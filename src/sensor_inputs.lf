@@ -1,0 +1,54 @@
+target Python {keepalive: true}
+preamble{=
+    import threading
+    from evdev import InputDevice, ecodes
+=}
+
+reactor steering_wheel{
+    // output steer
+    physical action wheel
+    state device_path = "/dev/input/event2"
+    state deadzone = 0.004
+
+
+    reaction(startup)-> wheel{=
+    def wheels(action, path):
+        dev = InputDevice(path)
+        print(f"The {dev.path} is the path and {dev.name} is the name of the device.\n")
+        center = 128.0
+        half = 127.0
+        for event in dev.read_loop():
+            if event.type == ecodes.EV_ABS and event.code == ecodes.ABS_X:
+                steer = (event.value - center) / half
+                if steer < -1.0:
+                    steer=-1.0
+                elif steer>1.0:
+                    steer = 1.0
+                action.schedule(0, steer)
+    t = threading.Thread(
+        target=wheels,
+        args=(wheel, self.device_path),
+        daemon=True
+    )
+    t.start()
+    print("The steering wheel is connected\n")
+    =}
+
+    reaction(wheel){=
+    steer = wheel.value
+    dz = self.deadzone
+    if steer < dz{
+        print("Left")
+    } elif steer > dz{
+        print("right")
+    }
+    else{
+        print("straight")
+    }
+    =}
+    
+}
+main reactor{
+    steer_wheel = new steering_wheel()
+
+}
