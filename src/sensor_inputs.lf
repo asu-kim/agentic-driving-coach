@@ -34,18 +34,17 @@ reactor steering_wheel{
     print("The steering wheel is connected\n")
     =}
 
-    reaction(wheel){=
+    reaction(wheel) {=
     steer = wheel.value
     dz = self.deadzone
-    if steer < dz{
-        print("Left")
-    } elif steer > dz{
-        print("right")
-    }
-    else{
-        print("straight")
-    }
-    =}
+
+    if steer < -dz:
+        print("LEFT")
+    elif steer > dz:
+        print("RIGHT")
+    else:
+        print("STRAIGHT")
+    =}  
     
 }
 main reactor{
