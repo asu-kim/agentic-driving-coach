@@ -1,80 +1,64 @@
 /*
 * sudo usermod -aG input raspdeeksha
+* sudo usermod -aG video raspdeeksha
+* to test the device $ python -m evdev.evtest
+* * https://python-evdev.readthedocs.io/en/latest/apidoc.html#evdev.events.InputEvent to understand the evdev python library for linux
 */
 
 
 target Python {keepalive: true}
-preamble{=
-    import threading
-    from evdev import InputDevice, ecodes, list_devices
-=}
+
+import DeviceReader from "sensor_reader.lf"
+
+
 
 reactor steering_wheel{
-    // output steer
-    physical action wheel
-    // state device_path = "/dev/input/event0"
-    state deadzone = 0.004
+   input steer
+   state deadzone = 0.04
+   reaction(steer){=
+        s = steer.value
+        dz = self.deadzone
 
-
-    reaction(startup)-> wheel{=
-        def find_wheel_path():
-            for p in list_devices():
-                try:
-                    d = InputDevice(p)
-                    if "shanwan" in d.name.lower() and "gamepad" in d.name.lower():
-                        return p
-                except Exception:
-                    pass
-            return None
-
-        path = find_wheel_path()
-        if path is None:
-            print("Error: steering wheel not found")
-            return
-
-        print(f"Wheel detected at: {path}")
-
-        def wheels(action, path):
-            dev = InputDevice(path)
-            print(f"The {dev.path} is the path and {dev.name} is the name of the device.\n")
-            center = 128.0
-            half = 127.0
-            for event in dev.read_loop():
-                if event.type == ecodes.EV_ABS and event.code == ecodes.ABS_X:
-                    steer = (event.value - center) / half
-                    if steer < -1.0:
-                        steer = -1.0
-                    elif steer > 1.0:
-                        steer = 1.0
-                    action.schedule(0, float(steer))
-
-        t = threading.Thread(
-            target=wheels,
-            args=(wheel, path),
-            daemon=True
-        )
-        t.start()
-        print("The steering wheel is connected\n")
-    =}
-
-    reaction(wheel) {=
-    steer = wheel.value
-    dz = self.deadzone
-
-    if steer < -dz:
-        print("LEFT")
-    elif steer > dz:
-        print("RIGHT")
-    else:
-        print("STRAIGHT")
-    =}  
-    
+        if s < -dz:
+            print("LEFT")
+        elif s > dz:
+            print("RIGHT")
+        else:
+            print("STRAIGHT")
+   =}
 }
 
-reactor pedal{
+reactor accelerator{
+    input accelerate
+    reaction(accelerate) {=
+    a = accelerate.value
+    print(f"Accelerate {a:.4f}")
+  =}
+}
 
+reactor brake{
+    input brake
+     reaction(brake) {=
+    b = brake.value
+    print(f"Brake {b:.4f}")
+  =}
+}
+
+reactor webcam{
+    input vid 
+    reaction(vid) {=
+    print(f"Webcam frame #{vid.value}")
+  =}
 }
 main reactor{
-    steer_wheel = new steering_wheel()
+    dev = new DeviceReader()
+    wheel = new steering_wheel()
+    acc = new accelerator()
+    brk = new brake()
+    video = new webcam()
+    dev.steer -> wheel.steer
+    dev.brake -> brk.brake
+    dev.throttle -> acc.accelerate
+    dev.frame_count -> video.vid
 
 }

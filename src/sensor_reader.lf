@@ -1,0 +1,129 @@
+/*
+* https://python-evdev.readthedocs.io/en/latest/apidoc.html#evdev.events.InputEvent to understand the evdev python library for linux
+* e.type   # what kind of event
+* e.code   # which control generated it
+* e.value  # the current value
+*/
+
+
+target Python { keepalive: true }
+
+preamble {=
+import threading
+import time
+from evdev import InputDevice, ecodes, list_devices
+import cv2
+=}
+
+reactor DeviceReader {
+  output steer
+  output throttle
+  output brake
+  output frame_count
+  physical action sensor
+
+
+  reaction(startup) -> sensor {=
+    def find_path():
+      for p in list_devices():
+        try:
+          d = InputDevice(p)
+          if "shanwan" in d.name.lower() and "gamepad" in d.name.lower():
+            return p
+        except Exception:
+          pass
+      return None
+
+    path = find_path()
+    if path is None:
+      print("wheel device not found")
+      return
+    #fr keeping the values to be in between [-1,1]
+    def clamp(x, lo, hi):
+        if x < lo:
+            return lo
+        elif x>hi:
+            return hi
+        else:
+            return x
+    #since the values are 0, 128, 255 we normalize
+    def norm(dev, code, val):
+      info = dev.absinfo(code)
+      mini, maxi = info.min, info.max
+      if maxi == mini:
+        return 0.0
+      result = (val - mini) / (maxi - mini)
+      return result
+
+    def reader(action, path):
+      dev = InputDevice(path)
+      print(f"The {dev.path} is the path and {dev.name} is the name of the device.\n")
+
+      xinfo = dev.absinfo(ecodes.ABS_X)
+      xmin, xmax = xinfo.min, xinfo.max
+
+      for e in dev.read_loop():
+        if e.type != ecodes.EV_ABS:
+          continue
+
+        if e.code == ecodes.ABS_X:
+            #since the values are 0, 128, 255 we normalize
+          s = ( 2 * (e.value - xmin) / (xmax - xmin) ) - 1.0
+          s = float(clamp(s, -1.0, 1.0))
+          action.schedule(0, ("steer", s))
+
+        elif e.code == ecodes.ABS_BRAKE:
+          b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
+          action.schedule(0, ("brake", b))
+
+        elif e.code == ecodes.ABS_GAS:
+            #this is for accelerator for this specific device
+          tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
+          action.schedule(0, ("throttle", tval))
+
+    # added webcam reader as separate thread 
+    def webcam_reader(action):
+      cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+      if not cap.isOpened():
+        print("cannot open camera 0")
+        return
+
+      count = 0
+      print("Webcam started")
+      while True:
+        ok, img = cap.read()
+        if ok:
+          count += 1
+          action.schedule(0, ("frame_count", int(count)))
+        time.sleep(0.1)
+
+    t = threading.Thread(
+            target=reader,
+            args=(sensor, path),
+            daemon=True
+        )
+    t.start()
+
+    cam_t = threading.Thread(
+            target=webcam_reader,
+            args=(sensor,),
+            daemon=True
+        )
+    cam_t.start()
+
+    print("The devices are connected\n")
+  =}
+
+  reaction(sensor) -> steer, brake, throttle, frame_count {=
+  tag, val = sensor.value
+
+  if tag == "steer":
+    steer.set(val)
+  elif tag == "brake":
+    brake.set(val)
+  elif tag == "throttle":
+    throttle.set(val)
+  elif tag == "frame_count":
+    frame_count.set(val)
+=}
+}
