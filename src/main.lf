@@ -9,7 +9,10 @@
 target Python {keepalive: true}
 
 import DeviceReader from "sensor_reader.lf"
-
+import FaceLandmark from "head_pose_estimation.lf"
+preamble{=
+  import cv2
+=}
 
 
 reactor steering_wheel{
@@ -46,19 +49,32 @@ reactor brake{
 
 reactor webcam{
     input vid 
+    output frame_fps
+    timer t(0, 100 msec)
+    state latest
+    
+    reaction(startup){=
+      self.latest = None
+    =}
     reaction(vid) {=
-    print(f"Webcam frame #{vid.value}")
-  =}
+    self.latest = vid.value 
+    =}
+    reaction(t)-> frame_fps{=
+      if self.latest is not None:
+        frame_fps.set(self.latest)
+    =}
 }
+
 main reactor{
     dev = new DeviceReader()
     wheel = new steering_wheel()
     acc = new accelerator()
     brk = new brake()
     video = new webcam()
+    face_detect = new FaceLandmark()
     dev.steer -> wheel.steer
     dev.brake -> brk.brake
     dev.throttle -> acc.accelerate
-    dev.frame_count -> video.vid
-
+    dev.frame -> video.vid
+    video.frame_fps -> face_detect.frame
 }

@@ -6,7 +6,7 @@
 */
 
 
-target Python { keepalive: true }
+target Python 
 
 preamble {=
 import threading
@@ -19,7 +19,7 @@ reactor DeviceReader {
   output steer
   output throttle
   output brake
-  output frame_count
+  output frame
   physical action sensor
 
 
@@ -94,7 +94,7 @@ reactor DeviceReader {
         ok, img = cap.read()
         if ok:
           count += 1
-          action.schedule(0, ("frame_count", int(count)))
+          action.schedule(0, ("frame", img))
         time.sleep(0.1)
 
     t = threading.Thread(
@@ -114,7 +114,7 @@ reactor DeviceReader {
     print("The devices are connected\n")
   =}
 
-  reaction(sensor) -> steer, brake, throttle, frame_count {=
+  reaction(sensor) -> steer, brake, throttle, frame {=
   tag, val = sensor.value
 
   if tag == "steer":
@@ -123,7 +123,7 @@ reactor DeviceReader {
     brake.set(val)
   elif tag == "throttle":
     throttle.set(val)
-  elif tag == "frame_count":
-    frame_count.set(val)
+  elif tag == "frame":
+    frame.set(val)
 =}
 }
