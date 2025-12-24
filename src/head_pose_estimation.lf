@@ -1,4 +1,4 @@
-target Python 
+target Python {keepalive: true}
 
 preamble {=
     import cv2
@@ -9,6 +9,8 @@ preamble {=
 reactor FaceLandmark{
     input frame
     output landmarks
+    output head_msg
+    output eye_msg
     state yaw_old
     state mesh
     state n
@@ -30,14 +32,14 @@ reactor FaceLandmark{
                 if not res.multi_face_landmarks:
                     return None
                 face = res.multi_face_landmarks[0].landmark
-                px = px = [(lm.x * w, lm.y * h) for lm in face]
+                px = [(lm.x * w, lm.y * h) for lm in face]
                 return {"px": px, "size": (w, h)}
         self.yaw_old = None
         self.mesh = FaceLandmarkTracker()
         self.n = 0
     =}
 
-    reaction(frame) -> landmarks {=
+    reaction(frame) -> landmarks, head_msg, eye_msg {=
         img = frame.value
         out = self.mesh.run(img)
         landmarks.set(out)
@@ -77,7 +79,8 @@ reactor FaceLandmark{
                 head_direction = "Head_is_left"
             else:
                 head_direction = "Head_is_in_center"
-            print(f"{head_direction} yaw={yaw_new:.1f}")
+            head_msg.set(head_direction)
+
         def clamp_eye(x):
             if x< 0.0:
                 return 0.0
@@ -86,6 +89,7 @@ reactor FaceLandmark{
                     return 1.0
                 else:
                     return x
+
         #center point
         rx = sum(px[i][0] for i in [468,469,470,471,472]) / 5.0
         lx = sum(px[i][0] for i in [473,474,475,476,477]) / 5.0
@@ -115,6 +119,6 @@ reactor FaceLandmark{
         else:
             eye_direction = "eye_is_in_center"
 
-        print(f"{eye_direction} gaze={gaze:.2f} (L={l_ratio:.2f}, R={r_ratio:.2f})")
+        eye_msg.set(eye_direction)
     =}
 }

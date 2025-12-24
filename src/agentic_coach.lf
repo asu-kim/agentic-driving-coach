@@ -1,0 +1,42 @@
+target Python {keepalive: true}
+
+import DrivingInputs from "inputs.lf"
+
+preamble{=
+=}
+
+reactor AgenticCoach{
+    input steer_msg
+    input accel_msg
+    input brake_msg
+    input head_msg
+    input eye_msg
+
+    reaction(steer_msg, accel_msg, brake_msg, head_msg, eye_msg){=
+        if steer_msg.is_present:
+            print(f"[AGENT] {steer_msg.value}")
+
+        if accel_msg.is_present:
+            print(f"[AGENT] {accel_msg.value}")
+
+        if brake_msg.is_present:
+            print(f"[AGENT] {brake_msg.value}")
+
+        if head_msg.is_present:
+            print(f"[AGENT] {head_msg.value}")
+
+        if eye_msg.is_present:
+            print(f"[AGENT] {eye_msg.value}")
+    =}
+}
+
+main reactor{
+    sensor_inputs = new DrivingInputs()
+    coach = new AgenticCoach()
+
+    sensor_inputs.steer_msg -> coach.steer_msg
+    sensor_inputs.accel_msg -> coach.accel_msg
+    sensor_inputs.brake_msg -> coach.brake_msg
+    sensor_inputs.head_msg  -> coach.head_msg
+    sensor_inputs.eye_msg   -> coach.eye_msg
+}

@@ -5,7 +5,6 @@
 * * https://python-evdev.readthedocs.io/en/latest/apidoc.html#evdev.events.InputEvent to understand the evdev python library for linux
 */
 
-
 target Python {keepalive: true}
 
 import DeviceReader from "sensor_reader.lf"
@@ -17,33 +16,39 @@ preamble{=
 
 reactor steering_wheel{
    input steer
+   output steer_msg
    state deadzone = 0.04
-   reaction(steer){=
+
+   reaction(steer) -> steer_msg {=
         s = steer.value
         dz = self.deadzone
 
         if s < -dz:
-            print("LEFT")
+            steer_msg.set("LEFT")
         elif s > dz:
-            print("RIGHT")
+            steer_msg.set("RIGHT")
         else:
-            print("STRAIGHT")
+            steer_msg.set("STRAIGHT")
    =}
 }
 
 reactor accelerator{
     input accelerate
-    reaction(accelerate) {=
-    a = accelerate.value
-    print(f"Accelerate {a:.4f}")
+    output accel_msg
+
+    reaction(accelerate) -> accel_msg {=
+        a = accelerate.value
+        accel_msg.set(f"Accelerate {a:.4f}")
   =}
 }
 
 reactor brake{
     input brake
-     reaction(brake) {=
-    b = brake.value
-    print(f"Brake {b:.4f}")
+    output brake_msg
+
+    reaction(brake) -> brake_msg {=
+        b = brake.value
+        brake_msg.set(f"Brake {b:.4f}")
   =}
 }
 
@@ -57,24 +62,39 @@ reactor webcam{
       self.latest = None
     =}
     reaction(vid) {=
-    self.latest = vid.value 
+      self.latest = vid.value 
     =}
-    reaction(t)-> frame_fps{=
+    reaction(t) -> frame_fps {=
       if self.latest is not None:
         frame_fps.set(self.latest)
     =}
 }
 
-main reactor{
+reactor DrivingInputs{
+    output steer_msg
+    output accel_msg
+    output brake_msg
+    output head_msg
+    output eye_msg
+
     dev = new DeviceReader()
     wheel = new steering_wheel()
     acc = new accelerator()
     brk = new brake()
     video = new webcam()
     face_detect = new FaceLandmark()
+
     dev.steer -> wheel.steer
+    wheel.steer_msg -> steer_msg
+
     dev.brake -> brk.brake
+    brk.brake_msg -> brake_msg
+
     dev.throttle -> acc.accelerate
+    acc.accel_msg -> accel_msg
+
     dev.frame -> video.vid
     video.frame_fps -> face_detect.frame
+    face_detect.head_msg -> head_msg
+    face_detect.eye_msg  -> eye_msg
 }
