@@ -1,6 +1,8 @@
 target Python
 
 reactor Driver{
+    input feedback
+    output questions
     reaction(startup){=
         
     =}

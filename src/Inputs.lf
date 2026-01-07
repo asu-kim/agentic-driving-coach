@@ -7,8 +7,8 @@
 
 target Python {keepalive: true}
 
-import DeviceReader from "sensor_reader.lf"
-import FaceLandmark from "head_pose_estimation.lf"
+import DeviceReader from "SensorReader.lf"
+import FaceLandmark from "HeadPoseEstimation.lf"
 preamble{=
   import cv2
 =}
@@ -70,7 +70,15 @@ reactor webcam{
     =}
 }
 
-reactor DrivingInputs{
+// reactor SpeedCalculator(max_speed_meter_p_s = 44.7, initial_speed = 0.0){
+//   input throttle
+//   input brake
+//   output speed_mph
+
+
+// }
+
+reactor Inputs{
     output steer_msg
     output accel_msg
     output brake_msg
