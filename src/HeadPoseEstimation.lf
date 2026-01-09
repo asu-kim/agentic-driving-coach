@@ -1,9 +1,9 @@
-target Python {keepalive: true}
+target Python 
 
 preamble {=
     import cv2
     import numpy as np
-    import mediapipe as mp
+   
 =}
 
 reactor FaceLandmark{
@@ -16,12 +16,13 @@ reactor FaceLandmark{
     state n
 
     reaction(startup) {=
+        import mediapipe as mp
         class FaceLandmarkTracker:
             def __init__(self):
                 self.mesh = mp.solutions.face_mesh.FaceMesh(
                     static_image_mode=False,
                     max_num_faces=1,
-                    refine_landmarks=True,
+                    refine_landmarks=False,
                     min_detection_confidence=0.5,
                     min_tracking_confidence=0.5,
                 )
@@ -41,6 +42,12 @@ reactor FaceLandmark{
 
     reaction(frame) -> landmarks, head_msg, eye_msg {=
         img = frame.value
+        if img is None:
+            return
+        if getattr(img, "ndim", 0) != 3:
+            return
+        img = np.ascontiguousarray(img)
+
         out = self.mesh.run(img)
         landmarks.set(out)
 
@@ -49,6 +56,8 @@ reactor FaceLandmark{
 
         h,w = img.shape[:2]
         px = out["px"]
+        if len(px) < 363:
+            return
         #this gives us the points on the face nose, chin,left eye outer, right eye outer, left mouth , right mouth
         image_points = np.array([px[1], px[152], px[33], px[263], px[61], px[291],], dtype=np.float64)
 
@@ -91,8 +100,17 @@ reactor FaceLandmark{
                     return x
 
         #center point
-        rx = sum(px[i][0] for i in [468,469,470,471,472]) / 5.0
-        lx = sum(px[i][0] for i in [473,474,475,476,477]) / 5.0
+        # rx = sum(px[i][0] for i in [468,469,470,471,472]) / 5.0
+        # lx = sum(px[i][0] for i in [473,474,475,476,477]) / 5.0
+        if len(px) > 477:
+            rx = sum(px[i][0] for i in [468,469,470,471,472]) / 5.0
+            lx = sum(px[i][0] for i in [473,474,475,476,477]) / 5.0
+        else:
+            # fallback: midpoint between outer/inner eye corners
+            # left: 33 (outer), 133 (inner)
+            # right: 362 (inner), 263 (outer)
+            lx = 0.5 * (px[33][0] + px[133][0])
+            rx = 0.5 * (px[362][0] + px[263][0])
 
         l_out_x = px[33][0]
         l_inn_x = px[133][0]

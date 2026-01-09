@@ -1,9 +1,38 @@
-target Python
+target Python {files: ["/home/raspdeeksha/agentic-driving-coach/src/questions.txt"]}
+
 
 reactor Driver{
     input feedback
     output questions
+    state lines = []
+    state idx = 0
+    state loaded = False
+    state last_sent = "NO_QUESTION"
+
+    timer t(0, 200msec)
     reaction(startup){=
+        try:
+            with open("/home/raspdeeksha/agentic-driving-coach/src/questions.txt", "r") as f:
+                self.lines = [ln.strip() for ln in f.readlines() if ln.strip() != "" ]
+            self.loaded = True
+            print(f"Driver has been seated", flush=True)
+        except Exception as e:
+            print(f"Driver is not seated {e}", flush=True)
+            self.loaded = False
         
+    =}
+    reaction(t)-> questions{=
+        if not self.loaded or len(self.lines)==0:
+            questions.set("NoQuestions")
+            return
+        if self.idx >= len(self.lines):
+            questions.set("NoQuestions")
+            return
+
+        msg = self.lines[self.idx]
+        self.idx += 1
+
+        print(f"Questions: {msg}", flush=True)
+        questions.set(msg)
     =}
 }

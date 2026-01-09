@@ -13,6 +13,7 @@ import threading
 import time
 from evdev import InputDevice, ecodes, list_devices
 import cv2
+import numpy as np
 =}
 
 reactor DeviceReader {
@@ -21,6 +22,9 @@ reactor DeviceReader {
   output brake
   output frame
   physical action sensor
+  timer cam_timer(0, 100 msec)
+  state cap
+  state cam_ready = False
 
 
   reaction(startup) -> sensor {=
@@ -36,7 +40,7 @@ reactor DeviceReader {
 
     path = find_path()
     if path is None:
-      print("wheel device not found")
+      print("wheel device not found", flush=True)
       return
     #fr keeping the values to be in between [-1,1]
     def clamp(x, lo, hi):
@@ -82,20 +86,20 @@ reactor DeviceReader {
           action.schedule(0, ("throttle", tval))
 
     # added webcam reader as separate thread 
-    def webcam_reader(action):
-      cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
-      if not cap.isOpened():
-        print("cannot open camera 0")
-        return
+    # def webcam_reader(action):
+    #   cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+    #   if not cap.isOpened():
+    #     print("cannot open camera 0")
+    #     return
 
-      count = 0
-      print("Webcam started")
-      while True:
-        ok, img = cap.read()
-        if ok:
-          count += 1
-          action.schedule(0, ("frame", img))
-        time.sleep(0.1)
+    #   count = 0
+    #   print("Webcam started")
+    #   while True:
+    #     ok, img = cap.read()
+    #     if ok:
+    #       count += 1
+    #       action.schedule(0, ("frame", img))
+    #     time.sleep(0.1)
 
     t = threading.Thread(
             target=reader,
@@ -104,17 +108,42 @@ reactor DeviceReader {
         )
     t.start()
 
-    cam_t = threading.Thread(
-            target=webcam_reader,
-            args=(sensor,),
-            daemon=True
-        )
-    cam_t.start()
+    # cam_t = threading.Thread(
+    #         target=webcam_reader,
+    #         args=(sensor,),
+    #         daemon=True
+    #     )
+    # cam_t.start()
+
+    #we open the camera once to avoid segmentation faults 
+    self.cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+    if not self.cap.isOpened():
+      print("Camera cannot be opened", flush=True)
+      self.cam_ready = False
+    else:
+      cv2.setNumThreads(1)
+      self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+      self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+      self.cap.set(cv2.CAP_PROP_FPS, 10)
+      self.cam_ready = True
+      print("Webcam opened", flush=True)
 
     print("The devices are connected\n")
   =}
 
-  reaction(sensor) -> steer, brake, throttle, frame {=
+  reaction(cam_timer) -> frame {=
+    if not getattr(self, "cam_ready", False) or getattr(self, "cap", None) is None:
+      return
+    try:
+      ok, img = self.cap.read()
+      if ok and img is not None:
+        img = np.ascontiguousarray(img)
+        frame.set(img)
+    except Exception as e:
+      print("camera error reading the frames", e, flush=True)
+  =}
+
+  reaction(sensor) -> steer, brake, throttle{=
   tag, val = sensor.value
 
   if tag == "steer":
@@ -123,7 +152,14 @@ reactor DeviceReader {
     brake.set(val)
   elif tag == "throttle":
     throttle.set(val)
-  elif tag == "frame":
-    frame.set(val)
+
 =}
+
+  reaction(shutdown) {=
+      try:
+        if getattr(self, "cap", None) is not None:
+          self.cap.release()
+      except Exception:
+        pass
+    =}
 }

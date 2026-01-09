@@ -1,49 +1,55 @@
-target Python {keepalive: true}
+target Python {keepalive: true, DNET: false, coordination-options: {
+    advance-message-interval: 10 msec
+  }}
 
 import Inputs from "Inputs.lf"
 import Driver from "DriverInput.lf"
 
 preamble {=
-  import threading
-  import time
-  import torch
-  from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+    import os
+    import threading
+    import time
+    # import torch
+    # from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 =}
 
-reactor RoadSign (object_detected="stop sign", start_distance=50.0, step= 10.0){
+reactor RoadSign (object_detected="stop sign", start_distance=200.0, step=10.0){
     output status
     output label
     output distance
+
     state dis = start_distance
-    state prev_distance = -1.0
 
     timer detect(0, 500 msec)
 
-    reaction(detect)-> label, distance, status{=
-        if self.dis < 0.0:
-            return
-
+    reaction(detect) -> label, distance, status {=
         label.set(self.object_detected)
         distance.set(self.dis)
 
-        if self.prev_distance < 0.0:
-            status.set("stop_detected")
-        elif self.dis < self.prev_distance:
-            status.set("nearing_sign")
+      
+        if self.dis > 0.0:
+            if self.dis <= 40.0:
+                status.set("stop_detected")
+            else:
+                status.set("nearing_sign")
         else:
-            status.set("no_sign")
 
-        self.prev_distance = self.dis
+            status.set("passed_sign")
+
+
         self.dis = self.dis - self.step
     =}
 }
 
-reactor AgenticLlm{
+reactor AgenticLlm(use_llm=False){
     input steer_msg
     input accel_msg
     input brake_msg
     input head_msg
     input eye_msg
+    input speed
+    input accelaration_mps2
+    input pedal_st
 
     input driver_msg
     output feedback
@@ -61,55 +67,66 @@ reactor AgenticLlm{
 
     state last_sign = "no_sign"
     state last_sign_distance = -1.0
+    state last_speed = 0.0
+    state last_acceleration = 0.0
+    state last_pedal_pos = ""
+
 
     timer check(0, 100msec)
 
     reaction(startup){=
-        print("[LlmA] Loading 70B", flush=True)
+        if not self.use_llm:
+            print("LLM disabled")
+            return
+            # print("[LlmA] Loading 70B", flush=True)
+            # os.environ["TRANSFORMERS_OFFLINE"] = "1"
+            # self.has_cuda = torch.cuda.is_available()
+            # self.dtype = torch.bfloat16 if self.has_cuda else torch.float32
 
-        self.has_cuda = torch.cuda.is_available()
-        self.dtype = torch.bfloat16 if self.has_cuda else torch.float32
+            # #change this to the locally downloaded model
+            # model_id = "path/Llama-2-70b-chat-hf"
+            # #This is a pretrained tokenizer from hugging face.
+            # self.tokenizer_a = AutoTokenizer.from_pretrained(
+            #     model_id, use_fast=True, local_files_only=True
+            # )
+            # if self.tokenizer_a.pad_token_id is None:
+            #     self.tokenizer_a.pad_token = self.tokenizer_a.eos_token
 
-        model_id = "meta-llama/Llama-2-70b-chat-hf"
-        #This is a pretrained tokenizer from hugging face.
-        self.tokenizer_a = AutoTokenizer.from_pretrained(model_id, use_fast=True)
-        if self.tokenizer_a.pad_token_id is None:
-        self.tokenizer_a.pad_token = self.tokenizer_a.eos_token
-        #Here we map the device to the GPU. 
-        common_a = dict(
-        device_map="auto" if self.has_cuda else None,
-        torch_dtype=self.dtype,
-        low_cpu_mem_usage=True,
-        )
-        #The 4 bit quantization will be selected if the device supports it.
-        try:
-        import bitsandbytes as bnb
-        common_a["quantization_config"] = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_use_double_quant=True,
-            bnb_4bit_compute_dtype=self.dtype,
-        )
-        except Exception:
-        pass
-        
-        #Here we load the model and map it to the device.
-        self.model_a = AutoModelForCausalLM.from_pretrained(model_id, **common_a)
-        self.model_a.eval()
+            # #Here we map the device to the GPU. 
+            # common_a = dict(
+            #     device_map="auto" if self.has_cuda else None,
+            #     torch_dtype=self.dtype,
+            #     low_cpu_mem_usage=True,
+            #     local_files_only=True,
+            # )
+            # #The 4 bit quantization will be selected if the device supports it.
+            # try:
+            #     import bitsandbytes as bnb
+            #     common_a["quantization_config"] = BitsAndBytesConfig(
+            #         load_in_4bit=True,
+            #         bnb_4bit_quant_type="nf4",
+            #         bnb_4bit_use_double_quant=True,
+            #         bnb_4bit_compute_dtype=self.dtype,
+            #     )
+            # except Exception:
+            #     pass
+            
+            # #Here we load the model and map it to the device.
+            # self.model_a = AutoModelForCausalLM.from_pretrained(model_id, **common_a)
+            # self.model_a.eval()
 
-        #Text-generation module. 
-        self.GEN_A = dict(
-        max_new_tokens=24,
-        do_sample=False,
-        eos_token_id=self.tokenizer_a.eos_token_id,
-        pad_token_id=self.tokenizer_a.pad_token_id,
-        )
+            # #Text-generation module. 
+            # self.GEN_A = dict(
+            #     max_new_tokens=24,
+            #     do_sample=False,
+            #     eos_token_id=self.tokenizer_a.eos_token_id,
+            #     pad_token_id=self.tokenizer_a.pad_token_id,
+            # )
 
-        print("[LlmA] Ready.", flush=True)
-        
+            # print("[LlmA] Ready.", flush=True)
   =}
 
-    reaction(steer_msg, accel_msg, brake_msg, head_msg, eye_msg){=
+    reaction(steer_msg, accel_msg, brake_msg, head_msg, eye_msg, speed, accelaration_mps2, pedal_st){=
         if steer_msg.is_present:
             self.last_steer_msg = steer_msg.value
         if accel_msg.is_present:
@@ -120,6 +137,12 @@ reactor AgenticLlm{
             self.last_head_msg = head_msg.value
         if eye_msg.is_present:
             self.last_eye_msg = eye_msg.value
+        if speed.is_present:
+            self.last_speed = float(speed.value)   
+        if accelaration_mps2.is_present:
+            self.last_acceleration = float(accelaration_mps2.value) 
+        if pedal_st.is_present:
+            self.last_pedal_pos = pedal_st.value
     =}
 
     reaction(driver_msg){=
@@ -134,55 +157,56 @@ reactor AgenticLlm{
             self.last_sign_distance = sign_distance.value
     =}
 
+
     initial mode monitoring{
-        reaction(check){=
+        reaction(check)-> warning{=
             check_status = self.last_sign.lower()
             check_distance = float(self.last_sign_distance)
 
-            accel = 0.0
-            try:
-                accel = float(self.last_accel_msg.split()[-1])
-            except Exception:
-                try:
-                    accel = float(self.last_accel_msg)
-                except Exception:
-                    accel = 0.0
-
-            if (check_status in ("stop_detected", "nearing_sign")) and (0.5 >= accel >= 0.0):
-                print("mode warning")
-                self.set_mode("warning")
+            print(f"[DBG] status={check_status} dist={check_distance:.1f} speed={self.last_speed:.1f} pedal={self.last_pedal_pos}", flush=True)
+            if check_status in ("stop_detected", "nearing_sign"):
+                if 38.0 <= check_distance <= 42.0 and self.last_speed > 24.0:
+                    print("mode warning")
+                    warning.set()
         =}
     }
 
     mode warning{
-        reaction (check)-> feedback{=
+        reaction(check)-> monitoring, actuation, feedback  {=
             check_status = self.last_sign.lower()
             check_distance = float(self.last_sign_distance)
 
             if check_status == "no_sign" or check_distance <= 0.0:
                 print("\nNo signs hence switching to monitoring\n")
-                self.set_mode("monitoring")
+                monitoring.set()
                 return
-
-            if 5.0 <= check_distance <= 7.0:
+            if 20.0 <= check_distance <= 25.0 and self.last_speed >= 15.0:
                 print("\n Taking control: actuation\n")
-                self.set_mode("actuation")
+                actuation.set()
                 return
 
-            feedback.set("WARNING there is a stop sign take the necessary action")
-            print(f"WARNING (dist={check_distance:.2f})")
+
+            feedback.set(
+                f"WARNING: stop sign ahead ({check_distance:.1f}m). "
+                f"Speed {self.last_speed:.1f} km/h. Start slowing down."
+            )
+            print(f"WARNING (dist={check_distance:.2f}, speed={self.last_speed:.1f})")
         =}
     }
 
     mode actuation{
         reaction(check) -> feedback {=
             sdist = float(self.last_sign_distance)
-            feedback.set(f"ACTUATE: approaching stop sign, distance {sdist:.2f}m")
+            feedback.set(
+                f"ACTUATE: Brake now. Stop sign in {sdist:.1f}m. "
+                f"Current speed {self.last_speed:.1f} km/h."
+            )
         =}
     }
 }
 
-federated reactor AgenticCoach at localhost{
+// federated reactor AgenticCoach{
+federated reactor{
     sensor_inputs = new Inputs()
     agent = new AgenticLlm()
     driver = new Driver()
@@ -193,10 +217,14 @@ federated reactor AgenticCoach at localhost{
     sensor_inputs.brake_msg -> agent.brake_msg
     sensor_inputs.head_msg  -> agent.head_msg
     sensor_inputs.eye_msg   -> agent.eye_msg
+    sensor_inputs.speed -> agent.speed
+    sensor_inputs.acceleration_mps2 -> agent.accelaration_mps2
+    sensor_inputs.pedal_position -> agent.pedal_st
 
     sign.status -> agent.sign_status
     sign.distance -> agent.sign_distance
 
     driver.questions -> agent.driver_msg
     agent.feedback -> driver.feedback
+
 }
