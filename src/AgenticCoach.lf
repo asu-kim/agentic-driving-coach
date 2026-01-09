@@ -206,7 +206,7 @@ reactor AgenticLlm(use_llm=False){
 }
 
 // federated reactor AgenticCoach{
-federated reactor{
+federated reactor AgenticCoach at 10.218.100.78{
     sensor_inputs = new Inputs()
     agent = new AgenticLlm()
     driver = new Driver()
