@@ -211,19 +211,19 @@ reactor LlmDecision(timeout_ms=180 msec) {
     output decision
     output driver_msg
 
-    // Use ONE action for: (a) polling for LLM result and (b) timeout deadline
+    
     logical action timeout
 
     state worker_started = False
     state pending = False
     state start_wall = 0.0
 
-    // Event-like outputs: emit only when changed
+  
     state last_decision = ""
     state last_msg = ""
 
-    // Polling period (no extra timer; just re-scheduling the same action)
-    state poll_s = 0.01   // 10 ms
+    
+    state poll_s = 0.01   
 
     reaction(startup){=
         if not self.worker_started:
@@ -233,7 +233,7 @@ reactor LlmDecision(timeout_ms=180 msec) {
     =}
 
     reaction(rd, v) -> timeout {=
-        # IMPORTANT: do not overwrite an in-flight job
+     
         if self.pending:
             return
 
@@ -279,8 +279,6 @@ reactor LlmDecision(timeout_ms=180 msec) {
 
         self.pending = True
         self.start_wall = time.time()
-
-        # Start polling immediately (same action), instead of waiting full timeout
         timeout.schedule(0)
     =}
 
@@ -288,7 +286,7 @@ reactor LlmDecision(timeout_ms=180 msec) {
         if not self.pending:
             return
 
-        # 1) If LLM finished, use it immediately
+       
         with llm_lock:
             global llm_result_ready, llm_decision, llm_message
             if llm_result_ready:
@@ -296,7 +294,7 @@ reactor LlmDecision(timeout_ms=180 msec) {
                 msg = llm_message
                 llm_result_ready = False
 
-                # Emit only if changed
+              
                 if kw != self.last_decision or msg != self.last_msg:
                     decision.set(kw)
                     driver_msg.set(msg)
@@ -306,18 +304,18 @@ reactor LlmDecision(timeout_ms=180 msec) {
                 self.pending = False
                 return
 
-        # 2) Not ready yet: check deadline
+       
         elapsed = time.time() - self.start_wall
 
-        # robust: timeout_ms can compile to int, float, or timedelta depending on LF version
+       
         try:
             deadline_s = self.timeout_ms.total_seconds()
         except Exception:
-            # If it's numeric, treat as milliseconds
+         
             deadline_s = float(self.timeout_ms) / 1000.0
 
         if elapsed >= deadline_s:
-            # Fallback rules (hard-coded)
+           
             rd_val = rd.value
             v_val  = v.value
 
@@ -341,7 +339,7 @@ reactor LlmDecision(timeout_ms=180 msec) {
             else:
                 kw = "NONE";        msg = ""
 
-            # Emit only if changed
+           
             if kw != self.last_decision or msg != self.last_msg:
                 decision.set(kw)
                 driver_msg.set(msg)
@@ -350,8 +348,6 @@ reactor LlmDecision(timeout_ms=180 msec) {
 
             self.pending = False
             return
-
-        # 3) Still within deadline: poll again (same action, no extra timer)
         timeout.schedule(1000000)
     =}
 }
@@ -395,7 +391,6 @@ reactor Agent {
       if msg is not None and msg != "":
         print(msg, flush=True)
 
-      # apply brake when ACTUATE event happens (it happens once now)
       ext_brk_cmd.set(Brake(6).name)
     =}
   }
