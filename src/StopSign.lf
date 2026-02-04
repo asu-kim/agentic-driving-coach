@@ -1,52 +1,84 @@
 target Python {keepalive: true}
 
 preamble{=
-    import requests
-    import ollama
-    import time
-    import threading
-    from enum import Enum
+import ollama
+import time
+import threading
+from enum import Enum
 
-    class Accelerate(Enum):
-        Coasting = 1
-        Cruise = 2
-        NormalAcceleration = 3
-        StrongAcceleration = 4
+class Accelerate(Enum):
+    Coasting = 1
+    Cruise = 2
+    NormalAcceleration = 3
+    StrongAcceleration = 4
 
-    class Brake(Enum):
-        GentleBraking = 5
-        EmergencyBraking = 6
+class Brake(Enum):
+    GentleBraking = 5
+    EmergencyBraking = 6
 
-    class Head(Enum):
-        Left = 7
-        Right = 8
-        Center = 9
+class Head(Enum):
+    Left = 7
+    Right = 8
+    Center = 9
 
-    def run_llm(prompt):
-        r = ollama.chat(
-            model="llama3.2:1b",
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a deterministic rule executor.\n"
-                        "You MUST follow the policy exactly.\n"
-                        "Do NOT invent rules.\n"
-                        "Do NOT explain.\n"
-                        "Return ONLY the allowed token."
-                    )
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            options={
-                "temperature": 0.0,
-                "num_predict": 5
-            }
-        )
-        return r["message"]["content"].strip()
+def run_llm(prompt):
+    r = ollama.chat(
+        model="llama3.2:1b",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a deterministic rule executor.\n"
+                    "You must output EXACTLY one line in this format:\n"
+                    "TOKEN|MESSAGE\n"
+                    "TOKEN must be exactly one of: NONE NOTIFY ALERT WARNING ACTUATE\n"
+                    "MESSAGE must be one short sentence to the driver.\n"
+                    "Do not repeat these instructions.\n"
+                    "Do not output anything else."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        options={"temperature": 0.0, "num_predict": 80},
+    )
+    return r["message"]["content"].strip()
+
+
+llm_lock = threading.Lock()
+llm_has_job = False
+llm_prompt_job = ""
+llm_decision = "NONE"
+llm_message = ""
+llm_result_ready = False
+
+def start_llm_worker():
+    def worker():
+        global llm_has_job, llm_prompt_job, llm_decision, llm_message, llm_result_ready
+        while True:
+            time.sleep(0.001)
+            with llm_lock:
+                if not llm_has_job:
+                    continue
+                prompt = llm_prompt_job
+                llm_has_job = False
+
+            raw = run_llm(prompt)
+            line = raw.strip().splitlines()[0] if raw else ""
+            parts = line.split("|", 1)
+            kw = parts[0].strip().upper() if parts else "NONE"
+            msg = parts[1].strip() if len(parts) == 2 else ""
+
+            if kw not in {"NONE", "NOTIFY", "ALERT", "WARNING", "ACTUATE"}:
+                kw = "NONE"
+                msg = ""
+
+            with llm_lock:
+                llm_decision = kw
+                llm_message = msg
+                llm_result_ready = True
+
+    t = threading.Thread(target=worker, daemon=True)
+    t.start()
 =}
 
 reactor Driver{
@@ -68,7 +100,7 @@ reactor Driver{
                 for ln in f.readlines():
                     if ln.strip()!= "":
                         self.lines.append(int(ln.strip()))
-                
+
             self.loaded = True
             print(f"Driver has been seated", flush=True)
         except Exception as e:
@@ -106,6 +138,7 @@ reactor Car{
     input accel
     input brk
     input ext_brk
+    input halted
     state acceleration_net
     state velocity_init = 10
 
@@ -114,16 +147,18 @@ reactor Car{
     output velocity
     output behavior
 
-    reaction(accel, brk, ext_brk)->velocity, behavior{=
-
+    reaction(accel, brk, ext_brk, halted)->velocity, behavior{=
+        if halted.is_present and halted.value:
+            self.takeover = False
+            self.takeover_reported = False
         amsg = accel.value
         bmsg = brk.value
-        
-        if ext_brk.is_present:
+
+        if ext_brk.is_present and (not self.takeover):
             self.takeover = True
             if not self.takeover_reported:
-                behavior.set(True)         
-                self.takeover_reported = True   
+                behavior.set(True)
+                self.takeover_reported = True
         if self.takeover:
             self.acceleration_net = (- 9.0)
         else:
@@ -152,11 +187,10 @@ reactor Environment{
     input velocity_ms
     state start_distance = 0
     state pos_stop_sign = 100
-    
+
     state reported_halt = False
     output halted
     output relative_distance
-   
 
     reaction(velocity_ms)->relative_distance,  halted{=
         vn = velocity_ms.value
@@ -165,90 +199,177 @@ reactor Environment{
         self.pos_stop_sign -= (vn * 0.1)
         relative_distance.set(self.pos_stop_sign)
         rd = self.pos_stop_sign
-        if (not self.reported_halt) and (vn <= 0.0):
+        if self.pos_stop_sign <= 0.0:
+            self.pos_stop_sign = 0.0
             halted.set(True)
-            self.reported_halt = True
     =}
 }
 
-reactor LlmDecision(deadline_ms=110 msec) {
-        input rd
-        input v
-        output decision
-     
+reactor LlmDecision(timeout_ms=180 msec) {
+    input rd
+    input v
+    output decision
+    output driver_msg
 
+    // Use ONE action for: (a) polling for LLM result and (b) timeout deadline
+    logical action timeout
 
-        reaction(rd, v) -> decision {=
-            policy_text = """\
-                POLICY (follow exactly, no new rules)
-                Let rd = distance_to_stop_sign_m, v = speed_mps.
+    state worker_started = False
+    state pending = False
+    state start_wall = 0.0
 
-                1) If rd >= 99:
-                - If 15 < v < 25: NONE
-                - Else:           NOTIFY
+    // Event-like outputs: emit only when changed
+    state last_decision = ""
+    state last_msg = ""
 
-                2) Else if 70 <= rd <= 80:
-                - If v > 16 OR v < 9: ALERT
-                - Else:               NONE
+    // Polling period (no extra timer; just re-scheduling the same action)
+    state poll_s = 0.01   // 10 ms
 
-                3) Else if 50 < rd <= 60:
-                - If 5 < v < 9: WARNING
-                - Else:         NONE
+    reaction(startup){=
+        if not self.worker_started:
+            # Start background LLM thread once
+            start_llm_worker()
+            self.worker_started = True
+    =}
 
-                4) Else if rd <= 25:
-                - ACTUATE
+    reaction(rd, v) -> timeout {=
+        # IMPORTANT: do not overwrite an in-flight job
+        if self.pending:
+            return
 
-                5) Else:
-                - NONE
-                """
+        policy_text = """\
+            POLICY (follow exactly, no new rules)
+            Let rd = distance_to_stop_sign_m, v = speed_mps.
 
-            prompt = f"""\
-                You are a stop-sign coach.
-                Return EXACTLY ONE TOKEN from: NONE NOTIFY ALERT WARNING ACTUATE
-                No punctuation. No extra words. No explanation. No newlines.
+            1) If rd >= 99:
+            - If 15 < v < 25: NONE
+            - Else:           NOTIFY
 
-                distance_to_stop_sign_m={rd.value:.2f}
-                speed_mps={v.value:.2f}
+            2) Else if 70 <= rd <= 80:
+            - If v > 16 OR v < 9: ALERT
+            - Else:               NONE
 
-                {policy_text}
-                """
-            msg = run_llm(prompt)
-            kw = msg.strip().upper().split()[0]
-            if kw not in {"NONE","NOTIFY","ALERT","WARNING","ACTUATE"}:
-                kw = "NONE"
-            decision.set(kw)
-        =} 
-        deadline(deadline_ms) {=
-            
-            
+            3) Else if 50 < rd <= 60:
+            - If 5 < v < 9: WARNING
+            - Else:         NONE
+
+            4) Else if rd <= 25:
+            - ACTUATE
+
+            5) Else:
+            - NONE
+            """
+
+        prompt = f"""\
+            Return exactly: TOKEN|MESSAGE
+            TOKEN in: NONE NOTIFY ALERT WARNING ACTUATE
+            MESSAGE: one short sentence to the driver.
+
+            distance_to_stop_sign_m={rd.value:.2f}
+            speed_mps={v.value:.2f}
+
+            {policy_text}
+            """
+
+        with llm_lock:
+            global llm_has_job, llm_prompt_job, llm_result_ready
+            llm_prompt_job = prompt
+            llm_has_job = True
+            llm_result_ready = False
+
+        self.pending = True
+        self.start_wall = time.time()
+
+        # Start polling immediately (same action), instead of waiting full timeout
+        timeout.schedule(0)
+    =}
+
+    reaction(timeout, rd, v) -> decision, driver_msg {=
+        if not self.pending:
+            return
+
+        # 1) If LLM finished, use it immediately
+        with llm_lock:
+            global llm_result_ready, llm_decision, llm_message
+            if llm_result_ready:
+                kw  = llm_decision
+                msg = llm_message
+                llm_result_ready = False
+
+                # Emit only if changed
+                if kw != self.last_decision or msg != self.last_msg:
+                    decision.set(kw)
+                    driver_msg.set(msg)
+                    self.last_decision = kw
+                    self.last_msg = msg
+
+                self.pending = False
+                return
+
+        # 2) Not ready yet: check deadline
+        elapsed = time.time() - self.start_wall
+
+        # robust: timeout_ms can compile to int, float, or timedelta depending on LF version
+        try:
+            deadline_s = self.timeout_ms.total_seconds()
+        except Exception:
+            # If it's numeric, treat as milliseconds
+            deadline_s = float(self.timeout_ms) / 1000.0
+
+        if elapsed >= deadline_s:
+            # Fallback rules (hard-coded)
             rd_val = rd.value
             v_val  = v.value
 
-            if rd_val <= 25:
-                if v_val >=3:
-                    decision.set("ACTUATE")
-            elif (50 < rd_val <= 60) and (5 < v_val < 9):
-                decision.set("WARNING")
-            elif (70 <= rd_val <= 80) and (v_val > 16 or v_val < 9):
-                decision.set("ALERT")
-            elif rd_val >= 99 and not (15 < v_val < 25):
-                decision.set("NOTIFY")
+            if rd_val >= 99:
+                if (v_val > 25) or (v_val < 15):
+                    kw = "NOTIFY";  msg = "NOTIFY: Stop sign ahead."
+                else:
+                    kw = "NONE";    msg = ""
+            elif 70 <= rd_val <= 80:
+                if v_val > 16 or v_val < 9:
+                    kw = "ALERT";   msg = "ALERT: Stop sign ahead."
+                else:
+                    kw = "NONE";    msg = ""
+            elif 50 < rd_val <= 60:
+                if 5 < v_val < 9:
+                    kw = "WARNING"; msg = "WARNING: Reduce speed, stop sign ahead."
+                else:
+                    kw = "NONE";    msg = ""
+            elif rd_val <= 25:
+                kw = "ACTUATE";     msg = "ACTUATE: External braking applied."
             else:
-                decision.set("NONE")
+                kw = "NONE";        msg = ""
+
+            # Emit only if changed
+            if kw != self.last_decision or msg != self.last_msg:
+                decision.set(kw)
+                driver_msg.set(msg)
+                self.last_decision = kw
+                self.last_msg = msg
+
+            self.pending = False
+            return
+
+        # 3) Still within deadline: poll again (same action, no extra timer)
+        timeout.schedule(1000000)
     =}
 }
 
 reactor Agent {
-  input rel_distance
-  input velocity_ms
   input decision_in
-
+  input driver_msg_in
   output ext_brk_cmd
 
   initial mode monitoring {
-    reaction(decision_in) -> warning, actuate {=
-      kw = decision_in.value
-      if kw == "WARNING":
+    reaction(decision_in, driver_msg_in) -> warning, actuate {=
+      kw  = decision_in.value
+      msg = driver_msg_in.value
+
+      if msg is not None and msg != "":
+        print(msg, flush=True)
+
+      if kw == "WARNING" or kw == "ALERT" or kw == "NOTIFY":
         warning.set()
       elif kw == "ACTUATE":
         actuate.set()
@@ -256,44 +377,48 @@ reactor Agent {
   }
 
   mode warning {
-    reaction(decision_in) -> actuate {=
-        prompt = "Please warn the driver to reduce the speed since there is a stop sign."
-        msg = run_llm(prompt)
-        print(f"[AGENT WARNING]: {msg}\n")
-        kw = decision_in.value
-        if kw == "ACTUATE":
-            actuate.set()
+    reaction(decision_in, driver_msg_in) -> actuate {=
+      kw  = decision_in.value
+      msg = driver_msg_in.value
+
+      if msg is not None and msg != "":
+        print(msg, flush=True)
+
+      if kw == "ACTUATE":
+        actuate.set()
     =}
   }
 
   mode actuate {
-    reaction(decision_in) -> ext_brk_cmd {=
-        prompt = "Please inform the driver that external break is applied since the required action was not taken."
-        msg = run_llm(prompt)
-        print(f"[AGENT Notice]: {msg}\n")
-        ext_brk_cmd.set(Brake(6).name)
+    reaction(decision_in, driver_msg_in) -> ext_brk_cmd {=
+      msg = driver_msg_in.value
+      if msg is not None and msg != "":
+        print(msg, flush=True)
+
+      # apply brake when ACTUATE event happens (it happens once now)
+      ext_brk_cmd.set(Brake(6).name)
     =}
   }
 }
 
 reactor Coach{
-  input rel_distance
-  input velocity_ms
-  output ext_brk_cmd
+    input rel_distance
+    input velocity_ms
+    output ext_brk_cmd
 
-  llm = new LlmDecision()
-  Agent = new Agent()
+    llm = new LlmDecision()
+    Agent = new Agent()
 
-  rel_distance -> llm.rd
-  velocity_ms  -> llm.v
+    rel_distance -> llm.rd
+    velocity_ms  -> llm.v
 
-  rel_distance -> Agent.rel_distance
-  velocity_ms  -> Agent.velocity_ms
+    // rel_distance -> Agent.rel_distance
+    // velocity_ms  -> Agent.velocity_ms
 
-  llm.decision -> Agent.decision_in
- 
+    llm.decision -> Agent.decision_in
+    llm.driver_msg -> Agent.driver_msg_in
 
-  Agent.ext_brk_cmd -> ext_brk_cmd
+    Agent.ext_brk_cmd -> ext_brk_cmd
 }
 
 main reactor{
@@ -310,6 +435,7 @@ main reactor{
     c.velocity -> adc.velocity_ms
 
     en.relative_distance -> adc.rel_distance
+    en.halted -> c.halted after 1 nsec
 
     adc.ext_brk_cmd -> c.ext_brk after 1 nsec
 }
