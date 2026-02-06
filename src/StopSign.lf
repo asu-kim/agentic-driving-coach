@@ -1,77 +1,119 @@
 target Python {keepalive: true}
 
 preamble{=
-import ollama
-import time
-import threading
-from enum import Enum
+    import ollama
+    import time
+    import threading
+    from enum import Enum
+    from queue import Queue, Empty
 
-class Accelerate(Enum):
-    Coasting = 1
-    Cruise = 2
-    NormalAcceleration = 3
-    StrongAcceleration = 4
+    class Accelerate(Enum):
+        Coasting = 1
+        Cruise = 2
+        NormalAcceleration = 3
+        StrongAcceleration = 4
 
-class Brake(Enum):
-    GentleBraking = 5
-    EmergencyBraking = 6
+    class Brake(Enum):
+        GentleBraking = 5
+        EmergencyBraking = 6
 
-class Head(Enum):
-    Left = 7
-    Right = 8
-    Center = 9
+    class Head(Enum):
+        Left = 7
+        Right = 8
+        Center = 9
 
-ALLOWED = {"NONE", "NOTIFY", "ALERT", "WARNING", "ACTUATE"}
+    ALLOWED = {"NONE", "NOTIFY", "ALERT", "WARNING", "ACTUATE"}
 
-def warmup_llm():
-    try:
-        ollama.chat(
+    def warmup_llm():
+        try:
+            ollama.chat(
+                model="llama3.2:1b",
+                messages=[{"role": "user", "content": "ping"}],
+                options={"temperature": 0.0, "num_predict": 1},
+            )
+        except Exception:
+            pass
+
+    def stop_dist(v, a=9.0, buf=1.0):
+        if v <= 0.0:
+            return 0.0
+        return (v * v) / (2.0 * a) + buf
+
+    def warmup_llm_async():
+        threading.Thread(target=warmup_llm, daemon=True).start()
+
+    def policy_token(rd_val, v_val):
+        # If we've reached/passed the stop sign, stop issuing ACTUATE.
+        if rd_val <= 0.0:
+            return "NONE"
+
+        if rd_val <= 25 and v_val > 2.5:
+            return "ACTUATE"
+
+        if 50 < rd_val <= 60:
+            return "WARNING" if not (5 < v_val < 9) else "NONE"
+
+        if 70 <= rd_val <= 80:
+            return "ALERT" if (v_val > 16 or v_val < 9) else "NONE"
+
+        if rd_val >= 99:
+            return "NOTIFY" if not (15 < v_val < 25) else "NONE"
+
+        return "NONE"
+
+    def run_llm_message(tok, rd_val, v_val):
+        if tok == "NONE":
+            return tok, "", 0.0
+
+        t0 = time.perf_counter()
+
+        r = ollama.chat(
             model="llama3.2:1b",
-            messages=[{"role": "user", "content": "ping"}],
-            options={"temperature": 0.0, "num_predict": 1},
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a driving coach.\n"
+                        "Return ONE short driver instruction (max 12 words).\n"
+                        "No token, no quotes, no markdown, no LaTeX, no variables, no explanation.\n"
+                        "Only the instruction text."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": f"rd={rd_val:.2f}m v={v_val:.2f}m/s token={tok}",
+                },
+            ],
+            options={"temperature": 0.0, "num_predict": 25},
         )
-    except Exception:
-        pass
 
-def run_llm_decision(prompt):
-    t0 = time.perf_counter()
-    r = ollama.chat(
-        model="llama3.2:1b",
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "Output EXACTLY one line: TOKEN|MESSAGE\n"
-                    "TOKEN ∈ {NONE, NOTIFY, ALERT, WARNING, ACTUATE}\n"
-                    "MESSAGE: one short sentence.\n"
-                    "No other text."
-                ),
-            },
-            {"role": "user", "content": prompt},
-        ],
-        options={"temperature": 0.0, "num_predict": 80},
-    )
-    elapsed_ms = (time.perf_counter() - t0) * 1000.0
+        ms = (time.perf_counter() - t0) * 1000.0
+        raw = (r.get("message", {}).get("content", "") or "").strip()
+        msg = raw.splitlines()[0].strip() if raw else ""
 
-    raw = (r.get("message", {}).get("content", "") or "").strip()
-    line = raw.splitlines()[0].strip() if raw else ""
-    if "|" not in line:
-        return "NONE", "", elapsed_ms
+        # sanitize common junk
+        msg = msg.replace("$", "").replace("`", "")
+        msg = msg.strip('"').strip("'").strip()
 
-    token, msg = line.split("|", 1)
-    token = token.strip().upper()
-    msg = msg.strip()
+        # hard guardrails (keeps it from being meta)
+        bad = ["token", "message", "position", "velocity", "rd=", "v=", "actuate"]
+        if any(b in msg.lower() for b in bad):
+            msg = ""
 
-    if token not in ALLOWED:
-        return "NONE", "", elapsed_ms
+        # fallback by token if LLM gives junk/empty
+        if not msg:
+            if tok == "NOTIFY":
+                msg = "Stop sign ahead."
+            elif tok == "ALERT":
+                msg = "Stop sign ahead. Pay attention."
+            elif tok == "WARNING":
+                msg = "Slow down and prepare to stop."
+            elif tok == "ACTUATE":
+                msg = "Brake now."
 
-    return token, msg, elapsed_ms
-def warmup_llm_async():
-    def _w():
-        warmup_llm()
-    threading.Thread(target=_w, daemon=True).start()
+        return tok, msg, ms
 
-warmup_llm_async()
+    warmup_llm_async()
 =}
 
 reactor Driver{
@@ -83,7 +125,7 @@ reactor Driver{
     state lines = []
     state idx = 0
     state loaded = False
-    state done=False
+    state done = False
 
     timer t(0 msec, 100 msec)
 
@@ -91,11 +133,10 @@ reactor Driver{
         try:
             with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/DriverBehavior.txt", "r") as f:
                 for ln in f.readlines():
-                    if ln.strip()!= "":
+                    if ln.strip() != "":
                         self.lines.append(int(ln.strip()))
-
             self.loaded = True
-            print(f"Driver has been seated", flush=True)
+            print("Driver has been seated", flush=True)
         except Exception as e:
             print(f"Driver is not seated {e}", flush=True)
             self.loaded = False
@@ -104,22 +145,21 @@ reactor Driver{
     reaction(t)-> accelerator, brake, head {=
         if self.done:
             return
-        if not self.loaded or len(self.lines)==0:
-                print("Driver behavior not loaded/done", flush=True)
-                self.done = True
-                return
+        if not self.loaded or len(self.lines) == 0:
+            print("Driver behavior not loaded/done", flush=True)
+            self.done = True
+            return
         if self.idx >= len(self.lines):
-                print("Driver behavior not loaded/done", flush=True)
-                self.done = True
-                return
+            print("Driver behavior not loaded/done", flush=True)
+            self.done = True
+            return
 
         msg = self.lines[self.idx]
-        print(f"Behavior: {msg}, Index: {self.idx}", flush=True)
         if msg in [1, 2, 3, 4]:
             accelerator.set(Accelerate(msg).name)
         elif msg in [5, 6]:
             brake.set(Brake(msg).name)
-        elif msg in [7,8,9]:
+        elif msg in [7, 8, 9]:
             head.set(Head(msg).name)
 
         self.idx += 1
@@ -132,45 +172,54 @@ reactor Car{
     input brk
     input ext_brk
     input halted
+
     state acceleration_net
-    state velocity_init = 10
+    state velocity_init = 10.0
 
     state takeover = False
     state takeover_reported = False
+
     output velocity
     output behavior
 
     reaction(accel, brk, ext_brk, halted)->velocity, behavior{=
+        
         if halted.is_present and halted.value:
             self.takeover = False
             self.takeover_reported = False
+
         amsg = accel.value
         bmsg = brk.value
 
-        if ext_brk.is_present and (not self.takeover):
+     
+        if ext_brk.is_present:
             self.takeover = True
             if not self.takeover_reported:
                 behavior.set(True)
                 self.takeover_reported = True
+
+  
         if self.takeover:
-            self.acceleration_net = (- 9.0)
+            self.acceleration_net = -9.0
         else:
             if bmsg == Brake(5).name:
-                self.acceleration_net = (- 3.0)
+                self.acceleration_net = -3.0
             elif bmsg == Brake(6).name:
-                self.acceleration_net = (- 9.0)
+                self.acceleration_net = -9.0
             elif amsg == Accelerate(1).name:
-                self.acceleration_net = (-0.2)
+                self.acceleration_net = -1.0
             elif amsg == Accelerate(2).name:
-                self.acceleration_net = (0.5)
+                self.acceleration_net = 3.0
             elif amsg == Accelerate(3).name:
-                self.acceleration_net = (2.0)
+                self.acceleration_net = 5.0
             elif amsg == Accelerate(4).name:
-                self.acceleration_net = (4.0)
+                self.acceleration_net = 10.0
 
+      
         v = self.velocity_init + self.acceleration_net * 0.1
         if v < 0.0:
             v = 0.0
+
         velocity.set(v)
         self.velocity_init = v
     =}
@@ -178,26 +227,20 @@ reactor Car{
 
 reactor Environment{
     input velocity_ms
-    state start_distance = 0
-    state pos_stop_sign = 100
+    state pos_stop_sign = 100.0
 
-    state reported_halt = False
     output halted
     output relative_distance
 
-    reaction(velocity_ms)->relative_distance,  halted{=
+    reaction(velocity_ms)->relative_distance, halted{=
         vn = velocity_ms.value
-        d = self.start_distance + vn * 0.1
-        self.start_distance = d
         self.pos_stop_sign -= (vn * 0.1)
-        relative_distance.set(self.pos_stop_sign)
-        rd = self.pos_stop_sign
         if self.pos_stop_sign <= 0.0:
             self.pos_stop_sign = 0.0
             halted.set(True)
+        relative_distance.set(self.pos_stop_sign)
     =}
 }
-
 
 reactor LlmDecision {
     input rd
@@ -205,129 +248,166 @@ reactor LlmDecision {
     output decision
     output driver_msg
 
-    reaction(rd, v) -> decision, driver_msg {=
-        start_ns = lf.time.physical_elapsed()/1e6
-        print(f"Start physical time: {start_ns}")
-        policy_text = """\
-            POLICY (follow exactly, no new rules)
-            Let rd = distance_to_stop_sign_m, v = speed_mps.
+    logical action tick
 
-            1) If rd >= 99:
-            - If 15 < v < 25: NONE
-            - Else:           NOTIFY
+    state q
+    state busy = False
+    state last_tok = ""
+    state last_msg = ""
 
-            2) Else if 70 <= rd <= 80:
-            - If v > 16 OR v < 9: ALERT
-            - Else:               NONE
-
-            3) Else if 50 < rd <= 60:
-            - If 5 < v < 9: WARNING
-            - Else:         NONE
-
-            4) Else if rd <= 25:
-            - ACTUATE
-
-            5) Else:
-            - NONE
-            """
-
-        prompt = f"""\
-            Return exactly: TOKEN|MESSAGE
-            TOKEN in: NONE NOTIFY ALERT WARNING ACTUATE
-            MESSAGE: one short sentence to the driver.
-
-            distance_to_stop_sign_m={rd.value:.2f}
-            speed_mps={v.value:.2f}
-
-            Refer from these rules:
-            {policy_text}
-            """
-
-        t, m, inf_ms = run_llm_decision(prompt)
-
-        # print(f"[LLM] {inf_ms:.1f} ms -> {t}", flush=True)
-       
-
-        missed = self.check_deadline(self)
-        elapsed_ms = (lf.time.physical_elapsed()/1e6 - start_ns)   
-        print(f"difference physical time: {elapsed_ms}")
-        if not missed:
-                decision.set(t)
-                driver_msg.set(m)
+    reaction(startup){=
+        self.q = Queue(maxsize=1)
     =}
 
-    deadline(200 msec) {=
-        rd_val = rd.value
-        v_val  = v.value
+    reaction(rd, v) -> tick, decision, driver_msg {=
+        if self.q is None:
+            return
+        if self.busy:
+            return
+        try:
+            while True:
+                self.q.get_nowait()
+        except Exception:
+            pass
 
-        if rd_val >= 99:
-            if (v_val > 25) or (v_val < 15):
-                t = "NOTIFY";  m = "NOTIFY: Stop sign ahead."
-            else:
-                t = "NONE";    m = ""
+        self.busy = True
+        print(f"[DISTANCE]: {rd.value:.2f}", flush=True)
+        print(f"[speed]: {v.value:.2f}", flush=True)
+
+        def worker(outq):
+            rd_val = float(rd.value)
+            v_val  = float(v.value)
+
+            tok = policy_token(rd_val, v_val)
+            print(tok, flush=True)
+
+            tok, msg, ms = run_llm_message(tok, rd_val, v_val)
+            print(f"[LLM] {ms:.1f} ms -> {tok} | {msg}", flush=True)
+
+            try:
+                outq.put_nowait((tok, msg, ms))
+            except Exception:
+                pass
+
+        threading.Thread(target=worker, args=(self.q,), daemon=True).start()
+
+  
+        tick.schedule(1) 
+    =}
+
+  
+    deadline(100 msec) {=
+        rd_val = float(rd.value)
+        v_val  = float(v.value)
+
+        tok = "NONE"
+        msg = ""
+
+        if (v_val > 2.5) and (rd_val <= stop_dist(v_val, a=9.0, buf=1.0)):
+            tok = "ACTUATE"
+            msg = "Brake now."
+        elif 50 < rd_val <= 60:
+            if not (5 < v_val < 9):
+                tok = "WARNING"
+                msg = "Slow down and prepare to stop."
         elif 70 <= rd_val <= 80:
             if v_val > 16 or v_val < 9:
-                t = "ALERT";   m = "ALERT: Stop sign ahead."
-            else:
-                t = "NONE";    m = ""
-        elif 50 < rd_val <= 60:
-            if 5 > v_val or v_val> 9:
-                t = "WARNING"; m = "WARNING: Reduce speed, stop sign ahead."
-            else:
-                t = "NONE";    m = ""
-        elif rd_val <= 25:
-            t = "ACTUATE"; m = "ACTUATE: External braking applied."
-        else:
-            t = "NONE";    m = ""
+                tok = "ALERT"
+                msg = "Stop sign ahead."
+        elif rd_val >= 99:
+            if (v_val > 25) or (v_val < 15):
+                tok = "NOTIFY"
+                msg = "Stop sign ahead."
 
+        decision.set(tok)
+        driver_msg.set(msg)
+        self.busy = False
+    =}
 
-        decision.set(t)
-        driver_msg.set(m)
+    reaction(tick) -> decision, driver_msg {=
+        if self.q is None:
+            return
+        if not self.busy:
+            return
+
+        try:
+            tok, msg, ms = self.q.get_nowait()
+        except Empty:
+        
+            tick.schedule(10_000_000)
+            return
+
+        self.busy = False
+
+        if tok != self.last_tok or msg != self.last_msg:
+            decision.set(tok)
+            driver_msg.set(msg)
+            self.last_tok = tok
+            self.last_msg = msg
     =}
 }
 
 reactor Agent {
   input decision_in
   input driver_msg_in
+  input rd_in
+  input v_in
   output ext_brk_cmd
 
-  initial mode monitoring {
-    reaction(decision_in, driver_msg_in) -> warning, actuate {=
-        kw  = decision_in.value
-        msg = driver_msg_in.value
-        print("[MONITORING]")
-        if kw == "ALERT" or kw == "NOTIFY" :
-            if msg is not None and msg != "":
-                print(msg, flush=True)
+  state last_printed = ""
+  state act_cnt = 0
 
-        if kw == "WARNING":
-            warning.set()
-        elif kw == "ACTUATE":
-            actuate.set()
+  initial mode monitoring {
+    reaction(decision_in, driver_msg_in, rd_in, v_in) -> warning, actuate {=
+      kw  = decision_in.value
+      msg = driver_msg_in.value
+      rd  = float(rd_in.value)
+      v   = float(v_in.value)
+
+      if msg and msg != self.last_printed:
+        print(msg, flush=True)
+        self.last_printed = msg
+
+      if kw == "ACTUATE" and rd > 0.0 and v > 0.05:
+        actuate.set()
+      elif kw == "WARNING" or kw == "ALERT" or kw == "NOTIFY":
+        warning.set()
     =}
   }
 
   mode warning {
-    reaction(decision_in, driver_msg_in) -> actuate {=
-        kw  = decision_in.value
-        msg = driver_msg_in.value
-        if kw == "WARNING":
-            if msg is not None and msg != "":
-                print(msg, flush=True)
+    reaction(decision_in, driver_msg_in, rd_in, v_in) -> monitoring, actuate {=
+      kw  = decision_in.value
+      msg = driver_msg_in.value
+      rd  = float(rd_in.value)
+      v   = float(v_in.value)
 
-        if kw == "ACTUATE":
-            actuate.set()
+      if msg and msg != self.last_printed:
+        print(msg, flush=True)
+        self.last_printed = msg
+
+      if kw == "ACTUATE" and rd > 0.0 and v > 0.05:
+        actuate.set()
+      elif kw == "NONE":
+        monitoring.set()
     =}
   }
 
   mode actuate {
-    reaction(decision_in, driver_msg_in) -> ext_brk_cmd {=
-      msg = driver_msg_in.value
-      if msg is not None and msg != "":
-        print(msg, flush=True)
-        request_stop()
+    reaction(decision_in, rd_in, v_in) -> ext_brk_cmd, monitoring {=
+        self.act_cnt += 1
+        rd = float(rd_in.value)
+        v  = float(v_in.value)
+        now_s = lf.time.logical_elapsed()/1e9
 
-      ext_brk_cmd.set(Brake(6).name)
+        print(f"[ACTUATE] cnt={self.act_cnt} t={now_s:.3f}s rd={rd:.2f} v={v:.2f}", flush=True)
+
+        if (rd <= 0.0) or (v <= 0.05):
+            print(f"[ACTUATE->MONITOR] reason={'rd<=0' if rd<=0 else 'v<=0.05'}", flush=True)
+            monitoring.set()
+            return
+
+        ext_brk_cmd.set(Brake(6).name)
     =}
   }
 }
@@ -343,11 +423,11 @@ reactor Coach{
     rel_distance -> llm.rd
     velocity_ms  -> llm.v
 
-    // rel_distance -> Agent.rel_distance
-    // velocity_ms  -> Agent.velocity_ms
-
     llm.decision -> Agent.decision_in
     llm.driver_msg -> Agent.driver_msg_in
+
+    rel_distance   -> Agent.rd_in
+    velocity_ms    -> Agent.v_in
 
     Agent.ext_brk_cmd -> ext_brk_cmd
 }
@@ -362,7 +442,7 @@ main reactor{
     d.brake -> c.brk
     d.steer -> c.steer
 
-    c.velocity-> en.velocity_ms
+    c.velocity -> en.velocity_ms
     c.velocity -> adc.velocity_ms
 
     en.relative_distance -> adc.rel_distance
