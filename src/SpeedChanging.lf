@@ -34,82 +34,81 @@ preamble{=
         except Exception:
             pass
 
-    def stop_dist(v, a=9.0, buf=1.0):
-        if v <= 0.0:
-            return 0.0
-        return (v * v) / (2.0 * a) + buf
-
     def warmup_llm_async():
         threading.Thread(target=warmup_llm, daemon=True).start()
 
-    def policy_token(rd_val, v_val):
-        # If we've reached/passed the stop sign, stop issuing ACTUATE.
-        if rd_val <= 0.0:
-            return "NONE"
+    
+    import re
 
-        if rd_val <= 25 and v_val > 2.5:
-            return "ACTUATE"
-
-        if 50 < rd_val <= 60:
-            return "WARNING" if not (5 < v_val < 9) else "NONE"
-
-        if 70 <= rd_val <= 80:
-            return "ALERT" if (v_val > 16 or v_val < 9) else "NONE"
-
-        if rd_val >= 99:
-            return "NOTIFY" if not (15 < v_val < 25) else "NONE"
-
-        return "NONE"
-
-    def run_llm_message(tok, rd_val, v_val):
-        if tok == "NONE":
-            return tok, "", 0.0
-
+    def run_llm_message(rd_val, v_val):
         t0 = time.perf_counter()
 
         r = ollama.chat(
             model="llama3.2:1b",
             messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a driving coach.\n"
-                        "Return ONE short driver instruction (max 12 words).\n"
-                        "No token, no quotes, no markdown, no LaTeX, no variables, no explanation.\n"
-                        "Only the instruction text."
-                    ),
+                                {
+                "role": "system",
+                "content": (
+                    "Output exactly ONE line: TOKEN|MSG\n"
+                    "TOKEN must be one of: NONE, NOTIFY, WARNING, ALERT, ACTUATE\n"
+                    "MSG must be <= 12 words, about speed only.\n"
+                    "Use meters and m/s only.\n"
+                    "Rules for TOKEN:\n"
+                    "- if distance_to_sign <= 25 and speed > 11: TOKEN=ACTUATE\n"
+                    "- else if 50 < distance_to_sign <= 60: TOKEN=WARNING\n"
+                    "- else if distance_to_sign >= 80: TOKEN=NOTIFY\n"
+                    "- else TOKEN=NONE\n"
+                    "Examples:\n"
+                    "ACTUATE|Brake now.\n"
+                    "WARNING|Slow down to 11 m/s.\n"
+                    "NOTIFY|Speed limit change ahead.\n"
+                    "NONE|\n"
+                    "Do not output anything else."
+                )
                 },
                 {
                     "role": "user",
-                    "content": f"rd={rd_val:.2f}m v={v_val:.2f}m/s token={tok}",
+                    "content": f"distance_to_sign={rd_val:.2f} speed={v_val:.2f}",
                 },
             ],
-            options={"temperature": 0.0, "num_predict": 25},
+            options={"temperature": 0.0, "num_predict": 30},
         )
 
         ms = (time.perf_counter() - t0) * 1000.0
         raw = (r.get("message", {}).get("content", "") or "").strip()
-        msg = raw.splitlines()[0].strip() if raw else ""
 
-        
+        tok = "NONE"
+        msg = ""
+
+        if raw:
+            line = raw.splitlines()[0].strip()
+            parts = [p.strip() for p in line.split("|", 1)]
+
+            if len(parts) >= 1 and parts[0].upper() in ALLOWED:
+                tok = parts[0].upper()
+
+            if len(parts) == 2:
+                msg = parts[1]
+
         msg = msg.replace("$", "").replace("`", "")
         msg = msg.strip('"').strip("'").strip()
 
-    
-        bad = ["token", "message", "position", "velocity", "rd=", "v=", "actuate"]
+        bad = ["token", "message", "position", "velocity", "rd=", "v="]
         if any(b in msg.lower() for b in bad):
             msg = ""
 
-       
-        if not msg:
+        if tok != "NONE" and not msg:
             if tok == "NOTIFY":
-                msg = "Stop sign ahead."
+                msg = "Speed sign ahead."
             elif tok == "ALERT":
-                msg = "Stop sign ahead. Pay attention."
+                msg = "Slow now."
             elif tok == "WARNING":
-                msg = "Slow down and prepare to stop."
+                msg = "Slow down toward target speed."
             elif tok == "ACTUATE":
                 msg = "Brake now."
+
+        if tok == "NONE":
+            msg = ""
 
         return tok, msg, ms
 
@@ -170,81 +169,91 @@ reactor Car{
     input steer
     input accel
     input brk
-    input ext_brk
-    input halted
+    input ext_inp
+    // input halted
 
     state acceleration_net
-    state velocity_init = 10.0
-
-    state takeover = False
-    state takeover_reported = False
+    state velocity_init = 18.0
+    state dist_init = 0.0
 
     output velocity
-    output behavior
+    output dist_trav
+    // output behavior
 
-    reaction(accel, brk, ext_brk, halted)->velocity, behavior{=
-        
-        if halted.is_present and halted.value:
-            self.takeover = False
-            self.takeover_reported = False
-
+    reaction(accel, brk, ext_inp)->velocity, dist_trav{=
         amsg = accel.value
         bmsg = brk.value
 
-     
-        if ext_brk.is_present:
-            self.takeover = True
-            if not self.takeover_reported:
-                behavior.set(True)
-                self.takeover_reported = True
+        
+        if ext_inp.is_present:
+            cmd = ext_inp.value
+            if cmd in [Brake(5).name, Brake(6).name]:
+                bmsg = cmd
+            elif cmd in [Accelerate(1).name, Accelerate(2).name, Accelerate(3).name, Accelerate(4).name]:
+                amsg = cmd
 
-  
-        if self.takeover:
+        if bmsg == Brake(5).name:
+            self.acceleration_net = -3.0
+        elif bmsg == Brake(6).name:
             self.acceleration_net = -9.0
+        elif amsg == Accelerate(1).name:
+            self.acceleration_net = -1.0
+        elif amsg == Accelerate(2).name:
+            self.acceleration_net = 2.0
+        elif amsg == Accelerate(3).name:
+            self.acceleration_net = 5.0
+        elif amsg == Accelerate(4).name:
+            self.acceleration_net = 10.0
         else:
-            if bmsg == Brake(5).name:
-                self.acceleration_net = -3.0
-            elif bmsg == Brake(6).name:
-                self.acceleration_net = -9.0
-            elif amsg == Accelerate(1).name:
-                self.acceleration_net = -1.0
-            elif amsg == Accelerate(2).name:
-                self.acceleration_net = 3.0
-            elif amsg == Accelerate(3).name:
-                self.acceleration_net = 5.0
-            elif amsg == Accelerate(4).name:
-                self.acceleration_net = 10.0
+            self.acceleration_net = 0.0
 
-      
         v = self.velocity_init + self.acceleration_net * 0.1
         if v < 0.0:
             v = 0.0
 
+        d = self.dist_init + v * 0.1
+
         velocity.set(v)
+        dist_trav.set(d)
+
         self.velocity_init = v
+        self.dist_init = d
     =}
 }
 
 reactor Environment{
     input velocity_ms
-    state pos_stop_sign = 100.0
+    state speed_change_pos = 100.0
+    state passed = False
+    state after_m = 0.0
 
-    output halted
     output relative_distance
+    output dist_aft_speed
 
-    reaction(velocity_ms)->relative_distance, halted{=
-        vn = velocity_ms.value
-        self.pos_stop_sign -= (vn * 0.1)
-        if self.pos_stop_sign <= 0.0:
-            self.pos_stop_sign = 0.0
-            halted.set(True)
-        relative_distance.set(self.pos_stop_sign)
+    reaction(velocity_ms)->relative_distance, dist_aft_speed{=
+        vn = float(velocity_ms.value)
+        step = vn * 0.1
+
+        if not self.passed:
+            self.speed_change_pos -= step
+            if self.speed_change_pos <= 0.0:
+                self.speed_change_pos = 0.0
+                self.passed = True
+                self.after_m = 0.0
+
+            relative_distance.set(self.speed_change_pos)
+            dist_aft_speed.set(0.0)          
+        else:
+            self.after_m += step
+            relative_distance.set(0.0)
+            dist_aft_speed.set(self.after_m) 
     =}
 }
 
 reactor LlmDecision {
     input rd
     input v
+    input dis_aft_sp
     output decision
     output driver_msg
 
@@ -263,7 +272,17 @@ reactor LlmDecision {
         self.q = Queue(maxsize=1)
     =}
 
-    reaction(rd, v) -> tick, decision, driver_msg {=
+    reaction(rd, v, dis_aft_sp) -> tick, decision, driver_msg {=
+         
+        d_val = dis_aft_sp.value if dis_aft_sp.value is not None else 0.0
+        rd_val = rd.value if rd.value is not None else 0.0
+        v_val  = v.value if v.value is not None else 0.0
+
+       
+        if d_val > 0.0 or rd_val <= 0.0:
+            decision.set("NONE")
+            driver_msg.set("")
+            return
         if self.q is None:
             return
 
@@ -271,7 +290,7 @@ reactor LlmDecision {
         if self.busy:
             return
 
-
+        
         try:
             while True:
                 self.q.get_nowait()
@@ -284,18 +303,23 @@ reactor LlmDecision {
         self.req_id += 1
         self.active_id = self.req_id
 
-        rd_val = float(rd.value)
-        v_val  = float(v.value)
-
-        print(f"[DISTANCE]: {rd_val:.2f}", flush=True)
+        # rd_val = rd.value
+        # v_val  = v.value
+        # d_val = dis_aft_sp.value
+        print("################################################")
+        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+        print(f"[DISTANCE after speed]: {d_val:.2f}", flush=True)
         print(f"[speed]: {v_val:.2f}", flush=True)
         print("logical", lf.time.logical_elapsed()/1e6, flush=True)
         print("physical", lf.time.physical_elapsed()/1e6, flush=True)
 
         def worker(outq, my_id, rd_local, v_local):
-            tok = policy_token(rd_local, v_local)
-            tok, msg, ms = run_llm_message(tok, rd_local, v_local)
+            tok, msg, ms = run_llm_message(rd_local, v_local)
             print(f"[LLM] {ms:.1f} ms -> {tok} | {msg}", flush=True)
+
+            
+            print(f"[LLM] {ms:.1f} ms -> {tok} | {msg}", flush=True)
+
             try:
                 outq.put_nowait((my_id, tok, msg, ms))
             except Exception:
@@ -307,12 +331,12 @@ reactor LlmDecision {
             daemon=True
         ).start()
 
-      
+        
         tick.schedule(0)
     =}
 
-    deadline(50 msec) {=
-     
+    deadline(100 msec) {=
+        
         if not self.busy:
             return
         if self.dl_fired_for_active:
@@ -320,33 +344,33 @@ reactor LlmDecision {
 
         self.dl_fired_for_active = True
 
-        rd_val = float(rd.value)
-        v_val  = float(v.value)
+        rd_val = rd.value
+        v_val  = v.value
 
         tok = "NONE"
         msg = ""
 
-        if (v_val > 2.5) and (rd_val <= stop_dist(v_val, a=9.0, buf=1.0)):
+        if (v_val > 11) and (rd_val <= 25):
             tok = "ACTUATE"
             msg = "Brake now."
         elif 50 < rd_val <= 60:
-            if not (5 < v_val < 9):
+            if not (14 < v_val < 15):
                 tok = "WARNING"
-                msg = "Slow down and prepare to stop."
-        elif 70 <= rd_val <= 80:
-            if v_val > 16 or v_val < 9:
-                tok = "ALERT"
-                msg = "Stop sign ahead."
+                msg = "Slow down speed sign ahead for 11 m/s."
+        # elif 70 <= rd_val <= 80:
+        #     if v_val > 16 or v_val < 9:
+        #         tok = "ALERT"
+        #         msg = "Stop sign ahead."
         elif rd_val >= 99:
-            if (v_val > 25) or (v_val < 15):
-                tok = "NOTIFY"
-                msg = "Stop sign ahead."
+            # if (v_val > 18) or (v_val < 15):
+            tok = "NOTIFY"
+            msg = "Speed sign ahead for 11 m/s."
 
         decision.set(tok)
         driver_msg.set(msg)
         print(f"[SRC=DL id={self.active_id}] {msg}", flush=True)
 
-   
+       
         self.active_id = -1
         self.busy = False
     =}
@@ -388,7 +412,7 @@ reactor Agent {
   input driver_msg_in
   input rd_in
   input v_in
-  output ext_brk_cmd
+  output ext_inp_cmd
 
   state last_printed = ""
   state act_cnt = 0
@@ -397,14 +421,14 @@ reactor Agent {
     reaction(decision_in, driver_msg_in, rd_in, v_in) -> warning, actuate {=
       kw  = decision_in.value
       msg = driver_msg_in.value
-      rd  = float(rd_in.value)
-      v   = float(v_in.value)
+      rd  = rd_in.value
+      v   = v_in.value
 
       if msg and msg != self.last_printed:
         print(msg, flush=True)
         self.last_printed = msg
 
-      if kw == "ACTUATE" and rd > 0.0 and v > 0.05:
+      if kw == "ACTUATE" and rd > 0.0:
         actuate.set()
       elif kw == "WARNING" or kw == "ALERT" or kw == "NOTIFY":
         warning.set()
@@ -415,14 +439,14 @@ reactor Agent {
     reaction(decision_in, driver_msg_in, rd_in, v_in) -> monitoring, actuate {=
       kw  = decision_in.value
       msg = driver_msg_in.value
-      rd  = float(rd_in.value)
-      v   = float(v_in.value)
+      rd  = rd_in.value
+      v   = v_in.value
 
       if msg and msg != self.last_printed:
         print(msg, flush=True)
         self.last_printed = msg
 
-      if kw == "ACTUATE" and rd > 0.0 and v > 0.05:
+      if kw == "ACTUATE" and rd > 0.0:
         actuate.set()
       elif kw == "NONE":
         monitoring.set()
@@ -430,28 +454,40 @@ reactor Agent {
   }
 
   mode actuate {
-    reaction(decision_in, rd_in, v_in) -> ext_brk_cmd, monitoring {=
-        self.act_cnt += 1
-        rd = float(rd_in.value)
-        v  = float(v_in.value)
-        now_s = lf.time.logical_elapsed()/1e9
+    reaction(decision_in, rd_in, v_in) -> ext_inp_cmd, monitoring {=
+        kw = decision_in.value
+        rd = rd_in.value
+        v  = v_in.value
 
-        print(f"[ACTUATE] cnt={self.act_cnt} t={now_s:.3f}s rd={rd:.2f} v={v:.2f}", flush=True)
-
-        if (rd <= 0.0) or (v <= 0.05):
-            print(f"[ACTUATE->MONITOR] reason={'rd<=0' if rd<=0 else 'v<=0.05'}", flush=True)
+       
+        if kw != "ACTUATE" and rd > 0.0:
             monitoring.set()
             return
 
-        ext_brk_cmd.set(Brake(6).name)
+        
+        if rd >= 60:
+            if v > 18:
+                ext_inp_cmd.set(Brake(6).name)
+        elif 50 < rd < 60:
+            if v < 14:
+                ext_inp_cmd.set(Accelerate(2).name)
+            elif v > 15:
+                ext_inp_cmd.set(Accelerate(1).name)
+        elif rd <= 25:
+            ext_inp_cmd.set(Brake(5).name)
+        else:
+            ext_inp_cmd.set(Accelerate(1).name)
+
+        monitoring.set()
     =}
-  }
+}
 }
 
 reactor Coach{
     input rel_distance
     input velocity_ms
-    output ext_brk_cmd
+    input dist_aft_speed
+    output ext_inp_cmd
 
     llm = new LlmDecision()
     Agent = new Agent()
@@ -461,11 +497,12 @@ reactor Coach{
 
     llm.decision -> Agent.decision_in
     llm.driver_msg -> Agent.driver_msg_in
+    dist_aft_speed -> llm.dis_aft_sp
 
     rel_distance   -> Agent.rd_in
     velocity_ms    -> Agent.v_in
 
-    Agent.ext_brk_cmd -> ext_brk_cmd
+    Agent.ext_inp_cmd -> ext_inp_cmd
 }
 
 main reactor{
@@ -480,9 +517,11 @@ main reactor{
 
     c.velocity -> en.velocity_ms
     c.velocity -> adc.velocity_ms
+    // c.dist_trav -> en.dist_m
+    en.dist_aft_speed -> adc.dist_aft_speed
 
     en.relative_distance -> adc.rel_distance
-    en.halted -> c.halted after 1 nsec
+    // en.halted -> c.halted after 1 nsec
 
-    adc.ext_brk_cmd -> c.ext_brk after 1 nsec
+    adc.ext_inp_cmd -> c.ext_inp after 1 nsec
 }
