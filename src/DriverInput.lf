@@ -1,4 +1,4 @@
-target Python {files: ["/home/raspdeeksha/agentic-driving-coach/src/questions.txt"]}
+target Python {files: ["/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/questions.txt"]}
 
 
 reactor Driver{
@@ -12,7 +12,7 @@ reactor Driver{
     timer t(0, 200msec)
     reaction(startup){=
         try:
-            with open("/home/raspdeeksha/agentic-driving-coach/src/questions.txt", "r") as f:
+            with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/questions.txt", "r") as f:
                 self.lines = [ln.strip() for ln in f.readlines() if ln.strip() != "" ]
             self.loaded = True
             print(f"Driver has been seated", flush=True)

@@ -1,0 +1,847 @@
+target Python {keepalive: true}
+
+preamble{=
+    import requests
+    import ollama
+    import time
+    import threading
+    # import torch
+    # from transformers import AutoTokenizer, AutoModelForCausalLM
+    from enum import Enum
+    class Accelerate(Enum):
+        Coasting = 1
+        Cruise = 2
+        NormalAcceleration = 3
+        StrongAcceleration = 4
+
+    class Brake(Enum):
+        GentleBraking = 5
+        EmergencyBraking = 6
+    class Head(Enum):
+        Left = 7
+        Right = 8
+        Center = 9
+    
+    
+=}
+
+reactor Driver{
+    #has three ports which goes to the car reactor to calculate the speed every  100msec
+    output steer
+    output accelerator
+    output brake
+    output head
+
+    state lines = []
+    state idx = 0
+    state loaded = False
+    state done=False
+
+    timer t(1000 msec, 100 msec)
+
+    reaction(startup){=
+        try:
+            with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/DriverBehavior.txt", "r") as f:
+                for ln in f.readlines():
+                    if ln.strip()!= "":
+                        self.lines.append(int(ln.strip()))
+                
+            self.loaded = True
+            print(f"Driver has been seated", flush=True)
+        except Exception as e:
+            print(f"Driver is not seated {e}", flush=True)
+            self.loaded = False
+    =}
+
+    reaction(t)-> accelerator, brake, head {=
+        if self.done:
+            return
+        if not self.loaded or len(self.lines)==0:
+                print("Driver behavior not loaded/done", flush=True)
+                self.done = True
+                # request_stop()
+                return
+        if self.idx >= len(self.lines):
+                print("Driver behavior not loaded/done", flush=True)
+                self.done = True
+                # request_stop()
+                return
+
+        msg = self.lines[self.idx]
+        print(f"Behavior: {msg}, Index: {self.idx}", flush=True)
+        if msg in [1, 2, 3, 4]:
+            accelerator.set(Accelerate(msg).name)
+            # print(accelerator.value)
+        elif msg in [5, 6]:
+            brake.set(Brake(msg).name)
+            # print(brake.value)
+        elif msg in [7,8,9]:
+            head.set(Head(msg).name)
+
+        self.idx += 1
+    =}
+}
+reactor Car{
+    input steer
+    input accel
+    input brk
+    input ext_brk
+    state acceleration_net
+    state velocity_init = 10
+    state dt = 0.1
+    state takeover = False
+    state takeover_reported = False
+    output velocity
+    output behavior
+    #acceleration_net is in m/s2
+
+    reaction(accel, brk, ext_brk)->velocity, behavior{=
+
+        amsg = accel.value
+        bmsg = brk.value
+        
+        if ext_brk.is_present:
+            self.takeover = True
+            if not self.takeover_reported:
+                behavior.set(True)         
+                self.takeover_reported = True   
+        if self.takeover:
+            self.acceleration_net = (- 7.0)
+        else:
+            if bmsg == Brake(5).name:
+                self.acceleration_net = (- 3.0)
+            elif bmsg == Brake(6).name:
+                self.acceleration_net = (- 9.0)
+            elif amsg == Accelerate(1).name:
+                self.acceleration_net = (-0.2)
+            elif amsg == Accelerate(2).name:
+                self.acceleration_net = (0.5)
+            elif amsg == Accelerate(3).name:
+                self.acceleration_net = (2.0)
+            elif amsg == Accelerate(4).name:
+                self.acceleration_net = (4.0)
+        
+        # print(self.acceleration_net)
+
+        
+        v = self.velocity_init + self.acceleration_net * self.dt
+        #this is for physics so velocity does not go below zero
+        if v < 0.0:
+            v = 0.0
+
+        velocity.set(v)
+        self.velocity_init = v
+        # print(f"velocity {v}")
+
+    =}
+
+
+}
+reactor Environment{
+    input velocity_ms
+    state start_distance = 0
+    state pos_stop_sign = 100
+    state prev_vel = 0.0
+    state first = True
+    state reported_halt = False
+    output halted
+    output relative_distance
+    output vel_diff
+
+    reaction(velocity_ms)->relative_distance, vel_diff, halted{=
+        vn = velocity_ms.value
+        d = self.start_distance + vn * 0.1
+        self.start_distance = d
+        self.pos_stop_sign -= (vn * 0.1)
+        relative_distance.set(self.pos_stop_sign)
+        rd = self.pos_stop_sign
+        if (not self.reported_halt) and (vn <= 0.0):
+            halted.set(True)
+            self.reported_halt = True
+        
+        if self.first:
+            self.prev_vel = vn
+            self.first = False
+            return
+        dv = self.prev_vel - vn
+        self.prev_vel = vn
+        vel_diff.set(dv)
+
+    =}
+}
+
+reactor coach2{
+    input rel_distance
+    input vel_diff
+    input velocity_ms
+    input halted 
+    input behavior
+    input head
+    input external_break
+    output brk_takeover
+
+    initial mode monitoring{
+        #the monitoring needs to be done till 50m 
+        state llm_response = ""
+        reaction(rel_distance, vel_diff, velocity_ms)-> warning{=
+            rd = rel_distance.value
+            dv = vel_diff.value
+            v = velocity_ms.value
+            tol_vel = 0.02
+            # print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+            # if halted.is_present and halted.value:
+            #     print("Car halted successfully at stop sign")
+            #     request_stop()
+            print("MONITORING")
+            if rd > 70:
+                pass
+            elif 60 < rd and rd <= 70:
+                if dv <= tol_vel:
+                    prompt = (
+                        f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+                        f"The current speed of the car is: {v:.2f} m/s."
+                        f"Notify the driver that a stop sign is ahead with the key word 'NOTIFICATION'. "
+                        )
+                        # print(prompt)
+                    st = lf.time.logical_elapsed()/1e9
+                    self.llm_response = self.coach(prompt)
+                    
+                    print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+                    print(self.llm_response)
+
+            elif 50<rd and rd <= 60:
+                if dv <= 0.15:
+                    prompt = (
+                    f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+                    f"The current speed of the car is: {v:.2f} m/s."
+                    f"Notify the driver that a stop sign is ahead with the key word 'ALERT'. "
+                    )
+                    # print(prompt)
+                    st = lf.time.logical_elapsed()/1e9
+                    self.llm_response = self.coach(prompt)
+                    
+                    print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+                    print(self.llm_response)
+            elif 40 <rd and rd< 50:
+                if dv < 0.2:
+                    warning.set()
+       
+            
+
+    =}
+    }
+    
+    mode warning{
+        #warning will be triggered idf the distance is 50 
+        
+        reaction(rel_distance, vel_diff, velocity_ms)->actuation{=
+                rd = rel_distance.value
+                dv = vel_diff.value
+                v = velocity_ms.value
+                if rd <= 25 :
+                    actuation.set()
+                    return
+                elif rd > 25 and rd <=  40:
+                    if dv < 0.5:
+                        prompt = (
+                        f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+                        f"The current speed of the car is: {v:.2f} m/s."
+                        f"Give a STRONG WARNING with the keyword 'WARNING AND DANGER' to tell the driver that a stop sign is way closer. "
+                        )
+                        # print(prompt)
+                        st = lf.time.logical_elapsed()/1e9
+                        self.llm_response = self.coach(prompt)
+                        
+                        # print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+                        print(self.llm_response)
+                elif rd > 40 and rd <= 50:
+                    if dv < 0.2:
+                        prompt = (
+                            f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+                            f"The current speed of the car is: {v:.2f} m/s."
+                            f"Give a WARNING with the keyword 'WARNING' to tell the driver that a stop sign is closer. "
+                            )
+                            # print(prompt)
+                        st = lf.time.logical_elapsed()/1e9
+                        self.llm_response = self.coach(prompt)
+                        
+                        print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+                        print(self.llm_response)
+        =}
+
+    }
+    mode actuation{
+        #this should be triggred when the distance is 25m
+        reaction(rel_distance, vel_diff, velocity_ms, external_break){=
+        rd = rel_distance.value
+        dv = vel_diff.value
+        v = velocity_ms.value
+        external_break.schedule(0, Brake(6).name)
+        # print(f"Break applied EXTERNALLY")
+        prompt = (
+                            f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+                            f"The current speed of the car is: {v:.2f} m/s."
+                            f"External ACTUATION is applied tell the driver with the keyword 'ACTUATION'. "
+                            )
+                            # print(prompt)
+        st = lf.time.logical_elapsed()/1e9
+        self.llm_response = self.coach(prompt)
+        
+        print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+        print(self.llm_response)
+        
+        =}
+        reaction(external_break)->brk_takeover{=
+            brk_takeover.set(external_break.value)
+        =}
+    }
+}
+
+reactor coach{
+    input rel_distance
+    input vel_diff
+    input velocity_ms
+    input halted 
+    input behavior
+    input head
+    state takeover_happened = False
+    state post_stop_active = False
+    state saw_left = False
+    state saw_right = False
+    state stop_feedback_sent = False
+    state head_prompt_sent = False
+    state last_head = "Unknown"
+    physical action external_break
+
+
+    reaction(startup){=
+        print("[Coach] Startup: warming model", flush=True)
+        ollama.chat(
+        model="llama3.2:1b",
+        messages=[{"role":"user","content":"warmup"}],
+        options={"num_predict": 1}
+        )
+        def coach(user_prompt):
+            start = time.time()
+            r = ollama.chat(
+                model="llama3.2:1b",
+                #warmup the gpu kernals
+                messages=[
+                    {"role": "system", "content": "You are a driving coach. Be concise. Output ONLY one line."},
+                    {"role": "user", "content": user_prompt}
+                ],
+                options={
+                    "temperature": 0.0,
+                    "num_predict": 40,
+                }
+            )
+            end = time.time()
+            msg = r["message"]["content"].strip()
+            formatted = f"[Coach] {end - start:.3f}s | {msg}"
+            return formatted
+            # return r["message"]["content"].strip()
+            # print(f"[Coach] {end - start:.3f}s | {r['message']['content']}", flush=True)
+        self.coach = coach
+
+        t = threading.Thread(target=coach, args=("Have a friendly conversation",), daemon=True)
+        t.start()   
+        #warmup the gpus
+        # coach("Have a friendly conversation")
+        # coach("motivate the drives")
+    =}
+    
+    reaction(behavior){=
+        if behavior.is_present and behavior.value:
+            self.takeover_happened = True
+    =}
+    reaction(halted, rel_distance, velocity_ms){=
+        if halted.is_present and halted.value and (not self.post_stop_active):
+            self.post_stop_active = True
+            self.saw_left = False
+            self.saw_right = False
+            self.stop_feedback_sent = False
+            self.head_prompt_sent = False
+
+            rd = rel_distance.value
+            v = velocity_ms.value
+
+            
+            if self.takeover_happened:
+                prompt = f"Use keyword 'TAKEOVER'. System stopped the car. Stop sign distance: {rd:.2f} m."
+            else:
+               
+                prompt = f"Use keyword 'STOP'. Driver stopped the car. Stop sign distance: {rd:.2f} m."
+
+            self.llm_response = self.coach(prompt)
+            print(self.llm_response, flush=True)
+            self.stop_feedback_sent = True
+    =}
+    reaction(head){=
+        if head.is_present:
+            self.last_head = head.value
+
+        if self.post_stop_active:
+            if self.last_head == "Left":
+                self.saw_left = True
+            elif self.last_head == "Right":
+                self.saw_right = True
+
+            
+            if (not self.head_prompt_sent):
+                prompt = "Use keyword 'HEADCHECK'. Look LEFT then RIGHT before proceeding."
+                self.llm_response = self.coach(prompt)
+                print(self.llm_response, flush=True)
+                self.head_prompt_sent = True
+
+            
+            if self.saw_left and self.saw_right:
+                prompt = "Use keyword 'CLEAR'. Good head-check. You may proceed."
+                self.llm_response = self.coach(prompt)
+                print(self.llm_response, flush=True)
+                request_stop()
+    =}
+    
+    coach2 = new coach2()
+    rel_distance -> coach2.rel_distance
+}
+
+main reactor{
+    d = new Driver()
+    c = new Car()
+    en = new Environment()
+    agent = new coach()
+
+    d.accelerator -> c.accel
+    d.brake -> c.brk
+    d.steer -> c.steer
+    d.head -> agent.head
+
+    c.velocity-> en.velocity_ms
+    c.velocity -> agent.velocity_ms
+    c.behavior -> agent.behavior
+
+    en.relative_distance -> agent.rel_distance
+    en.vel_diff -> agent.vel_diff
+    en.halted -> agent.halted
+
+    // agent.brk_takeover -> c.ext_brk after 1 nsec
+ 
+    
+}
+# ./bin/StopSign | tee src/StopSign.log
+// reactor coach2{
+//     input rel_distance
+//     input velocity_ms
+//     input halted 
+//     input behavior
+//     input head
+//     input external_break
+//     output brk_takeover
+//     output llm_prompt
+
+//     initial mode monitoring{
+
+//         reaction(rel_distance,  velocity_ms)-> warning, llm_prompt{=
+//             # rd = rel_distance.value
+//             # v = velocity_ms.value
+//             # print("MONITORING")
+//             rd = rel_distance.value
+//             v = velocity_ms.value
+//             prompt = (
+//                 "You are a stop-sign coach.\n"
+//                 f"relative distance from driver to the stop sign is {rd:.2f} m\n"
+//                 f"relative distance of the car is {v:.2f} m/s\n"
+//                 "Decide one label ONLY from: NONE, NOTIFY, ALERT, WARNING, ACTUATE.\n"
+//                 "Output EXACTLY one line: DECISION=<LABEL>\n"
+//             )
+//             llm_prompt.set(prompt)
+//             # print("MONITORING", rd, v, flush=True)
+
+//             # # TEMP: force one call to see if it blocks
+//             # prompt = f"Say one word: OK. rd={rd:.2f}, v={v:.2f}"
+
+//             # print("ABOUT TO CALL LLM", flush=True)
+//             # llm_prompt.set(prompt)
+
+//             # if rd >= 99:
+//             #     if 15 < v and 25 > v:
+//             #         pass
+//             #     elif v>25:
+//             #         prompt = (
+//             #             f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+//             #             f"The current speed of the car is: {v:.2f} m/s."
+//             #             f"Notify the driver that a stop sign is ahead with the key word 'NOTIFICATION' and 'REDUCE SPEED'. "
+//             #             )
+//             #             # print(prompt)
+//             #         st = lf.time.logical_elapsed()/1e9
+//             #         self.llm_response = self.coach(prompt)
+                    
+//             #         print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+//             #         print(self.llm_response)
+//             #     elif v < 15:
+//             #         prompt = (
+//             #             f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+//             #             f"The current speed of the car is: {v:.2f} m/s."
+//             #             f"Notify the driver that a stop sign is ahead with the key word 'NOTIFICATION' and 'Normal Acceleration'. "
+//             #             )
+//             #             # print(prompt)
+//             #         st = lf.time.logical_elapsed()/1e9
+//             #         self.llm_response = self.coach(prompt)
+                    
+//             #         print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+//             #         print(self.llm_response)
+
+//             # elif 70 <= rd and rd <= 80:
+//             #     if  (v > 16):
+//             #         prompt = (
+//             #             f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+//             #             f"The current speed of the car is: {v:.2f} m/s."
+//             #             f"Notify the driver that a stop sign is ahead with the key word 'ALERT'. "
+//             #             )
+//             #             # print(prompt)
+//             #         st = lf.time.logical_elapsed()/1e9
+//             #         self.llm_response = self.coach(prompt)
+                    
+//             #         print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+//             #         print(self.llm_response)
+//             #     elif (v < 9):
+//             #         prompt = (
+//             #             f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+//             #             f"The current speed of the car is: {v:.2f} m/s."
+//             #             f"Notify the driver that a stop sign is ahead with the key word 'ALERT' and the driver can accelerate a little. "
+//             #             )
+//             #             # print(prompt)
+//             #         st = lf.time.logical_elapsed()/1e9
+//             #         self.llm_response = self.coach(prompt)
+                    
+//             #         print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+//             #         print(self.llm_response)
+
+//             # elif 50<rd and rd <= 60:
+//             #     if v > 9 and v < 5:
+//             #         warning.set()
+  
+                   
+
+//     =}
+//     }
+    
+//     mode warning{
+//         #warning will be triggered idf the distance is 50 
+        
+//         reaction(rel_distance, velocity_ms)->actuation{=
+//                 rd = rel_distance.value
+//                 v = velocity_ms.value
+//                 if rd <= 25 :
+//                     actuation.set()
+//                     return
+//                 elif rd > 25 and rd <=  40:
+//                         prompt = (
+//                             f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+//                             f"The current speed of the car is: {v:.2f} m/s."
+//                             f"Give a STRONG WARNING with the keyword 'WARNING AND DANGER' to tell the driver that a stop sign is way closer. "
+//                         )
+//                         # print(prompt)
+//                         st = lf.time.logical_elapsed()/1e9
+//                         self.llm_response = self.coach(prompt)
+                        
+//                         # print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+//                         print(self.llm_response)
+//                 elif rd > 40 and rd <= 50:
+//                         prompt = (
+//                             f"Relative distance from the driver to stop sign: {rd:.2f} m." 
+//                             f"The current speed of the car is: {v:.2f} m/s."
+//                             f"Give a WARNING with the keyword 'WARNING' to tell the driver that a stop sign is closer. "
+//                             )
+//                             # print(prompt)
+//                         st = lf.time.logical_elapsed()/1e9
+//                         self.llm_response = self.coach(prompt)
+                        
+//                         print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.  ", flush=True)
+//                         print(self.llm_response)
+//         =}
+
+//     }
+//     mode actuation{
+//         reaction(rel_distance, velocity_ms, external_break){=
+//             rd = rel_distance.value
+//             v = velocity_ms.value
+
+//             external_break.schedule(0, Brake(6).name)
+
+//             prompt = (
+//                 f"Relative distance from the driver to stop sign: {rd:.2f} m."
+//                 f"The current speed of the car is: {v:.2f} m/s."
+//                 f" External ACTUATION is applied tell the driver with the keyword 'ACTUATION'."
+//             )
+
+//             st = lf.time.logical_elapsed()/1e9
+//             self.llm_response = self.coach(prompt)
+
+//             print(f"[Logical time] {st:.3f}s, rd = {rd:.3f}m, vel = {v:.3f}m/s.", flush=True)
+//             print(self.llm_response, flush=True)
+//         =}
+
+//         reaction(external_break)->brk_takeover{=
+//             brk_takeover.set(external_break.value)
+//         =}
+//     }
+    
+// }
+// reactor coach{
+//     input rel_distance
+//     input velocity_ms
+//     input halted 
+//     input behavior
+//     input head
+//     input llm_prompt
+
+//     state saw_left = False
+//     state saw_right = False
+//     state stop_feedback_sent = False
+//     state head_prompt_sent = False
+//     state last_head = "Unknown"
+//     physical action external_break
+
+
+//     reaction(startup){=
+//         print("[Coach] Startup: warming model", flush=True)
+//         ollama.chat(
+//         model="llama3.2:1b",
+//         messages=[{"role":"user","content":"warmup"}],
+//         options={"num_predict": 1}
+//         )
+//         def coach(user_prompt):
+//             start = time.time()
+//             r = ollama.chat(
+//                 model="llama3.2:1b",
+//                 messages=[
+//                     {"role": "system", "content": "You are a driving coach. Be concise. Output ONLY one line."},
+//                     {"role": "user", "content": user_prompt}
+//                 ],
+//                 options={
+//                     "temperature": 0.0,
+//                     "num_predict": 40,
+//                 }
+//             )
+//             end = time.time()
+//             msg = r["message"]["content"].strip()
+//             formatted = f"[Coach] {end - start:.3f}s | {msg}"
+//             print(formatted)
+//             return formatted
+
+//         self.coach = coach
+
+//         t = threading.Thread(target=coach, args=("Have a friendly conversation",), daemon=True)
+//         t.start()   
+//     =}
+//     reaction(llm_prompt){=
+//         prompt = llm_prompt.value
+
+//         response = self.coach(prompt)
+//         print(response)
+
+//     =}
+    
+//     // reaction(behavior){=
+//     //     if behavior.is_present and behavior.value:
+//     //         self.takeover_happened = True
+//     // =}
+//     // reaction(halted){=
+//     //     if halted.is_present and halted.value and (not self.post_stop_active):
+//     //         self.post_stop_active = True
+//     //         self.saw_left = False
+//     //         self.saw_right = False
+//     //         self.stop_feedback_sent = False
+//     //         self.head_prompt_sent = False
+
+           
+            
+//     //         if self.takeover_happened:
+//     //             prompt = f"Use keyword 'TAKEOVER'. System stopped the car. "
+//     //         else:
+               
+//     //             prompt = f"Use keyword 'STOP'. Driver stopped the car. "
+
+//     //         self.llm_response = self.coach(prompt)
+//     //         print(self.llm_response, flush=True)
+//     //         self.stop_feedback_sent = True
+//     // =}
+//     // reaction(head){=
+//     //     if head.is_present:
+//     //         self.last_head = head.value
+
+//     //     if self.post_stop_active:
+//     //         if self.last_head == "Left":
+//     //             self.saw_left = True
+//     //         elif self.last_head == "Right":
+//     //             self.saw_right = True
+
+            
+//     //         if (not self.head_prompt_sent):
+//     //             prompt = "Use keyword 'HEADCHECK'. Look LEFT then RIGHT before proceeding."
+//     //             self.llm_response = self.coach(prompt)
+//     //             print(self.llm_response, flush=True)
+//     //             self.head_prompt_sent = True
+
+            
+//     //         if self.saw_left and self.saw_right:
+//     //             prompt = "Use keyword 'CLEAR'. Good head-check. You may proceed."
+//     //             self.llm_response = self.coach(prompt)
+//     //             print(self.llm_response, flush=True)
+//     //             request_stop()
+//     // =}
+    
+//     coach2 = new coach2()
+//     rel_distance -> coach2.rel_distance
+//     velocity_ms -> coach2.velocity_ms
+    
+//     // halted -> coach2.halted
+// }
+
+// reactor LlmDecision(timeout_ms=180 msec) {
+//     input rd
+//     input v
+//     output decision
+//     output driver_msg
+
+    
+//     logical action timeout
+
+//     state worker_started = False
+//     state pending = False
+//     state start_wall = 0.0
+
+  
+//     state last_decision = ""
+//     state last_msg = ""
+
+    
+//     state poll_s = 0.01   
+
+//     reaction(startup){=
+//         if not self.worker_started:
+//             # Start background LLM thread once
+//             start_llm_worker()
+//             self.worker_started = True
+//     =}
+
+//     reaction(rd, v) -> timeout {=
+     
+//         if self.pending:
+//             return
+
+//         policy_text = """\
+//             POLICY (follow exactly, no new rules)
+//             Let rd = distance_to_stop_sign_m, v = speed_mps.
+
+//             1) If rd >= 99:
+//             - If 15 < v < 25: NONE
+//             - Else:           NOTIFY
+
+//             2) Else if 70 <= rd <= 80:
+//             - If v > 16 OR v < 9: ALERT
+//             - Else:               NONE
+
+//             3) Else if 50 < rd <= 60:
+//             - If 5 < v < 9: WARNING
+//             - Else:         NONE
+
+//             4) Else if rd <= 25:
+//             - ACTUATE
+
+//             5) Else:
+//             - NONE
+//             """
+
+//         prompt = f"""\
+//             Return exactly: TOKEN|MESSAGE
+//             TOKEN in: NONE NOTIFY ALERT WARNING ACTUATE
+//             MESSAGE: one short sentence to the driver.
+
+//             distance_to_stop_sign_m={rd.value:.2f}
+//             speed_mps={v.value:.2f}
+
+//             {policy_text}
+//             """
+
+//         with llm_lock:
+//             global llm_has_job, llm_prompt_job, llm_result_ready
+//             llm_prompt_job = prompt
+//             llm_has_job = True
+//             llm_result_ready = False
+
+//         self.pending = True
+//         self.start_wall = time.time()
+//         timeout.schedule(0)
+//     =}
+
+//     reaction(timeout, rd, v) -> decision, driver_msg {=
+//         if not self.pending:
+//             return
+
+       
+//         with llm_lock:
+//             global llm_result_ready, llm_decision, llm_message
+//             if llm_result_ready:
+//                 kw  = llm_decision
+//                 msg = llm_message
+//                 llm_result_ready = False
+
+              
+//                 if kw != self.last_decision or msg != self.last_msg:
+//                     decision.set(kw)
+//                     driver_msg.set(msg)
+//                     self.last_decision = kw
+//                     self.last_msg = msg
+
+//                 self.pending = False
+//                 return
+
+       
+//         elapsed = time.time() - self.start_wall
+
+       
+//         try:
+//             deadline_s = self.timeout_ms.total_seconds()
+//         except Exception:
+         
+//             deadline_s = float(self.timeout_ms) / 1000.0
+
+//         if elapsed >= deadline_s:
+           
+//             rd_val = rd.value
+//             v_val  = v.value
+
+//             if rd_val >= 99:
+//                 if (v_val > 25) or (v_val < 15):
+//                     kw = "NOTIFY";  msg = "NOTIFY: Stop sign ahead."
+//                 else:
+//                     kw = "NONE";    msg = ""
+//             elif 70 <= rd_val <= 80:
+//                 if v_val > 16 or v_val < 9:
+//                     kw = "ALERT";   msg = "ALERT: Stop sign ahead."
+//                 else:
+//                     kw = "NONE";    msg = ""
+//             elif 50 < rd_val <= 60:
+//                 if 5 < v_val < 9:
+//                     kw = "WARNING"; msg = "WARNING: Reduce speed, stop sign ahead."
+//                 else:
+//                     kw = "NONE";    msg = ""
+//             elif rd_val <= 25:
+//                 kw = "ACTUATE";     msg = "ACTUATE: External braking applied."
+//             else:
+//                 kw = "NONE";        msg = ""
+
+           
+//             if kw != self.last_decision or msg != self.last_msg:
+//                 decision.set(kw)
+//                 driver_msg.set(msg)
+//                 self.last_decision = kw
+//                 self.last_msg = msg
+
+//             self.pending = False
+//             return
+//         timeout.schedule(1000000)
+//     =}
+// }
