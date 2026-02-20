@@ -222,11 +222,10 @@ reactor Environment{
     state pos_stop_sign = 100.0
     state passed = False
 
-    output halted
     output relative_distance
     output dist_aft_stop
 
-    reaction(velocity_ms)->relative_distance, halted, dist_aft_stop{=
+    reaction(velocity_ms)->relative_distance, dist_aft_stop{=
         vn = float(velocity_ms.value)
         step = vn * 0.1
 
@@ -394,20 +393,23 @@ reactor Coach{
     input dist_aft_stop
     output ext_inp_cmd
 
+    logical action actuation_command
+
     llm = new LlmDecision()
-    Agent = new Agent()
+    agent = new Agent()
 
     rel_distance -> llm.rd
     velocity_ms  -> llm.v
     dist_aft_stop -> llm.dist_aft_stop
 
-    llm.decision -> Agent.decision_in
-    llm.driver_msg -> Agent.driver_msg_in
+    llm.decision -> agent.decision_in
+    llm.driver_msg -> agent.driver_msg_in
 
-    rel_distance -> Agent.rd_in
-    velocity_ms  -> Agent.v_in
+    rel_distance -> agent.rd_in
+    velocity_ms  -> agent.v_in
 
-    Agent.ext_inp_cmd -> ext_inp_cmd
+    // Actuation delay
+    agent.ext_inp_cmd -> ext_inp_cmd
 }
 
 main reactor{
@@ -416,9 +418,9 @@ main reactor{
     en = new Environment()
     adc = new Coach()
 
-    d.accelerator -> c.accel
-    d.brake -> c.brk
-    d.steer -> c.steer
+    d.accelerator -> c.accel after 500 ms
+    d.brake -> c.brk after 500 ms
+    d.steer -> c.steer after 500 ms
 
     c.velocity -> en.velocity_ms
     c.velocity -> adc.velocity_ms
@@ -426,5 +428,5 @@ main reactor{
     en.relative_distance -> adc.rel_distance
     en.dist_aft_stop -> adc.dist_aft_stop
 
-    adc.ext_inp_cmd -> c.ext_inp after 1 nsec
+    adc.ext_inp_cmd -> c.ext_inp after 200 ms
 }
