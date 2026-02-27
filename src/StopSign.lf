@@ -123,7 +123,7 @@ reactor Driver{
 
     reaction(startup){=
         try:
-            with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/DriverBehaviorStop.txt", "r") as f:
+            with open("/home/daniel/furi/agentic-driving-coach/src/DriverBehaviorStop.txt", "r") as f:
                 for ln in f.readlines():
                     if ln.strip() != "":
                         self.lines.append(int(ln.strip()))
@@ -234,7 +234,6 @@ reactor Environment{
             if self.pos_stop_sign <= 0.0:
                 self.pos_stop_sign = 0.0
                 self.passed = True
-                halted.set(True)
 
             relative_distance.set(self.pos_stop_sign)
             dist_aft_stop.set(0.0)
