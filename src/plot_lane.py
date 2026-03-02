@@ -7,26 +7,22 @@ from matplotlib.lines import Line2D
 # ============================
 # CONFIG
 # ============================
-LOG_PATH = "src/lane_change.log"                # <-- your lane-change runtime log
-BEHAVIOR_PATH = "src/DriverBehaviorLane.txt"    # <-- accel,head,steer per line (e.g., 4,9,14)
+LOG_PATH = "src/lane_change.log"
 OUT_PNG = "lane_change.svg"
 
 UNIT = "m/s"  # or "km/h"
-USE_DEADLINE_TOKEN_AS_EFFECTIVE = False  # if True, effective token = deadline token when miss
-
-# Only what you want
+USE_DEADLINE_TOKEN_AS_EFFECTIVE = False
 ALLOWED_TOKENS = {"NONE", "NOTIFY", "WARNING", "ACTUATE"}
 
 # ============================
-# ALLOWED SPEED BANDS (EDIT)
+# IDEAL SPEED + ENVELOPE
 # ============================
-# Format: (rd_min, rd_max, v_min, v_max, label)
-# rd is "distance_to_maneuver" i.e. [Relative DISTANCE]
-SPEED_BANDS = [
-    (80.0, None, 17.0, 20.0, "Allowed (rd>=80): 15–25"),
-    (50.0, 60.0, 17.0, 20.0, "Allowed (50<rd<=60): 15–25"),
-    (0.0, 25.0, 17.0, 20.0, "Allowed (rd<=25): 15–25"),
-]
+# Lane change: maintain constant speed ~18.5 m/s throughout
+# Piecewise-linear ideal: (rd, v_mps)
+IDEAL_ANCHORS = [(100.0, 18.5), (0.0, 18.5)]
+ENV_W = 1.5  # envelope half-width (m/s)
+
+ENVELOPE_COLOR = "#d62728"
 
 # ============================
 # REGEX patterns
@@ -45,35 +41,18 @@ def to_unit(v_mps: float) -> float:
 def unit_label() -> str:
     return "km/h" if UNIT.lower() == "km/h" else "m/s"
 
-def parse_lane_behavior(path: str):
-    """
-    DriverBehaviorLane.txt lines: accel,head,steer
-    Example: 4,9,14
-    Returns dict of lists: accel[], head[], steer[]
-    """
-    accel, head, steer = [], [], []
-    try:
-        with open(path, "r", errors="ignore") as f:
-            for ln in f:
-                ln = ln.strip()
-                if not ln:
-                    continue
-                parts = [p.strip() for p in ln.split(",")]
-                if len(parts) != 3:
-                    continue
-                try:
-                    a = int(parts[0]); h = int(parts[1]); s = int(parts[2])
-                    accel.append(a); head.append(h); steer.append(s)
-                except Exception:
-                    pass
-    except FileNotFoundError:
-        return None
-    if not accel:
-        return None
-    return {"accel": accel, "head": head, "steer": steer}
+def ideal_speed(rd: float) -> float:
+    """Piecewise-linear ideal speed at distance rd (m/s)."""
+    anchors = IDEAL_ANCHORS
+    r = max(anchors[-1][0], min(anchors[0][0], rd))
+    for (r0, v0), (r1, v1) in zip(anchors[:-1], anchors[1:]):
+        if r <= r0 and r >= r1:
+            t = (r0 - r) / (r0 - r1 + 1e-9)
+            return v0 + t * (v1 - v0)
+    return anchors[-1][1]
 
 # ============================
-# Parse log into dataframe
+# Parse log
 # ============================
 rows = []
 cur = {
@@ -91,9 +70,7 @@ def flush_if_ready():
         return
     if cur["llm_tok"] is None and cur["deadline_tok"] is None:
         return
-
     rows.append(cur.copy())
-
     cur["step"] += 1
     cur["distance"] = None
     cur["speed"] = None
@@ -143,125 +120,103 @@ else:
 
 df["tok"] = df["tok"].fillna("NONE").str.upper()
 df = df[df["tok"].isin(ALLOWED_TOKENS)].copy()
-
 df["speed_u"] = df["speed"].apply(to_unit)
-
-# Sort by distance (we'll invert axis later to show 100 -> 0)
-df.sort_values("distance", ascending=True, inplace=True)
-
-# Attach lane behavior by step
-beh = parse_lane_behavior(BEHAVIOR_PATH)
-df["beh_accel"] = np.nan
-df["beh_head"] = np.nan
-df["beh_steer"] = np.nan
-if beh is not None:
-    df["beh_accel"] = df["step"].apply(lambda i: beh["accel"][i] if i < len(beh["accel"]) else np.nan)
-    df["beh_head"]  = df["step"].apply(lambda i: beh["head"][i]  if i < len(beh["head"]) else np.nan)
-    df["beh_steer"] = df["step"].apply(lambda i: beh["steer"][i] if i < len(beh["steer"]) else np.nan)
+df.sort_values("distance", ascending=False, inplace=True)
 
 print(df.head(10))
 print("\nCounts:\n", df["tok"].value_counts())
 print("\nDeadline misses:", int(df["deadline_miss"].sum()))
 
 # ============================
-# Plot ALL-IN-ONE
+# Build envelope grid
 # ============================
-fig, ax = plt.subplots(figsize=(14, 7))
-
-# --- Allowed speed bands (shaded) ---
-# IMPORTANT: build grid from max->min so shading visually matches approach 100->0
 x_min = float(df["distance"].min())
 x_max = float(df["distance"].max())
-x_grid = np.linspace(x_max, x_min, 600)  # descending grid
+x_grid = np.linspace(x_min, x_max, 900)
 
-for (rd_min, rd_max, vmin, vmax, lab) in SPEED_BANDS:
-    if rd_max is None:
-        mask = (x_grid >= rd_min)
-    else:
-        mask = (x_grid > rd_min) & (x_grid <= rd_max)
+ideal_arr = np.array([ideal_speed(x) for x in x_grid])
+upper_env = np.maximum(0.0, ideal_arr + ENV_W)
+lower_env = np.maximum(0.0, ideal_arr - ENV_W)
 
-    if not np.any(mask):
-        continue
+# ============================
+# PLOT
+# ============================
+TOKEN_MARKER = {"NONE": "o", "NOTIFY": "s", "WARNING": "^", "ACTUATE": "D"}
 
-    ax.fill_between(
-        x_grid[mask],
-        to_unit(vmin),
-        to_unit(vmax),
-        alpha=0.15,
-        label=f"{lab} ({unit_label()})",
-        zorder=1,
-    )
+fig, ax = plt.subplots(figsize=(14, 7))
 
-# --- Speed trace ---
+# Upper & lower envelopes
+ax.plot(x_grid, to_unit(upper_env), linewidth=2.0, color=ENVELOPE_COLOR,
+        label="Upper envelope", zorder=2)
+ax.plot(x_grid, to_unit(lower_env), linewidth=2.0, color=ENVELOPE_COLOR,
+        linestyle="--", label="Lower envelope", zorder=2)
+
+# Speed trace
 ax.plot(
     df["distance"],
     df["speed_u"],
     marker=".",
-    linewidth=1.0,
+    linewidth=1.2,
     label=f"Speed ({unit_label()})",
-    zorder=2,
+    zorder=3,
 )
 
-# --- Token markers ---
-marker_map = {"NONE": "o", "NOTIFY": "s", "WARNING": "^", "ACTUATE": "D"}
+# Token markers
 for tok, g in df.groupby("tok"):
     ax.scatter(
-        g["distance"], g["speed_u"],
-        marker=marker_map.get(tok, "o"),
+        g["distance"],
+        g["speed_u"],
+        marker=TOKEN_MARKER.get(tok, "o"),
+        s=160,
+        edgecolors="black",
+        linewidths=0.8,
         label=f"LLM: {tok}",
-        zorder=3,
+        zorder=4,
     )
 
-# --- Deadline miss overlay ---
+# Deadline misses
 miss = df[df["deadline_miss"]]
 if not miss.empty:
     ax.scatter(
         miss["distance"],
         miss["speed_u"],
         marker="x",
+        s=85,
         label="Deadline miss",
-        zorder=4,
+        zorder=5,
     )
 
-ax.set_xlabel("Relative distance to lane-change (m)")
-ax.set_ylabel(f"Speed ({unit_label()})")
-ax.set_title("Lane Change: Speed vs Distance + Allowed Buffer + LLM Token + Deadline Miss + Behavior")
+ax.set_xlabel("Relative distance to lane-change (m)", fontsize=16, fontweight="bold")
+ax.set_ylabel(f"Speed ({unit_label()})", fontsize=16, fontweight="bold")
+ax.tick_params(axis="both", labelsize=18)
 ax.grid(True)
-
-# Show as 100 -> 0
+ax.set_ylim(bottom=0)
 ax.invert_xaxis()
 
-# --- Behavior on secondary y-axis (codes) ---
-ax2 = ax.twinx()
-ax2.set_ylabel("Behavior codes")
+# Force legend entries for all tokens even if absent
+legend_force = [
+    Line2D([0], [0], marker='o', linestyle='None', label='LLM: NONE'),
+    Line2D([0], [0], marker='s', linestyle='None', label='LLM: NOTIFY'),
+    Line2D([0], [0], marker='^', linestyle='None', label='LLM: WARNING'),
+    Line2D([0], [0], marker='D', linestyle='None', label='LLM: ACTUATE'),
+    Line2D([0], [0], marker='x', linestyle='None', label='Deadline miss'),
+]
 
-beh_plot = df.dropna(subset=["beh_accel", "beh_head", "beh_steer"], how="all")
-if not beh_plot.empty:
-    ax2.scatter(beh_plot["distance"], beh_plot["beh_accel"], marker="|", label="Behavior: accel", zorder=2)
-    ax2.scatter(beh_plot["distance"], beh_plot["beh_head"],  marker="_", label="Behavior: head",  zorder=2)
-    ax2.scatter(beh_plot["distance"], beh_plot["beh_steer"], marker="+", label="Behavior: steer", zorder=2)
-
-# ============================
-# FORCE legend entries even if token missing (e.g., ACTUATE not present)
-# ============================
-want_tokens_in_legend = ["NOTIFY", "WARNING", "ACTUATE"]
-existing = set(df["tok"].unique().tolist())
-
-dummy_handles = []
-dummy_labels = []
-for t in want_tokens_in_legend:
-    if t not in existing:
-        dummy_handles.append(Line2D([0], [0], marker=marker_map[t], linestyle="None"))
-        dummy_labels.append(f"LLM: {t}")
-
-# Combine legends from both axes + dummy handles
 h1, l1 = ax.get_legend_handles_labels()
-h2, l2 = ax2.get_legend_handles_labels()
+all_h = h1 + legend_force
+all_l = l1 + [h.get_label() for h in legend_force]
 
-ax.legend(h1 + h2 + dummy_handles, l1 + l2 + dummy_labels, loc="upper right")
+seen = set()
+uniq_h, uniq_l = [], []
+for h, l in zip(all_h, all_l):
+    if l not in seen:
+        uniq_h.append(h)
+        uniq_l.append(l)
+        seen.add(l)
+
+ax.legend(uniq_h, uniq_l, loc="lower left", fontsize=14)
 
 plt.tight_layout()
 plt.savefig(OUT_PNG, dpi=200)
 plt.show()
-
 print(f"\nSaved: {OUT_PNG}")

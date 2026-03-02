@@ -128,7 +128,7 @@ reactor Driver{
 
     reaction(startup){=
         try:
-            with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/DriverBehaviorSpeed.txt", "r") as f:
+            with open("/home/daniel/furi/agentic-driving-coach/src/DriverBehaviorSpeed.txt", "r") as f:
                 for ln in f.readlines():
                     if ln.strip() != "":
                         self.lines.append(int(ln.strip()))
@@ -445,9 +445,9 @@ main reactor{
     en = new Environment()
     adc = new Coach()
 
-    d.accelerator -> c.accel
-    d.brake -> c.brk
-    d.steer -> c.steer
+    d.accelerator -> c.accel after 500 ms
+    d.brake -> c.brk after 500 ms
+    d.steer -> c.steer after 500 ms
 
     c.velocity -> en.velocity_ms
     c.velocity -> adc.velocity_ms
@@ -455,5 +455,5 @@ main reactor{
     en.dist_aft_speed -> adc.dist_aft_speed
     en.relative_distance -> adc.rel_distance
 
-    adc.ext_inp_cmd -> c.ext_inp after 1 nsec
+    adc.ext_inp_cmd -> c.ext_inp after 200 ms
 }
