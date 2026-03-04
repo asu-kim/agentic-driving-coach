@@ -284,7 +284,7 @@ reactor LlmDecision {
         print(f"[LLM] {ms:.1f} ms -> {tok} | {instruction}", flush=True)
     =}
 
-    deadline(300 msec) {=
+    deadline(250 msec) {=
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value  if v.value is not None else 0.0
        
@@ -383,8 +383,8 @@ reactor Agent {
   mode actuate {
     reaction(dec, s, v) -> expInp, monitoring {=
         kw = dec.value
-        rd = float(s.value) if s.value is not None else 0.0
-        vel  = float(v.value)  if v.value is not None else 0.0
+        rd = s.value if s.value is not None else 0.0
+        vel  = v.value  if v.value is not None else 0.0
 
         TARGET = 11.0
         HI = TARGET + 0.5
@@ -425,7 +425,7 @@ reactor Agent {
                 print("[ACTUATE] Strong brake", flush=True)
                 expInp.set(Brake(6).name)
             else:
-                print("[ACTUATE] Mild brake / settle", flush=True)
+                print("[ACTUATE] Mild brake", flush=True)
                 expInp.set(Brake(5).name)
 
             monitoring.set()
