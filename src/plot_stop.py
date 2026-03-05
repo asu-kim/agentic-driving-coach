@@ -3,334 +3,168 @@ import math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.ticker import MaxNLocator
-import matplotlib.ticker as mticker
 
 # ============================
 # CONFIG
 # ============================
 LOG_PATH = "src/stop_sign.log"
-OUT_PNG  = "stop_sign.svg"
-UNIT     = "m/s"   # "m/s" or "km/h"
+OUT_SPEED_SVG = "stop_sign.svg"
+UNIT = "m/s"   
 
 STOP_SIGN_AT_M = 100.0
+MAX_PLOT_TIME = 9.0  
 
-# Plot only points where a [VERBAL] line occurred
-PLOT_TOKENS = {"WARNING", "ACTUATE"}
+# Start at 12 and 8 (Center 10.0 +/- 2.0)
+V_CRUISE = 10.0
+ENV_W = 2.0 
+BRAKE_START_RD = 25.0
+ENVELOPE_COLOR = "#FB0000" # Professional Grey
 
 # Marker styling
-VERBAL_MARKER = "^"          # same shape for both
-MARKER_EDGE_LW = 1.0
-MARKER_SIZE_WARNING = 240
-MARKER_SIZE_ACTUATE = 240
-COLOR_WARNING = "#2ca02c"
-COLOR_ACTUATE = "#ff7f0e"
-
-# Deadline miss styling (make obvious)
-DEADLINE_MARKER = "X"
-DEADLINE_SIZE = 220
-DEADLINE_EDGE_LW = 1.8
-DEADLINE_COLOR = "#d62728"
-
-# Time axis (below displacement)
-TIME_AXIS_BELOW = True
-TIME_AXIS_OUTWARD_PTS = 50       # pushes time axis down (separate line)
-TIME_TICK_PAD = 6
-TIME_MAX_TICKS = 9               # reduces clutter so 9/10 don't overlap
+VERBAL_MARKER = "^"          
+MARKER_SIZE = 240
+COLOR_WARNING = "#2ca02c" # Green
+COLOR_ACTUATE = "#ff7f0e" # Orange
 
 # ============================
-# IDEAL SPEED + ENVELOPE
+# Regex & Helpers
 # ============================
-BRAKE_START_RD = 25.0
-V_CRUISE       = 10.0
-ENV_W          = 2.5
-ENVELOPE_COLOR = "#d62728"
-
-# ============================
-# REGEX patterns (your log format)
-# ============================
-re_dist     = re.compile(r"\[Relative DISTANCE\]:\s*([0-9]*\.?[0-9]+)")
-re_speed    = re.compile(r"\[speed\]:\s*([0-9]*\.?[0-9]+)")
-re_llm      = re.compile(r"\[LLM\]\s*([0-9]*\.?[0-9]+)\s*ms\s*->\s*([A-Z]+)\s*\|")
-re_deadline = re.compile(r"\[DEADLINE\]\s*fallback\s*->\s*([A-Z]+)\s*\|")
-re_verbal   = re.compile(r"\[VERBAL\]\s*([A-Z]+)\s*\|\s*(.*)$")
-re_logical  = re.compile(r"^logical\s+([0-9]*\.?[0-9]+)")
+re_dist = re.compile(r"\[Relative DISTANCE\]:\s*([0-9]*\.?[0-9]+)")
+re_speed = re.compile(r"\[speed\]:\s*([0-9]*\.?[0-9]+)")
 re_physical = re.compile(r"^physical\s+([0-9]*\.?[0-9]+)")
+re_decision = re.compile(r"(WARNING|ACTUATE)")
 
-# ============================
-# Helpers
-# ============================
-def to_unit(v_mps: float) -> float:
-    return v_mps * 3.6 if UNIT.lower() == "km/h" else v_mps
+def to_unit(v_mps): return v_mps * 3.6 if UNIT.lower() == "km/h" else v_mps
+def unit_label(): return "km/h" if UNIT.lower() == "km/h" else "m/s"
 
-def unit_label() -> str:
-    return "km/h" if UNIT.lower() == "km/h" else "m/s"
+def smoothstep01(t):
+    t = max(0.0, min(1.0, t))
+    return t * t * (3.0 - 2.0 * t)
 
-def ideal_speed(rd: float) -> float:
-    if rd >= BRAKE_START_RD:
-        return V_CRUISE
+BRAKE_BLEND_RD = 12.0  # meters of smoothing zone ABOVE BRAKE_START_RD (tune 8..20)
+
+def ideal_speed(rd):
+    """
+    Smooth center-line:
+    - braking curve for rd <= BRAKE_START_RD
+    - smoothly blends to V_CRUISE over [BRAKE_START_RD, BRAKE_START_RD + BRAKE_BLEND_RD]
+    - flat V_CRUISE beyond that
+    """
     if rd <= 0.0:
         return 0.0
-    return V_CRUISE * math.sqrt(rd / BRAKE_START_RD)
 
-def add_time_cols(df: pd.DataFrame) -> pd.DataFrame:
-    if df.empty:
-        return df
-    have_logical = df["logical_ms"].notna().mean() > 0.7
-    if have_logical:
-        df["time_s"] = df["logical_ms"] / 1000.0
-    else:
-        STEP_PERIOD_SEC = 0.1
-        df["time_s"] = df["step"] * STEP_PERIOD_SEC
-    return df
+    # raw braking curve (sqrt)
+    v_brake = V_CRUISE * math.sqrt(max(0.0, rd) / BRAKE_START_RD)
+
+    # far away: cruise
+    if rd >= BRAKE_START_RD + BRAKE_BLEND_RD:
+        return V_CRUISE
+
+    # near: pure braking curve
+    if rd <= BRAKE_START_RD:
+        return min(V_CRUISE, v_brake)
+
+    # blend zone
+    t = (rd - BRAKE_START_RD) / BRAKE_BLEND_RD   # 0..1
+    w = smoothstep01(t)                          # smooth easing
+    return (1.0 - w) * min(V_CRUISE, v_brake) + w * V_CRUISE
 
 # ============================
-# Parse log into rows
+# Parse Log
 # ============================
-rows_all = []
-rows_verbal = []
-
-cur = {
-    "step": 0,
-    "distance": None,
-    "speed": None,
-    "llm_ms": None,
-    "llm_tok": None,
-    "deadline_tok": None,
-    "deadline_miss": False,
-    "logical_ms": None,
-    "physical_ms": None,
-    "verbal": False,
-    "verbal_tok": None,
-    "verbal_msg": None,
-}
-
-def reset_cur_for_next():
-    cur["step"] += 1
-    cur["distance"] = None
-    cur["speed"] = None
-    cur["llm_ms"] = None
-    cur["llm_tok"] = None
-    cur["deadline_tok"] = None
-    cur["deadline_miss"] = False
-    cur["logical_ms"] = None
-    cur["physical_ms"] = None
-    cur["verbal"] = False
-    cur["verbal_tok"] = None
-    cur["verbal_msg"] = None
-
-def flush_if_ready(require_decision=True):
-    if cur["distance"] is None or cur["speed"] is None:
-        return
-    if require_decision and cur["llm_tok"] is None and cur["deadline_tok"] is None:
-        return
-
-    row = cur.copy()
-    rows_all.append(row)
-    if cur["verbal"]:
-        rows_verbal.append(row)
-
-    reset_cur_for_next()
-
-with open(LOG_PATH, "r", errors="ignore") as f:
+rows = []
+cur = {}
+with open(LOG_PATH, "r") as f:
     for line in f:
         line = line.strip()
+        if m := re_dist.search(line):
+            if "distance" in cur: rows.append(cur.copy())
+            cur = {"distance": float(m.group(1)), "verbal_tok": None, "has_verbal": False}
+        elif m := re_speed.search(line): cur["speed"] = float(m.group(1))
+        elif m := re_physical.search(line): cur["physical_ms"] = float(m.group(1))
+        
+        if "[VERBAL]" in line:
+            cur["has_verbal"] = True
+            if m := re_decision.search(line): cur["verbal_tok"] = m.group(1)
 
-        m = re_dist.search(line)
-        if m:
-            if (
-                cur["distance"] is not None
-                and cur["speed"] is not None
-                and cur["deadline_tok"] is not None
-                and cur["llm_tok"] is None
-            ):
-                flush_if_ready()
-            cur["distance"] = float(m.group(1))
-            continue
+if "distance" in cur: rows.append(cur)
 
-        m = re_speed.search(line)
-        if m:
-            cur["speed"] = float(m.group(1))
-            continue
-
-        m = re_logical.search(line)
-        if m:
-            cur["logical_ms"] = float(m.group(1))
-            continue
-
-        m = re_physical.search(line)
-        if m:
-            cur["physical_ms"] = float(m.group(1))
-            continue
-
-        m = re_deadline.search(line)
-        if m:
-            cur["deadline_tok"] = m.group(1).upper()
-            cur["deadline_miss"] = True
-            continue
-
-        m = re_llm.search(line)
-        if m:
-            cur["llm_ms"] = float(m.group(1))
-            cur["llm_tok"] = m.group(2).upper()
-            continue
-
-        m = re_verbal.search(line)
-        if m:
-            cur["verbal"] = True
-            cur["verbal_tok"] = m.group(1).upper().strip()
-            cur["verbal_msg"] = (m.group(2) or "").strip()
-            flush_if_ready()
-            continue
-
-# flush tail
-if cur["distance"] is not None and cur["speed"] is not None and (cur["llm_tok"] is not None or cur["deadline_tok"] is not None):
-    rows_all.append(cur.copy())
-    if cur["verbal"]:
-        rows_verbal.append(cur.copy())
-
-df_all = pd.DataFrame(rows_all)
-if df_all.empty:
-    raise RuntimeError("Parsed 0 rows. Check LOG_PATH and regex patterns vs your log.")
-
-df_verbal = pd.DataFrame(rows_verbal)
-
-df_all = add_time_cols(df_all)
-df_verbal = add_time_cols(df_verbal)
-
-# units + displacement axis
+df_all = pd.DataFrame(rows)
+# Time Normalization
+df_all["time_s"] = (df_all["physical_ms"].interpolate().ffill().bfill() / 1000.0)
+df_all["time_s"] -= df_all["time_s"].min()
+# Coordinate Conversion
+df_all["x_m"] = (STOP_SIGN_AT_M - df_all["distance"]).clip(0, STOP_SIGN_AT_M)
 df_all["speed_u"] = df_all["speed"].apply(to_unit)
-df_all["x_m"] = (STOP_SIGN_AT_M - df_all["distance"]).clip(0.0, STOP_SIGN_AT_M)
 
-if not df_verbal.empty:
-    df_verbal["speed_u"] = df_verbal["speed"].apply(to_unit)
-    df_verbal["x_m"] = (STOP_SIGN_AT_M - df_verbal["distance"]).clip(0.0, STOP_SIGN_AT_M)
-
-# sort for interpolation stability
-df_all.sort_values("x_m", inplace=True)
-if not df_verbal.empty:
-    df_verbal.sort_values("x_m", inplace=True)
-
-# envelope grid in displacement coords
-rd_grid = np.linspace(0.0, STOP_SIGN_AT_M, 900)
-x_grid  = np.sort(STOP_SIGN_AT_M - rd_grid)
-ideal_arr = np.array([ideal_speed(rd) for rd in (STOP_SIGN_AT_M - x_grid)])
-upper_env = np.maximum(0.0, ideal_arr + ENV_W)
-lower_env = np.maximum(0.0, ideal_arr - ENV_W)
-
-# verbal points (only tokens you care about)
-dfp = df_verbal.copy()
-if not dfp.empty:
-    dfp["tok"] = (
-        dfp["verbal_tok"]
-        .fillna(dfp["llm_tok"])
-        .fillna(dfp["deadline_tok"])
-        .fillna("NONE")
-        .str.upper()
-    )
-    dfp = dfp[dfp["tok"].isin(PLOT_TOKENS)].copy()
+# Filter for the 9s markers
+df_markers = df_all[(df_all["has_verbal"] == True) & (df_all["time_s"] <= MAX_PLOT_TIME)].copy()
 
 # ============================
-# Plot (ONE axes + secondary bottom time axis)
+# Plotting
 # ============================
-fig, ax = plt.subplots(figsize=(18, 7))
+fig, ax = plt.subplots(figsize=(18, 9))
 
-# envelopes
-ax.plot(x_grid, to_unit(upper_env), linewidth=2.0, color=ENVELOPE_COLOR, zorder=2, label="Upper envelope")
-ax.plot(x_grid, to_unit(lower_env), linewidth=2.0, color=ENVELOPE_COLOR, linestyle="--", zorder=2, label="Lower envelope")
+# Tapered Envelope Math
+rd_grid = np.linspace(0, STOP_SIGN_AT_M, 1000)
+x_grid = STOP_SIGN_AT_M - rd_grid
+ideal_mps = np.array([ideal_speed(rd) for rd in rd_grid])
 
-# speed trace
-ax.plot(df_all["x_m"], df_all["speed_u"], marker=".", linewidth=1.2, color="#1f77b4", zorder=3, label=f"Speed ({unit_label()})")
+# Tapering: scales the allowed deviation from ENV_W (at 0m) down to 0 (at 100m)
+# ----------------------------
+# Smooth envelopes
+# ----------------------------
 
-# deadline misses
-miss = df_all[df_all["deadline_miss"] == True]
-if not miss.empty:
-    ax.scatter(
-        miss["x_m"], miss["speed_u"],
-        marker=DEADLINE_MARKER, s=DEADLINE_SIZE,
-        color=DEADLINE_COLOR, edgecolors="black", linewidths=DEADLINE_EDGE_LW,
-        zorder=6, label="Deadline miss",
-    )
+# === Smooth braking envelopes (flat far away, parabolic/√ drop near stop) ===
+UPPER_START = 12.0   # upper envelope when far (x near 0)
+LOWER_START = 8.0    # lower envelope when far (x near 0)
+BRAKE_START_RD = 25.0  # start braking when distance-to-stop <= 25m
 
-# verbal markers only
-if not dfp.empty:
-    gw = dfp[dfp["tok"] == "WARNING"]
-    ga = dfp[dfp["tok"] == "ACTUATE"]
+rd_grid = np.linspace(0, STOP_SIGN_AT_M, 1000)   # rd: distance-to-stop (0..100)
+x_grid  = STOP_SIGN_AT_M - rd_grid               # x: displacement from start (0..100)
 
-    if not gw.empty:
-        ax.scatter(
-            gw["x_m"], gw["speed_u"],
-            marker=VERBAL_MARKER, s=MARKER_SIZE_WARNING,
-            color=COLOR_WARNING, edgecolors="black", linewidths=MARKER_EDGE_LW,
-            zorder=5, label="VERBAL: WARNING",
-        )
+def brake_curve(start_speed, rd):
+    # flat at start_speed until braking starts, then √ curve to 0 at rd=0
+    out = np.empty_like(rd, dtype=float)
+    mask_far = rd >= BRAKE_START_RD
+    out[mask_far] = start_speed
+    out[~mask_far] = start_speed * np.sqrt(np.clip(rd[~mask_far], 0, BRAKE_START_RD) / BRAKE_START_RD)
+    return out
 
-    if not ga.empty:
-        ax.scatter(
-            ga["x_m"], ga["speed_u"],
-            marker=VERBAL_MARKER, s=MARKER_SIZE_ACTUATE,
-            color=COLOR_ACTUATE, edgecolors="black", linewidths=MARKER_EDGE_LW,
-            zorder=5, label="VERBAL: ACTUATE",
-        )
+upper = to_unit(brake_curve(UPPER_START, rd_grid))
+lower = to_unit(brake_curve(LOWER_START, rd_grid))
 
-# main axes labels
-ax.set_xlabel("Displacement of car from stop sign (m)", fontsize=18, fontweight="bold", labelpad=10)
-ax.set_ylabel(f"Speed ({unit_label()})", fontsize=18, fontweight="bold")
-ax.tick_params(axis="both", labelsize=16)
-ax.set_xlim(0.0, STOP_SIGN_AT_M)
-ax.set_ylim(bottom=0.0)
-ax.grid(False)
+# Plot Envelopes
+ax.plot(x_grid, upper, color=ENVELOPE_COLOR, label="Upper Envelope", alpha=0.7, linewidth=1.8)
+ax.plot(x_grid, lower, color=ENVELOPE_COLOR, ls="--", label="Lower Envelope", alpha=0.7, linewidth=1.8)
 
-# ===== secondary time axis below (with its own axis line) =====
-x_vals = df_all["x_m"].to_numpy()
-t_vals = df_all["time_s"].to_numpy()
+# Plot Speed Trace
+ax.plot(df_all["x_m"], df_all["speed_u"], color="#1f77b4", lw=2.5, label="Measured Speed", zorder=3)
 
-# ensure monotonic for interp
-order = np.argsort(x_vals)
-x_sorted = x_vals[order]
-t_sorted = t_vals[order]
+# Plot Verbal Markers
+if not df_markers.empty:
+    for tok, col in [("WARNING", COLOR_WARNING), ("ACTUATE", COLOR_ACTUATE)]:
+        sub = df_markers[df_markers["verbal_tok"] == tok]
+        ax.scatter(sub["x_m"], sub["speed_u"], marker=VERBAL_MARKER, s=MARKER_SIZE, 
+                   color=col, edgecolors="black", zorder=5, label=f"Verbal {tok}")
 
-def x_to_time(x):
-    return np.interp(x, x_sorted, t_sorted)
+# Physical Time Axis
+time_ticks = np.arange(0, int(MAX_PLOT_TIME) + 1)
+tick_pos_x = np.interp(time_ticks, df_all["time_s"], df_all["x_m"])
+secax = ax.secondary_xaxis("bottom")
+secax.spines["bottom"].set_position(("outward", 65))
+secax.set_xticks(tick_pos_x)
+secax.set_xticklabels([f"{t}s" for t in time_ticks])
+secax.set_xlabel("Physical Time (s)", fontsize=16, fontweight="bold", labelpad=15)
 
-def time_to_x(t):
-    # invert approximately by interpolating t->x using sorted t
-    ord_t = np.argsort(t_sorted)
-    t_s = t_sorted[ord_t]
-    x_s = x_sorted[ord_t]
-    return np.interp(t, t_s, x_s)
+# Axis Labels & Formatting
+ax.set_xlim(0, 100)
+ax.set_ylim(0, 14)
+ax.set_xlabel("Displacement from start (m)", fontsize=16, fontweight="bold")
+ax.set_ylabel(f"Speed ({unit_label()})", fontsize=16, fontweight="bold")
+ax.tick_params(axis='both', labelsize=14)
+ax.legend(loc="upper right", fontsize=12, framealpha=0.9)
 
-if TIME_AXIS_BELOW:
-    secax = ax.secondary_xaxis("bottom", functions=(x_to_time, time_to_x))
-    secax.spines["bottom"].set_position(("outward", TIME_AXIS_OUTWARD_PTS))
-    secax.spines["bottom"].set_visible(True)
-    secax.spines["bottom"].set_linewidth(1.2)
-
-    secax.set_xlabel("Time (s)", fontsize=18, fontweight="bold", labelpad=18)
-    secax.tick_params(axis="x", labelsize=14, pad=TIME_TICK_PAD)
-
-    # >>> REPLACEMENT STARTS HERE <<<
-    t_max = float(np.nanmax(t_sorted)) if len(t_sorted) else 0.0
-    t_end = math.floor(t_max)
-    secax.set_xticks(np.arange(0, t_end + 1, 1))
-    secax.xaxis.set_major_formatter(mticker.FormatStrFormatter('%d'))
-    # >>> REPLACEMENT ENDS HERE <<<
-
-else:
-    secax = ax.secondary_xaxis("top", functions=(x_to_time, time_to_x))
-    secax.set_xlabel("Time (s)", fontsize=18, fontweight="bold")
-    secax.tick_params(axis="x", labelsize=14, pad=8)
-
-    t_max = float(np.nanmax(t_sorted)) if len(t_sorted) else 0.0
-    t_end = math.floor(t_max)
-    secax.set_xticks(np.arange(0, t_end + 1, 1))
-    secax.xaxis.set_major_formatter(mticker.FormatStrFormatter('%d'))
-
-ax.legend(loc="lower left", fontsize=14)
-
-# important: leave room at bottom for the moved time axis
-plt.subplots_adjust(bottom=0.22)
 plt.tight_layout()
-plt.savefig(OUT_PNG, dpi=200)
+plt.savefig(OUT_SPEED_SVG, dpi=300)
 plt.show()
-print(f"\nSaved: {OUT_PNG}")

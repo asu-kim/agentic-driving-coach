@@ -32,11 +32,12 @@ preamble{=
         t0 = time.perf_counter()
 
         r = ollama.chat(
-            model="llama3:8b",
+            model="llama3:70b",
             messages=[
                 {
                     "role": "system",
                     "content": (
+                        "You are an agentic driving coach."
                         "Output exactly ONE line: TOKEN|Message"
                         "TOKEN must be one of: NONE, WARNING, ACTUATE"
                         "Message must be one sentence, about stopping only."
@@ -44,8 +45,8 @@ preamble{=
 
                         "Rules for TOKEN:"
                         "if distance_to_stop is less than or equal to 25 and speed is greater than 2.5 then TOKEN=ACTUATE"
-                        "else if distance_to_stop lies in between 50 to 60 and speed is not between 8 to 10 then TOKEN=WARNING"
-                        "else if distance_to_stop is greater than 99 and speed is not between 8 to 12 then TOKEN=WARNING"
+                        "else if distance_to_stop lies between 50 and 60 and speed is not between 8 and 10 then TOKEN=WARNING"
+                        "else if distance_to_stop is greater than 99 and speed is not between 8 and 12 then TOKEN=WARNING"
                         "else TOKEN=NONE"
 
                         "If TOKEN=NONE, output: NONE|"
@@ -112,6 +113,7 @@ preamble{=
 =}
 
 reactor Driver{
+    input instr
     output steer
     output accelerator
     output brake
@@ -137,7 +139,7 @@ reactor Driver{
             self.loaded = False
     =}
 
-    reaction(t)-> accelerator, brake {=
+    reaction(t)-> accelerator, brake, head, steer {=
         if self.done:
             return
         if not self.loaded or len(self.lines) == 0:
@@ -156,8 +158,17 @@ reactor Driver{
             brake.set(Brake(msg).name)
         elif msg in [7, 8, 9]:
             head.set(Head(msg).name)
+        
+        if msg in [7, 8, 9]:
+            head.set(Head(h).name)
+
+        if msg in [10, 11, 12, 13, 14]:
+            steer.set(Steer(s).name)
 
         self.idx += 1
+    =}
+    reaction(instr){=
+        print(f"{instr.value}]")
     =}
 }
 
@@ -165,7 +176,7 @@ reactor Car{
     input steer
     input accel
     input brk
-    input extInp 
+    input act 
     input head  
 
     state acceleration_net
@@ -175,12 +186,12 @@ reactor Car{
     output v
     
 
-    reaction(accel, brk, extInp)->v{=
+    reaction(accel, brk, act)->v{=
         amsg = accel.value
         bmsg = brk.value
 
-        if extInp.is_present:
-            cmd = extInp.value
+        if act.is_present:
+            cmd = act.value
             if cmd in [Brake(5).name, Brake(6).name]:
                 bmsg = cmd
             elif cmd in [Accelerate(1).name, Accelerate(2).name, Accelerate(3).name, Accelerate(4).name]:
@@ -240,32 +251,31 @@ reactor Environment{
     =}
 }
 
-reactor LlmDecision {
+reactor LLMInference {
     input s
     input v
     
 
-    output dec
-    output msg
+    output ctrl
+    output instr
 
     state last_dl_tok = ""
     state last_dl_msg = ""
 
-    reaction(s, v) -> dec, msg {=
+    reaction(s, v) -> ctrl, instr {=
       
-        rd_val = s.value            if s.value is not None else 0.0
-        v_val  = v.value             if v.value is not None else 0.0
+        rd_val = s.value if s.value is not None else 0.0
+        v_val  = v.value if v.value is not None else 0.0
 
         
         if rd_val <= 0.0:
-            dec.set("NONE")
-            msg.set("")
+            ctrl.set("NONE")
+            instr.set("")
             return
 
         print("#################LoggingforReference###############################", flush=True)
         print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
         print("------------------------------------------------", flush=True)
-
         print(f"[speed]: {v_val:.2f}", flush=True)
         print("------------------------------------------------", flush=True)
         print("logical", lf.time.logical_elapsed()/1e6, flush=True)
@@ -276,13 +286,13 @@ reactor LlmDecision {
         
         self.check_deadline()
 
-        dec.set(tok)
-        msg.set(instruction)
+        ctrl.set(tok)
+        instr.set(instruction)
 
         print(f"[LLM] {ms:.1f} ms -> {tok} | {instruction}", flush=True)
     =}
 
-    deadline(250 msec) {=
+    deadline(613 msec) {=
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value  if v.value is not None else 0.0
 
@@ -298,8 +308,8 @@ reactor LlmDecision {
         self.last_dl_tok = tok
         self.last_dl_msg = instruction
 
-        dec.set(tok)
-        msg.set(instruction)
+        ctrl.set(tok)
+        instr.set(instruction)
 
         print("#################LoggingforReference###############################", flush=True)
         print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
@@ -314,29 +324,33 @@ reactor LlmDecision {
 }
 
 
-reactor Agent {
-  input dec
-  input msg
+reactor Planner {
+  input ctrl
+  input instr
   input s
   input v
-  output extInp
+  output act
+  output Instr
+  
 
   state last_warn_ns = -1000000000000
   state last_printed = ""
 
   initial mode monitoring {
-    reaction(dec, msg, s, v) -> warning, actuate {=
+    reaction(ctrl, instr, s, v) -> warning, actuate, Instr {=
       throttle = 1000000000
-      kw  = (dec.value or "NONE").strip()
-      instruction = (msg.value or "").strip()
-      rd  = float(s.value) if s.value is not None else 0.0
+      kw  = (ctrl.value or "NONE").strip()
+      instruction = (instr.value or "").strip()
+      rd  = s.value if s.value is not None else 0.0
 
       now_ns = lf.time.logical_elapsed()
 
      
       if kw == "ACTUATE" and rd > 0.0:
         if instruction and instruction != self.last_printed:
-          print(f"[VERBAL] {kw} | {instruction}", flush=True)
+        #   print(f"[VERBAL] {kw} | {instruction}", flush=True)
+          i = f"[VERBAL] {kw} | {instruction}"
+          Instr.set(i)
           self.last_printed = instruction
         actuate.set()
         return
@@ -345,7 +359,9 @@ reactor Agent {
       if kw == "WARNING":
         if (now_ns - self.last_warn_ns) >= throttle:
           if instruction and instruction != self.last_printed:
-            print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            # print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            i = f"[VERBAL] {kw} | {instruction}"
+            Instr.set(i)
             self.last_printed = instruction
           self.last_warn_ns = now_ns
         warning.set()
@@ -354,17 +370,18 @@ reactor Agent {
   }
 
   mode warning {
-    reaction(dec, msg, s, v) -> monitoring, actuate {=
+    reaction(ctrl, instr, s, v) -> monitoring, actuate, Instr {=
       throttle = 1000000000
-      kw  = (dec.value or "NONE").strip()
-      instruction = (msg.value or "").strip()
-      rd  = float(s.value) if s.value is not None else 0.0
+      kw  = (ctrl.value or "NONE").strip()
+      instruction = (instr.value or "").strip()
+      rd  = s.value if s.value is not None else 0.0
 
       now_ns = lf.time.logical_elapsed()
 
       if kw == "ACTUATE" and rd > 0.0:
         if instruction and instruction != self.last_printed:
-          print(f"[VERBAL] {kw} | {instruction}", flush=True)
+          i = f"[VERBAL] {kw} | {instruction}"
+          Instr.set(i)
           self.last_printed = instruction
         actuate.set()
         return
@@ -376,7 +393,9 @@ reactor Agent {
       if kw == "WARNING":
         if (now_ns - self.last_warn_ns) >= throttle:
           if instruction and instruction != self.last_printed:
-            print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            # print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            i = f"[VERBAL] {kw} | {instruction}"
+            Instr.set(i)
             self.last_printed = instruction
           self.last_warn_ns = now_ns
         return
@@ -384,16 +403,17 @@ reactor Agent {
   }
 
   mode actuate {
-    reaction(dec, s, v) -> extInp, monitoring {=
-      kw = (dec.value or "NONE").strip()
-      rd = float(s.value) if s.value is not None else 0.0
+    reaction(ctrl, s, v) -> act, monitoring, Instr {=
+      kw = (ctrl.value or "NONE").strip()
+      rd = s.value if s.value is not None else 0.0
 
       if kw != "ACTUATE" or rd <= 0.0:
         monitoring.set()
         return
-
-      extInp.set(Brake(6).name)
-      print("[ACTUATE] sent extInp=EmergencyBraking", flush=True)
+      i = f"[VERBAL] {kw} | Sent EmergencyBraking"
+     
+      act.set(Brake(6).name)
+      Instr.set(i)
 
       monitoring.set()
     =}
@@ -402,21 +422,23 @@ reactor Agent {
 reactor Coach{
     input s
     input v
-    output extInp
+    output act
+    output instr
 
-    llm = new LlmDecision()
-    a = new Agent()
+    llm = new LLMInference()
+    a = new Planner()
 
     s -> llm.s
     v  -> llm.v
 
-    llm.dec -> a.dec
-    llm.msg -> a.msg
+    llm.ctrl -> a.ctrl
+    llm.instr -> a.instr
 
     s -> a.s
     v  -> a.v
     
-    a.extInp -> extInp
+    a.act -> act
+    a.Instr -> instr
 }
 
 main reactor{
@@ -435,5 +457,6 @@ main reactor{
     en.s -> adc.s
 
 
-    adc.extInp -> c.extInp after 200 ms
+    adc.act -> c.act after 200 ms
+    adc.instr -> d.instr  
 }
