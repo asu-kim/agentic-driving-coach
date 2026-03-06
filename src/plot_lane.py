@@ -8,29 +8,49 @@ from matplotlib.lines import Line2D
 # CONFIG
 # ============================
 LOG_PATH = "src/lane_change.log"
-OUT_PNG = "lane_change.svg"
+OUT_PNG  = "lane_change.svg"
 
-UNIT = "m/s"  # or "km/h"
-USE_DEADLINE_TOKEN_AS_EFFECTIVE = False
-ALLOWED_TOKENS = {"NONE", "NOTIFY", "WARNING", "ACTUATE"}
+UNIT = "m/s"  # "m/s" or "km/h"
 
-# ============================
-# IDEAL SPEED + ENVELOPE
-# ============================
-# Lane change: maintain constant speed ~18.5 m/s throughout
-# Piecewise-linear ideal: (rd, v_mps)
-IDEAL_ANCHORS = [(100.0, 18.5), (0.0, 18.5)]
-ENV_W = 1.5  # envelope half-width (m/s)
+EVENT_AT_M = 100.0
+MAX_PLOT_TIME = 9.0          # seconds shown on the time axis
+TIME_SOURCE = "physical"     # "physical" or "logical"
+
+# Ideal lane-change speed band (constant)
+IDEAL_V = 18.5               # m/s
+ENV_W   = 1.5                # +/- envelope half-width (m/s)
 
 ENVELOPE_COLOR = "#d62728"
 
+# tokens
+ALLOWED_TOKENS = {"NONE", "NOTIFY", "WARNING", "ACTUATE"}
+PLOT_TOKENS    = {"NOTIFY", "WARNING", "ACTUATE"}  # markers
+
+# marker styling
+TOKEN_MARKER = {"NOTIFY": "s", "WARNING": "^", "ACTUATE": "D"}
+TOKEN_COLOR  = {"NOTIFY": "#1f77b4", "WARNING": "#2ca02c", "ACTUATE": "#ff7f0e"}
+
+DEADLINE_MARKER   = "X"
+DEADLINE_SIZE     = 220
+DEADLINE_EDGE_LW  = 1.8
+DEADLINE_COLOR    = "#d62728"
+
 # ============================
-# REGEX patterns
+# REGEX patterns (match your log)
 # ============================
-re_dist = re.compile(r"\[Relative DISTANCE\]:\s*([0-9]*\.?[0-9]+)")
-re_speed = re.compile(r"\[speed\]:\s*([0-9]*\.?[0-9]+)")
-re_llm = re.compile(r"\[LLM\]\s*([0-9]*\.?[0-9]+)\s*ms\s*->\s*([A-Z]+)\s*\|")
-re_deadline = re.compile(r"\[DEADLINE\]\s*fallback\s*->\s*([A-Z]+)\s*\|")
+re_dist     = re.compile(r"\[Relative DISTANCE\]:\s*([0-9]*\.?[0-9]+)")
+re_speed    = re.compile(r"\[speed\]:\s*([0-9]*\.?[0-9]+)")
+re_logical  = re.compile(r"^logical\s+([0-9]*\.?[0-9]+)")
+re_physical = re.compile(r"^physical\s+([0-9]*\.?[0-9]+)")
+
+# [LLM] 1811.1 ms -> NONE |
+re_llm      = re.compile(r"\[LLM\]\s*([0-9]*\.?[0-9]+)\s*ms\s*->\s*([A-Z]+)\s*\|")
+
+# [DEADLINE] fallback -> WARNING | message...
+re_deadline = re.compile(r"\[DEADLINE\]\s*fallback\s*->\s*([A-Z]+)\s*\|\s*(.*)$")
+
+# [VERBAL] ACTUATE | message...
+re_verbal   = re.compile(r"\[VERBAL\]\s*([A-Z]+)\s*\|\s*(.*)$")
 
 # ============================
 # Helpers
@@ -41,51 +61,54 @@ def to_unit(v_mps: float) -> float:
 def unit_label() -> str:
     return "km/h" if UNIT.lower() == "km/h" else "m/s"
 
-def ideal_speed(rd: float) -> float:
-    """Piecewise-linear ideal speed at distance rd (m/s)."""
-    anchors = IDEAL_ANCHORS
-    r = max(anchors[-1][0], min(anchors[0][0], rd))
-    for (r0, v0), (r1, v1) in zip(anchors[:-1], anchors[1:]):
-        if r <= r0 and r >= r1:
-            t = (r0 - r) / (r0 - r1 + 1e-9)
-            return v0 + t * (v1 - v0)
-    return anchors[-1][1]
-
 # ============================
-# Parse log
+# Parse log into per-block rows
+# We finalize ("flush") when a NEW [Relative DISTANCE] starts.
 # ============================
 rows = []
-cur = {
-    "step": 0,
-    "distance": None,
-    "speed": None,
-    "llm_ms": None,
-    "llm_tok": None,
-    "deadline_tok": None,
-    "deadline_miss": False,
-}
+cur = None
 
-def flush_if_ready():
-    if cur["distance"] is None or cur["speed"] is None:
+def start_new_block(dist_val: float):
+    return {
+        "distance": dist_val,
+        "speed": None,
+        "logical_ms": None,
+        "physical_ms": None,
+
+        "llm_ms": None,
+        "llm_tok": None,
+
+        "has_deadline": False,
+        "deadline_tok": None,
+        "deadline_msg": None,
+
+        "has_verbal": False,
+        "verbal_tok": None,
+        "verbal_msg": None,
+    }
+
+def flush_block():
+    nonlocal_cur = cur  # just for clarity
+    if nonlocal_cur is None:
         return
-    if cur["llm_tok"] is None and cur["deadline_tok"] is None:
+    # keep only blocks that have distance + speed
+    if nonlocal_cur["distance"] is None or nonlocal_cur["speed"] is None:
         return
-    rows.append(cur.copy())
-    cur["step"] += 1
-    cur["distance"] = None
-    cur["speed"] = None
-    cur["llm_ms"] = None
-    cur["llm_tok"] = None
-    cur["deadline_tok"] = None
-    cur["deadline_miss"] = False
+    rows.append(nonlocal_cur.copy())
 
 with open(LOG_PATH, "r", errors="ignore") as f:
-    for line in f:
-        line = line.strip()
+    for raw in f:
+        line = raw.strip()
 
         m = re_dist.search(line)
         if m:
-            cur["distance"] = float(m.group(1))
+            # new block starts -> flush previous
+            if cur is not None:
+                flush_block()
+            cur = start_new_block(float(m.group(1)))
+            continue
+
+        if cur is None:
             continue
 
         m = re_speed.search(line)
@@ -93,113 +116,189 @@ with open(LOG_PATH, "r", errors="ignore") as f:
             cur["speed"] = float(m.group(1))
             continue
 
+        m = re_logical.search(line)
+        if m:
+            cur["logical_ms"] = float(m.group(1))
+            continue
+
+        m = re_physical.search(line)
+        if m:
+            cur["physical_ms"] = float(m.group(1))
+            continue
+
         m = re_deadline.search(line)
         if m:
-            cur["deadline_tok"] = m.group(1).upper()
-            cur["deadline_miss"] = True
+            cur["has_deadline"] = True
+            cur["deadline_tok"] = (m.group(1) or "").strip().upper()
+            cur["deadline_msg"] = (m.group(2) or "").strip().rstrip("]")
             continue
 
         m = re_llm.search(line)
         if m:
             cur["llm_ms"] = float(m.group(1))
-            cur["llm_tok"] = m.group(2).upper()
-            flush_if_ready()
+            cur["llm_tok"] = (m.group(2) or "").strip().upper()
             continue
 
-flush_if_ready()
+        m = re_verbal.search(line)
+        if m:
+            cur["has_verbal"] = True
+            cur["verbal_tok"] = (m.group(1) or "").strip().upper()
+            cur["verbal_msg"] = (m.group(2) or "").strip().rstrip("]")
+            continue
+
+# flush last
+if cur is not None:
+    flush_block()
 
 df = pd.DataFrame(rows)
 if df.empty:
-    raise RuntimeError("Parsed 0 rows. Check LOG_PATH and patterns vs your log output.")
+    raise RuntimeError("Parsed 0 rows. Check LOG_PATH and regex patterns.")
 
-# Effective token
-if USE_DEADLINE_TOKEN_AS_EFFECTIVE:
-    df["tok"] = np.where(df["deadline_miss"], df["deadline_tok"], df["llm_tok"])
+# ============================
+# Clean + derive columns
+# ============================
+df["speed"] = pd.to_numeric(df["speed"], errors="coerce")
+df = df[df["speed"].notna()].copy()
+
+# time source
+if TIME_SOURCE == "physical":
+    t_ms = pd.to_numeric(df["physical_ms"], errors="coerce")
 else:
-    df["tok"] = df["llm_tok"].fillna(df["deadline_tok"])
+    t_ms = pd.to_numeric(df["logical_ms"], errors="coerce")
 
-df["tok"] = df["tok"].fillna("NONE").str.upper()
-df = df[df["tok"].isin(ALLOWED_TOKENS)].copy()
+# normalize time (seconds) robustly
+df["time_s"] = (t_ms.interpolate().ffill().bfill() / 1000.0)
+df["time_s"] -= float(df["time_s"].min())
+
+# displacement axis (0..100): x = EVENT_AT_M - distance_to_event
+df["x_m"] = (EVENT_AT_M - df["distance"]).clip(0.0, EVENT_AT_M)
 df["speed_u"] = df["speed"].apply(to_unit)
-df.sort_values("distance", ascending=False, inplace=True)
 
-print(df.head(10))
-print("\nCounts:\n", df["tok"].value_counts())
-print("\nDeadline misses:", int(df["deadline_miss"].sum()))
+# Effective token (what "acted"):
+# Prefer deadline token when deadline fired; else LLM token; else NONE
+df["tok_eff"] = np.where(df["has_deadline"], df["deadline_tok"], df["llm_tok"])
+df["tok_eff"] = df["tok_eff"].fillna("NONE").str.upper()
+df = df[df["tok_eff"].isin(ALLOWED_TOKENS)].copy()
+
+# Verbal token for markers
+df["tok_verbal"] = df["verbal_tok"].fillna("").str.upper()
+
+# deadline misses mask (for X markers)
+df["deadline_miss"] = df["has_deadline"] == True
+
+# sort by displacement increasing (nice lines)
+df.sort_values("x_m", inplace=True)
 
 # ============================
-# Build envelope grid
+# Envelope grid (constant band)
 # ============================
-x_min = float(df["distance"].min())
-x_max = float(df["distance"].max())
-x_grid = np.linspace(x_min, x_max, 900)
-
-ideal_arr = np.array([ideal_speed(x) for x in x_grid])
-upper_env = np.maximum(0.0, ideal_arr + ENV_W)
-lower_env = np.maximum(0.0, ideal_arr - ENV_W)
+x_grid = np.linspace(0.0, EVENT_AT_M, 900)
+upper_env = np.full_like(x_grid, IDEAL_V + ENV_W, dtype=float)
+lower_env = np.full_like(x_grid, IDEAL_V - ENV_W, dtype=float)
 
 # ============================
-# PLOT
+# Plot
 # ============================
-TOKEN_MARKER = {"NONE": "o", "NOTIFY": "s", "WARNING": "^", "ACTUATE": "D"}
+fig, ax = plt.subplots(figsize=(18, 7))
 
-fig, ax = plt.subplots(figsize=(14, 7))
+# envelopes
+ax.plot(x_grid, to_unit(upper_env), linewidth=2.2, color=ENVELOPE_COLOR, alpha=0.85, label="Upper envelope", zorder=2)
+ax.plot(x_grid, to_unit(lower_env), linewidth=2.2, color=ENVELOPE_COLOR, alpha=0.85, linestyle="--", label="Lower envelope", zorder=2)
 
-# Upper & lower envelopes
-ax.plot(x_grid, to_unit(upper_env), linewidth=2.0, color=ENVELOPE_COLOR,
-        label="Upper envelope", zorder=2)
-ax.plot(x_grid, to_unit(lower_env), linewidth=2.0, color=ENVELOPE_COLOR,
-        linestyle="--", label="Lower envelope", zorder=2)
+# speed trace
+ax.plot(df["x_m"], df["speed_u"], color="#1f77b4", lw=2.8, label=f"Measured speed ({unit_label()})", zorder=3)
 
-# Speed trace
-ax.plot(
-    df["distance"],
-    df["speed_u"],
-    marker=".",
-    linewidth=1.2,
-    label=f"Speed ({unit_label()})",
-    zorder=3,
-)
-
-# Token markers
-for tok, g in df.groupby("tok"):
-    ax.scatter(
-        g["distance"],
-        g["speed_u"],
-        marker=TOKEN_MARKER.get(tok, "o"),
-        s=160,
-        edgecolors="black",
-        linewidths=0.8,
-        label=f"LLM: {tok}",
-        zorder=4,
-    )
-
-# Deadline misses
+# deadline misses
 miss = df[df["deadline_miss"]]
+# Speed trace (lower zorder)
+ax.plot(df["x_m"], df["speed_u"],
+        color="#1f77b4", lw=2.8, zorder=3, label="Measured Speed")
+
+# Verbal markers (middle zorder)
+# ax.scatter(..., zorder=10, label="VERBAL: WARNING")
+# ax.scatter(..., zorder=10, label="VERBAL: ACTUATE")
+
+# Deadline misses (TOP zorder)  
+miss = df[df["deadline_miss"] == True]
 if not miss.empty:
     ax.scatter(
-        miss["distance"],
-        miss["speed_u"],
-        marker="x",
-        s=85,
-        label="Deadline miss",
-        zorder=5,
+        miss["x_m"], miss["speed_u"],
+        marker="X", s=DEADLINE_SIZE,
+        color=DEADLINE_COLOR,
+        edgecolors="black", linewidths=DEADLINE_EDGE_LW,
+        zorder=50,   # <<< highest
+        label="Deadline miss"
     )
 
-ax.set_xlabel("Relative distance to lane-change (m)", fontsize=16, fontweight="bold")
-ax.set_ylabel(f"Speed ({unit_label()})", fontsize=16, fontweight="bold")
-ax.tick_params(axis="both", labelsize=18)
-ax.grid(True)
-ax.set_ylim(bottom=0)
-ax.invert_xaxis()
+# verbal markers (only when [VERBAL] exists)
+df_verbal = df[df["has_verbal"] == True].copy()
+df_verbal = df_verbal[df_verbal["tok_verbal"].isin(PLOT_TOKENS)]
 
-# Force legend entries for all tokens even if absent
+for tok in ["NOTIFY", "WARNING", "ACTUATE"]:
+    sub = df_verbal[df_verbal["tok_verbal"] == tok]
+    if sub.empty:
+        continue
+    ax.scatter(
+        sub["x_m"], sub["speed_u"],
+        marker=TOKEN_MARKER[tok],
+        s=240,
+        color=TOKEN_COLOR[tok],
+        edgecolors="black",
+        linewidths=0.9,
+        zorder=7,
+        label=f"VERBAL: {tok}",
+    )
+
+# axes formatting
+ax.set_xlim(0, EVENT_AT_M)
+ax.set_ylim(16, 22)
+ax.set_xlabel("Displacement from start (m)", fontsize=18, fontweight="bold")
+ax.set_ylabel(f"Speed ({unit_label()})", fontsize=18, fontweight="bold")
+ax.tick_params(axis="both", labelsize=18, length=8, width=2)
+for lab in ax.get_xticklabels() + ax.get_yticklabels():
+    lab.set_fontweight("bold")
+for sp in ax.spines.values():
+    sp.set_linewidth(1.5)
+
+ax.grid(False)
+
+# ============================
+# Secondary time axis (bottom)
+# ============================
+# Need monotonic arrays for interp; x_m is sorted already
+x_vals = df["x_m"].to_numpy()
+t_vals = df["time_s"].to_numpy()
+
+# guard against empty
+if len(x_vals) >= 2 and np.isfinite(t_vals).any():
+    time_ticks = np.arange(0, int(MAX_PLOT_TIME) + 1, 1)
+    # only ticks within data time range
+    t_max = float(np.nanmax(t_vals))
+    time_ticks = time_ticks[time_ticks <= t_max + 1e-9]
+
+    tick_pos_x = np.interp(time_ticks, t_vals, x_vals)
+
+    secax = ax.secondary_xaxis("bottom")
+    secax.spines["bottom"].set_position(("outward", 65))
+    secax.set_xticks(tick_pos_x)
+    secax.set_xticklabels([f"{int(t)}s" for t in time_ticks])
+    secax.set_xlabel(f"{TIME_SOURCE.capitalize()} Time (s)", fontsize=18, fontweight="bold", labelpad=15)
+    secax.tick_params(axis="x", labelsize=18, length=8, width=2)
+    for lab in secax.get_xticklabels():
+        lab.set_fontweight("bold")
+    for sp in secax.spines.values():
+        sp.set_linewidth(1.5)
+
+# Legend (force entries even if absent)
 legend_force = [
-    Line2D([0], [0], marker='o', linestyle='None', label='LLM: NONE'),
-    Line2D([0], [0], marker='s', linestyle='None', label='LLM: NOTIFY'),
-    Line2D([0], [0], marker='^', linestyle='None', label='LLM: WARNING'),
-    Line2D([0], [0], marker='D', linestyle='None', label='LLM: ACTUATE'),
-    Line2D([0], [0], marker='x', linestyle='None', label='Deadline miss'),
+    Line2D([0], [0], marker='s', linestyle='None', markerfacecolor=TOKEN_COLOR["NOTIFY"],
+           markeredgecolor='black', label='VERBAL: NOTIFY'),
+    Line2D([0], [0], marker='^', linestyle='None', markerfacecolor=TOKEN_COLOR["WARNING"],
+           markeredgecolor='black', label='VERBAL: WARNING'),
+    Line2D([0], [0], marker='D', linestyle='None', markerfacecolor=TOKEN_COLOR["ACTUATE"],
+           markeredgecolor='black', label='VERBAL: ACTUATE'),
+    Line2D([0], [0], marker='X', linestyle='None', markerfacecolor=DEADLINE_COLOR,
+           markeredgecolor='black', label='Deadline fallback'),
 ]
 
 h1, l1 = ax.get_legend_handles_labels()
@@ -214,9 +313,28 @@ for h, l in zip(all_h, all_l):
         uniq_l.append(l)
         seen.add(l)
 
-ax.legend(uniq_h, uniq_l, loc="lower left", fontsize=14)
+# ax.legend(uniq_h, uniq_l, loc="lower left", fontsize=14)
 
 plt.tight_layout()
-plt.savefig(OUT_PNG, dpi=200)
+plt.savefig(OUT_PNG, dpi=250)
 plt.show()
-print(f"\nSaved: {OUT_PNG}")
+print(f"Saved: {OUT_PNG}")
+
+fig, ax = plt.subplots(figsize=(14, 2))
+
+# Hide axes
+ax.axis("off")
+
+# Draw legend only (horizontal)
+ax.legend(
+    uniq_h,
+    uniq_l,
+    loc="center",
+    ncol=len(uniq_h),   # makes it horizontal
+    fontsize=14,
+    frameon=False
+)
+
+plt.tight_layout()
+plt.savefig("lane_change_legend.svg", dpi=250)
+plt.show()

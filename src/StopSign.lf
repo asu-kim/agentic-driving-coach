@@ -32,7 +32,7 @@ preamble{=
         t0 = time.perf_counter()
 
         r = ollama.chat(
-            model="llama3:70b",
+            model="llama3.2:1b",
             messages=[
                 {
                     "role": "system",
@@ -292,7 +292,7 @@ reactor LLMInference {
         print(f"[LLM] {ms:.1f} ms -> {tok} | {instruction}", flush=True)
     =}
 
-    deadline(613 msec) {=
+    deadline(186 msec) {=
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value  if v.value is not None else 0.0
 

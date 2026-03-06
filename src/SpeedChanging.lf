@@ -32,7 +32,7 @@ preamble{=
         t0 = time.perf_counter()
 
         r = ollama.chat(
-            model="llama3:8b",
+            model="llama3:70b",
             messages=[
                 {
                     "role": "system",
@@ -127,7 +127,7 @@ reactor Driver{
 
     reaction(startup){=
         try:
-            with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/DriverBehaviorSpeed_intermediate.txt", "r") as f:
+            with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/DriverBehaviorSpeed_beginner.txt", "r") as f:
                 for ln in f.readlines():
                     if ln.strip() != "":
                         self.lines.append(int(ln.strip()))
@@ -272,6 +272,8 @@ reactor LlmDecision {
         print("------------------------------------------------", flush=True)
         print(f"[speed]: {v_val:.2f}", flush=True)
         print("------------------------------------------------", flush=True)
+        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
 
         tok, instruction, ms = run_llm_message(rd_val, v_val)
 
@@ -284,7 +286,7 @@ reactor LlmDecision {
         print(f"[LLM] {ms:.1f} ms -> {tok} | {instruction}", flush=True)
     =}
 
-    deadline(250 msec) {=
+    deadline(613 msec) {=
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value  if v.value is not None else 0.0
        
@@ -307,6 +309,8 @@ reactor LlmDecision {
         print("------------------------------------------------", flush=True)
         print(f"[speed]: {v_val:.2f}", flush=True)
         print("------------------------------------------------", flush=True)
+        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
         print(f"[DEADLINE] fallback -> {tok} | {instruction}", flush=True)
     =}
 }

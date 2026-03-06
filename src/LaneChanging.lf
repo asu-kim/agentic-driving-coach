@@ -33,7 +33,7 @@ preamble{=
         t0 = time.perf_counter()
 
         r = ollama.chat(
-            model="llama3:8b",
+            model="llama3:70b",
             messages=[
                 {
                     "role": "system",
@@ -310,7 +310,7 @@ reactor LlmDecision {
         print(f"[LLM] {ms:.1f} ms -> {tok} | {instruction}", flush=True)
     =}
 
-    deadline(250 msec) {=
+    deadline(613 msec) {=
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value  if v.value is not None else 0.0
         h_val  = h.value if h.value is not None else Head(9).name
@@ -342,6 +342,9 @@ reactor LlmDecision {
         print("------------------------------------------------", flush=True)
         print(f"[head position]: {h_val}", flush=True)
         print(f"[steer position]: {s_val}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
         print("------------------------------------------------", flush=True)
         print(f"[DEADLINE] fallback -> {tok} | {instruction}", flush=True)
     =}
