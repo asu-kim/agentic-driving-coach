@@ -32,7 +32,7 @@ preamble{=
         t0 = time.perf_counter()
 
         r = ollama.chat(
-            model="llama3.2:1b",
+            model="llama3:8b",
             messages=[
                 {
                     "role": "system",
@@ -40,13 +40,14 @@ preamble{=
                         "You are an agentic driving coach."
                         "Output exactly ONE line: TOKEN|Message"
                         "TOKEN must be one of: NONE, WARNING, ACTUATE"
-                        "Message must be one sentence, about stopping only."
-                        "Use meters and m/s only."
+                        "Message must be one sentence, about stop sign approaching only."
+                        "Use distance_to_stop is s and measured in meters"
+                        "velocity is v measured using m/s only."
 
                         "Rules for TOKEN:"
-                        "if distance_to_stop is less than or equal to 25 and speed is greater than 2.5 then TOKEN=ACTUATE"
-                        "else if distance_to_stop lies between 50 and 60 and speed is not between 8 and 10 then TOKEN=WARNING"
-                        "else if distance_to_stop is greater than 99 and speed is not between 8 and 12 then TOKEN=WARNING"
+                        "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
+                        "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
+                        "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
                         "else TOKEN=NONE"
 
                         "If TOKEN=NONE, output: NONE|"
@@ -184,9 +185,11 @@ reactor Car{
     state dist_init = 0.0
 
     output v
+    output st
+    output h
     
 
-    reaction(accel, brk, act)->v{=
+    reaction(accel, brk, act)->v, st, h{=
         amsg = accel.value
         bmsg = brk.value
 
@@ -254,6 +257,8 @@ reactor Environment{
 reactor LLMInference {
     input s
     input v
+    input st 
+    input h
     
 
     output ctrl
@@ -262,7 +267,7 @@ reactor LLMInference {
     state last_dl_tok = ""
     state last_dl_msg = ""
 
-    reaction(s, v) -> ctrl, instr {=
+    reaction(s, v, st, h) -> ctrl, instr {=
       
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value if v.value is not None else 0.0
@@ -292,7 +297,7 @@ reactor LLMInference {
         print(f"[LLM] {ms:.1f} ms -> {tok} | {instruction}", flush=True)
     =}
 
-    deadline(186 msec) {=
+    deadline(250 msec) {=
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value  if v.value is not None else 0.0
 
@@ -422,6 +427,9 @@ reactor Planner {
 reactor Coach{
     input s
     input v
+    input st 
+    input h
+
     output act
     output instr
 
@@ -430,6 +438,8 @@ reactor Coach{
 
     s -> llm.s
     v  -> llm.v
+    st -> llm.st
+    h -> llm.h
 
     llm.ctrl -> a.ctrl
     llm.instr -> a.instr
@@ -453,6 +463,8 @@ main reactor{
     d.head-> c.head after 500 ms
     c.v -> en.v
     c.v -> adc.v
+    c.st -> adc.st
+    c.h -> adc.h
 
     en.s -> adc.s
 
