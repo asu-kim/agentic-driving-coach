@@ -1,0 +1,305 @@
+******* Using Python version: 3.12.3
+Driver has been seated
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 18.01
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 500.0
+physical 500.334527
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 18.01
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+[DEADLINE] fallback -> NOTIFY | Lane change ahead. Maintain speed.
+[LLM] 270.6 ms -> WARNING | Distance to maneuver is 98.20 meters and speed is 18.01 m/s, steering right and maintaining speed.
+[VERBAL] WARNING | Distance to maneuver is 98.20 meters and speed is 18.01 m/s, steering right and maintaining speed.
+################################################
+[Relative DISTANCE]: 96.38
+------------------------------------------------
+[speed]: 18.21
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 600.0
+physical 771.606106
+[LLM] 255.1 ms -> WARNING | Distance to maneuver is 96.38 meters and you are maintaining a speed of 18.21 meters per second, steering straight ahead.
+################################################
+[Relative DISTANCE]: 92.71
+------------------------------------------------
+[speed]: 18.42
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 800.0
+physical 1027.890141
+[LLM] 237.1 ms -> WARNING | Distance to maneuver is 92.71 meters and speed is 18.42 m/s, steering right and maintain speed.
+################################################
+[Relative DISTANCE]: 87.16
+------------------------------------------------
+[speed]: 18.64
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 1100.0
+physical 1265.812468
+[LLM] 233.0 ms -> WARNING | Distance to maneuver is 87.16 meters and speed is 18.64 m/s, steering right and maintaining speed.
+################################################
+[Relative DISTANCE]: 83.43
+------------------------------------------------
+[speed]: 18.66
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 1300.0
+physical 1499.482231
+[LLM] 247.6 ms -> WARNING | Distance to maneuver is 83.43 meters and you are maintaining a speed of 18.66 meters per second, so adjust your steering
+################################################
+[Relative DISTANCE]: 79.70
+------------------------------------------------
+[speed]: 18.68
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 1500.0
+physical 1747.794009
+################################################
+[Relative DISTANCE]: 79.70
+------------------------------------------------
+[speed]: 18.68
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+[DEADLINE] fallback -> NONE | 
+[LLM] 252.7 ms -> WARNING | Distance to maneuver is 79.7 meters and you are traveling at a speed of 18.68 meters per second, so steer right
+[VERBAL] WARNING | Distance to maneuver is 79.7 meters and you are traveling at a speed of 18.68 meters per second, so steer right
+################################################
+[Relative DISTANCE]: 74.09
+------------------------------------------------
+[speed]: 18.71
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 1800.0
+physical 2001.625103
+[LLM] 243.3 ms -> WARNING | Distance to maneuver is 74.09 meters and you are maintaining a speed of 18.71 meters per second, steering straight ahead.
+################################################
+[Relative DISTANCE]: 70.34
+------------------------------------------------
+[speed]: 18.73
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 2000.0
+physical 2246.16059
+[LLM] 244.9 ms -> WARNING | Distance to maneuver is 70.34 meters, maintain your current speed of 18.73 meters per second and keep steering right.
+################################################
+[Relative DISTANCE]: 64.72
+------------------------------------------------
+[speed]: 18.74
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 2300.0
+physical 2492.090759
+[LLM] 245.2 ms -> WARNING | Distance to maneuver is 64.72 meters, maintain your current speed of 18.74 m/s and keep steering right.
+################################################
+[Relative DISTANCE]: 60.93
+------------------------------------------------
+[speed]: 18.95
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 2500.0
+physical 2738.169887
+[LLM] 236.5 ms -> WARNING | Distance to maneuver is 60.93 meters, maintain speed of 18.95 meters per second and steer right.
+[VERBAL] WARNING | Distance to maneuver is 60.93 meters, maintain speed of 18.95 meters per second and steer right.
+################################################
+[Relative DISTANCE]: 59.04
+------------------------------------------------
+[speed]: 18.94
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+[DEADLINE] fallback -> WARNING | Prepare to steer right soon. Maintain speed.
+################################################
+[Relative DISTANCE]: 55.24
+------------------------------------------------
+[speed]: 18.96
+------------------------------------------------
+[head position]: Right
+[steer position]: Rightmost
+------------------------------------------------
+logical 2800.0
+physical 2975.764842
+[LLM] 243.1 ms -> WARNING | Distance to maneuver is 55.24 meters, maintain your current speed of 18.96 m/s and keep steering right.
+################################################
+[Relative DISTANCE]: 51.41
+------------------------------------------------
+[speed]: 19.17
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 3000.0
+physical 3219.736767
+[LLM] 255.3 ms -> WARNING | Distance to maneuver is 51.41 meters, maintain your current speed of 19.17 meters per second and keep steering right.
+################################################
+[Relative DISTANCE]: 49.49
+------------------------------------------------
+[speed]: 19.18
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+[DEADLINE] fallback -> NONE | 
+################################################
+[Relative DISTANCE]: 45.62
+------------------------------------------------
+[speed]: 19.39
+------------------------------------------------
+[head position]: Right
+[steer position]: Rightmost
+------------------------------------------------
+logical 3300.0
+physical 3477.02785
+[LLM] 250.0 ms -> WARNING | Distance to maneuver is 45.62 meters, maintain your current speed of 19.39 m/s and keep steering right.
+################################################
+[Relative DISTANCE]: 41.74
+------------------------------------------------
+[speed]: 19.41
+------------------------------------------------
+[head position]: Right
+[steer position]: Rightmost
+------------------------------------------------
+logical 3500.0
+physical 3728.430798
+[LLM] 248.9 ms -> WARNING | Distance to maneuver is 41.74 meters, maintain your current speed of 19.41 m/s and keep steering right.
+[VERBAL] WARNING | Distance to maneuver is 41.74 meters, maintain your current speed of 19.41 m/s and keep steering right.
+################################################
+[Relative DISTANCE]: 35.91
+------------------------------------------------
+[speed]: 19.42
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 3800.0
+physical 3979.360351
+[LLM] 258.3 ms -> WARNING | Distance to maneuver is 35.91 meters, maintain your current speed of 19.42 meters per second and keep steering right.
+################################################
+[Relative DISTANCE]: 32.11
+------------------------------------------------
+[speed]: 18.82
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 4000.0
+physical 4238.646803
+[LLM] 234.8 ms -> WARNING | Distance to maneuver is 32.11 meters, maintain speed of 18.82 m/s and steer right.
+################################################
+[Relative DISTANCE]: 26.65
+------------------------------------------------
+[speed]: 17.92
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 4300.0
+physical 4475.095552
+################################################
+[Relative DISTANCE]: 26.65
+------------------------------------------------
+[speed]: 17.92
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+[DEADLINE] fallback -> WARNING | Prepare to steer right soon. Maintain speed.
+[LLM] 262.3 ms -> ACTUATE | Steer right and maintain speed of 17.92 m/s while approaching the maneuver at a distance of 26.65 meters
+[VERBAL] ACTUATE | Steer right and maintain speed of 17.92 m/s while approaching the maneuver at a distance of 26.65 meters
+################################################
+[Relative DISTANCE]: 24.89
+------------------------------------------------
+[speed]: 17.62
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+[DEADLINE] fallback -> ACTUATE | Steer right now. Maintain speed.
+[ACTUATE] sent extInp=Rightmost
+Driver behavior not loaded/done
+################################################
+[Relative DISTANCE]: 23.15
+------------------------------------------------
+[speed]: 17.32
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 4500.0
+physical 4739.062318
+################################################
+[Relative DISTANCE]: 23.15
+------------------------------------------------
+[speed]: 17.32
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+[DEADLINE] fallback -> WARNING | Prepare to steer right soon. Maintain speed.
+[LLM] 261.6 ms -> ACTUATE | Steer right and maintain speed at 17.32 m/s for the next 23.15 meters.
+[VERBAL] ACTUATE | Steer right and maintain speed at 17.32 m/s for the next 23.15 meters.
+################################################
+[Relative DISTANCE]: 21.45
+------------------------------------------------
+[speed]: 17.02
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+[DEADLINE] fallback -> ACTUATE | Steer right now. Maintain speed.
+[ACTUATE] sent extInp=Rightmost
+[VERBAL] ACTUATE | Steer right now. Maintain speed.
+################################################
+[Relative DISTANCE]: 18.14
+------------------------------------------------
+[speed]: 16.42
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 4800.0
+physical 5001.759327
+[LLM] 140.3 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 16.53
+------------------------------------------------
+[speed]: 16.12
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 4900.0
+physical 5142.559022
+[LLM] 276.6 ms -> ACTUATE | Steer right and maintain speed at 16.12 m/s while approaching the maneuver point at a distance of 16.53
+[VERBAL] ACTUATE | Steer right and maintain speed at 16.12 m/s while approaching the maneuver point at a distance of 16.53

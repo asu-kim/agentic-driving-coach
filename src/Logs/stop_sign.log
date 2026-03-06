@@ -1,0 +1,445 @@
+******* Using Python version: 3.12.3
+Driver has been seated
+#################LoggingforReference###############################
+[Relative DISTANCE]: 98.98
+------------------------------------------------
+[speed]: 10.20
+------------------------------------------------
+logical 500.0
+physical 500.58912
+#################LoggingforReference###############################
+[Relative DISTANCE]: 98.98
+------------------------------------------------
+[speed]: 10.20
+------------------------------------------------
+logical 500.0
+physical 798.810383
+[DEADLINE] fallback -> NONE | 
+[LLM] 298.0 ms -> WARNING | Speed of 10.20 m/s is not within the range of 8 to 12 m/s when distance to stop is greater than
+[VERBAL] WARNING | Speed of 10.20 m/s is not within the range of 8 to 12 m/s when distance to stop is greater than
+#################LoggingforReference###############################
+[Relative DISTANCE]: 97.94
+------------------------------------------------
+[speed]: 10.40
+------------------------------------------------
+logical 600.0
+physical 799.027663
+[LLM] 262.6 ms -> WARNING | Speed of 10.40 m/s is not within the range of 8 to 12 m/s when distance to stop is greater than
+#################LoggingforReference###############################
+[Relative DISTANCE]: 94.81
+------------------------------------------------
+[speed]: 10.43
+------------------------------------------------
+logical 900.0
+physical 1062.276845
+[LLM] 250.8 ms -> WARNING | Speed of 10.43 m/s is not within the range of 8 to 12 m/s when distance to stop is greater than
+#################LoggingforReference###############################
+[Relative DISTANCE]: 92.72
+------------------------------------------------
+[speed]: 10.45
+------------------------------------------------
+logical 1100.0
+physical 1314.504787
+[LLM] 255.0 ms -> WARNING | Speed of 10.45 m/s is not within the range of 8 to 12 m/s when distance to stop is greater than
+#################LoggingforReference###############################
+[Relative DISTANCE]: 89.59
+------------------------------------------------
+[speed]: 10.46
+------------------------------------------------
+logical 1400.0
+physical 1570.852505
+[LLM] 257.8 ms -> WARNING | Speed of 10.46 m/s is not within the range of 8 to 12 m/s when distance to stop is greater than
+[VERBAL] WARNING | Speed of 10.46 m/s is not within the range of 8 to 12 m/s when distance to stop is greater than
+#################LoggingforReference###############################
+[Relative DISTANCE]: 87.50
+------------------------------------------------
+[speed]: 10.44
+------------------------------------------------
+logical 1600.0
+physical 1829.487523
+[LLM] 263.0 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 87.50 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 84.37
+------------------------------------------------
+[speed]: 10.41
+------------------------------------------------
+logical 1900.0
+physical 2093.977095
+[LLM] 251.6 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 84.37 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 82.29
+------------------------------------------------
+[speed]: 10.39
+------------------------------------------------
+logical 2100.0
+physical 2346.856694
+[LLM] 252.4 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 82.29 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 79.18
+------------------------------------------------
+[speed]: 10.36
+------------------------------------------------
+logical 2400.0
+physical 2600.861006
+[LLM] 250.4 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 79.18 meters while traveling at a speed of 10
+[VERBAL] WARNING | The vehicle must slow down as it approaches the stop line at a distance of 79.18 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 76.08
+------------------------------------------------
+[speed]: 10.33
+------------------------------------------------
+logical 2700.0
+physical 2852.508417
+[LLM] 153.9 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 75.05
+------------------------------------------------
+[speed]: 10.32
+------------------------------------------------
+logical 2800.0
+physical 3006.686862
+[LLM] 149.6 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 72.99
+------------------------------------------------
+[speed]: 10.30
+------------------------------------------------
+logical 3000.0
+physical 3157.745109
+[LLM] 139.3 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 71.96
+------------------------------------------------
+[speed]: 10.29
+------------------------------------------------
+logical 3100.0
+physical 3297.756709
+[LLM] 134.9 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 70.93
+------------------------------------------------
+[speed]: 10.28
+------------------------------------------------
+logical 3200.0
+physical 3433.132929
+[LLM] 144.2 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 68.88
+------------------------------------------------
+[speed]: 10.26
+------------------------------------------------
+logical 3400.0
+physical 3578.655896
+[LLM] 256.9 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 68.88 meters while traveling at a speed of 10
+[VERBAL] WARNING | The vehicle must slow down as it approaches the stop line at a distance of 68.88 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 66.83
+------------------------------------------------
+[speed]: 10.24
+------------------------------------------------
+logical 3600.0
+physical 3836.631641
+[LLM] 249.8 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 66.83 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 63.76
+------------------------------------------------
+[speed]: 10.21
+------------------------------------------------
+logical 3900.0
+physical 4087.742197
+[LLM] 246.0 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 63.76 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 61.72
+------------------------------------------------
+[speed]: 10.19
+------------------------------------------------
+logical 4100.0
+physical 4335.133037
+[LLM] 146.0 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 59.69
+------------------------------------------------
+[speed]: 10.17
+------------------------------------------------
+logical 4300.0
+physical 4482.334179
+#################LoggingforReference###############################
+[Relative DISTANCE]: 59.69
+------------------------------------------------
+[speed]: 10.17
+------------------------------------------------
+logical 4300.0
+physical 4747.251201
+[DEADLINE] fallback -> WARNING | Adjust speed and prepare to stop.
+[LLM] 264.7 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 59.69 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 57.66
+------------------------------------------------
+[speed]: 10.15
+------------------------------------------------
+logical 4500.0
+physical 4748.597544
+[LLM] 259.2 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 57.66 meters while traveling at a speed of 10
+[VERBAL] WARNING | The vehicle must slow down as it approaches the stop line at a distance of 57.66 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 54.62
+------------------------------------------------
+[speed]: 10.12
+------------------------------------------------
+logical 4800.0
+physical 5008.542054
+[LLM] 253.0 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 54.62 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 51.59
+------------------------------------------------
+[speed]: 10.09
+------------------------------------------------
+logical 5100.0
+physical 5262.875646
+[LLM] 251.0 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 51.59 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 49.57
+------------------------------------------------
+[speed]: 10.09
+------------------------------------------------
+logical 5300.0
+physical 5515.281256
+#################LoggingforReference###############################
+[Relative DISTANCE]: 49.57
+------------------------------------------------
+[speed]: 10.09
+------------------------------------------------
+logical 5300.0
+physical 5774.044215
+[DEADLINE] fallback -> NONE | 
+[LLM] 258.6 ms -> WARNING | The vehicle must slow down as it is approaching the stop line at a distance of 49.57 meters while traveling at a speed of
+[VERBAL] WARNING | The vehicle must slow down as it is approaching the stop line at a distance of 49.57 meters while traveling at a speed of
+#################LoggingforReference###############################
+[Relative DISTANCE]: 46.54
+------------------------------------------------
+[speed]: 10.08
+------------------------------------------------
+logical 5600.0
+physical 5774.35499
+[LLM] 260.5 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 46.54 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 44.53
+------------------------------------------------
+[speed]: 10.08
+------------------------------------------------
+logical 5800.0
+physical 6035.270753
+[LLM] 257.1 ms -> WARNING | The vehicle must slow down as it approaches the stop line at a distance of 44.53 meters while traveling at a speed of 10
+#################LoggingforReference###############################
+[Relative DISTANCE]: 41.51
+------------------------------------------------
+[speed]: 10.07
+------------------------------------------------
+logical 6100.0
+physical 6292.602114
+[LLM] 255.0 ms -> WARNING | The vehicle must slow down as it is approaching the stop line at a distance of 41.51 meters while traveling at a speed of
+#################LoggingforReference###############################
+[Relative DISTANCE]: 39.50
+------------------------------------------------
+[speed]: 10.05
+------------------------------------------------
+logical 6300.0
+physical 6548.125443
+[LLM] 256.5 ms -> WARNING | The vehicle must slow down as it is approaching the stop line at a distance of 39.5 meters while traveling at a speed of
+[VERBAL] WARNING | The vehicle must slow down as it is approaching the stop line at a distance of 39.5 meters while traveling at a speed of
+#################LoggingforReference###############################
+[Relative DISTANCE]: 36.48
+------------------------------------------------
+[speed]: 10.04
+------------------------------------------------
+logical 6600.0
+physical 6805.680287
+[LLM] 257.9 ms -> WARNING | Distance to stop (36.48m) is within the range of 50-60m and speed (10.04m/s)
+#################LoggingforReference###############################
+[Relative DISTANCE]: 33.47
+------------------------------------------------
+[speed]: 10.05
+------------------------------------------------
+logical 6900.0
+physical 7063.891288
+[LLM] 251.0 ms -> WARNING | Distance to stop (33.47m) is within the range of 50-60m and speed (10.05m/s)
+#################LoggingforReference###############################
+[Relative DISTANCE]: 31.46
+------------------------------------------------
+[speed]: 10.05
+------------------------------------------------
+logical 7100.0
+physical 7316.058198
+[LLM] 246.3 ms -> WARNING | Distance to stop (31.46m) is within the range of 50-60m and speed (10.05m/s)
+#################LoggingforReference###############################
+[Relative DISTANCE]: 28.45
+------------------------------------------------
+[speed]: 10.02
+------------------------------------------------
+logical 7400.0
+physical 7564.097441
+[LLM] 236.4 ms -> ACTUATE | Stop immediately at a distance of 28.45 meters with a speed of 10.02 m/s.
+[VERBAL] ACTUATE | Stop immediately at a distance of 28.45 meters with a speed of 10.02 m/s.
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 26.45
+------------------------------------------------
+[speed]: 10.00
+------------------------------------------------
+logical 7600.0
+physical 7800.710207
+[LLM] 266.4 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stop point and traveling at a high speed of 10.0 m
+[VERBAL] ACTUATE | The vehicle must stop immediately as it is too close to the stop point and traveling at a high speed of 10.0 m
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 24.63
+------------------------------------------------
+[speed]: 9.09
+------------------------------------------------
+logical 7800.0
+physical 8067.299506
+[DEADLINE] fallback -> ACTUATE | Brake now.
+[VERBAL] ACTUATE | Brake now.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 23.81
+------------------------------------------------
+[speed]: 8.19
+------------------------------------------------
+logical 7900.0
+physical 8067.343844
+[LLM] 246.9 ms -> ACTUATE | Stop immediately at a distance of 23.81 meters with a speed of 8.19 meters per second.
+[ACTUATE] sent extInp=EmergencyBraking
+[VERBAL] ACTUATE | Stop immediately at a distance of 23.81 meters with a speed of 8.19 meters per second.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 22.26
+------------------------------------------------
+[speed]: 7.28
+------------------------------------------------
+logical 8100.0
+physical 8314.543245
+[LLM] 252.9 ms -> ACTUATE | Stop immediately at a distance of 22.26 meters with a speed of 7.28 meters per second.
+[ACTUATE] sent extInp=EmergencyBraking
+[VERBAL] ACTUATE | Stop immediately at a distance of 22.26 meters with a speed of 7.28 meters per second.
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 20.26
+------------------------------------------------
+[speed]: 6.36
+------------------------------------------------
+logical 8400.0
+physical 8568.840176
+[LLM] 255.5 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and traveling at a high speed of 6.36 m
+[VERBAL] ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and traveling at a high speed of 6.36 m
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 19.26
+------------------------------------------------
+[speed]: 4.56
+------------------------------------------------
+logical 8600.0
+physical 8824.639901
+[LLM] 249.7 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and traveling at a high speed of 4.56 m
+[VERBAL] ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and traveling at a high speed of 4.56 m
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.43
+------------------------------------------------
+[speed]: 1.86
+------------------------------------------------
+logical 8900.0
+physical 9075.686355
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.43
+------------------------------------------------
+[speed]: 1.86
+------------------------------------------------
+logical 8900.0
+physical 9314.209245
+[DEADLINE] fallback -> NONE | 
+[LLM] 238.4 ms -> ACTUATE | Stop immediately as you are approaching the stop line at a speed of 1.86 meters per second.
+[ACTUATE] sent extInp=EmergencyBraking
+[VERBAL] ACTUATE | Stop immediately as you are approaching the stop line at a speed of 1.86 meters per second.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.06
+------------------------------------------------
+logical 9100.0
+physical 9314.392089
+[LLM] 253.0 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and moving at a slow speed of 0.06 m
+[ACTUATE] sent extInp=EmergencyBraking
+[VERBAL] ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and moving at a slow speed of 0.06 m
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 9400.0
+physical 9567.683226
+[LLM] 245.0 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.
+[VERBAL] ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 9600.0
+physical 9813.768591
+[LLM] 215.5 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 9800.0
+physical 10030.48802
+[LLM] 217.5 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10000.0
+physical 10248.802857
+[LLM] 210.9 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.
+[ACTUATE] sent extInp=EmergencyBraking
+Driver behavior not loaded/done
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10300.0
+physical 10460.87163
+[LLM] 202.4 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10500.0
+physical 10664.395337
+[LLM] 219.2 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10700.0
+physical 10884.66387
+[LLM] 226.0 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.
+[ACTUATE] sent extInp=EmergencyBraking
+#################LoggingforReference###############################
+[Relative DISTANCE]: 18.33
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10900.0
+physical 11111.140949
+[LLM] 224.4 ms -> ACTUATE | The vehicle must stop immediately as it is too close to the stopping point and stationary.

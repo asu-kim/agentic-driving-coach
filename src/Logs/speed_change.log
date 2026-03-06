@@ -1,0 +1,50 @@
+******* Using Python version: 3.12.3
+Driver has been seated
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 17.99
+------------------------------------------------
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 17.99
+------------------------------------------------
+[DEADLINE] fallback -> NONE | 
+[LLM] 2376.3 ms -> WARNING | Speed must be changed from 17.99 m/s to a value between 16 and 18 m/s.
+[VERBAL] WARNING | Speed must be changed from 17.99 m/s to a value between 16 and 18 m/s.
+################################################
+[Relative DISTANCE]: 64.70
+------------------------------------------------
+[speed]: 9.82
+------------------------------------------------
+[LLM] 255.9 ms -> WARNING | Speed must be increased from 9.82 m/s to a speed of at least 11 m/s before reaching the sign at 25
+################################################
+[Relative DISTANCE]: 62.82
+------------------------------------------------
+[speed]: 9.22
+------------------------------------------------
+[LLM] 262.4 ms -> WARNING | Speed must be increased from 9.22 m/s to a speed of at least 11 m/s before reaching the sign.
+Driver behavior not loaded/done
+################################################
+[Relative DISTANCE]: 60.24
+------------------------------------------------
+[speed]: 8.32
+------------------------------------------------
+[LLM] 258.3 ms -> ACTUATE | Speed must be increased from 8.32 m/s to a speed of at least 11 m/s before approaching the sign at
+[VERBAL] ACTUATE | Speed must be increased from 8.32 m/s to a speed of at least 11 m/s before approaching the sign at
+################################################
+[Relative DISTANCE]: 59.43
+------------------------------------------------
+[speed]: 8.02
+------------------------------------------------
+[DEADLINE] fallback -> WARNING | Slow down to 11 m/s.
+[ACTUATE] Control zone 50–60m
+[ACTUATE] Mild accel -> increase speed
+################################################
+[Relative DISTANCE]: 57.92
+------------------------------------------------
+[speed]: 7.42
+------------------------------------------------
+[LLM] 263.5 ms -> WARNING | Speed must be increased from 7.42 m/s to a speed of at least 11 m/s before reaching the sign in 57
+[VERBAL] WARNING | Speed must be increased from 7.42 m/s to a speed of at least 11 m/s before reaching the sign in 57
