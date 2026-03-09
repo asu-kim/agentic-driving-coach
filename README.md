@@ -13,7 +13,7 @@ The Agentic Driving Coach functions as an HITL CPS consisting of three key inter
 
 - **Deterministic Coordination**: Leveraging the Reactor MoC and the Lingua Franca (LF) framework to ensure consistent system behavior for a given set of inputs and initial states.
 - **Deadline-Aware Inference**: Uses LF constructs to detect excessive LLM delays and trigger fallback safety mechanisms, such as emergency braking and pulling over.
-- **Modal Planning**: Implements a three-mode state machine (monitoring, warning, and actuation) within the Planner reactor to moderate AI instructions provided to the human driver.
+- **Modal Planning**: Implements a modal model (monitoring, warning, and actuation) within the Planner reactor to moderate AI instructions provided to the human driver.
 - **Structured Prompting**: Employs context-aware, zero-temperature prompts via Ollama to ensure precise, non-random control signals and instructions.
 
 ---
