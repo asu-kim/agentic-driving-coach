@@ -16,6 +16,14 @@ The Agentic Driving Coach functions as an HITL CPS consisting of three key inter
 - **Modal Planning**: Implements a modal model (monitoring, warning, and actuation) within the Planner reactor to moderate AI instructions provided to the human driver.
 - **Structured Prompting**: Employs context-aware, zero-temperature prompts via Ollama to ensure precise, non-random control signals and instructions.
 
+<div align="center">
+  <figure>
+    <img src="./img/mainreactor.svg" alt="Proposed Reactor Model implemented using Lingua Franca">
+    <figcaption>Proposed Reactor Model implemented using Lingua Franca</figcaption>
+  </figure>
+</div>
+
+
 ---
 
 ## Repository Structure
@@ -29,7 +37,7 @@ The project is organized around scenario-specific Lingua Franca programs:
 ## Getting Started
 
 ### Prerequisites
-1. **Lingua Franca (LF)**: Install the LF compiler and runtime from the [official website](https://www.lf-lang.org/).
+1. **Lingua Franca (LF)**: Install the LF compiler and runtime from the [installation page](https://www.lf-lang.org/docs/installation/).
 2. **Ollama**: Install [Ollama](https://ollama.com/) to host local Llama 3 models.
 3. **Llama 3 Models**: Pull the required 4-bit quantized models:
 ```
@@ -59,7 +67,6 @@ numpy==2.4.1
 accelerate==1.12.0
 pydantic==2.12.5
 ```
-Lingua Franca installations for specfic systems can be found on the [installation page](https://www.lf-lang.org/docs/installation/).
 
 ---
 
