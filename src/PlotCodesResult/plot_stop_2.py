@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 # ============================
 # CONFIG
 # ============================
-LOG_PATH = "src/stop_sign.log"
-OUT_SPEED_SVG = "stop_sign.svg"
+LOG_PATH = "/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/logs/stop_sign_novice_1b.log"
+OUT_SPEED_SVG = "/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/plot2/stop_novice_1b.svg"
 UNIT = "m/s"
 
 STOP_SIGN_AT_M = 100.0
@@ -25,14 +25,14 @@ ENVELOPE_COLOR = "#FB0000"
 
 # Marker styling
 VERBAL_MARKER = "^"
-MARKER_SIZE = 240
+MARKER_SIZE = 4000
 COLOR_WARNING = "#2ca02c"
 COLOR_ACTUATE = "#ff7f0e"
 
 # Deadline marker styling
 DEADLINE_MARKER = "X"
-DEADLINE_SIZE = 220
-DEADLINE_EDGE_LW = 1.8
+DEADLINE_SIZE = 1500
+DEADLINE_EDGE_LW = 2.5
 DEADLINE_COLOR = "#d62728"
 
 ALLOWED_TOKENS = {"WARNING", "ACTUATE"}
@@ -158,18 +158,21 @@ df_all["time_s"] -= df_all["time_s"].min()
 # Coordinates
 df_all["x_m"] = (STOP_SIGN_AT_M - df_all["distance"]).clip(0, STOP_SIGN_AT_M)
 df_all["speed_u"] = df_all["speed"].apply(to_unit)
+df_all.to_csv("CSV/stop_novice_1b_data_all.csv", index=False)
 
 # Marker datasets
 df_verbal = df_all[(df_all["has_verbal"] == True) & (df_all["time_s"] <= MAX_PLOT_TIME)].copy()
 df_verbal = df_verbal[df_verbal["verbal_tok"].isin(ALLOWED_TOKENS)].copy()
+df_verbal.to_csv("CSV/stop_novice_1b_data_verbal.csv", index=False)
 
 df_deadline = df_all[(df_all["has_deadline"] == True) & (df_all["time_s"] <= MAX_PLOT_TIME)].copy()
 df_deadline = df_deadline[df_deadline["deadline_tok"].isin(ALLOWED_TOKENS)].copy()
+df_deadline.to_csv("CSV/stop_novice_1b_data_deadline.csv", index=False)
 
 # ============================
 # Plot
 # ============================
-fig, ax = plt.subplots(figsize=(18, 9))
+fig, ax = plt.subplots(figsize=(30, 15))
 
 # Envelopes
 rd_grid = np.linspace(0, STOP_SIGN_AT_M, 1000)   # rd: distance-to-stop (0..100)
@@ -178,11 +181,11 @@ x_grid  = STOP_SIGN_AT_M - rd_grid               # x: displacement from start (0
 upper = to_unit(brake_curve(UPPER_START, rd_grid))
 lower = to_unit(brake_curve(LOWER_START, rd_grid))
 
-ax.plot(x_grid, upper, color=ENVELOPE_COLOR, label="Upper Envelope", alpha=0.8, linewidth=2.2)
-ax.plot(x_grid, lower, color=ENVELOPE_COLOR, ls="--", label="Lower Envelope", alpha=0.8, linewidth=2.2)
+ax.plot(x_grid, upper, color=ENVELOPE_COLOR, label="Upper Envelope", alpha=0.8, linewidth=4.0)
+ax.plot(x_grid, lower, color=ENVELOPE_COLOR, ls="--", label="Lower Envelope", alpha=0.8, linewidth=4.0)
 
 # Speed trace
-ax.plot(df_all["x_m"], df_all["speed_u"], color="#1f77b4", lw=2.8, label="Measured Speed", zorder=3)
+ax.plot(df_all["x_m"], df_all["speed_u"], color="#1f77b4", lw=5.0, label="Measured Speed", zorder=3)
 
 # VERBAL markers
 for tok, col in [("WARNING", COLOR_WARNING), ("ACTUATE", COLOR_ACTUATE)]:
@@ -207,13 +210,22 @@ if not df_deadline.empty:
 time_ticks = np.arange(0, int(MAX_PLOT_TIME) + 1)
 tick_pos_x = np.interp(time_ticks, df_all["time_s"], df_all["x_m"])
 
-secax = ax.secondary_xaxis("bottom")
-secax.spines["bottom"].set_position(("outward", 65))
-secax.set_xticks(tick_pos_x)
-secax.set_xticklabels([f"{t}s" for t in time_ticks])
-secax.set_xlabel("Physical Time (s)", fontsize=18, fontweight="bold", labelpad=15)
+valid_ticks = []
+valid_pos = []
+last_x = -999.0
+for t, x in zip(time_ticks, tick_pos_x):
+    if abs(x - last_x) >= 4.0:  # Prevent ticks from getting too close horizontally
+        valid_ticks.append(t)
+        valid_pos.append(x)
+        last_x = x
 
-secax.tick_params(axis='x', labelsize=18, length=8, width=2)
+secax = ax.secondary_xaxis("bottom")
+secax.spines["bottom"].set_position(("outward", 250))
+secax.set_xticks(valid_pos)
+secax.set_xticklabels([f"{t}s" for t in valid_ticks])
+secax.set_xlabel("Time (s)", fontsize=75, fontweight="bold", labelpad=40 )
+
+secax.tick_params(axis='x', labelsize=75, length=12, width=3, pad=18)
 for label in secax.get_xticklabels():
     label.set_fontweight('bold')
 for spine in secax.spines.values():
@@ -222,10 +234,10 @@ for spine in secax.spines.values():
 # Axis formatting
 ax.set_xlim(0, 100)
 ax.set_ylim(0, 14)
-ax.set_xlabel("Displacement (s) from start (m)", fontsize=18, fontweight="bold")
-ax.set_ylabel(f"Velocity (v) ({unit_label()})", fontsize=18, fontweight="bold")
+ax.set_xlabel("Displacement (m)", fontsize=75, fontweight="bold", labelpad=30)
+ax.set_ylabel(f"Velocity ({unit_label()})", fontsize=75, fontweight="bold", labelpad=30)
 
-ax.tick_params(axis='both', labelsize=18, length=8, width=2)
+ax.tick_params(axis='both', labelsize=85, length=12, width=3, pad=18)
 for label in ax.get_xticklabels():
     label.set_fontweight('bold')
 for label in ax.get_yticklabels():

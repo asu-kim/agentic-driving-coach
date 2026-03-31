@@ -40,12 +40,13 @@ preamble{=
                         "Output exactly ONE line: TOKEN|Message"
                         "TOKEN must be one of: NONE, WARNING, ACTUATE"
                         "Message must be one sentence, about speed change only."
-                        "Use meters and m/s only."
+                        "Use distance_to_sign is s and measured in meters"
+                        "velocity is v measured using m/s only."
 
                         "Rules for TOKEN:"
-                        "if distance_to_sign is lesser than or equal to 25 and speed is greater than 12 or lesser than 11 then TOKEN=ACTUATE\n"
-                        "else if distance_to_stop lies in between 50 to 60 and speed is in between 15 to 13 then TOKEN=WARNING"
-                        "else if distance_to_sign is greater than 80 and speed is not in between 18 to 16 then TOKEN=WARNING\n"
+                        "if s is lesser than or equal to 25 and v is greater than 12 or lesser than 11 then TOKEN=ACTUATE\n"
+                        "else if s lies in between 50 to 60 and v is in between 15 to 13 then TOKEN=WARNING"
+                        "else if s is greater than 80 and v is not in between 18 to 16 then TOKEN=WARNING\n"
                         "else TOKEN=NONE\n"
 
                         "If TOKEN=NONE, output: NONE|\n"
@@ -390,9 +391,9 @@ reactor Agent {
         rd = s.value if s.value is not None else 0.0
         vel  = v.value  if v.value is not None else 0.0
 
-        TARGET = 11.0
-        HI = TARGET + 0.5
-        LO = TARGET - 0.5
+        # TARGET = 11.0
+        # HI = TARGET + 0.5
+        # LO = TARGET - 0.5
 
 
 
@@ -405,12 +406,13 @@ reactor Agent {
        
         if 50.0 < rd <= 60.0:
             print("[ACTUATE] Control zone 50–60m", flush=True)
+            
 
-            if vel > HI:
+            if vel > 16:
                 print("[ACTUATE] Gentle brake -> reduce speed", flush=True)
                 expInp.set(Brake(5).name)
 
-            elif vel < LO:
+            elif 14 < LO:
                 print("[ACTUATE] Mild accel -> increase speed", flush=True)
                 expInp.set(Accelerate(3).name)
 
@@ -425,7 +427,7 @@ reactor Agent {
         if rd <= 25.0:
             print("[ACTUATE] Near sign zone <=25m", flush=True)
 
-            if vel > HI:
+            if vel > 12:
                 print("[ACTUATE] Strong brake", flush=True)
                 expInp.set(Brake(6).name)
             else:

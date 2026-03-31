@@ -7,8 +7,8 @@ from matplotlib.lines import Line2D
 # ============================
 # CONFIG
 # ============================
-LOG_PATH = "src/lane_change.log"
-OUT_PNG  = "lane_change.svg"
+LOG_PATH = "/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/logs/lane_change_novice_70b.log"
+OUT_PNG  = "/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/plot2/lane_change_novice_70b.svg"
 
 UNIT = "m/s"  # "m/s" or "km/h"
 
@@ -27,11 +27,11 @@ ALLOWED_TOKENS = {"NONE", "NOTIFY", "WARNING", "ACTUATE"}
 PLOT_TOKENS    = {"NOTIFY", "WARNING", "ACTUATE"}  # markers
 
 # marker styling
-TOKEN_MARKER = {"NOTIFY": "s", "WARNING": "^", "ACTUATE": "D"}
+TOKEN_MARKER = {"NOTIFY": "s", "WARNING": "^", "ACTUATE": "^"}
 TOKEN_COLOR  = {"NOTIFY": "#1f77b4", "WARNING": "#2ca02c", "ACTUATE": "#ff7f0e"}
 
 DEADLINE_MARKER   = "X"
-DEADLINE_SIZE     = 220
+DEADLINE_SIZE     = 300
 DEADLINE_EDGE_LW  = 1.8
 DEADLINE_COLOR    = "#d62728"
 
@@ -241,7 +241,7 @@ for tok in ["NOTIFY", "WARNING", "ACTUATE"]:
     ax.scatter(
         sub["x_m"], sub["speed_u"],
         marker=TOKEN_MARKER[tok],
-        s=240,
+        s=800,
         color=TOKEN_COLOR[tok],
         edgecolors="black",
         linewidths=0.9,
@@ -252,9 +252,9 @@ for tok in ["NOTIFY", "WARNING", "ACTUATE"]:
 # axes formatting
 ax.set_xlim(0, EVENT_AT_M)
 ax.set_ylim(16, 22)
-ax.set_xlabel("Displacement from start (m)", fontsize=18, fontweight="bold")
-ax.set_ylabel(f"Speed ({unit_label()})", fontsize=18, fontweight="bold")
-ax.tick_params(axis="both", labelsize=18, length=8, width=2)
+ax.set_xlabel("Displacement (m)", fontsize=28, fontweight="bold")
+ax.set_ylabel(f"Velocity ({unit_label()})", fontsize=28, fontweight="bold")
+ax.tick_params(axis="both", labelsize=28, length=8, width=2)
 for lab in ax.get_xticklabels() + ax.get_yticklabels():
     lab.set_fontweight("bold")
 for sp in ax.spines.values():
@@ -282,8 +282,8 @@ if len(x_vals) >= 2 and np.isfinite(t_vals).any():
     secax.spines["bottom"].set_position(("outward", 65))
     secax.set_xticks(tick_pos_x)
     secax.set_xticklabels([f"{int(t)}s" for t in time_ticks])
-    secax.set_xlabel(f"{TIME_SOURCE.capitalize()} Time (s)", fontsize=18, fontweight="bold", labelpad=15)
-    secax.tick_params(axis="x", labelsize=18, length=8, width=2)
+    secax.set_xlabel(f"{TIME_SOURCE.capitalize()} Time (s)", fontsize=28, fontweight="bold", labelpad=15)
+    secax.tick_params(axis="x", labelsize=28, length=8, width=2)
     for lab in secax.get_xticklabels():
         lab.set_fontweight("bold")
     for sp in secax.spines.values():
@@ -320,21 +320,21 @@ plt.savefig(OUT_PNG, dpi=250)
 plt.show()
 print(f"Saved: {OUT_PNG}")
 
-fig, ax = plt.subplots(figsize=(14, 2))
+# fig, ax = plt.subplots(figsize=(14, 2))
 
-# Hide axes
-ax.axis("off")
+# # Hide axes
+# ax.axis("off")
 
-# Draw legend only (horizontal)
-ax.legend(
-    uniq_h,
-    uniq_l,
-    loc="center",
-    ncol=len(uniq_h),   # makes it horizontal
-    fontsize=14,
-    frameon=False
-)
+# # Draw legend only (horizontal)
+# # ax.legend(
+# #     uniq_h,
+# #     uniq_l,
+# #     loc="center",
+# #     ncol=len(uniq_h),   # makes it horizontal
+# #     fontsize=14,
+# #     frameon=False
+# # )
 
-plt.tight_layout()
-plt.savefig("lane_change_legend.svg", dpi=250)
-plt.show()
+# plt.tight_layout()
+# plt.savefig("lane_change_legend.svg", dpi=250)
+# plt.show()

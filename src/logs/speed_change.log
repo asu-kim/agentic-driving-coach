@@ -1,0 +1,146 @@
+******* Using Python version: 3.12.3
+Driver has been seated
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 17.99
+------------------------------------------------
+logical 500.0
+physical 500.598601
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 17.99
+------------------------------------------------
+logical 500.0
+physical 1256.333182
+[DEADLINE] fallback -> NONE | 
+[LLM] 755.7 ms -> WARNING | You are approaching a speed change zone, please adjust your speed to 17 meters per second.
+[VERBAL] WARNING | You are approaching a speed change zone, please adjust your speed to 17 meters per second.
+################################################
+[Relative DISTANCE]: 94.61
+------------------------------------------------
+[speed]: 17.97
+------------------------------------------------
+logical 700.0
+physical 1256.988808
+[LLM] 201.0 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 91.02
+------------------------------------------------
+[speed]: 17.95
+------------------------------------------------
+logical 900.0
+physical 1458.532941
+[LLM] 724.7 ms -> WARNING | You are approaching a speed change, please adjust your speed to 17 meters per second.
+[VERBAL] WARNING | You are approaching a speed change, please adjust your speed to 17 meters per second.
+################################################
+[Relative DISTANCE]: 78.47
+------------------------------------------------
+[speed]: 17.90
+------------------------------------------------
+logical 1600.0
+physical 2185.13907
+[LLM] 744.0 ms -> WARNING | You are approaching a speed change zone, please adjust your speed to 17 meters per second.
+################################################
+[Relative DISTANCE]: 64.17
+------------------------------------------------
+[speed]: 17.86
+------------------------------------------------
+logical 2400.0
+physical 2930.421272
+[LLM] 205.2 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 60.60
+------------------------------------------------
+[speed]: 17.84
+------------------------------------------------
+logical 2600.0
+physical 3136.312736
+[LLM] 804.1 ms -> WARNING | You are approaching a speed change zone, please adjust your speed to 16-18 meters per second.
+[VERBAL] WARNING | You are approaching a speed change zone, please adjust your speed to 16-18 meters per second.
+################################################
+[Relative DISTANCE]: 58.82
+------------------------------------------------
+[speed]: 17.85
+------------------------------------------------
+logical 2700.0
+physical 3940.936095
+[DEADLINE] fallback -> WARNING | Slow down to 11 m/s.
+################################################
+[Relative DISTANCE]: 49.88
+------------------------------------------------
+[speed]: 17.88
+------------------------------------------------
+logical 3200.0
+physical 3941.614421
+[DEADLINE] fallback -> NONE | 
+################################################
+[Relative DISTANCE]: 46.31
+------------------------------------------------
+[speed]: 17.86
+------------------------------------------------
+logical 3400.0
+physical 3941.899832
+[LLM] 804.3 ms -> WARNING | You are approaching a speed change zone, please adjust your speed to 16-18 meters per second.
+################################################
+[Relative DISTANCE]: 32.03
+------------------------------------------------
+[speed]: 17.61
+------------------------------------------------
+logical 4200.0
+physical 4747.541942
+[LLM] 809.5 ms -> WARNING | You are approaching a speed change zone, please adjust your speed to 16-18 meters per second.
+################################################
+[Relative DISTANCE]: 23.68
+------------------------------------------------
+[speed]: 16.11
+------------------------------------------------
+logical 4700.0
+physical 5557.892983
+[DEADLINE] fallback -> ACTUATE | Brake now.
+[VERBAL] ACTUATE | Brake now.
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Strong brake
+################################################
+[Relative DISTANCE]: 19.08
+------------------------------------------------
+[speed]: 14.61
+------------------------------------------------
+logical 5000.0
+physical 5558.360545
+[LLM] 754.5 ms -> WARNING | You are approaching a speed change zone, please adjust your speed to 15 meters per second.
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Strong brake
+Driver behavior not loaded/done
+[VERBAL] WARNING | You are approaching a speed change zone, please adjust your speed to 15 meters per second.
+################################################
+[Relative DISTANCE]: 10.06
+------------------------------------------------
+[speed]: 11.91
+------------------------------------------------
+logical 5700.0
+physical 6314.554182
+[DEADLINE] fallback -> NONE | 
+################################################
+[Relative DISTANCE]: 8.89
+------------------------------------------------
+[speed]: 11.61
+------------------------------------------------
+logical 5800.0
+physical 6314.849416
+[LLM] 978.1 ms -> ACTUATE | You need to adjust your speed as you are approaching a sign at 8.89 meters ahead at a speed of 11.
+[VERBAL] ACTUATE | You need to adjust your speed as you are approaching a sign at 8.89 meters ahead at a speed of 11.
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Mild brake
+################################################
+[Relative DISTANCE]: 5.59
+------------------------------------------------
+[speed]: 10.71
+------------------------------------------------
+logical 6100.0
+physical 7294.17229
+[DEADLINE] fallback -> ACTUATE | Brake now.
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Mild brake
+[VERBAL] ACTUATE | Brake now.

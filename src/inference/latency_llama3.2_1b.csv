@@ -1,0 +1,301 @@
+run,distance_to_stop_m,speed_mps,latency_ms,raw_output
+1,100.94766271098311,1.7408947830023522,142.72998698288575,"NONE| distance_to_stop=100.95m, speed=1.74m/s"
+2,56.03726031366891,14.528308918938844,146.90941100707278,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+3,11.485621991796064,2.246870931357768,145.0127040152438,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+4,50.78800198078458,5.277209065327672,145.149031013716,"NONE| distance_to_stop=50.79m, speed=5.28m/s"
+5,15.462993809106152,15.51072420559399,147.67573197605088,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+6,4.8072147564164975,1.2519926788273366,160.45760898850858,NONE|The vehicle is stopped at a distance of 4.81m and is travelling at 1.25m/s.
+7,5.697456891288671,5.208983344837929,167.86014003446326,NONE|The vehicle is stopped at a distance of 5.7 meters from the stop line and is traveling at 5.21 m/s.
+8,116.96167214131809,15.596706001594853,130.26607898063958,"NONE| distance_to_stop=116.96m, speed=15.60m/s"
+9,52.779736031100924,11.442319996759203,137.05021201167256,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+10,51.62654097156085,6.3948726040953865,147.3773920442909,"NONE| distance_to_stop=51.63m, speed=6.39m/s"
+11,6.674445551227834,16.85978257882489,136.4047469687648,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+12,1.785062739463708,11.429609187547085,136.03276398498565,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+13,18.22816994875873,2.941244887714711,149.7200460289605,"NONE| distance_to_stop=18.23m, speed=2.94m/s"
+14,52.69947826784278,16.65704123318192,142.2019680030644,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+15,13.923743594366156,12.323056517817744,137.57632701890543,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+16,103.8100095112462,0.5778043902726797,148.61907000886276,"NONE| distance_to_stop=103.81m, speed=0.58m/s"
+17,54.011647870223285,1.1913948938078502,142.7391580073163,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+18,21.909190661816723,5.664201854372602,142.20988500164822,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+19,12.480781487306933,15.924296769960645,157.14076400035992,"NONE| distance_to_stop=12.48m, speed=15.92m/s"
+20,11.47129631468497,4.767842996964944,141.21279498795047,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+21,114.64476862392374,9.701591214011227,136.0068040085025,"NONE| distance_to_stop=114.64m, speed=9.70m/s"
+22,14.614649755588513,16.160811904844586,137.4731350224465,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+23,53.61996443713611,17.951864003804896,140.63839300069958,"NONE| distance_to_stop=53.62m, speed=17.95m/s"
+24,109.70005216720575,1.63636941912829,140.10088000213727,"NONE| distance_to_stop=109.70m, speed=1.64m/s"
+25,117.08316110299998,2.7511437482686993,148.44750799238682,"NONE| distance_to_stop=117.08m, speed=2.75m/s"
+26,115.63366665162225,7.598879402394313,145.01468400703743,"NONE| distance_to_stop=115.63m, speed=7.60m/s"
+27,107.0801135451645,10.725991710500306,146.15597296506166,"NONE| distance_to_stop=107.08m, speed=10.73m/s"
+28,55.29114345099137,17.479410797045126,145.64829098526388,"NONE| distance_to_stop=55.29m, speed=17.48m/s"
+29,113.28595161538689,2.0619313737063596,134.67184698674828,"NONE| distance_to_stop=113.29m, speed=2.06m/s"
+30,18.771944989790242,13.834777187834026,136.55197399202734,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+31,51.115521735958765,7.82577451204389,144.45385499857366,"NONE|Distance to stop is too close and speed is too low, stopping is not necessary."
+32,50.032453161017294,12.997657103578394,145.38085303502157,"NONE| distance_to_stop=50.03m, speed=13.00m/s"
+33,6.584726268777269,9.01055003490537,138.18847201764584,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+34,109.66131516669083,1.9153948103586895,140.8789330162108,"NONE| distance_to_stop=109.66m, speed=1.92m/s"
+35,7.461119786215822,11.501090907588093,138.81765096448362,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+36,4.972777544118326,6.730449346640663,142.25988602265716,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+37,110.32695963251214,14.015276615350048,137.5840519904159,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+38,22.962337359892558,10.781002520284122,140.13377600349486,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+39,50.19476742385832,16.72377509276311,143.33616703515872,"NONE| distance_to_stop=50.19m, speed=16.72m/s"
+40,52.394523103380585,4.3356886640501955,136.22484903316945,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+41,23.673736132449854,1.541762137221818,135.1714050397277,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+42,58.16023253420089,17.603720886192015,139.67466598842293,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+43,19.145860732674695,2.3110463609957304,146.8408569926396,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+44,59.468486797049906,2.9722852615342976,135.25292102713138,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+45,21.810826027131437,7.616482923615965,149.24915501615033,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+46,118.50718335304572,13.5947735394445,147.60962600121275,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+47,5.028776584742397,5.610893243416109,169.07297703437507,NONE|The vehicle is stopped at a distance of 5.03m from the stop line and is travelling at 5.61m/s.
+48,16.246951440986336,7.885801510461073,145.99887700751424,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+49,11.287153534778243,4.462301045988143,147.66071096528322,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+50,106.09979680509656,10.589556932230199,140.47132298583165,"NONE| distance_to_stop=106.10m, speed=10.59m/s"
+51,111.35724240261737,0.1294351017316837,152.81830303138122,"NONE| distance_to_stop=111.36m, speed=0.13m/s"
+52,15.777573931752473,4.120952108600779,154.1248870198615,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+53,117.05234340532868,1.275432297995762,162.9823370021768,"NONE| distance_to_stop=117.05m, speed=1.28m/s"
+54,104.84802254325548,8.737460984708832,155.16304899938405,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+55,3.307796218125625,16.839256330452077,158.3490800112486,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+56,14.405291243022496,4.373950363123042,151.2817629845813,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+57,58.074969977666434,3.4273784585137985,158.36063004098833,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+58,112.83863773980792,6.3773561986119685,157.0912899915129,"NONE| distance_to_stop=112.84m, speed=6.38m/s"
+59,54.67024668036675,13.123365290277311,149.05133499996737,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+60,16.33638720664479,11.63123552330972,157.07831404870376,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+61,107.45504692414764,6.1074468971093365,148.7326350179501,"NONE| distance_to_stop=107.46m, speed=6.11m/s"
+62,104.221783012326,3.4237603519346074,153.00134499557316,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+63,51.40182297094775,3.302784644170199,146.50696399621665,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+64,52.49806447882101,16.61878078696823,156.28057497087866,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+65,58.08022244731703,15.40740406443071,152.16329402755946,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+66,100.0623549200225,17.98708443142908,149.0267839981243,"NONE| distance_to_stop=100.06m, speed=17.99m/s"
+67,119.34892140297978,16.674605694146297,152.31547900475562,"NONE| distance_to_stop=119.35m, speed=16.67m/s"
+68,102.49253332268219,8.741540258112932,155.07045201957226,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+69,117.15765827463453,16.243971579189875,149.15032201679423,"NONE| distance_to_stop=117.16m, speed=16.24m/s"
+70,106.95843549851524,17.73555918803507,158.33494701655582,"NONE| distance_to_stop=106.96m, speed=17.74m/s"
+71,59.26518073559333,14.132328422294188,153.29747804207727,"NONE| distance_to_stop=59.27m, speed=14.13m/s"
+72,54.23007485990163,17.231717535474118,159.02140701655298,"NONE| distance_to_stop=54.23m, speed=17.23m/s"
+73,16.546782798768632,8.76008540977793,149.6223909780383,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+74,105.23086433538585,17.436768569444858,151.48169494932517,"NONE| distance_to_stop=105.23m, speed=17.44m/s"
+75,18.393429469726087,1.0972362865772847,154.96885403990746,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+76,50.57165272907483,10.515196700261482,156.59141697688028,"NONE| distance_to_stop=50.57m, speed=10.52m/s"
+77,22.98467827080188,9.560270434869743,151.8314799759537,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+78,119.17635696876346,1.4420063743305638,150.84324101917446,"NONE| distance_to_stop=119.18m, speed=1.44m/s"
+79,100.43894798677964,1.2232955407636303,160.79100797651336,"NONE| distance_to_stop=100.44m, speed=1.22m/s"
+80,107.47928657768382,16.94873029012361,144.00610799202695,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+81,6.1553836947156215,10.701344763601941,145.54416196187958,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+82,2.049585137371887,11.832716960505405,148.25832803035155,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+83,13.069567888298971,16.82471263925569,152.39797200774774,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+84,113.06424547016641,5.65530953032037,153.6186029552482,"NONE| distance_to_stop=113.06m, speed=5.66m/s"
+85,53.957858467912544,12.090424013279483,153.2023440231569,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+86,54.57224572570452,16.722329970699256,153.502858011052,"NONE| distance_to_stop=54.57m, speed=16.72m/s"
+87,99.19562459456917,11.18086659887567,157.51393599202856,"NONE| distance_to_stop=99.20m, speed=11.18m/s"
+88,24.90241119637736,1.318692979793394,151.62696497282013,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+89,109.62357857502407,2.3842182665964113,160.20263702375814,"NONE| distance_to_stop=109.62m, speed=2.38m/s"
+90,58.808641736864395,15.82686436472177,156.22420597355813,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+91,52.849873912166565,7.887322314138777,158.81278598681092,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+92,17.588498127184273,11.010199783067103,145.01832594396546,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+93,13.223517315056752,12.021537666826504,155.59087897418067,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+94,7.484468804999447,11.94099686938939,147.09071797551587,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+95,104.55378435122968,16.014828726102763,145.20213601645082,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+96,13.830591022120398,4.902267821666694,150.53198899840936,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+97,5.2657413701735765,6.171845180278655,180.1941019948572,NONE|The vehicle is stopped at a distance of 5.27 meters from the stop line and is traveling at 6.17 m/s.
+98,15.855948972126994,4.75171022934737,154.48796702548862,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+99,52.51121252069894,16.346862831934295,144.83280200511217,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+100,100.9382678219674,7.6243639061470745,153.09625800000504,"NONE| distance_to_stop=100.94m, speed=7.62m/s"
+101,50.4408676179905,6.004017694891587,157.94232697226107,"NONE| distance_to_stop=50.44m, speed=6.00m/s"
+102,112.37938092332897,4.715194723818268,147.3976910347119,"NONE| distance_to_stop=112.38m, speed=4.72m/s"
+103,11.045887796521264,12.702014041679833,157.10948599735275,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+104,0.24174249020849914,1.3543894813278068,149.70515097957104,"NONE| distance_to_stop=0.24m, speed=1.35m/s"
+105,22.59821428899733,9.820625205699402,146.50086901383474,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+106,55.825095664897944,2.6656881402146877,148.56726897414774,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+107,99.87840602154601,6.563727275890608,150.40836803382263,"NONE| distance_to_stop=99.88m, speed=6.56m/s"
+108,117.87741736705597,3.7813776901155727,153.88968400657177,"NONE| distance_to_stop=117.88m, speed=3.78m/s"
+109,113.00560162334641,6.36621542306313,156.87301702564582,"NONE| distance_to_stop=113.01m, speed=6.37m/s"
+110,22.103367536275222,7.314793016978102,143.57369701610878,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+111,18.73694027858848,16.66374880625202,147.09091401891783,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+112,117.15671962061924,17.571708592757332,154.8712080111727,"NONE| distance_to_stop=117.16m, speed=17.57m/s"
+113,117.50974029792981,0.44615451416739704,154.97170900925994,"NONE| distance_to_stop=117.51m, speed=0.45m/s"
+114,23.11218238103864,14.082956930657371,143.97671801270917,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+115,58.02235138937139,15.55315251075503,143.9254559809342,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+116,104.60291990148392,14.17274116443848,142.93240598635748,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+117,107.03337617453562,0.6970429379841561,150.05880099488422,"NONE| distance_to_stop=107.03m, speed=0.70m/s"
+118,52.22433717545665,14.698558900744722,150.47787898220122,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+119,53.496584244459186,14.769654857488117,150.35562199773267,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+120,103.68139449132198,11.880597289475322,152.82452397514135,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+121,53.28261951197707,15.558352956545153,144.88382695708424,"NONE| distance_to_stop=53.28m, speed=15.56m/s"
+122,53.51146129082752,9.169302159504673,150.87842097273096,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+123,24.528742179956502,9.651883184616993,146.23508200747892,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+124,101.42217678887998,17.467210998400102,153.5158499609679,"NONE| distance_to_stop=101.42m, speed=17.47m/s"
+125,111.19238440851286,17.70391031189557,150.1770509639755,"NONE| distance_to_stop=111.19m, speed=17.70m/s"
+126,101.27645349150893,7.822147654163598,159.36602698639035,"NONE| distance_to_stop=101.28m, speed=7.82m/s"
+127,19.66070445509205,7.8550899096709434,152.12582604726776,"NONE| distance_to_stop=19.66m, speed=7.86m/s"
+128,2.8911446007332615,16.191085192401594,134.70682298066095,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+129,104.34917262891022,12.758135109015072,157.66937599983066,"NONE| distance_to_stop=104.35m, speed=12.76m/s"
+130,109.9183273198983,14.51719565460187,153.12868996988982,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+131,17.985749978621136,13.355101401110577,152.317259053234,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+132,4.925878227543359,7.763353193249765,144.4298719870858,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+133,23.019271405451004,11.216797379035365,163.16632804227993,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+134,21.200381987658385,12.955576734251103,148.45029398566112,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+135,55.071225040352694,12.004072273903134,139.57849302096292,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+136,54.024003870577246,5.3217936454670465,148.10851600486785,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+137,103.0286419527931,11.968729815829887,152.9681560350582,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+138,56.77317945272733,16.250499823186487,159.04895396670327,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+139,14.227631371645233,7.309353037646932,149.53914697980508,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+140,105.38137393463543,3.783288327887554,153.18061399739236,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+141,15.166539261994066,5.800486135257686,151.67838899651542,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+142,54.421597993048074,3.846625217803805,155.07102402625605,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+143,57.93735399106002,17.27697606629465,156.87396097928286,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+144,4.242284904951369,1.5263196610521914,157.1108279749751,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+145,16.59634590762497,11.146694496522759,157.0083560072817,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+146,116.18689275526995,13.520486475733179,152.1942779654637,"NONE| distance_to_stop=116.19m, speed=13.52m/s"
+147,7.760486607372882,14.518132102372785,146.75000897841528,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+148,99.51293314226335,4.407165793410303,147.76920899748802,"NONE| distance_to_stop=99.51m, speed=4.41m/s"
+149,56.112739730606805,13.832808102003543,156.17416001623496,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+150,54.144410109977194,11.335776853278848,154.74804100813344,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+151,114.08526422547877,6.911612413069523,163.14733104081824,"NONE| distance_to_stop=114.09m, speed=6.91m/s"
+152,52.43984439578439,11.809044200012114,149.08279600786045,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+153,117.7458563504387,15.487930177605385,160.81173496786505,"NONE| distance_to_stop=117.75m, speed=15.49m/s"
+154,115.34682854211383,3.93914046262175,165.42974702315405,"NONE| distance_to_stop=115.35m, speed=3.94m/s"
+155,12.94894376109352,0.9039309325315366,153.39917200617492,"NONE| distance_to_stop=12.95m, speed=0.90m/s"
+156,118.26687030356425,2.1844547854089194,147.94524101307616,"NONE| distance_to_stop=118.27m, speed=2.18m/s"
+157,115.82974863616755,12.016399186554356,155.529864015989,"NONE| distance_to_stop=115.83m, speed=12.02m/s"
+158,14.886307961735493,17.100712951976806,161.85367002617568,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+159,56.126523227617625,12.946931302967407,151.3840570114553,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+160,10.668518921466388,16.323385148210043,146.14806900499389,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+161,58.972081032332625,13.385797958872528,151.52843797113746,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+162,54.50069757246908,13.531982157009207,159.97635398525745,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+163,6.932783828268513,13.998147036011492,155.59415705502033,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+164,56.267484369817815,4.94275404451569,157.05543395597488,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+165,113.98444211483218,4.220884404263436,157.8575479798019,"NONE| distance_to_stop=113.98m, speed=4.22m/s"
+166,53.19709568418762,9.722740005332215,146.5482019702904,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+167,102.16744381827482,6.894635263764087,148.6109200050123,"NONE| distance_to_stop=102.17m, speed=6.89m/s"
+168,113.83480197558559,1.1561193128498053,159.9018860142678,"NONE| distance_to_stop=113.83m, speed=1.16m/s"
+169,53.308813910380834,8.386637460320712,160.23918899009004,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+170,103.34352217980262,7.562583319921661,161.84385202359408,"NONE| distance_to_stop=103.34m, speed=7.56m/s"
+171,23.651550839752513,0.35157522127908813,175.96788803348318,NONE|The vehicle is stopped at a distance of 23.65 meters from the stop line and is traveling at a speed of 0.35
+172,9.509525723192791,0.1061295045118753,156.6507700481452,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+173,52.98612652372383,7.019759665146939,150.54887300357223,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+174,55.382205676102316,13.22341309361444,161.03359800763428,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+175,22.44528368497988,8.788130595904509,151.80765400873497,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+176,54.358359760466364,0.5224467590408743,183.71020298218355,NONE|The vehicle is stopped at a distance of 54.36 meters from the stop line and is traveling at a speed of 0.52
+177,56.68873620622917,14.3665618395634,155.0436380202882,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+178,4.12611828008772,8.413022686181582,149.5179370394908,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+179,119.59516152789739,9.614225331585079,168.4739759657532,"NONE| distance_to_stop=119.60m, speed=9.61m/s"
+180,55.91892775627911,11.933995623050903,157.49871800653636,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+181,112.49774260819605,2.442590770150156,153.40320602990687,"NONE| distance_to_stop=112.5m, speed=2.44m/s"
+182,51.81729026513432,4.682813650547485,154.5574360061437,"NONE| distance_to_stop=51.82m, speed=4.68m/s"
+183,52.116602842114816,5.883224487863554,150.68017604062334,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+184,52.78256615638806,17.121674157490112,173.82270703092217,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+185,52.52271531782381,1.474312189709566,167.83148801187053,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+186,114.72950948273987,0.9375409483785986,155.81480599939823,"NONE| distance_to_stop=114.73m, speed=0.94m/s"
+187,52.24222165719748,1.2351306681498495,167.92516398709267,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+188,1.0064534385191641,0.5585399798528181,171.84873798396438,NONE|The vehicle is stopped at a distance of 1.01m and is moving at 0.56m/s.
+189,103.1865743296132,0.3668403117659822,149.3150379974395,"NONE| distance_to_stop=103.19m, speed=0.37m/s"
+190,104.00944377966702,8.524099097030305,151.04259498184547,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+191,110.8433612205304,3.9233617363170654,148.01234198966995,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+192,6.406092414054665,6.6401131378129445,146.42230299068615,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+193,15.181187347273292,13.462661735195145,161.89812298398465,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+194,115.33362960968408,2.947784583009585,156.2338310177438,"NONE| distance_to_stop=115.33m, speed=2.95m/s"
+195,51.080987496576064,0.4622116589543883,164.24204496433958,"NONE| distance_to_stop=51.08m, speed=0.46m/s"
+196,55.75796728412414,16.344470718854,158.72825001133606,"NONE| distance_to_stop=55.76m, speed=16.34m/s"
+197,53.966544415166275,12.870264690890432,153.37927301879972,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+198,111.4340550862469,14.95028940804573,145.4334409791045,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+199,101.1399274143655,13.904655929122033,149.0031469729729,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+200,15.010290370421103,2.1789911712116723,151.49010199820623,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+201,19.56588365902549,6.249667775552082,145.28447401244193,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+202,56.61521340687356,1.2412212573535293,156.81794099509716,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+203,8.530779371532079,15.292361285992392,151.83727099793032,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+204,51.055388706439985,17.294176209862414,161.3463659887202,"NONE| distance_to_stop=51.06m, speed=17.29m/s"
+205,22.28937537012758,8.275308256831433,153.59743795124814,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+206,108.14523004516121,13.208315472241054,150.9386410471052,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+207,6.752059909685021,14.547585938521607,163.01918402314186,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+208,19.366036259289366,8.367727889421142,154.63235200149938,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+209,14.811865476592542,5.801482493660128,149.8487539938651,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+210,116.44535139670268,1.5599321650021392,154.28882802370936,"NONE| distance_to_stop=116.45m, speed=1.56m/s"
+211,52.43863439190956,8.36475239885817,146.2235819781199,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+212,16.70471176113734,6.055139158044755,148.8493430078961,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+213,58.50952836312459,3.2731174288384524,155.52694798680022,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+214,106.451324289698,4.650343359456205,154.6744839870371,"NONE| distance_to_stop=106.45m, speed=4.65m/s"
+215,58.80319979758225,12.62130750597963,154.71681603230536,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+216,55.55791027919584,9.299290530868815,151.96698799263686,"NONE| distance_to_stop=55.56m, speed=9.30m/s"
+217,100.79787220111845,12.961343953875497,148.19332101615146,"NONE| distance_to_stop=100.80m, speed=12.96m/s"
+218,55.551762115818605,4.32583085023588,148.54473696323112,"NONE| distance_to_stop=55.55m, speed=4.33m/s"
+219,56.459028997409526,8.83478403141455,144.08280298812315,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+220,100.95412036164811,3.9887352085055428,158.09980599442497,"NONE| distance_to_stop=100.95m, speed=3.99m/s"
+221,6.082629096918929,11.951280388742688,143.92280502943322,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+222,54.732604887595244,9.55659476062382,148.82137801032513,"NONE| distance_to_stop=54.73m, speed=9.56m/s"
+223,59.96631463959332,9.906992509620213,152.9547329992056,"NONE| distance_to_stop=59.97m, speed=9.91m/s"
+224,57.02854942185769,4.876495685571534,162.80994395492598,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+225,52.30538041298508,12.983117963869253,149.68293503625318,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+226,51.195547412550525,9.645551376907497,145.27787803672254,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+227,4.628746060941549,3.8949235178149024,156.78694902453572,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+228,52.76499626968689,10.612564307294235,160.585098026786,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+229,14.919768512807543,17.649191348325235,165.7340729725547,"NONE| distance_to_stop=14.92m, speed=17.65m/s"
+230,105.22117572856803,6.4958592446889565,159.65116600273177,"NONE| distance_to_stop=105.22m, speed=6.50m/s"
+231,50.14148367256064,9.61443160681794,146.59150200895965,"NONE| distance_to_stop=50.14m, speed=9.61m/s"
+232,50.455157009832185,0.9814683643017801,161.15959198214114,"NONE| distance_to_stop=50.46m, speed=0.98m/s"
+233,56.974173929101944,2.2730308732513604,140.93760499963537,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+234,51.02587646787761,0.2207772607591434,179.1220279992558,NONE|The vehicle is stopped at a distance of 51.03m from the stop line and is travelling at 0.22m/s.
+235,54.6939694493051,7.928438366448185,159.1468920232728,"NONE| distance_to_stop=54.69m, speed=7.93m/s"
+236,119.27545050590419,4.544611028873507,157.2550839628093,"NONE| distance_to_stop=119.28m, speed=4.54m/s"
+237,51.14087140724924,1.1761818320507846,156.97303699562326,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+238,50.740821702556396,11.330022725135969,154.30008800467476,"NONE| distance_to_stop=50.74m, speed=11.33m/s"
+239,102.18626714597008,14.600557372950856,165.275659004692,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+240,50.8518090839623,4.46743719378209,151.50596399325877,"NONE| distance_to_stop=50.85m, speed=4.47m/s"
+241,19.111086133154856,10.91371772237333,155.27849300997332,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+242,5.642178426625866,9.406305632343921,182.42143100360408,NONE|The vehicle is stopped at a distance of 5.64 meters from the stop line and is traveling at 9.41 m/s.
+243,59.08504377623804,5.352356385312973,148.7397439777851,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+244,24.75078151166995,5.496844397748487,157.5544000370428,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+245,1.505757609313521,17.281957993817386,149.5505560305901,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+246,118.89939420683294,3.740182304823924,149.6169770252891,"NONE| distance_to_stop=118.90m, speed=3.74m/s"
+247,104.55756863109016,1.4613743784057174,163.7690939824097,"NONE| distance_to_stop=104.56m, speed=1.46m/s"
+248,102.65008451485512,1.3511676402210226,152.49566099373624,"NONE| distance_to_stop=102.65m, speed=1.35m/s"
+249,107.57886902586056,12.40868044412584,146.14937000442296,"NONE| distance_to_stop=107.58m, speed=12.41m/s"
+250,52.91259289031028,4.166572222008465,148.41641497332603,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+251,7.067959327807194,15.472921164129405,147.7609199937433,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+252,113.4350833214961,16.630398800685875,161.26286203507334,"NONE| distance_to_stop=113.44m, speed=16.63m/s"
+253,14.744739730131446,14.47030224506581,148.27976399101317,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+254,107.92791828818844,9.802122816790416,149.6458239853382,"NONE| distance_to_stop=107.93m, speed=9.80m/s"
+255,3.72473502688323,4.781384489531524,154.76534800836816,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+256,100.4996065739721,2.986610205973044,153.92329799942672,"NONE| distance_to_stop=100.50m, speed=2.99m/s"
+257,55.95044037319405,14.836325423760167,149.3138880468905,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+258,54.39153448673737,8.436563464970915,152.1000909851864,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+259,56.997336849757176,16.968172333392733,161.56154597410932,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+260,13.49953906495035,7.879659544288764,149.51747603481635,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+261,0.9965196045903263,7.776515954893906,160.25955602526665,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+262,56.03713640945911,0.46556806299003806,181.4330430352129,NONE|The vehicle is stopped at a distance of 56.04m from the stop line and is travelling at 0.47m/s.
+263,119.20013314604957,15.047255050311264,148.08887901017442,"NONE| distance_to_stop=119.2m, speed=15.05m/s"
+264,14.678073292744584,0.37341821187960655,165.53546697832644,"NONE|Distance to stop is too close and speed is very low, stopping is not recommended."
+265,20.53553113145959,10.372445722849443,155.77289898646995,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+266,108.88051728828431,11.727170809806355,160.66364903235808,"NONE| distance_to_stop=108.88m, speed=11.73m/s"
+267,51.81489147223126,10.535933255001378,150.13106900732964,"NONE| distance_to_stop=51.81m, speed=10.54m/s"
+268,20.356123613515084,17.442994249182664,155.93720402102917,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+269,53.479610562946505,5.999551085971657,147.37226197030395,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+270,2.6149971145639355,2.894847347859039,160.8757409849204,NONE|The vehicle is stopped at a distance of 25 meters and is traveling at 2.89 m/s.
+271,56.93673673983432,5.1879203165062036,153.51985703455284,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+272,58.135660347379726,9.901738961492093,147.06106495577842,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+273,50.88059792775788,4.543179316959739,159.54851498827338,"NONE| distance_to_stop=50.88m, speed=4.54m/s"
+274,119.37387926298013,7.275151026013422,160.80723103368655,"NONE| distance_to_stop=119.37m, speed=7.28m/s"
+275,20.623180081717525,0.020719214066019953,162.89353597676381,"NONE| distance_to_stop=20.62m, speed=0.02m/s"
+276,11.5494086245536,0.9756735367811149,183.67615103488788,NONE|The vehicle is stopped at a distance of 11.55 meters from the stop line and is traveling at 0.98 m/s.
+277,9.044483978791881,13.615976773000327,153.7379669607617,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+278,11.051023893056536,0.9290119533542414,185.40665897307917,NONE|The vehicle is stopped at a distance of 11.05m from the stop line and is travelling at 0.93m/s.
+279,55.492196390853316,16.69810969520006,156.27415501512587,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+280,58.808466173578054,8.724812345099966,147.08451594924554,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+281,119.43608313225559,10.95969000747537,156.65397001430392,"NONE| distance_to_stop=119.44m, speed=10.96m/s"
+282,113.90543932710544,5.593502491080032,153.39157299604267,"NONE| distance_to_stop=113.91m, speed=5.59m/s"
+283,110.5972795901284,1.6777656230674058,157.6011290308088,"NONE| distance_to_stop=110.60m, speed=1.68m/s"
+284,108.69040577775445,2.1143906836120356,156.7382009816356,"NONE| distance_to_stop=108.69m, speed=2.11m/s"
+285,109.4658855988511,12.89885986785224,169.3263840279542,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+286,17.635290748146343,7.478826172836355,156.35604597628117,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+287,59.80244632603375,4.38715630935249,160.60808399925008,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+288,3.616049212140218,3.4309866770627098,151.61314397118986,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+289,12.70602228982235,15.82787259263657,153.8566899835132,"NONE| distance_to_stop=12.71m, speed=15.83m/s"
+290,104.80119545926286,14.220111276056041,160.38708196720108,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+291,53.39875243114295,14.178913303757295,153.8074070122093,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+292,58.20549473185578,5.0911016990908795,149.2167579708621,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+293,58.374759226064214,10.438620909901275,151.61230898229405,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+294,12.241008666392524,2.674717530890204,151.6011089552194,"NONE| distance_to_stop=12.24m, speed=2.67m/s"
+295,12.108534638793008,5.983919202793489,156.09899500850588,"NONE| distance_to_stop=12.11m, speed=5.98m/s"
+296,9.43025135534715,16.791340602874698,152.3324020090513,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+297,119.59626725798448,4.2984997949924875,152.01806201366708,"NONE| distance_to_stop=119.60m, speed=4.30m/s"
+298,52.335624460578934,13.959800551786659,159.87234003841877,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+299,105.68170287190979,8.513572504327458,147.5108090089634,NONE|The vehicle is too close to the stop line and should be stopped immediately.
+300,53.860787524909824,11.946398930721625,154.27556895883754,NONE|The vehicle is too close to the stop line and should be stopped immediately.

@@ -1,0 +1,93 @@
+target Python
+
+reactor Planner {
+  input ctrl
+  input instr
+  input s
+  input v
+  output act
+  output Instr
+  
+
+  state last_warn_ns = -1000000000000
+  state last_printed = ""
+
+  initial mode monitoring {
+    reaction(ctrl, instr, s, v) -> warning, actuate, Instr {=
+      throttle = 1000000000
+      kw  = (ctrl.value or "NONE").strip()
+      instruction = (instr.value or "").strip()
+      rd  = s.value if s.value is not None else 0.0
+
+      now_ns = lf.time.logical_elapsed()
+
+     
+      if kw == "ACTUATE" and rd > 0.0:
+        if instruction and instruction != self.last_printed:
+        #   print(f"[VERBAL] {kw} | {instruction}", flush=True)
+          Instr.set(instruction)
+          self.last_printed = instruction
+        actuate.set()
+        return
+
+      
+      if kw == "WARNING":
+        if (now_ns - self.last_warn_ns) >= throttle:
+          if instruction and instruction != self.last_printed:
+            # print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            Instr.set(instruction)
+            self.last_printed = instruction
+          self.last_warn_ns = now_ns
+        warning.set()
+        return
+    =}
+  }
+
+  mode warning {
+    reaction(ctrl, instr, s, v) -> monitoring, actuate, Instr {=
+      throttle = 1000000000
+      kw  = (ctrl.value or "NONE").strip()
+      instruction = (instr.value or "").strip()
+      rd  = s.value if s.value is not None else 0.0
+
+      now_ns = lf.time.logical_elapsed()
+
+      if kw == "ACTUATE" and rd > 0.0:
+        if instruction and instruction != self.last_printed:
+        #   print(f"[VERBAL] {kw} | {instruction}", flush=True)
+          Instr.set(instruction)
+          self.last_printed = instruction
+        actuate.set()
+        return
+
+      if kw == "NONE":
+        monitoring.set()
+        return
+
+      if kw == "WARNING":
+        if (now_ns - self.last_warn_ns) >= throttle:
+          if instruction and instruction != self.last_printed:
+            # print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            Instr.set(instruction)
+            self.last_printed = instruction
+          self.last_warn_ns = now_ns
+        return
+    =}
+  }
+
+  mode actuate {
+    reaction(ctrl, s, v) -> act, monitoring, Instr {=
+      kw = (ctrl.value or "NONE").strip()
+      rd = s.value if s.value is not None else 0.0
+
+      if kw != "ACTUATE" or rd <= 0.0:
+        monitoring.set()
+        return
+      instruction = "ACTUATE sent EmergencyBraking"
+      act.set(Brake(6).name)
+      Instr.set(instruction)
+
+      monitoring.set()
+    =}
+  }
+}

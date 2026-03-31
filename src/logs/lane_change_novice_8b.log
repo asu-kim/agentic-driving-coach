@@ -1,0 +1,314 @@
+******* Using Python version: 3.12.3
+Driver has been seated
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 18.01
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 500.0
+physical 500.699621
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 18.01
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 500.0
+physical 2133.848237
+------------------------------------------------
+[DEADLINE] fallback -> NOTIFY | Lane change ahead. Maintain speed.
+[LLM] 1632.9 ms -> WARNING | Prepare to steer right soon. Maintain speed.
+[VERBAL] WARNING | Prepare to steer right soon. Maintain speed.
+################################################
+[Relative DISTANCE]: 79.70
+------------------------------------------------
+[speed]: 18.68
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 1500.0
+physical 2135.048714
+------------------------------------------------
+[DEADLINE] fallback -> NONE | 
+################################################
+[Relative DISTANCE]: 72.16
+------------------------------------------------
+[speed]: 18.91
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 1900.0
+physical 2135.630848
+[LLM] 129.8 ms -> WARNING | Prepare to steer right soon. Maintain speed.
+################################################
+[Relative DISTANCE]: 68.26
+------------------------------------------------
+[speed]: 19.71
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 2100.0
+physical 2266.165103
+[LLM] 127.7 ms -> WARNING | Prepare to steer right soon. Maintain speed.
+################################################
+[Relative DISTANCE]: 66.25
+------------------------------------------------
+[speed]: 20.11
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 2200.0
+physical 2394.454058
+[LLM] 130.7 ms -> WARNING | Prepare to steer right soon. Maintain speed.
+################################################
+[Relative DISTANCE]: 64.19
+------------------------------------------------
+[speed]: 20.51
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 2300.0
+physical 2526.216612
+[LLM] 125.2 ms -> WARNING | Prepare to steer right soon. Maintain speed.
+################################################
+[Relative DISTANCE]: 60.01
+------------------------------------------------
+[speed]: 20.92
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 2500.0
+physical 2652.386065
+[LLM] 245.4 ms -> WARNING | Maintain your current speed and steering to the right as you approach the maneuver at 60.01 meters away.
+################################################
+[Relative DISTANCE]: 57.90
+------------------------------------------------
+[speed]: 21.12
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 2600.0
+physical 2898.161897
+------------------------------------------------
+[DEADLINE] fallback -> WARNING | Prepare to steer right soon. Maintain speed.
+################################################
+[Relative DISTANCE]: 55.79
+------------------------------------------------
+[speed]: 21.13
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 2700.0
+physical 2898.583377
+[LLM] 200.5 ms -> WARNING | Maintain your current speed and steer right to ensure a smooth maneuver.
+################################################
+[Relative DISTANCE]: 51.54
+------------------------------------------------
+[speed]: 21.34
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 2900.0
+physical 3100.361414
+[LLM] 191.2 ms -> WARNING | Maintain your current speed and steer right to ensure a smooth maneuver.
+[VERBAL] WARNING | Maintain your current speed and steer right to ensure a smooth maneuver.
+################################################
+[Relative DISTANCE]: 49.40
+------------------------------------------------
+[speed]: 21.35
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 3000.0
+physical 3292.055853
+------------------------------------------------
+[DEADLINE] fallback -> NONE | 
+################################################
+[Relative DISTANCE]: 47.27
+------------------------------------------------
+[speed]: 21.36
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 3100.0
+physical 3292.174289
+[LLM] 127.6 ms -> WARNING | Prepare to steer right soon. Maintain speed.
+################################################
+[Relative DISTANCE]: 45.11
+------------------------------------------------
+[speed]: 21.56
+------------------------------------------------
+[head position]: Right
+[steer position]: Rightmost
+------------------------------------------------
+logical 3200.0
+physical 3420.467248
+[LLM] 127.6 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 42.95
+------------------------------------------------
+[speed]: 21.57
+------------------------------------------------
+[head position]: Right
+[steer position]: Left
+------------------------------------------------
+logical 3300.0
+physical 3548.550669
+[LLM] 199.7 ms -> WARNING | Maintain your current speed and steer right to navigate the upcoming maneuver safely.
+################################################
+[Relative DISTANCE]: 38.67
+------------------------------------------------
+[speed]: 21.28
+------------------------------------------------
+[head position]: Right
+[steer position]: Rightmost
+------------------------------------------------
+logical 3500.0
+physical 3749.573278
+[LLM] 128.2 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 34.50
+------------------------------------------------
+[speed]: 20.68
+------------------------------------------------
+[head position]: Right
+[steer position]: Left
+------------------------------------------------
+logical 3700.0
+physical 3878.475966
+[LLM] 198.3 ms -> ACTUATE | Steer right and maintain speed to navigate the maneuver safely.
+[VERBAL] ACTUATE | Steer right and maintain speed to navigate the maneuver safely.
+[ACTUATE] outside <=25m -> no action
+################################################
+[Relative DISTANCE]: 30.46
+------------------------------------------------
+[speed]: 20.08
+------------------------------------------------
+[head position]: Right
+[steer position]: Rightmost
+------------------------------------------------
+logical 3900.0
+physical 4078.061386
+[LLM] 133.5 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 28.48
+------------------------------------------------
+[speed]: 19.78
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 4000.0
+physical 4211.807176
+[LLM] 195.8 ms -> WARNING | Maintain your current speed and steer right to ensure a smooth maneuver.
+[VERBAL] WARNING | Maintain your current speed and steer right to ensure a smooth maneuver.
+################################################
+[Relative DISTANCE]: 24.61
+------------------------------------------------
+[speed]: 19.18
+------------------------------------------------
+[head position]: Right
+[steer position]: Rightmost
+------------------------------------------------
+logical 4200.0
+physical 4407.780636
+################################################
+[Relative DISTANCE]: 24.61
+------------------------------------------------
+[speed]: 19.18
+------------------------------------------------
+[head position]: Right
+[steer position]: Rightmost
+------------------------------------------------
+logical 4200.0
+physical 4541.42243
+------------------------------------------------
+[DEADLINE] fallback -> ACTUATE | Steer right now. Maintain speed.
+[LLM] 133.4 ms -> ACTUATE | Steer right now. Maintain speed.
+[VERBAL] ACTUATE | Steer right now. Maintain speed.
+################################################
+[Relative DISTANCE]: 22.72
+------------------------------------------------
+[speed]: 18.88
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 4300.0
+physical 4541.666799
+################################################
+[Relative DISTANCE]: 22.72
+------------------------------------------------
+[speed]: 18.88
+------------------------------------------------
+[head position]: Center
+[steer position]: Right
+------------------------------------------------
+logical 4300.0
+physical 4742.53803
+------------------------------------------------
+[DEADLINE] fallback -> NONE | 
+[LLM] 200.7 ms -> ACTUATE | Steer right and maintain speed to navigate the maneuver safely.
+[ACTUATE] sent extInp=Rightmost
+################################################
+[Relative DISTANCE]: 20.87
+------------------------------------------------
+[speed]: 18.58
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 4400.0
+physical 4742.62829
+------------------------------------------------
+[DEADLINE] fallback -> ACTUATE | Steer right now. Maintain speed.
+Driver behavior not loaded/done
+################################################
+[Relative DISTANCE]: 19.04
+------------------------------------------------
+[speed]: 18.28
+------------------------------------------------
+[head position]: Center
+[steer position]: Rightmost
+------------------------------------------------
+logical 4500.0
+physical 4742.669352
+[LLM] 132.3 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 15.47
+------------------------------------------------
+[speed]: 17.68
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 4700.0
+physical 4875.301106
+[LLM] 200.9 ms -> WARNING | Maintain your current speed and steer right to ensure a smooth maneuver.
+################################################
+[Relative DISTANCE]: 12.03
+------------------------------------------------
+[speed]: 17.08
+------------------------------------------------
+[head position]: Center
+[steer position]: Center
+------------------------------------------------
+logical 4900.0
+physical 5076.348447
+[LLM] 119.8 ms -> NONE | 

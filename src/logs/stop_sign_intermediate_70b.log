@@ -1,0 +1,224 @@
+******* Using Python version: 3.12.3
+Driver has been seated
+#################LoggingforReference###############################
+[Relative DISTANCE]: 98.98
+------------------------------------------------
+[speed]: 10.20
+------------------------------------------------
+logical 500.0
+physical 500.613033
+[LLM] 562.2 ms -> WARNING | You are approaching a stop sign in approximately 99 meters.
+[VERBAL] WARNING | You are approaching a stop sign in approximately 99 meters.]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 97.94
+------------------------------------------------
+[speed]: 10.40
+------------------------------------------------
+logical 600.0
+physical 1063.54475
+#################LoggingforReference###############################
+[Relative DISTANCE]: 97.94
+------------------------------------------------
+[speed]: 10.40
+------------------------------------------------
+logical 600.0
+physical 1738.499968
+[DEADLINE] fallback -> NONE | 
+[LLM] 674.9 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 91.68
+------------------------------------------------
+[speed]: 10.46
+------------------------------------------------
+logical 1200.0
+physical 1739.05229
+[LLM] 671.8 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+[VERBAL] WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 85.41
+------------------------------------------------
+[speed]: 10.42
+------------------------------------------------
+logical 1800.0
+physical 2411.501016
+[LLM] 677.3 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 78.15
+------------------------------------------------
+[speed]: 10.35
+------------------------------------------------
+logical 2500.0
+physical 3089.021379
+[LLM] 668.3 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 70.93
+------------------------------------------------
+[speed]: 10.28
+------------------------------------------------
+logical 3200.0
+physical 3759.015442
+[LLM] 667.6 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 63.76
+------------------------------------------------
+[speed]: 10.21
+------------------------------------------------
+logical 3900.0
+physical 4428.173875
+[LLM] 661.5 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 59.69
+------------------------------------------------
+[speed]: 10.17
+------------------------------------------------
+logical 4300.0
+physical 5090.20833
+[DEADLINE] fallback -> WARNING | Adjust speed and prepare to stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 57.66
+------------------------------------------------
+[speed]: 10.15
+------------------------------------------------
+logical 4500.0
+physical 5090.435301
+[LLM] 668.5 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 50.58
+------------------------------------------------
+[speed]: 10.10
+------------------------------------------------
+logical 5200.0
+physical 5759.931732
+[LLM] 675.9 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 49.57
+------------------------------------------------
+[speed]: 10.09
+------------------------------------------------
+logical 5300.0
+physical 6436.485784
+[DEADLINE] fallback -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 43.52
+------------------------------------------------
+[speed]: 10.07
+------------------------------------------------
+logical 5900.0
+physical 6437.099296
+[LLM] 670.0 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 37.49
+------------------------------------------------
+[speed]: 10.05
+------------------------------------------------
+logical 6500.0
+physical 7108.093671
+[LLM] 666.2 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 30.45
+------------------------------------------------
+[speed]: 10.04
+------------------------------------------------
+logical 7200.0
+physical 7775.871169
+[LLM] 665.2 ms -> WARNING | You are approaching a stop sign, please slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 24.45
+------------------------------------------------
+[speed]: 9.98
+------------------------------------------------
+logical 7800.0
+physical 8442.469506
+[DEADLINE] fallback -> ACTUATE | Brake now.
+[VERBAL] ACTUATE | Brake now.]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 23.45
+------------------------------------------------
+[speed]: 9.97
+------------------------------------------------
+logical 7900.0
+physical 8442.703918
+[LLM] 668.7 ms -> ACTUATE | Prepare to stop at the upcoming stop sign, it's approaching quickly!
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | Prepare to stop at the upcoming stop sign, it's approaching quickly!]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 17.60
+------------------------------------------------
+[speed]: 6.94
+------------------------------------------------
+logical 8600.0
+physical 9113.319209
+[LLM] 524.3 ms -> ACTUATE | Prepare to stop at the upcoming stop sign.
+[VERBAL] ACTUATE | Prepare to stop at the upcoming stop sign.]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 15.12
+------------------------------------------------
+[speed]: 3.64
+------------------------------------------------
+logical 9100.0
+physical 9639.039713
+[LLM] 519.3 ms -> ACTUATE | Prepare to stop at the approaching stop sign.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | Prepare to stop at the approaching stop sign.]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 14.54
+------------------------------------------------
+[speed]: 2.44
+------------------------------------------------
+logical 9300.0
+physical 10159.135545
+[DEADLINE] fallback -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 13.99
+------------------------------------------------
+[speed]: 1.54
+------------------------------------------------
+logical 9600.0
+physical 10159.399499
+[LLM] 204.2 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 13.83
+------------------------------------------------
+[speed]: 0.34
+------------------------------------------------
+logical 9800.0
+physical 10364.091073
+[LLM] 201.2 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 13.83
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10000.0
+physical 10565.620735
+[LLM] 210.6 ms -> NONE | 
+Driver behavior not loaded/done
+#################LoggingforReference###############################
+[Relative DISTANCE]: 13.83
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10200.0
+physical 10776.926684
+[LLM] 182.1 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 13.83
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10400.0
+physical 10959.659614
+[LLM] 180.1 ms -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 13.83
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10600.0
+physical 11140.428657
+[LLM] 188.0 ms -> NONE | 

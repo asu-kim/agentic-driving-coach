@@ -1,0 +1,348 @@
+******* Using Python version: 3.12.3
+Driver has been seated
+################################################
+[Relative DISTANCE]: 98.20
+------------------------------------------------
+[speed]: 17.99
+------------------------------------------------
+logical 500.0
+physical 500.562794
+[LLM] 137.2 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 96.40
+------------------------------------------------
+[speed]: 17.98
+------------------------------------------------
+logical 600.0
+physical 638.108434
+[LLM] 134.7 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 94.61
+------------------------------------------------
+[speed]: 17.97
+------------------------------------------------
+logical 700.0
+physical 773.001208
+[LLM] 140.4 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 92.81
+------------------------------------------------
+[speed]: 17.96
+------------------------------------------------
+logical 800.0
+physical 913.719892
+[LLM] 130.0 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 91.02
+------------------------------------------------
+[speed]: 17.95
+------------------------------------------------
+logical 900.0
+physical 1044.050375
+################################################
+[Relative DISTANCE]: 91.02
+------------------------------------------------
+[speed]: 17.95
+------------------------------------------------
+logical 900.0
+physical 1185.685516
+[DEADLINE] fallback -> NONE | 
+[LLM] 141.4 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 89.22
+------------------------------------------------
+[speed]: 17.94
+------------------------------------------------
+logical 1000.0
+physical 1185.87636
+[LLM] 136.6 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 87.43
+------------------------------------------------
+[speed]: 17.93
+------------------------------------------------
+logical 1100.0
+physical 1322.583636
+[LLM] 139.9 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 83.85
+------------------------------------------------
+[speed]: 17.91
+------------------------------------------------
+logical 1300.0
+physical 1462.836482
+[LLM] 130.3 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 82.06
+------------------------------------------------
+[speed]: 17.90
+------------------------------------------------
+logical 1400.0
+physical 1593.306454
+[LLM] 138.7 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 80.27
+------------------------------------------------
+[speed]: 17.89
+------------------------------------------------
+logical 1500.0
+physical 1732.286306
+[LLM] 137.7 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 76.69
+------------------------------------------------
+[speed]: 17.87
+------------------------------------------------
+logical 1700.0
+physical 1871.004336
+[LLM] 141.8 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 74.91
+------------------------------------------------
+[speed]: 17.86
+------------------------------------------------
+logical 1800.0
+physical 2013.171049
+[LLM] 173.8 ms -> WARNING | speed change warning at distance 74.91m
+[VERBAL] WARNING | speed change warning at distance 74.91m
+################################################
+[Relative DISTANCE]: 71.34
+------------------------------------------------
+[speed]: 17.84
+------------------------------------------------
+logical 2000.0
+physical 2188.376001
+[LLM] 144.5 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 69.55
+------------------------------------------------
+[speed]: 17.83
+------------------------------------------------
+logical 2100.0
+physical 2333.110871
+[LLM] 179.8 ms -> WARNING | Speed change warning at distance 69.55 meters
+################################################
+[Relative DISTANCE]: 65.99
+------------------------------------------------
+[speed]: 17.81
+------------------------------------------------
+logical 2300.0
+physical 2514.071497
+[LLM] 181.8 ms -> WARNING | speed change warning at distance 65.99 meters
+################################################
+[Relative DISTANCE]: 62.43
+------------------------------------------------
+[speed]: 17.79
+------------------------------------------------
+logical 2500.0
+physical 2697.173712
+[LLM] 180.8 ms -> WARNING | speed change warning at distance 62.43 meters
+################################################
+[Relative DISTANCE]: 58.88
+------------------------------------------------
+[speed]: 17.77
+------------------------------------------------
+logical 2700.0
+physical 2879.097453
+################################################
+[Relative DISTANCE]: 58.88
+------------------------------------------------
+[speed]: 17.77
+------------------------------------------------
+logical 2700.0
+physical 3059.843559
+[DEADLINE] fallback -> WARNING | Slow down to 11 m/s.
+[LLM] 180.6 ms -> WARNING | Speed change warning at distance 58.88 meters
+[VERBAL] WARNING | Speed change warning at distance 58.88 meters
+################################################
+[Relative DISTANCE]: 55.33
+------------------------------------------------
+[speed]: 17.75
+------------------------------------------------
+logical 2900.0
+physical 3061.230946
+[LLM] 187.6 ms -> WARNING | Speed change warning at distance 55.33 meters
+################################################
+[Relative DISTANCE]: 53.55
+------------------------------------------------
+[speed]: 17.74
+------------------------------------------------
+logical 3000.0
+physical 3249.294895
+[LLM] 175.2 ms -> WARNING | Speed change warning at distance 53.55 meters
+################################################
+[Relative DISTANCE]: 50.01
+------------------------------------------------
+[speed]: 17.72
+------------------------------------------------
+logical 3200.0
+physical 3425.66454
+[LLM] 175.1 ms -> WARNING | Speed change warning at distance 50.01 meters
+################################################
+[Relative DISTANCE]: 48.24
+------------------------------------------------
+[speed]: 17.71
+------------------------------------------------
+logical 3300.0
+physical 3600.955537
+[DEADLINE] fallback -> NONE | 
+################################################
+[Relative DISTANCE]: 46.47
+------------------------------------------------
+[speed]: 17.70
+------------------------------------------------
+logical 3400.0
+physical 3601.005678
+[LLM] 254.3 ms -> WARNING | Speed change warning: Speed is within the range of 15 to 13 m/s while distance to sign is between 50 to 60
+################################################
+[Relative DISTANCE]: 41.16
+------------------------------------------------
+[speed]: 17.67
+------------------------------------------------
+logical 3700.0
+physical 3856.024462
+[LLM] 133.1 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 39.40
+------------------------------------------------
+[speed]: 17.66
+------------------------------------------------
+logical 3800.0
+physical 3989.499786
+[LLM] 133.3 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 37.63
+------------------------------------------------
+[speed]: 17.65
+------------------------------------------------
+logical 3900.0
+physical 4123.268604
+[LLM] 259.5 ms -> WARNING | Speed change warning: Speed is within the range of 15 to 13 m/s while distance to sign is between 50 to 60
+[VERBAL] WARNING | Speed change warning: Speed is within the range of 15 to 13 m/s while distance to sign is between 50 to 60
+################################################
+[Relative DISTANCE]: 32.34
+------------------------------------------------
+[speed]: 17.62
+------------------------------------------------
+logical 4200.0
+physical 4383.097673
+[LLM] 129.8 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 30.58
+------------------------------------------------
+[speed]: 17.61
+------------------------------------------------
+logical 4300.0
+physical 4513.207335
+[LLM] 123.8 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 28.82
+------------------------------------------------
+[speed]: 17.60
+------------------------------------------------
+logical 4400.0
+physical 4637.295971
+[LLM] 243.1 ms -> ACTUATE | Speed change required due to distance to sign being 28.82 meters and velocity being 17.60 m/s.
+[VERBAL] ACTUATE | Speed change required due to distance to sign being 28.82 meters and velocity being 17.60 m/s.
+[ACTUATE] Outside control zone -> no action
+################################################
+[Relative DISTANCE]: 23.55
+------------------------------------------------
+[speed]: 17.57
+------------------------------------------------
+logical 4700.0
+physical 4882.085987
+################################################
+[Relative DISTANCE]: 23.55
+------------------------------------------------
+[speed]: 17.57
+------------------------------------------------
+logical 4700.0
+physical 5143.489537
+[DEADLINE] fallback -> ACTUATE | Brake now.
+[LLM] 261.2 ms -> ACTUATE | Since the distance to sign is 23.55 meters and the speed is 17.57 m/s, the vehicle must slow
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Strong brake
+[VERBAL] ACTUATE | Since the distance to sign is 23.55 meters and the speed is 17.57 m/s, the vehicle must slow
+################################################
+[Relative DISTANCE]: 20.12
+------------------------------------------------
+[speed]: 16.66
+------------------------------------------------
+logical 4900.0
+physical 5143.978174
+[LLM] 255.0 ms -> ACTUATE | Speed change required due to proximity to sign at 20.12 meters with a velocity of 16.66 m/s.
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Strong brake
+[VERBAL] ACTUATE | Speed change required due to proximity to sign at 20.12 meters with a velocity of 16.66 m/s.
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Strong brake
+################################################
+[Relative DISTANCE]: 15.34
+------------------------------------------------
+[speed]: 15.45
+------------------------------------------------
+logical 5200.0
+physical 5400.816577
+[LLM] 131.8 ms -> NONE | 
+################################################
+[Relative DISTANCE]: 13.88
+------------------------------------------------
+[speed]: 14.55
+------------------------------------------------
+logical 5300.0
+physical 5532.89372
+[LLM] 192.7 ms -> ACTUATE | Speed change from 14.55 m/s to ?
+[VERBAL] ACTUATE | Speed change from 14.55 m/s to ?
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Strong brake
+Driver behavior not loaded/done
+################################################
+[Relative DISTANCE]: 11.06
+------------------------------------------------
+[speed]: 13.95
+------------------------------------------------
+logical 5500.0
+physical 5726.007876
+[LLM] 261.2 ms -> ACTUATE | Speed change ahead, slow down from 13.95 m/s to an unknown speed at a distance of 11.06 meters
+[VERBAL] ACTUATE | Speed change ahead, slow down from 13.95 m/s to an unknown speed at a distance of 11.06 meters
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Strong brake
+################################################
+[Relative DISTANCE]: 7.30
+------------------------------------------------
+[speed]: 11.85
+------------------------------------------------
+logical 5800.0
+physical 5987.600156
+################################################
+[Relative DISTANCE]: 7.30
+------------------------------------------------
+[speed]: 11.85
+------------------------------------------------
+logical 5800.0
+physical 6197.716255
+[DEADLINE] fallback -> NONE | 
+[LLM] 209.9 ms -> ACTUATE | Speed must be reduced from 11.85 m/s to a lower value.
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Mild brake
+[VERBAL] ACTUATE | Speed must be reduced from 11.85 m/s to a lower value.
+################################################
+[Relative DISTANCE]: 5.02
+------------------------------------------------
+[speed]: 11.25
+------------------------------------------------
+logical 6000.0
+physical 6198.943099
+[LLM] 260.2 ms -> ACTUATE | Speed must be reduced from 11.25 m/s to a speed of less than or equal to 11 m/s before reaching
+[ACTUATE] Near sign zone <=25m
+[ACTUATE] Mild brake
+################################################
+[Relative DISTANCE]: 3.92
+------------------------------------------------
+[speed]: 10.95
+------------------------------------------------
+logical 6200.0
+physical 6459.706364
+[DEADLINE] fallback -> ACTUATE | Brake now.
+[VERBAL] ACTUATE | Brake now.

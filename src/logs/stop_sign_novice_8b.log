@@ -1,0 +1,489 @@
+******* Using Python version: 3.12.3
+Driver has been seated
+#################LoggingforReference###############################
+[Relative DISTANCE]: 98.98
+------------------------------------------------
+[speed]: 10.20
+------------------------------------------------
+logical 500.0
+physical 500.843102
+#################LoggingforReference###############################
+[Relative DISTANCE]: 98.98
+------------------------------------------------
+[speed]: 10.20
+------------------------------------------------
+logical 500.0
+physical 2629.518661
+[DEADLINE] fallback -> NONE | 
+[LLM] 2128.4 ms -> WARNING | The stop sign is approaching at a distance of approximately 98.98 meters and your current velocity of 10.20 m/s indicates you
+[VERBAL] WARNING | The stop sign is approaching at a distance of approximately 98.98 meters and your current velocity of 10.20 m/s indicates you]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 77.09
+------------------------------------------------
+[speed]: 12.46
+------------------------------------------------
+logical 2400.0
+physical 2632.389668
+[LLM] 251.0 ms -> WARNING | The stop sign is approaching at a distance of 77.09 meters and your current velocity of 12.46 m/s does not fall
+[VERBAL] WARNING | The stop sign is approaching at a distance of 77.09 meters and your current velocity of 12.46 m/s does not fall]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 73.36
+------------------------------------------------
+[speed]: 12.45
+------------------------------------------------
+logical 2700.0
+physical 2884.031654
+[LLM] 240.0 ms -> WARNING | The stop sign is approaching at a distance of 73.36 meters and your current velocity of 12.45 m/s does not fall
+#################LoggingforReference###############################
+[Relative DISTANCE]: 70.87
+------------------------------------------------
+[speed]: 12.47
+------------------------------------------------
+logical 2900.0
+physical 3124.464488
+[LLM] 246.9 ms -> WARNING | The stop sign is approaching at a distance of approximately 70.87 meters and your current velocity is 12.47 m/s.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 67.13
+------------------------------------------------
+[speed]: 12.44
+------------------------------------------------
+logical 3200.0
+physical 3372.23824
+[LLM] 242.0 ms -> WARNING | The stop sign is approaching at a distance of 67.13 meters and your current velocity is 12.44 m/s.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 64.65
+------------------------------------------------
+[speed]: 12.42
+------------------------------------------------
+logical 3400.0
+physical 3614.617899
+[LLM] 250.0 ms -> WARNING | Speed of 12.42 m/s is not within the range of 8 to 10 m/s as you approach a stop sign at
+[VERBAL] WARNING | Speed of 12.42 m/s is not within the range of 8 to 10 m/s as you approach a stop sign at]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 60.93
+------------------------------------------------
+[speed]: 12.39
+------------------------------------------------
+logical 3700.0
+physical 3865.877387
+[LLM] 253.2 ms -> WARNING | The stop sign is approaching at a distance of approximately 60.93 meters and your current velocity is 12.39 m/s.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 59.69
+------------------------------------------------
+[speed]: 12.38
+------------------------------------------------
+logical 3800.0
+physical 4119.488913
+[DEADLINE] fallback -> WARNING | Adjust speed and prepare to stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 58.45
+------------------------------------------------
+[speed]: 12.37
+------------------------------------------------
+logical 3900.0
+physical 4119.729734
+[LLM] 238.9 ms -> WARNING | The stop sign is approaching at a distance of 58.45 meters and your current velocity of 12.37 m/s does not fall
+#################LoggingforReference###############################
+[Relative DISTANCE]: 54.75
+------------------------------------------------
+[speed]: 12.34
+------------------------------------------------
+logical 4200.0
+physical 4359.482988
+[LLM] 248.2 ms -> WARNING | The stop sign is approaching at a distance of 54.75 meters and your current velocity of 12.34 m/s does not fall
+#################LoggingforReference###############################
+[Relative DISTANCE]: 52.28
+------------------------------------------------
+[speed]: 12.32
+------------------------------------------------
+logical 4400.0
+physical 4608.725995
+[LLM] 240.6 ms -> WARNING | The stop sign is approaching at a distance of 52.28 meters and your current velocity is 12.32 m/s.
+[VERBAL] WARNING | The stop sign is approaching at a distance of 52.28 meters and your current velocity is 12.32 m/s.]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 49.82
+------------------------------------------------
+[speed]: 12.30
+------------------------------------------------
+logical 4600.0
+physical 4849.519123
+#################LoggingforReference###############################
+[Relative DISTANCE]: 49.82
+------------------------------------------------
+[speed]: 12.30
+------------------------------------------------
+logical 4600.0
+physical 5085.336581
+[DEADLINE] fallback -> NONE | 
+[LLM] 235.8 ms -> WARNING | Speed of 12.30 m/s is not within the range of 8 to 10 m/s for a distance to stop of
+#################LoggingforReference###############################
+[Relative DISTANCE]: 46.14
+------------------------------------------------
+[speed]: 12.27
+------------------------------------------------
+logical 4900.0
+physical 5085.800282
+[LLM] 242.8 ms -> WARNING | The stop sign is approaching at a distance of 46.14 meters and your current velocity is 12.27 m/s.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 43.69
+------------------------------------------------
+[speed]: 12.25
+------------------------------------------------
+logical 5100.0
+physical 5328.88982
+[LLM] 203.6 ms -> WARNING | You are approaching a stop sign too quickly, slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 41.24
+------------------------------------------------
+[speed]: 12.23
+------------------------------------------------
+logical 5300.0
+physical 5533.109681
+[LLM] 198.7 ms -> WARNING | You are approaching a stop sign too quickly, slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 38.80
+------------------------------------------------
+[speed]: 12.21
+------------------------------------------------
+logical 5500.0
+physical 5732.298671
+[LLM] 206.2 ms -> WARNING | You are approaching a stop sign too quickly, slow down to ensure a safe stop.
+[VERBAL] WARNING | You are approaching a stop sign too quickly, slow down to ensure a safe stop.]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 36.36
+------------------------------------------------
+[speed]: 12.19
+------------------------------------------------
+logical 5700.0
+physical 5939.384411
+[LLM] 253.5 ms -> WARNING | You are approaching a stop sign at a distance of 36.36 meters and traveling at a speed of 12.19 m/s,
+#################LoggingforReference###############################
+[Relative DISTANCE]: 32.71
+------------------------------------------------
+[speed]: 12.16
+------------------------------------------------
+logical 6000.0
+physical 6194.030286
+[LLM] 244.7 ms -> WARNING | You are approaching a stop sign at a distance of approximately 32.71 meters and traveling at a speed of 12.16 meters per
+#################LoggingforReference###############################
+[Relative DISTANCE]: 30.28
+------------------------------------------------
+[speed]: 12.14
+------------------------------------------------
+logical 6200.0
+physical 6439.130288
+[LLM] 200.1 ms -> WARNING | You are approaching a stop sign too quickly, slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 27.85
+------------------------------------------------
+[speed]: 12.12
+------------------------------------------------
+logical 6400.0
+physical 6639.880364
+[LLM] 197.9 ms -> WARNING | You are approaching a stop sign too quickly, slow down to ensure a safe stop.
+#################LoggingforReference###############################
+[Relative DISTANCE]: 25.43
+------------------------------------------------
+[speed]: 12.12
+------------------------------------------------
+logical 6600.0
+physical 6838.394817
+[LLM] 241.5 ms -> ACTUATE | You need to stop immediately as you are approaching a stop sign at 25.43 meters away while traveling at 12.12
+[VERBAL] ACTUATE | You need to stop immediately as you are approaching a stop sign at 25.43 meters away while traveling at 12.12]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 24.22
+------------------------------------------------
+[speed]: 12.11
+------------------------------------------------
+logical 6700.0
+physical 7080.461331
+[DEADLINE] fallback -> ACTUATE | Brake now.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | Brake now.]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 21.88
+------------------------------------------------
+[speed]: 11.22
+------------------------------------------------
+logical 6900.0
+physical 7080.924883
+[LLM] 243.8 ms -> ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 21.88 meters while traveling at a speed
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 21.88 meters while traveling at a speed]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 19.73
+------------------------------------------------
+[speed]: 10.31
+------------------------------------------------
+logical 7100.0
+physical 7325.789414
+[LLM] 244.8 ms -> ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 19.73 meters while traveling at a speed
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 19.73 meters while traveling at a speed]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 16.82
+------------------------------------------------
+[speed]: 9.41
+------------------------------------------------
+logical 7400.0
+physical 7571.453924
+[LLM] 242.8 ms -> ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 16.82 meters with a velocity of
+[VERBAL] ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 16.82 meters with a velocity of]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 15.12
+------------------------------------------------
+[speed]: 8.50
+------------------------------------------------
+logical 7600.0
+physical 7815.058969
+[LLM] 249.9 ms -> ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 15.12 meters with a velocity of
+[VERBAL] ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 15.12 meters with a velocity of]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 12.93
+------------------------------------------------
+[speed]: 6.69
+------------------------------------------------
+logical 7900.0
+physical 8065.952862
+[LLM] 202.7 ms -> WARNING | You are approaching a stop sign too quickly, slow down to avoid an accident.
+[VERBAL] WARNING | You are approaching a stop sign too quickly, slow down to avoid an accident.]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 11.59
+------------------------------------------------
+[speed]: 6.69
+------------------------------------------------
+logical 8100.0
+physical 8269.374554
+[LLM] 184.5 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+[VERBAL] ACTUATE | You are approaching a stop sign too quickly, slow down immediately!]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 10.25
+------------------------------------------------
+[speed]: 6.69
+------------------------------------------------
+logical 8300.0
+physical 8454.453179
+[LLM] 251.0 ms -> ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 10.25 meters while traveling at a speed
+[VERBAL] ACTUATE | You need to stop immediately as you are approaching a stop sign at a distance of 10.25 meters while traveling at a speed]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 9.10
+------------------------------------------------
+[speed]: 5.78
+------------------------------------------------
+logical 8500.0
+physical 8706.205303
+[LLM] 195.5 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+[VERBAL] ACTUATE | You are approaching a stop sign too quickly, slow down immediately!]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 8.12
+------------------------------------------------
+[speed]: 4.87
+------------------------------------------------
+logical 8700.0
+physical 8902.486792
+[LLM] 240.1 ms -> WARNING | You are approaching a stop sign at a distance of approximately 8.12 meters and traveling at a speed of 4.87 meters per
+#################LoggingforReference###############################
+[Relative DISTANCE]: 7.33
+------------------------------------------------
+[speed]: 3.96
+------------------------------------------------
+logical 8900.0
+physical 9143.302952
+[LLM] 191.6 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 6.54
+------------------------------------------------
+[speed]: 3.94
+------------------------------------------------
+logical 9100.0
+physical 9335.622102
+[LLM] 199.5 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 5.93
+------------------------------------------------
+[speed]: 3.03
+------------------------------------------------
+logical 9300.0
+physical 9535.968284
+[LLM] 184.9 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+#################LoggingforReference###############################
+[Relative DISTANCE]: 5.72
+------------------------------------------------
+[speed]: 2.13
+------------------------------------------------
+logical 9400.0
+physical 9721.467616
+[DEADLINE] fallback -> NONE | 
+#################LoggingforReference###############################
+[Relative DISTANCE]: 5.51
+------------------------------------------------
+[speed]: 2.12
+------------------------------------------------
+logical 9500.0
+physical 9721.733767
+[LLM] 193.1 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 5.09
+------------------------------------------------
+[speed]: 2.10
+------------------------------------------------
+logical 9700.0
+physical 9915.519863
+[LLM] 183.5 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.85
+------------------------------------------------
+[speed]: 1.19
+------------------------------------------------
+logical 9900.0
+physical 10099.528915
+[LLM] 185.9 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.28
+------------------------------------------------
+logical 10100.0
+physical 10286.12086
+[LLM] 189.7 ms -> ACTUATE | You are approaching a stop sign too quickly, slow down immediately!
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10300.0
+physical 10476.606807
+[LLM] 265.3 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10500.0
+physical 10742.789163
+[LLM] 227.1 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 10800.0
+physical 10970.39587
+[LLM] 234.5 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 11000.0
+physical 11205.426167
+[LLM] 222.2 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 11200.0
+physical 11428.533932
+[LLM] 219.0 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 11400.0
+physical 11648.581358
+[LLM] 222.7 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 11700.0
+physical 11872.822623
+[LLM] 229.0 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 11900.0
+physical 12102.758256
+[LLM] 224.6 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 12100.0
+physical 12328.037721
+[LLM] 227.2 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 12400.0
+physical 12555.640409
+[LLM] 230.0 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 12600.0
+physical 12786.11785
+[LLM] 218.6 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+Driver behavior not loaded/done
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 12800.0
+physical 13005.629882
+[LLM] 231.4 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 13000.0
+physical 13237.802139
+[LLM] 231.0 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+[VERBAL] ACTUATE | Sent EmergencyBraking]
+#################LoggingforReference###############################
+[Relative DISTANCE]: 4.79
+------------------------------------------------
+[speed]: 0.00
+------------------------------------------------
+logical 13400.0
+physical 13469.60249
+[LLM] 222.0 ms -> ACTUATE | You are approaching a stop sign at a distance of 4.79 meters and should come to a complete stop.
