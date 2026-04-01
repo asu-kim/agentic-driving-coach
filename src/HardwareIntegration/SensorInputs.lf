@@ -1,0 +1,262 @@
+/*
+* sudo usermod -aG input raspdeeksha
+* sudo usermod -aG video raspdeeksha
+* to test the device $ python -m evdev.evtest
+* * https://python-evdev.readthedocs.io/en/latest/apidoc.html#evdev.events.InputEvent to understand the evdev python library for linux
+*/
+
+target Python {keepalive: true}
+
+import DeviceReader from "SensorReader.lf"
+import FaceLandmark from "HeadPoseEstimation.lf"
+preamble{=
+  import cv2
+=}
+
+
+reactor steering_wheel{
+   input steer
+   output steer_msg
+   state deadzone = 0.04
+
+   reaction(steer) -> steer_msg {=
+        s = steer.value
+        dz = self.deadzone
+
+        if s < -dz:
+            steer_msg.set("LEFT")
+        elif s > dz:
+            steer_msg.set("RIGHT")
+        else:
+            steer_msg.set("STRAIGHT")
+   =}
+}
+
+reactor accelerator{
+    input accelerate
+    output accel_msg
+
+    reaction(accelerate) -> accel_msg {=
+        a = accelerate.value
+        accel_msg.set(a)
+  =}
+}
+
+reactor brake{
+    input brake
+    output brake_msg
+
+    reaction(brake) -> brake_msg {=
+        b = brake.value
+        brake_msg.set(b)
+  =}
+}
+
+reactor webcam(period=5){
+    input vid
+    output frame_fps
+    state k = 0
+
+    reaction(vid) -> frame_fps {=
+      self.k += 1
+      if self.k >= self.period:
+        self.k = 0
+        frame_fps.set(vid.value)
+    =}
+}
+
+// reactor SpeedCalculator{
+//   input throttle
+//   input brake
+//   output speed_kmph
+//   output accel_mps2
+//   output pedal_state
+//   state mps = 0.0
+//   state throt = 0.0
+//   state brk = 0.0
+
+//   timer calculate(0, 100 msec)
+//   preamble{=
+//     def clamp(self, x, low, hi):
+//       if x < low:
+//         return low 
+//       if x > hi:
+//         return hi 
+//       return x
+
+//     def levels(self, a):
+//       #since our values are between 0 and 1
+//       if a <= 0.05:
+//         return "None"
+//       if a <= 0.20:
+//         return "Light"
+//       if a <= 0.6:
+//         return "Medium"
+//       if a < 0.95:
+//         return "Strong"
+//       return "Full"
+
+//     # for single pedal
+//     def range_value(self, p, p_low, p_hi, amin, amax):
+//       if p_hi <= p_low:
+//         u = 0.0
+//       else:
+//         u = (p - p_low)/(p_hi - p_low)
+
+//       u = self.clamp(u, 0.0, 1.0)
+//       return amin + u*(amax-amin)
+
+//     # to pick an appropriate net acceleration 
+//     #if: for mixed pedal
+//         # brake dominates pick closer to a_min 
+//         # throttle dominates pick closer to a_max
+//     def value_accel(self, amin, amax, throt, brk):
+//       d = throt - brk
+//       #this is to map [-1,1] to [0,1] as our hardware setup gives us this range
+//       w = self.clamp(0.5* (d+1), 0.0, 1.0)
+//       return amin + w*(amax-amin)
+
+//     def calculate_net_acceleration(self, throt, brk):
+//       #checking the level for throttle and brake
+//       t = self.levels(throt)
+//       b = self.levels(brk)
+
+//       #based on the approx accele valus 
+//       if t == "None" and b == "None":
+//         return -0.2, "Coasting"
+
+//       if b == "Full":
+//         a = self.value_accel(-9.0, -7.0, throt, brk)
+//         return a, "Brake override /emergency"
+
+//       #when brake is not pushed single pedal case
+//       if b == "None":
+//         if t == "Light":
+//           a = self.range_value(throt, 0.05, 0.2, -0.1, 0.1)
+//           return a, "Cruise / Speed-hold"
+
+//         if t == "Medium":
+//           a = self.range_value(throt, 0.2, 0.6, 1.0, 2.0)
+//           return a, "Normal acceleration"
+//         if t == "Strong" or t == "Full":
+//           a = self.range_value(throt, 0.6, 1.0, 2.5, 4.0)
+//           return a, "Strong Acceleration"
+
+//       #if there is no acelerator
+//       if t == "None":
+//         if b == "Light":
+         
+//           a = self.range_value(brk, 0.05, 0.2, -1.0, -3.0)
+//           return a, "Gentle braking"
+
+//         if b == "Medium":
+         
+//           a = self.range_value(brk, 0.2, 0.6, -3.0, -6.0)
+//           return a, "Strong braking"
+//         if b == "Strong":
+        
+//           a = self.range_value(brk, 0.6, 1.0, -6.0, -9.0)
+//           return a, "Emergency-like braking"
+
+//       #mixed pedal input
+//       if b == "Light":
+//         if t == "Light":
+//           a = self.value_accel(-0.5, 0.5, throt, brk)
+//           return a, "Pedal conflict - mild"
+//         if t == "Medium":
+//           a = self.value_accel(-1.0, 0.0, throt, brk)
+//           return a, "Powered braking"
+//         if t == "Strong" or t == "Full":
+//           a = self.value_accel(0.0, 1.0, throt, brk) 
+//           return a, "Throttle-based braking"
+
+//       if b == "Medium":
+//         if t == "Light":
+//           a = self.value_accel(-4.0, -2.0, throt, brk)
+//           return a, "Braking with throttle drag"
+//         if t == "Medium":
+//           a = self.value_accel(-6.0, -3.0, throt, brk)
+//           return a, "Severe pedal conflict"
+//         if t == "Strong" or t == "Full":
+//           a = self.value_accel(-5.0, -2.0, throt, brk) 
+//           return a, "Brake-dominated override"
+
+//       if b == "Strong":
+//         a = self.range_value(brk, 0.60, 0.95, -6.0, -9.0)
+//         return a, "Brake-dominated override "
+
+//       return -0.5, "unknown" 
+
+//   =}
+
+//   reaction(throttle){=
+//     self.throt = float(throttle.value)
+//   =}
+
+//   reaction(brake){=
+//     self.brk = float(brake.value)
+//   =}
+
+//   reaction(calculate)->speed_kmph, accel_mps2, pedal_state {=
+//     #change in time
+//     dt = 0.1
+  
+//     a, st = self.calculate_net_acceleration(self.throt, self.brk)
+//     self.mps = self.mps + a*dt
+
+//     if self.mps < 0.0:
+//       self.mps = 0.0
+//     kmph = self.mps * 3.6
+
+//     #setting maximum speed limit as 120 kmph
+//     if kmph > 120:
+//       kmph = 120.0
+//       self.mps = kmph / 3.6
+//     speed_kmph.set(kmph)
+//     accel_mps2.set(a)
+//     pedal_state.set(st)
+//   =}
+
+// }
+
+reactor SensorInputs{
+    output steer_msg
+    output accel_msg
+    output brake_msg
+    output head_msg
+    output eye_msg
+    // output speed
+    // output acceleration_mps2
+    // output pedal_position
+
+    dev = new DeviceReader()
+    wheel = new steering_wheel()
+    acc = new accelerator()
+    brk = new brake()
+    video = new webcam()
+    face_detect = new FaceLandmark()
+    // speedcalci = new SpeedCalculator()
+
+    dev.steer -> wheel.steer
+    wheel.steer_msg -> steer_msg
+
+    dev.brake -> brk.brake
+    brk.brake_msg -> brake_msg
+
+    dev.throttle -> acc.accelerate
+    acc.accel_msg -> accel_msg
+
+    dev.frame -> video.vid
+    video.frame_fps -> face_detect.frame
+    
+    face_detect.head_msg -> head_msg
+    face_detect.eye_msg  -> eye_msg
+
+    // dev.throttle -> speedcalci.throttle
+    // dev.brake -> speedcalci.brake
+
+    // speedcalci.speed_kmph -> speed
+    // speedcalci.accel_mps2 -> acceleration_mps2
+    // speedcalci.pedal_state -> pedal_position
+
+}
