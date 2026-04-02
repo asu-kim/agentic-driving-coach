@@ -142,14 +142,14 @@ reactor Driver{
         head.set(head1)
         eye.set(eye1)
 
-        # print("---------------------------------------")
-        # print(f"from driver Eye: {eye1} \n")
-        # print(f"from driver head: {head1} \n")
-        # print(f"from driver brake: {brake1} \n")
-        # print(f"from driver accelerator: {accelerator1} \n")
-        print(accelerator1)
-        # print(f"from driver steer: {steer1} \n")
-        # print("---------------------------------------")
+        print("---------------------------------------")
+        print(f"from driver Eye: {eye1} \n")
+        print(f"from driver head: {head1} \n")
+        print(f"from driver brake: {brake1} \n")
+        print(f"from driver accelerator: {accelerator1} \n")
+
+        print(f"from driver steer: {steer1} \n")
+        print("---------------------------------------")
 
 
         # if instr.is_present:
@@ -185,19 +185,43 @@ reactor Car{
         # print(f"from car brake: {bmsg}", flush=True)
         # print(f"from car accelerator: {amsg}", flush=True)
         # print("---------------------------------------", flush=True)
+        #pedal position is 0-1 values to get net acceleration p*9.81 but accelerator angle max and brake is 30deg
+        # amsg = float(amsg)
+        # bmsg = float(bmsg)
+        # using piecewise model for accel assuming max m/s2 is 4 and brake 
+        def acel_cal(p):
+            p = max(0.0, min(1.0, p))
+            if p<0.1:
+                return 0.0
+            elif p<0.6:
+                return 2.4 * p
+            else:
+                return 4.0*(p**2)
+        def brake_cal(p):
+            p = max(0.0, min(1.0, p))
+            if p<0.1:
+                return 0.0
+            elif p<0.6:
+                return -(5.4 * p)
+            else:
+                return -(9.0*(p**2))
+        if bmsg > 0.0:
+            self.acceleration_net = brake_cal(bmsg)
+        elif amsg > 0.0:
+            self.acceleration_net = acel_cal(amsg)
+        else:
+            # for coasting 
+            self.acceleration_net = -0.5
 
-        amsg = float(amsg)
-        bmsg = float(bmsg)
-
-        vel = self.velocity_init + amsg * 0.1 - bmsg * 0.1
+        vel = self.velocity_init + self.acceleration_net * 0.1
 
         if vel < 0.0:
             vel = 0.0
 
         d = self.dist_init + vel * 0.1
 
-        # print(f"from car Velocity: {vel}", flush=True)
-        # print(f"from car Distance: {d}", flush=True)
+        print(f"from car Velocity: {vel}", flush=True)
+        print(f"from car Distance: {d}", flush=True)
 
         velocity.set(vel)
 
@@ -206,29 +230,30 @@ reactor Car{
     =}
 }
 
-// reactor Environment{
-//     input v
-//     state pos_stop_sign = 100.0
-//     state passed = False
-//     output displacement
+reactor Environment{
+    input v
+    state pos_stop_sign = 100.0
+    state passed = False
+    output displacement
  
-//     reaction(v)->displacement{=
-//         vn = float(v.value)
-//         step = vn * 0.1
+    reaction(v)->displacement{=
+        vn = float(v.value)
+        step = vn * 0.1
 
-//         if not self.passed:
-//             self.pos_stop_sign -= step
-//             if self.pos_stop_sign <= 0.0:
-//                 self.pos_stop_sign = 0.0
-//                 self.passed = True
+        if not self.passed:
+            self.pos_stop_sign -= step
+            if self.pos_stop_sign <= 0.0:
+                self.pos_stop_sign = 0.0
+                self.passed = True
 
-//             displacement.set(self.pos_stop_sign)
-//         else:
+            displacement.set(self.pos_stop_sign)
+        else:
             
-//             displacement.set(0.0)
+            displacement.set(0.0)
+        print(f"displacement from the environment: {displacement.value}", flush=True)
 
-//     =}
-// }
+    =}
+}
 
 // reactor LLMInference {
 //     input s
@@ -431,7 +456,7 @@ main reactor{
     d = new Driver()
     sen = new SensorInputs()
     c = new Car()
-    // en = new Environment()
+    en = new Environment()
     // adc = new Coach()
 
     d.accelerator -> c.accel_in 
@@ -446,7 +471,7 @@ main reactor{
     sen.head_msg -> d.head_reading
     sen.steer_msg -> d.steer_reading
 
-    // c.velocity -> en.v
+    c.velocity -> en.v
     // c.velocity -> adc.v
     // c.steer -> adc.st
     // c.head_pos -> adc.h
