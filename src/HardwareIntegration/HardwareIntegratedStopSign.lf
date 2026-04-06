@@ -7,26 +7,6 @@ import SensorInputs from "SensorInputs.lf"
 //     import time
 //     from enum import Enum
 
-//     class Accelerate(Enum):
-//         Coasting = 1
-//         Cruise = 2
-//         NormalAcceleration = 3
-//         StrongAcceleration = 4
-
-//     class Brake(Enum):
-//         GentleBraking = 5
-//         EmergencyBraking = 6
-//     class Head(Enum):
-//         Left = 7
-//         Right = 8
-//         Center = 9
-//     class Steer(Enum):
-//         Leftmost = 10
-//         Left = 11
-//         Rightmost = 12
-//         Right = 13
-//         Center = 14
-
     
 //     ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
@@ -181,18 +161,11 @@ reactor Car{
         amsg = 0.0 if amsg is None else float(amsg)
         bmsg = 0.0 if bmsg is None else float(bmsg)
 
-        # print("---------------------------------------", flush=True)
-        # print(f"from car brake: {bmsg}", flush=True)
-        # print(f"from car accelerator: {amsg}", flush=True)
-        # print("---------------------------------------", flush=True)
-        #pedal position is 0-1 values to get net acceleration p*9.81 but accelerator angle max and brake is 30deg
-        # amsg = float(amsg)
-        # bmsg = float(bmsg)
-        # using piecewise model for accel assuming max m/s2 is 4 and brake 
+
         def acel_cal(p):
             p = max(0.0, min(1.0, p))
             if p<0.1:
-                return 0.0
+                return p
             elif p<0.6:
                 return 2.4 * p
             else:
@@ -200,7 +173,7 @@ reactor Car{
         def brake_cal(p):
             p = max(0.0, min(1.0, p))
             if p<0.1:
-                return 0.0
+                return p
             elif p<0.6:
                 return -(5.4 * p)
             else:
@@ -210,7 +183,7 @@ reactor Car{
         elif amsg > 0.0:
             self.acceleration_net = acel_cal(amsg)
         else:
-            # for coasting 
+            #for coasting 
             self.acceleration_net = -0.5
 
         vel = self.velocity_init + self.acceleration_net * 0.1
@@ -452,7 +425,7 @@ reactor Environment{
 //     a.planned_instr -> instr
 // }
 
-main reactor{
+federated reactor at 10.218.100.78 {
     d = new Driver()
     sen = new SensorInputs()
     c = new Car()
