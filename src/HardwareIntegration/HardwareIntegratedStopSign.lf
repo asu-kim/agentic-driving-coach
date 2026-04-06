@@ -97,25 +97,26 @@ import SensorInputs from "SensorInputs.lf"
 
 reactor Driver{
     input instr
-    input eye_reading
-    input head_reading
-    input brake_reading 
-    input accel_reading
-    input steer_reading
+    // input eye_reading
+    // input head_reading
+    // input brake_reading 
+    // input accel_reading
+    // input steer_reading
     output steer
     output accelerator
     output brake
     output head
     output eye
-
-    reaction(eye_reading, head_reading, brake_reading, accel_reading, steer_reading, instr)-> eye, accelerator, brake, steer, head{=
+    sen = new SensorInputs()
+    // reaction(eye_reading, head_reading, brake_reading, accel_reading, steer_reading, instr)-> eye, accelerator, brake, steer, head{=
         # if t.is_present: 
-          
-        eye1 = eye_reading.value
-        head1= head_reading.value
-        brake1 = brake_reading.value
-        accelerator1= accel_reading.value
-        steer1 = steer_reading.value
+    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg,sen.accel_msg, sen.brake_msg, instr)-> eye, accelerator, brake, steer, head{=      
+        eye1 = sen.eye_msg.value
+        head1 = sen.head_msg.value
+        brake1 = sen.brake_msg.value
+        accelerator1 = sen.accel_msg.value
+        steer1 = sen.steer_msg.value
+
         steer.set(steer1)
         accelerator.set(accelerator1)
         brake.set(brake1)
@@ -427,7 +428,7 @@ reactor Environment{
 
 federated reactor at 10.218.100.78 {
     d = new Driver()
-    sen = new SensorInputs()
+    // sen = new SensorInputs()
     c = new Car()
     en = new Environment()
     // adc = new Coach()
@@ -438,11 +439,11 @@ federated reactor at 10.218.100.78 {
     d.head-> c.head_pos_in 
     d.eye -> c.eye_pos_in 
 
-    sen.eye_msg -> d.eye_reading
-    sen.brake_msg -> d.brake_reading
-    sen.accel_msg -> d.accel_reading
-    sen.head_msg -> d.head_reading
-    sen.steer_msg -> d.steer_reading
+    // sen.eye_msg -> d.eye_reading
+    // sen.brake_msg -> d.brake_reading
+    // sen.accel_msg -> d.accel_reading
+    // sen.head_msg -> d.head_reading
+    // sen.steer_msg -> d.steer_reading
 
     c.velocity -> en.v
     // c.velocity -> adc.v
