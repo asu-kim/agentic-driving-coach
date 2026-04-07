@@ -83,11 +83,14 @@ reactor FaceLandmark{
             yaw_new = self.yaw_old
             #random angle to be adjusted
             if yaw_new > 15:
-                head_direction = "Head_is_right"
+                # head_direction = "Head_is_right"
+                head_direction = 3
             elif yaw_new< -15:
-                head_direction = "Head_is_left"
+                # head_direction = "Head_is_left"
+                head_direction = 4
             else:
-                head_direction = "Head_is_in_center"
+                # head_direction = "Head_is_in_center"
+                head_direction = 5
             head_msg.set(head_direction)
 
         def clamp_eye(x):
@@ -131,11 +134,14 @@ reactor FaceLandmark{
 
         gaze = 0.5 * (l_ratio + r_ratio)
         if gaze < 0.40:
-            eye_direction = "eye_is_left"
+            # eye_direction = "eye_is_left"
+            eye_direction = 6
         elif gaze > 0.60:
-            eye_direction = "eye_is_right"
+            # eye_direction = "eye_is_right"
+            eye_direction = 7
         else:
-            eye_direction = "eye_is_in_center"
+            # eye_direction = "eye_is_in_center"
+            eye_direction = 8
 
         eye_msg.set(eye_direction)
     =}
