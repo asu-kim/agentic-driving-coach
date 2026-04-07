@@ -87,7 +87,7 @@ reactor FaceLandmark{
         if px is None:
             return
 
-        landmarks.set({"px": px})
+        # landmarks.set({"px": px})
 
         if len(px) < 363:
             return
