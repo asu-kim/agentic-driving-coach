@@ -4,8 +4,8 @@ import socket
 import pickle
 import struct
 
-HOST = "127.0.0.1"
-PORT = 9999
+HOST = "10.218.100.78"
+PORT = 15045
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((HOST, PORT))
