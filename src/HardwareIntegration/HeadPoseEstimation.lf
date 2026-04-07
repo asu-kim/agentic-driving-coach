@@ -14,197 +14,85 @@ reactor FaceLandmark{
     output landmarks
     output head_msg
     output eye_msg
+
     state yaw_old
-    state mesh
-    state n
-    state count = 0
-    state reset_counter = 0
+    state sock
 
     reaction(startup) {=
-        import mediapipe as mp
-        import threading
+        import socket
 
-        class FaceLandmarkTracker:
-            def __init__(self):
-                self.mesh = mp.solutions.face_mesh.FaceMesh(
-                    static_image_mode=False,
-                    max_num_faces=1,
-                    refine_landmarks=False,
-                    min_detection_confidence=0.5,
-                    min_tracking_confidence=0.5,
-                )
+        try:
+            self.sock = socket.socket()
+            self.sock.connect(("127.0.0.1", 9999))
+            print("Connected to face_detection server", flush=True)
+        except Exception as e:
+            print("Socket connection failed:", e, flush=True)
+            self.sock = None
 
-            def run(self, frame_bgr):
-                h, w = frame_bgr.shape[:2]
-                rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
-                res = self.mesh.process(rgb)
-                if not res.multi_face_landmarks:
-                    return None
-                face = res.multi_face_landmarks[0].landmark
-                px = [(lm.x * w, lm.y * h) for lm in face]
-                return {"px": px, "size": (w, h)}
-
-        self.mesh = FaceLandmarkTracker()
         self.yaw_old = None
-
-        # shared state
-        self.latest_frame = None
-        self.latest_result = None
-
-        def worker():
-            import time
-            while True:
-                if self.latest_frame is None:
-                    time.sleep(0.01)
-                    continue
-
-                try:
-                    img = self.latest_frame
-                    out = self.mesh.run(img)
-                    self.latest_result = out
-                except Exception:
-                    self.latest_result = None
-
-                time.sleep(0.05)   # run at ~20Hz
-
-        t = threading.Thread(target=worker, daemon=True)
-        t.start()
     =}
 
-    // reaction(frame) -> landmarks, head_msg, eye_msg {=
-    //     img = frame.value
-    //     if img is None:
-    //         return
-    //     if getattr(img, "ndim", 0) != 3:
-    //         return
-    //     img = np.ascontiguousarray(img).copy()
-
-    //     try:
-    //         # out = self.mesh.run(img)
-    //         out = None
-    //     except Exception as e:
-    //         print("[ERROR] mediapipe crash:", e, flush=True)
-    //         return
-
-    //     if out is None:
-    //         return
-
-    //     landmarks.set(out)
-
-    //     h,w = img.shape[:2]
-    //     px = out["px"]
-    //     if len(px) < 363:
-    //         return
-    //     #this gives us the points on the face nose, chin,left eye outer, right eye outer, left mouth , right mouth
-    //     image_points = np.array([px[1], px[152], px[33], px[263], px[61], px[291],], dtype=np.float64)
-
-    //     #this is for 3D face model point
-    //     model_points =  np.array([(0.0, 0.0, 0.0), (0.0, -63.6, -12.5), (-43.3, 32.7, -26.0), (43.3, 32.7, -26.0), (-28.9, -28.9, -24.1), (28.9, -28.9, -24.1)], dtype=np.float64)
-
-    //     focal_length = float(w)
-    //     center = (w/2.0, h/2.0)
-    //     camera_mat = np.array([[focal_length, 0, center[0]], [0, focal_length, center[1]], [0, 0, 1]], dtype=np.float64)
-    //     dist_coeff = np.zeros((4,1), dtype=np.float64)
-
-    //     j, rvec, tvec = cv2.solvePnP(model_points, image_points, camera_mat, dist_coeff, flags=cv2.SOLVEPNP_ITERATIVE)
-
-    //     if j:
-    //         R, _ = cv2.Rodrigues(rvec)
-    //         yaw = np.degrees(np.arctan2(R[1,0], R[0,0]))
-
-    //         if self.yaw_old is None:
-    //             self.yaw_old = yaw
-    //         else:
-    //             self.yaw_old = 0.8 * self.yaw_old + 0.2 * yaw
-            
-    //         yaw_new = self.yaw_old
-    //         #random angle to be adjusted
-    //         if yaw_new > 15:
-    //             # head_direction = "Head_is_right"
-    //             head_direction = 3
-    //         elif yaw_new< -15:
-    //             # head_direction = "Head_is_left"
-    //             head_direction = 4
-    //         else:
-    //             # head_direction = "Head_is_in_center"
-    //             head_direction = 5
-    //         head_msg.set(head_direction)
-
-    //     def clamp_eye(x):
-    //         if x< 0.0:
-    //             return 0.0
-    //         else:
-    //             if x>1.0:
-    //                 return 1.0
-    //             else:
-    //                 return x
-
-    //     #center point
-    //     # rx = sum(px[i][0] for i in [468,469,470,471,472]) / 5.0
-    //     # lx = sum(px[i][0] for i in [473,474,475,476,477]) / 5.0
-    //     if len(px) > 477:
-    //         rx = sum(px[i][0] for i in [468,469,470,471,472]) / 5.0
-    //         lx = sum(px[i][0] for i in [473,474,475,476,477]) / 5.0
-    //     else:
-    //         # fallback: midpoint between outer/inner eye corners
-    //         # left: 33 (outer), 133 (inner)
-    //         # right: 362 (inner), 263 (outer)
-    //         lx = 0.5 * (px[33][0] + px[133][0])
-    //         rx = 0.5 * (px[362][0] + px[263][0])
-
-    //     l_out_x = px[33][0]
-    //     l_inn_x = px[133][0]
-    //     if (l_inn_x - l_out_x) != 0:
-    //         l_den = l_inn_x - l_out_x
-    //     else:
-    //         l_den = 1.0
-    //     l_ratio = clamp_eye((lx-l_out_x)/l_den)
-
-    //     r_inn_x = px[362][0]
-    //     r_out_x = px[263][0]
-
-    //     den = r_out_x - r_inn_x
-    //     if den != 0:
-    //         r_ratio = clamp_eye((rx - r_inn_x) / den)
-    //     else:
-    //         r_ratio = 0.5
-
-    //     gaze = 0.5 * (l_ratio + r_ratio)
-    //     if gaze < 0.40:
-    //         # eye_direction = "eye_is_left"
-    //         eye_direction = 6
-    //     elif gaze > 0.60:
-    //         # eye_direction = "eye_is_right"
-    //         eye_direction = 7
-    //     else:
-    //         # eye_direction = "eye_is_in_center"
-    //         eye_direction = 8
-
-    //     eye_msg.set(eye_direction)
-    // =}
-
     reaction(frame) -> landmarks, head_msg, eye_msg {=
+        import pickle
+        import struct
+
+        # ---------- SAFETY ----------
+        if self.sock is None:
+            return
+
         img = frame.value
         if img is None:
             return
+
         if getattr(img, "ndim", 0) != 3:
             return
 
-        # store frame for worker thread
-        self.latest_frame = np.ascontiguousarray(img).copy()
+        img = np.ascontiguousarray(img)
 
-        out = self.latest_result
-
-        if out is None:
+        # ---------- SEND ----------
+        try:
+            data = pickle.dumps(img)
+            self.sock.sendall(struct.pack(">I", len(data)) + data)
+        except Exception as e:
+            print("Send error:", e, flush=True)
             return
 
-        landmarks.set(out)
+        # ---------- SAFE RECEIVE ----------
+        def recv_full(sock, size):
+            data = b""
+            while len(data) < size:
+                packet = sock.recv(size - len(data))
+                if not packet:
+                    return None
+                data += packet
+            return data
 
-        px = out["px"]
+        try:
+            raw_len = recv_full(self.sock, 4)
+            if not raw_len:
+                return
+
+            msg_len = struct.unpack(">I", raw_len)[0]
+
+            data = recv_full(self.sock, msg_len)
+            if not data:
+                return
+
+            px = pickle.loads(data)
+
+        except Exception as e:
+            print("Receive error:", e, flush=True)
+            return
+
+        if px is None:
+            return
+
+        landmarks.set({"px": px})
+
         if len(px) < 363:
             return
 
-        # --- HEAD ---
+        # ---------- HEAD ----------
         image_points = np.array(
             [px[1], px[152], px[33], px[263], px[61], px[291]],
             dtype=np.float64
@@ -223,17 +111,18 @@ reactor FaceLandmark{
         )
 
         h, w = img.shape[:2]
+
         focal_length = float(w)
-        center = (w / 2.0, h / 2.0)
+        center = (w/2.0, h/2.0)
 
         camera_mat = np.array(
             [[focal_length, 0, center[0]],
-            [0, focal_length, center[1]],
-            [0, 0, 1]],
+             [0, focal_length, center[1]],
+             [0, 0, 1]],
             dtype=np.float64
         )
 
-        dist_coeff = np.zeros((4, 1), dtype=np.float64)
+        dist_coeff = np.zeros((4,1), dtype=np.float64)
 
         ok, rvec, tvec = cv2.solvePnP(
             model_points,
@@ -245,12 +134,12 @@ reactor FaceLandmark{
 
         if ok:
             R, _ = cv2.Rodrigues(rvec)
-            yaw = np.degrees(np.arctan2(R[1, 0], R[0, 0]))
+            yaw = np.degrees(np.arctan2(R[1,0], R[0,0]))
 
             if self.yaw_old is None:
                 self.yaw_old = yaw
             else:
-                self.yaw_old = 0.8 * self.yaw_old + 0.2 * yaw
+                self.yaw_old = 0.8*self.yaw_old + 0.2*yaw
 
             if self.yaw_old > 15:
                 head_msg.set(3)
@@ -259,7 +148,7 @@ reactor FaceLandmark{
             else:
                 head_msg.set(5)
 
-        # --- EYE ---
+        # ---------- EYE ----------
         def clamp_eye(x):
             return max(0.0, min(1.0, x))
 
@@ -278,7 +167,7 @@ reactor FaceLandmark{
         r_inn_x = px[362][0]
         r_out_x = px[263][0]
         den = r_out_x - r_inn_x
-        r_ratio = clamp_eye((rx - r_inn_x) / den) if den != 0 else 0.5
+        r_ratio = clamp_eye((rx - r_inn_x)/den) if den != 0 else 0.5
 
         gaze = 0.5 * (l_ratio + r_ratio)
 
