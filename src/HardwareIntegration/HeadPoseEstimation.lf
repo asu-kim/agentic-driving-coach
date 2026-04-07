@@ -55,7 +55,8 @@ reactor FaceLandmark{
         img = np.ascontiguousarray(img).copy()
 
         try:
-            out = self.mesh.run(img)
+            # out = self.mesh.run(img)
+            out = None
         except Exception as e:
             print("[ERROR] mediapipe crash:", e, flush=True)
             return
