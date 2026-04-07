@@ -1,9 +1,12 @@
 target Python 
 
 preamble {=
+    import os
+    os.environ["OMP_NUM_THREADS"] = "1"
+    os.environ["OPENBLAS_NUM_THREADS"] = "1"
+
     import cv2
     import numpy as np
-   
 =}
 
 reactor FaceLandmark{
@@ -37,6 +40,9 @@ reactor FaceLandmark{
                 return {"px": px, "size": (w, h)}
         self.yaw_old = None
         self.mesh = FaceLandmarkTracker()
+
+        # disable OpenCV threading (important on Pi)
+        cv2.setNumThreads(1)
         self.n = 0
     =}
 
@@ -46,13 +52,18 @@ reactor FaceLandmark{
             return
         if getattr(img, "ndim", 0) != 3:
             return
-        img = np.ascontiguousarray(img)
+        img = np.ascontiguousarray(img).copy()
 
-        out = self.mesh.run(img)
-        landmarks.set(out)
+        try:
+            out = self.mesh.run(img)
+        except Exception as e:
+            print("[ERROR] mediapipe crash:", e, flush=True)
+            return
 
         if out is None:
             return
+
+        landmarks.set(out)
 
         h,w = img.shape[:2]
         px = out["px"]
