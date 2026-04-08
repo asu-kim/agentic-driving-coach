@@ -15,7 +15,7 @@ reactor FaceLandmark{
     output eye_msg
 
     state yaw_old
-    state sock
+
 
     reaction(startup) {=
         # import socket
@@ -27,7 +27,7 @@ reactor FaceLandmark{
         # except Exception as e:
         #     print("Socket connection failed:", e, flush=True)
         #     self.sock = None
-        self.sock = None
+
 
         self.yaw_old = None
     =}
@@ -184,14 +184,19 @@ reactor FaceLandmark{
         if img is None:
             return
 
-        if getattr(img, "ndim", 0) != 3:
+        try:
+            # ensure it's a proper numpy array (SAFE copy)
+            img = np.array(img, copy=True)
+
+            if getattr(img, "ndim", 0) != 3:
+                return
+
+        except Exception as e:
+            print("Frame error:", e, flush=True)
             return
 
-        img = np.ascontiguousarray(img)
-
-        head_msg.set(5)   # center
-        eye_msg.set(8)    # center
-
-        return
+        # minimal output
+        head_msg.set(5)
+        eye_msg.set(8)
     =}
 }
