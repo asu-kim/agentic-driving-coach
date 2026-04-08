@@ -14,7 +14,7 @@ reactor Driver{
     sen = new SensorInputs()
 
     reaction(startup) {=
-        a.schedule(800_000_000)
+        self.a.schedule(800_000_000)
     =}
 
     reaction(a) {=
@@ -26,8 +26,7 @@ reactor Driver{
     state brake_val = 0.0
     state head_val = 5
 
-    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg, sen.accel_msg, sen.brake_msg)
-    -> accelerator, brake, steer, head {=
+    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg, sen.accel_msg, sen.brake_msg) -> accelerator, brake, steer, head {=
         if not self.started:
             return
 
@@ -76,7 +75,7 @@ reactor Car{
     output head_pos
 
     reaction(startup) {=
-        a.schedule(800_000_000)
+        self.a.schedule(800_000_000)
     =}
 
     reaction(a) {=
@@ -155,7 +154,7 @@ reactor Environment{
     output displacement
 
     reaction(startup) {=
-        a.schedule(800_000_000)
+        self.a.schedule(800_000_000)
     =}
 
     reaction(a) {=
