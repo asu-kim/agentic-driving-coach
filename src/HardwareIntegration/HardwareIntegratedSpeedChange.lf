@@ -526,10 +526,10 @@ reactor Coach{
         if not self.llm.is_ready:
             return
 
-        self.llm.s.set(self.s_val)
-        self.llm.v.set(self.v_val)
-        self.llm.st.set(self.st_val)
-        self.llm.h.set(self.h_val)
+        llm.s.set(self.s_val)
+        llm.v.set(self.v_val)
+        llm.st.set(self.st_val)
+        llm.h.set(self.h_val)
 
         print("----- coach clock -----")
         print(f"s={self.s_val} v={self.v_val}", flush=True)
