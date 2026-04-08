@@ -175,13 +175,14 @@ reactor LLMInference {
         import time
         from enum import Enum
 
-        ALLOWED = {"NONE", "WARNING", "ACTUATE"}
+       
 
         def run_llm_message(self, rd_val, v_val):
             import ollama
             import time
             print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
+             ALLOWED = {"NONE", "WARNING", "ACTUATE"}
             try:
                 r = ollama.chat(
                     model="llama3:8b",
