@@ -3,21 +3,17 @@ target Python {keepalive: true}
 import SensorInputs from "SensorInputs.lf"
 
 reactor Driver{
+    input start_signal
+    state started = False
 
     output steer
     output accelerator
     output brake
     output head
-    logical action a
-    state started = False
 
     sen = new SensorInputs()
 
-    reaction(startup) {=
-        self.a.schedule(800_000_000)
-    =}
-
-    reaction(a) {=
+    reaction(start_signal) {=
         self.started = True
     =}
 
@@ -26,7 +22,8 @@ reactor Driver{
     state brake_val = 0.0
     state head_val = 5
 
-    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg, sen.accel_msg, sen.brake_msg) -> accelerator, brake, steer, head {=
+    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg, sen.accel_msg, sen.brake_msg)
+    -> accelerator, brake, steer, head {=
         if not self.started:
             return
 
@@ -48,15 +45,17 @@ reactor Driver{
         head.set(self.head_val)
 
         print("---------------------------------------")
-        print(f"from driver head: {self.head_val} \n")
-        print(f"from driver brake: {self.brake_val} \n")
-        print(f"from driver accelerator: {self.accel_val} \n")
-        print(f"from driver steer: {self.steer_val} \n")
+        print(f"from driver head: {self.head_val}")
+        print(f"from driver brake: {self.brake_val}")
+        print(f"from driver accelerator: {self.accel_val}")
+        print(f"from driver steer: {self.steer_val}")
         print("---------------------------------------")
     =}
 }
 
 reactor Car{
+    input start_signal
+    state started = False
 
     input steer_in
     input accel_in
@@ -67,18 +66,12 @@ reactor Car{
     state acceleration_net
     state velocity_init = 0.0
     state dist_init = 0.0
-    state started = False
-    logical action a
 
     output velocity
     output steer
     output head_pos
 
-    reaction(startup) {=
-        self.a.schedule(800_000_000)
-    =}
-
-    reaction(a) {=
+    reaction(start_signal) {=
         self.started = True
     =}
 
@@ -125,14 +118,13 @@ reactor Car{
                 self.acceleration_net = -0.5
 
         vel = self.velocity_init + self.acceleration_net * 0.1
-
         if vel < 0.0:
             vel = 0.0
 
         d = self.dist_init + vel * 0.1
 
-        print(f"from car Velocity: {vel}", flush=True)
-        print(f"from car Distance: {d}", flush=True)
+        print(f"from car Velocity: {vel}")
+        print(f"from car Distance: {d}")
 
         velocity.set(vel)
         steer.set(smsg)
@@ -144,24 +136,20 @@ reactor Car{
 }
 
 reactor Environment{
+    input start_signal
+    state started = False
 
     input v
     state pos_stop_sign = 100.0
     state passed = False
-    state started = False
-    logical action a
 
     output displacement
 
-    reaction(startup) {=
-        self.a.schedule(800_000_000)
-    =}
-
-    reaction(a) {=
+    reaction(start_signal) {=
         self.started = True
     =}
-
-    reaction(v) -> displacement {=
+ 
+    reaction(v)->displacement {=
         if not self.started:
             return
 
@@ -178,7 +166,7 @@ reactor Environment{
         else:
             displacement.set(0.0)
 
-        print(f"displacement from the environment: {displacement.value}", flush=True)
+        print(f"displacement from the environment: {displacement.value}")
     =}
 }
 
@@ -188,9 +176,9 @@ reactor LLMInference {
     input st 
     input h
 
-   
     output control
     output instruction
+    output ready
 
     state last_dl_tok = ""
     state last_dl_msg = ""
@@ -199,7 +187,6 @@ reactor LLMInference {
     preamble{=
         import ollama
         import time
-        from enum import Enum
 
         ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
@@ -247,11 +234,16 @@ reactor LLMInference {
             return "NONE", ""
     =}
 
-    reaction(startup) {=
+    reaction(startup) -> ready {=
         import ollama
+        print("Loading LLM...", flush=True)
+
         ollama.chat(model="llama3:8b", messages=[{"role": "user", "content": "hi"}])
+
+        print("LLM READY", flush=True)
+
         self.is_ready = True
-       
+        ready.set(True)
     =}
 
     reaction(s, v, st, h) -> control, instruction {=
@@ -390,12 +382,7 @@ reactor Coach{
 
     llm = new LLMInference()
     a = new Planner()
-    // logical action wait
 
-    // reaction(startup) {=
-    //      wait.schedule(800 msec)
-    
-    // =}
     s -> llm.s
     v -> llm.v
     st -> llm.st
@@ -407,26 +394,22 @@ reactor Coach{
     s -> a.s
     v -> a.v
 
-    // llm.ready -> ready
+    llm.ready -> ready
 
     a.act -> act
     a.planned_instr -> instr
 }
 
 federated reactor at 10.218.100.78 {
-    
+
     d = new Driver()
     c = new Car()
     en = new Environment()
     adc = new Coach()
 
-    // reaction(startup) -> start_all {=
-    //     start_all.schedule(800 msec)
-    // =}
-
-    // start_all -> d.startup
-    // start_all -> c.startup
-    // start_all -> en.startup
+    adc.ready -> d.start_signal
+    adc.ready -> c.start_signal
+    adc.ready -> en.start_signal
 
     d.accelerator -> c.accel_in 
     d.brake -> c.brake_in 
