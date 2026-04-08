@@ -11,17 +11,33 @@ class FaceDetector:
             min_detection_confidence=0.5,
             min_tracking_confidence=0.5
         )
+
         self.yaw_old = None
+        self.counter = 0
+        self.reset_counter = 0
 
     def process(self, frame):
         if frame is None:
             return None
 
-        frame = np.ascontiguousarray(frame)
-        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        if getattr(frame, "ndim", 0) != 3:
+            return None
 
-        res = self.mesh.process(rgb)
-        if not res.multi_face_landmarks:
+        frame = np.ascontiguousarray(frame)
+
+        # ---------- THROTTLE ----------
+        self.counter += 1
+        if self.counter % 3 != 0:
+            return None
+
+        # ---------- MEDIAPIPE SAFE ----------
+        try:
+            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            res = self.mesh.process(rgb)
+        except Exception:
+            return None
+
+        if res is None or not res.multi_face_landmarks:
             return None
 
         h, w = frame.shape[:2]
@@ -31,7 +47,9 @@ class FaceDetector:
         if len(px) < 363:
             return None
 
-        # -------- HEAD --------
+        # =========================
+        # HEAD POSE
+        # =========================
         image_points = np.array(
             [px[1], px[152], px[33], px[263], px[61], px[291]],
             dtype=np.float64
@@ -61,6 +79,8 @@ class FaceDetector:
 
         dist_coeff = np.zeros((4,1), dtype=np.float64)
 
+        head = 5  # default center
+
         ok, rvec, _ = cv2.solvePnP(
             model_points,
             image_points,
@@ -68,7 +88,6 @@ class FaceDetector:
             dist_coeff
         )
 
-        head = 5
         if ok:
             R, _ = cv2.Rodrigues(rvec)
             yaw = np.degrees(np.arctan2(R[1,0], R[0,0]))
@@ -83,7 +102,9 @@ class FaceDetector:
             elif self.yaw_old < -15:
                 head = 4
 
-        # -------- EYE --------
+        # =========================
+        # EYE GAZE
+        # =========================
         def clamp(x):
             return max(0.0, min(1.0, x))
 
@@ -99,10 +120,21 @@ class FaceDetector:
 
         gaze = 0.5 * (l_ratio + r_ratio)
 
-        eye = 8
+        eye = 8  # center
         if gaze < 0.40:
             eye = 6
         elif gaze > 0.60:
             eye = 7
+
+        # ---------- RESET MEDIAPIPE ----------
+        self.reset_counter += 1
+        if self.reset_counter > 100:
+            self.mesh.close()
+            self.mesh = mp.solutions.face_mesh.FaceMesh(
+                static_image_mode=False,
+                max_num_faces=1,
+                refine_landmarks=False
+            )
+            self.reset_counter = 0
 
         return {"head": head, "eye": eye}
