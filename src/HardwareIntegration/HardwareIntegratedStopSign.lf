@@ -382,7 +382,8 @@ reactor LLMInference {
         print("logical", lf.time.logical_elapsed()/1e6, flush=True)
         print("physical", lf.time.physical_elapsed()/1e6, flush=True)
 
-        tok, llm_instruction, ms = run_llm_message(rd_val, v_val)
+        # tok, llm_instruction, ms = run_llm_message(rd_val, v_val)
+        tok, llm_instruction, ms = self.run_llm_message(rd_val, v_val)
 
         
         self.check_deadline()
@@ -401,7 +402,8 @@ reactor LLMInference {
         if rd_val <= 0.0:
             tok, llm_instruction = "NONE", ""
         else:
-            tok, llm_instruction = fallback_policy(rd_val, v_val)
+            # tok, llm_instruction = fallback_policy(rd_val, v_val)
+            tok, llm_instruction = self.fallback_policy(rd_val, v_val)
 
         
         if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
