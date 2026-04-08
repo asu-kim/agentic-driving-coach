@@ -2,98 +2,98 @@ target Python {keepalive: true}
 
 import SensorInputs from "SensorInputs.lf"
 
-preamble{=
-    import ollama
-    import time
-    from enum import Enum
+// preamble{=
+//     import ollama
+//     import time
+//     from enum import Enum
 
     
-    ALLOWED = {"NONE", "WARNING", "ACTUATE"}
+//     ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
-    def run_llm_message(rd_val, v_val):
-        t0 = time.perf_counter()
+//     def run_llm_message(rd_val, v_val):
+//         t0 = time.perf_counter()
 
-        r = ollama.chat(
-            model="llama3:8b",
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are an agentic driving coach."
-                        "Output exactly ONE line: TOKEN|Message"
-                        "TOKEN must be one of: NONE, WARNING, ACTUATE"
-                        "Message must be one sentence, about stop sign approaching only."
-                        "Use distance_to_stop is s and measured in meters"
-                        "velocity is v measured using m/s only."
+//         r = ollama.chat(
+//             model="llama3:8b",
+//             messages=[
+//                 {
+//                     "role": "system",
+//                     "content": (
+//                         "You are an agentic driving coach."
+//                         "Output exactly ONE line: TOKEN|Message"
+//                         "TOKEN must be one of: NONE, WARNING, ACTUATE"
+//                         "Message must be one sentence, about stop sign approaching only."
+//                         "Use distance_to_stop is s and measured in meters"
+//                         "velocity is v measured using m/s only."
 
-                        "Rules for TOKEN:"
-                        "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
-                        "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
-                        "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
-                        "else TOKEN=NONE"
+//                         "Rules for TOKEN:"
+//                         "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
+//                         "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
+//                         "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
+//                         "else TOKEN=NONE"
 
-                        "If TOKEN=NONE, output: NONE|"
-                        "Do not output anything else."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
-                },
-            ],
-            options={"temperature": 0.0, "num_predict": 30},
-        )
+//                         "If TOKEN=NONE, output: NONE|"
+//                         "Do not output anything else."
+//                     ),
+//                 },
+//                 {
+//                     "role": "user",
+//                     "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
+//                 },
+//             ],
+//             options={"temperature": 0.0, "num_predict": 30},
+//         )
 
-        ms = (time.perf_counter() - t0) * 1000.0
-        raw = (r.get("message", {}).get("content", "") or "").strip()
+//         ms = (time.perf_counter() - t0) * 1000.0
+//         raw = (r.get("message", {}).get("content", "") or "").strip()
 
-        tok = "NONE"
-        msg = ""
+//         tok = "NONE"
+//         msg = ""
 
-        if raw:
-            line = raw.splitlines()[0].strip()
-            parts = [p.strip() for p in line.split("|", 1)]
-            if len(parts) >= 1:
-                tok = parts[0].upper().strip()
-            if len(parts) == 2:
-                msg = parts[1].strip()
+//         if raw:
+//             line = raw.splitlines()[0].strip()
+//             parts = [p.strip() for p in line.split("|", 1)]
+//             if len(parts) >= 1:
+//                 tok = parts[0].upper().strip()
+//             if len(parts) == 2:
+//                 msg = parts[1].strip()
 
-        if tok not in ALLOWED:
-            tok = "NONE"
-            msg = ""
+//         if tok not in ALLOWED:
+//             tok = "NONE"
+//             msg = ""
 
-        msg = msg.replace("$", "").replace("`", "").strip().strip('"').strip("'")
+//         msg = msg.replace("$", "").replace("`", "").strip().strip('"').strip("'")
 
-        bad = ["token", "message", "rd=", "v=", "distance_to", "speed="]
-        if any(b in msg.lower() for b in bad):
-            msg = ""
+//         bad = ["token", "message", "rd=", "v=", "distance_to", "speed="]
+//         if any(b in msg.lower() for b in bad):
+//             msg = ""
 
-        if tok != "NONE" and not msg:
-            if tok == "WARNING":
-                msg = "Slow down and prepare to stop."
-            elif tok == "ACTUATE":
-                msg = "Brake now."
+//         if tok != "NONE" and not msg:
+//             if tok == "WARNING":
+//                 msg = "Slow down and prepare to stop."
+//             elif tok == "ACTUATE":
+//                 msg = "Brake now."
 
-        if tok == "NONE":
-            msg = ""
+//         if tok == "NONE":
+//             msg = ""
 
-        return tok, msg, ms
+//         return tok, msg, ms
 
-    def fallback_policy(rd_val, v_val):
-        if rd_val <= 0.0:
-            return "NONE", ""
+//     def fallback_policy(rd_val, v_val):
+//         if rd_val <= 0.0:
+//             return "NONE", ""
 
-        if rd_val <= 25.0 and v_val > 2.5:
-            return "ACTUATE", "Brake now."
+//         if rd_val <= 25.0 and v_val > 2.5:
+//             return "ACTUATE", "Brake now."
 
-        if 50.0 < rd_val <= 60.0 and (v_val > 10.0 or v_val < 8.0):
-            return "WARNING", "Adjust speed and prepare to stop."
+//         if 50.0 < rd_val <= 60.0 and (v_val > 10.0 or v_val < 8.0):
+//             return "WARNING", "Adjust speed and prepare to stop."
 
-        if rd_val >= 99.0 and (v_val > 12.0 or v_val < 8.0):
-            return "WARNING", "Stop sign ahead."
+//         if rd_val >= 99.0 and (v_val > 12.0 or v_val < 8.0):
+//             return "WARNING", "Stop sign ahead."
 
-        return "NONE", ""
-=}
+//         return "NONE", ""
+// =}
 
 reactor Driver{
     // input instr
@@ -260,6 +260,98 @@ reactor LLMInference {
 
     state last_dl_tok = ""
     state last_dl_msg = ""
+    preamble{=
+        import ollama
+        import time
+        from enum import Enum
+
+        
+        ALLOWED = {"NONE", "WARNING", "ACTUATE"}
+
+        def run_llm_message(rd_val, v_val):
+            t0 = time.perf_counter()
+
+            r = ollama.chat(
+                model="llama3:8b",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are an agentic driving coach."
+                            "Output exactly ONE line: TOKEN|Message"
+                            "TOKEN must be one of: NONE, WARNING, ACTUATE"
+                            "Message must be one sentence, about stop sign approaching only."
+                            "Use distance_to_stop is s and measured in meters"
+                            "velocity is v measured using m/s only."
+
+                            "Rules for TOKEN:"
+                            "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
+                            "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
+                            "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
+                            "else TOKEN=NONE"
+
+                            "If TOKEN=NONE, output: NONE|"
+                            "Do not output anything else."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
+                    },
+                ],
+                options={"temperature": 0.0, "num_predict": 30},
+            )
+
+            ms = (time.perf_counter() - t0) * 1000.0
+            raw = (r.get("message", {}).get("content", "") or "").strip()
+
+            tok = "NONE"
+            msg = ""
+
+            if raw:
+                line = raw.splitlines()[0].strip()
+                parts = [p.strip() for p in line.split("|", 1)]
+                if len(parts) >= 1:
+                    tok = parts[0].upper().strip()
+                if len(parts) == 2:
+                    msg = parts[1].strip()
+
+            if tok not in ALLOWED:
+                tok = "NONE"
+                msg = ""
+
+            msg = msg.replace("$", "").replace("`", "").strip().strip('"').strip("'")
+
+            bad = ["token", "message", "rd=", "v=", "distance_to", "speed="]
+            if any(b in msg.lower() for b in bad):
+                msg = ""
+
+            if tok != "NONE" and not msg:
+                if tok == "WARNING":
+                    msg = "Slow down and prepare to stop."
+                elif tok == "ACTUATE":
+                    msg = "Brake now."
+
+            if tok == "NONE":
+                msg = ""
+
+            return tok, msg, ms
+
+        def fallback_policy(rd_val, v_val):
+            if rd_val <= 0.0:
+                return "NONE", ""
+
+            if rd_val <= 25.0 and v_val > 2.5:
+                return "ACTUATE", "Brake now."
+
+            if 50.0 < rd_val <= 60.0 and (v_val > 10.0 or v_val < 8.0):
+                return "WARNING", "Adjust speed and prepare to stop."
+
+            if rd_val >= 99.0 and (v_val > 12.0 or v_val < 8.0):
+                return "WARNING", "Stop sign ahead."
+
+            return "NONE", ""
+    =}
 
     reaction(s, v, st, h) -> control, instruction {=
       
