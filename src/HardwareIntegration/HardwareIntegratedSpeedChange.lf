@@ -17,38 +17,26 @@ reactor Driver{
         self.started = True
     =}
 
-    state steer_val = 2
-    state accel_val = 0.0
-    state brake_val = 0.0
-    state head_val = 5
-
-    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg, sen.accel_msg, sen.brake_msg)
-    -> accelerator, brake, steer, head {=
+    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg, sen.accel_msg, sen.brake_msg)-> accelerator, brake, steer, head {=
         if not self.started:
             return
 
-        if sen.head_msg.is_present:
-            self.head_val = sen.head_msg.value
+        eye1 = sen.eye_msg.value
+        head1 = sen.head_msg.value
+        brake1 = sen.brake_msg.value
+        accelerator1 = sen.accel_msg.value
+        steer1 = sen.steer_msg.value
 
-        if sen.steer_msg.is_present:
-            self.steer_val = sen.steer_msg.value
-
-        if sen.accel_msg.is_present:
-            self.accel_val = sen.accel_msg.value
-
-        if sen.brake_msg.is_present:
-            self.brake_val = sen.brake_msg.value
-
-        steer.set(self.steer_val)
-        accelerator.set(self.accel_val)
-        brake.set(self.brake_val)
-        head.set(self.head_val)
+        steer.set(steer1)
+        accelerator.set(accelerator1)
+        brake.set(brake1)
+        head.set(head1)
 
         print("---------------------------------------")
-        print(f"from driver head: {self.head_val}")
-        print(f"from driver brake: {self.brake_val}")
-        print(f"from driver accelerator: {self.accel_val}")
-        print(f"from driver steer: {self.steer_val}")
+        print(f"from driver head: {head1} \n")
+        print(f"from driver brake: {brake1} \n")
+        print(f"from driver accelerator: {accelerator1} \n")
+        print(f"from driver steer: {steer1} \n")
         print("---------------------------------------")
     =}
 }
@@ -75,8 +63,7 @@ reactor Car{
         self.started = True
     =}
 
-    reaction(accel_in, brake_in, steer_in, actuate_in, head_pos_in)
-    -> velocity, steer, head_pos {=
+    reaction(accel_in, brake_in, steer_in, actuate_in, head_pos_in)->velocity, steer, head_pos {=
         if not self.started:
             return
 
@@ -118,13 +105,14 @@ reactor Car{
                 self.acceleration_net = -0.5
 
         vel = self.velocity_init + self.acceleration_net * 0.1
+
         if vel < 0.0:
             vel = 0.0
 
         d = self.dist_init + vel * 0.1
 
-        print(f"from car Velocity: {vel}")
-        print(f"from car Distance: {d}")
+        print(f"from car Velocity: {vel}", flush=True)
+        print(f"from car Distance: {d}", flush=True)
 
         velocity.set(vel)
         steer.set(smsg)
@@ -142,7 +130,6 @@ reactor Environment{
     input v
     state pos_stop_sign = 100.0
     state passed = False
-
     output displacement
 
     reaction(start_signal) {=
@@ -166,7 +153,7 @@ reactor Environment{
         else:
             displacement.set(0.0)
 
-        print(f"displacement from the environment: {displacement.value}")
+        print(f"displacement from the environment: {displacement.value}", flush=True)
     =}
 }
 
@@ -176,9 +163,9 @@ reactor LLMInference {
     input st 
     input h
 
+    output ready
     output control
     output instruction
-    output ready
 
     state last_dl_tok = ""
     state last_dl_msg = ""
@@ -187,22 +174,47 @@ reactor LLMInference {
     preamble{=
         import ollama
         import time
+        from enum import Enum
 
         ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
         def run_llm_message(self, rd_val, v_val):
+            print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
             try:
                 r = ollama.chat(
                     model="llama3:8b",
                     messages=[
-                        {"role": "system", "content": "You are an agentic driving coach."},
-                        {"role": "user", "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s"},
+                        {
+                            "role": "system",
+                            "content": (
+                                "You are an agentic driving coach."
+                                "Output exactly ONE line: TOKEN|Message"
+                                "TOKEN must be one of: NONE, WARNING, ACTUATE"
+                                "Message must be one sentence, about stop sign approaching only."
+                                "Use distance_to_stop is s and measured in meters"
+                                "velocity is v measured using m/s only."
+                                "Rules for TOKEN:"
+                                "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
+                                "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
+                                "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
+                                "else TOKEN=NONE"
+                                "If TOKEN=NONE, output: NONE|"
+                                "Do not output anything else."
+                            ),
+                        },
+                        {
+                            "role": "user",
+                            "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
+                        },
                     ],
                     options={"temperature": 0.0, "num_predict": 30},
                 )
-            except Exception:
+            except Exception as e:
+                print(">>> LLM ERROR:", e, flush=True)
                 return "NONE", "", 0.0
+
+            print(">>> LLM RETURNED", flush=True)
 
             ms = (time.perf_counter() - t0) * 1000.0
             raw = (r.get("message", {}).get("content", "") or "").strip()
@@ -211,13 +223,30 @@ reactor LLMInference {
             msg = ""
 
             if raw:
-                parts = raw.split("|", 1)
-                tok = parts[0].upper().strip()
+                line = raw.splitlines()[0].strip()
+                parts = [p.strip() for p in line.split("|", 1)]
+                if len(parts) >= 1:
+                    tok = parts[0].upper().strip()
                 if len(parts) == 2:
                     msg = parts[1].strip()
 
             if tok not in ALLOWED:
                 tok = "NONE"
+                msg = ""
+
+            msg = msg.replace("$", "").replace("`", "").strip().strip('"').strip("'")
+
+            bad = ["token", "message", "rd=", "v=", "distance_to", "speed="]
+            if any(b in msg.lower() for b in bad):
+                msg = ""
+
+            if tok != "NONE" and not msg:
+                if tok == "WARNING":
+                    msg = "Slow down and prepare to stop."
+                elif tok == "ACTUATE":
+                    msg = "Brake now."
+
+            if tok == "NONE":
                 msg = ""
 
             return tok, msg, ms
@@ -236,9 +265,14 @@ reactor LLMInference {
 
     reaction(startup) -> ready {=
         import ollama
+
         print("Loading LLM...", flush=True)
 
-        ollama.chat(model="llama3:8b", messages=[{"role": "user", "content": "hi"}])
+        ollama.chat(
+            model="llama3:8b",
+            messages=[{"role": "user", "content": "hi"}],
+            options={"num_predict": 1}
+        )
 
         print("LLM READY", flush=True)
 
@@ -248,35 +282,69 @@ reactor LLMInference {
 
     reaction(s, v, st, h) -> control, instruction {=
         if not self.is_ready:
+            print("Waiting for LLM...", flush=True)
             return
 
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value if v.value is not None else 0.0
+        st_val = st.value
+
+        if st_val==0:
+            steer = "LEFT"
+        elif st_val == 1:
+            steer = "RIGHT"
+        else:
+            steer = "CENTER"
 
         if rd_val <= 0.0:
             control.set("NONE")
             instruction.set("")
             return
 
-        tok, msg, _ = self.run_llm_message(rd_val, v_val)
+        print("#################LoggingforReference###############################", flush=True)
+        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print(f"[speed]: {v_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print(f"[steer]: {steer}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
+
+        tok, llm_instruction, ms = self.run_llm_message(rd_val, v_val)
+
         control.set(tok)
-        instruction.set(msg)
+        instruction.set(llm_instruction)
+
+        print(f"[LLM] {ms:.1f} ms -> {tok} | {llm_instruction}", flush=True)
     =}
 
     deadline(250 msec) {=
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value if v.value is not None else 0.0
 
-        tok, msg = self.fallback_policy(rd_val, v_val)
+        if rd_val <= 0.0:
+            tok, llm_instruction = "NONE", ""
+        else:
+            tok, llm_instruction = self.fallback_policy(rd_val, v_val)
 
-        if tok == self.last_dl_tok and msg == self.last_dl_msg:
+        if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
             return
 
         self.last_dl_tok = tok
-        self.last_dl_msg = msg
+        self.last_dl_msg = llm_instruction
 
         control.set(tok)
-        instruction.set(msg)
+        instruction.set(llm_instruction)
+
+        print("#################LoggingforReference###############################", flush=True)
+        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print(f"[speed]: {v_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
+        print(f"[DEADLINE] fallback -> {tok} | {llm_instruction}", flush=True)
     =}
 }
 
@@ -401,7 +469,6 @@ reactor Coach{
 }
 
 federated reactor at 10.218.100.78 {
-
     d = new Driver()
     c = new Car()
     en = new Environment()
