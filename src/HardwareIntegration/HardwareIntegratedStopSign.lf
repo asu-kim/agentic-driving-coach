@@ -2,101 +2,101 @@ target Python {keepalive: true}
 
 import SensorInputs from "SensorInputs.lf"
 
-// preamble{=
-//     import ollama
-//     import time
-//     from enum import Enum
+preamble{=
+    import ollama
+    import time
+    from enum import Enum
 
     
-//     ALLOWED = {"NONE", "WARNING", "ACTUATE"}
+    ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
-//     def run_llm_message(rd_val, v_val):
-//         t0 = time.perf_counter()
+    def run_llm_message(rd_val, v_val):
+        t0 = time.perf_counter()
 
-//         r = ollama.chat(
-//             model="llama3:8b",
-//             messages=[
-//                 {
-//                     "role": "system",
-//                     "content": (
-//                         "You are an agentic driving coach."
-//                         "Output exactly ONE line: TOKEN|Message"
-//                         "TOKEN must be one of: NONE, WARNING, ACTUATE"
-//                         "Message must be one sentence, about stop sign approaching only."
-//                         "Use distance_to_stop is s and measured in meters"
-//                         "velocity is v measured using m/s only."
+        r = ollama.chat(
+            model="llama3:8b",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are an agentic driving coach."
+                        "Output exactly ONE line: TOKEN|Message"
+                        "TOKEN must be one of: NONE, WARNING, ACTUATE"
+                        "Message must be one sentence, about stop sign approaching only."
+                        "Use distance_to_stop is s and measured in meters"
+                        "velocity is v measured using m/s only."
 
-//                         "Rules for TOKEN:"
-//                         "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
-//                         "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
-//                         "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
-//                         "else TOKEN=NONE"
+                        "Rules for TOKEN:"
+                        "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
+                        "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
+                        "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
+                        "else TOKEN=NONE"
 
-//                         "If TOKEN=NONE, output: NONE|"
-//                         "Do not output anything else."
-//                     ),
-//                 },
-//                 {
-//                     "role": "user",
-//                     "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
-//                 },
-//             ],
-//             options={"temperature": 0.0, "num_predict": 30},
-//         )
+                        "If TOKEN=NONE, output: NONE|"
+                        "Do not output anything else."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
+                },
+            ],
+            options={"temperature": 0.0, "num_predict": 30},
+        )
 
-//         ms = (time.perf_counter() - t0) * 1000.0
-//         raw = (r.get("message", {}).get("content", "") or "").strip()
+        ms = (time.perf_counter() - t0) * 1000.0
+        raw = (r.get("message", {}).get("content", "") or "").strip()
 
-//         tok = "NONE"
-//         msg = ""
+        tok = "NONE"
+        msg = ""
 
-//         if raw:
-//             line = raw.splitlines()[0].strip()
-//             parts = [p.strip() for p in line.split("|", 1)]
-//             if len(parts) >= 1:
-//                 tok = parts[0].upper().strip()
-//             if len(parts) == 2:
-//                 msg = parts[1].strip()
+        if raw:
+            line = raw.splitlines()[0].strip()
+            parts = [p.strip() for p in line.split("|", 1)]
+            if len(parts) >= 1:
+                tok = parts[0].upper().strip()
+            if len(parts) == 2:
+                msg = parts[1].strip()
 
-//         if tok not in ALLOWED:
-//             tok = "NONE"
-//             msg = ""
+        if tok not in ALLOWED:
+            tok = "NONE"
+            msg = ""
 
-//         msg = msg.replace("$", "").replace("`", "").strip().strip('"').strip("'")
+        msg = msg.replace("$", "").replace("`", "").strip().strip('"').strip("'")
 
-//         bad = ["token", "message", "rd=", "v=", "distance_to", "speed="]
-//         if any(b in msg.lower() for b in bad):
-//             msg = ""
+        bad = ["token", "message", "rd=", "v=", "distance_to", "speed="]
+        if any(b in msg.lower() for b in bad):
+            msg = ""
 
-//         if tok != "NONE" and not msg:
-//             if tok == "WARNING":
-//                 msg = "Slow down and prepare to stop."
-//             elif tok == "ACTUATE":
-//                 msg = "Brake now."
+        if tok != "NONE" and not msg:
+            if tok == "WARNING":
+                msg = "Slow down and prepare to stop."
+            elif tok == "ACTUATE":
+                msg = "Brake now."
 
-//         if tok == "NONE":
-//             msg = ""
+        if tok == "NONE":
+            msg = ""
 
-//         return tok, msg, ms
+        return tok, msg, ms
 
-//     def fallback_policy(rd_val, v_val):
-//         if rd_val <= 0.0:
-//             return "NONE", ""
+    def fallback_policy(rd_val, v_val):
+        if rd_val <= 0.0:
+            return "NONE", ""
 
-//         if rd_val <= 25.0 and v_val > 2.5:
-//             return "ACTUATE", "Brake now."
+        if rd_val <= 25.0 and v_val > 2.5:
+            return "ACTUATE", "Brake now."
 
-//         if 50.0 < rd_val <= 60.0 and (v_val > 10.0 or v_val < 8.0):
-//             return "WARNING", "Adjust speed and prepare to stop."
+        if 50.0 < rd_val <= 60.0 and (v_val > 10.0 or v_val < 8.0):
+            return "WARNING", "Adjust speed and prepare to stop."
 
-//         if rd_val >= 99.0 and (v_val > 12.0 or v_val < 8.0):
-//             return "WARNING", "Stop sign ahead."
+        if rd_val >= 99.0 and (v_val > 12.0 or v_val < 8.0):
+            return "WARNING", "Stop sign ahead."
 
-//         return "NONE", ""
-// =}
+        return "NONE", ""
+=}
 
 reactor Driver{
-    input instr
+    // input instr
     // input eye_reading
     // input head_reading
     // input brake_reading 
@@ -106,11 +106,11 @@ reactor Driver{
     output accelerator
     output brake
     output head
-    output eye
+    // output eye
     sen = new SensorInputs()
     // reaction(eye_reading, head_reading, brake_reading, accel_reading, steer_reading, instr)-> eye, accelerator, brake, steer, head{=
         # if t.is_present: 
-    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg,sen.accel_msg, sen.brake_msg, instr)-> eye, accelerator, brake, steer, head{=      
+    reaction(sen.eye_msg, sen.head_msg, sen.steer_msg,sen.accel_msg, sen.brake_msg)-> accelerator, brake, steer, head{=      
         eye1 = sen.eye_msg.value
         head1 = sen.head_msg.value
         brake1 = sen.brake_msg.value
@@ -121,10 +121,10 @@ reactor Driver{
         accelerator.set(accelerator1)
         brake.set(brake1)
         head.set(head1)
-        eye.set(eye1)
+        # eye.set(eye1)
 
         print("---------------------------------------")
-        print(f"from driver Eye: {eye1} \n")
+        # print(f"from driver Eye: {eye1} \n")
         print(f"from driver head: {head1} \n")
         print(f"from driver brake: {brake1} \n")
         print(f"from driver accelerator: {accelerator1} \n")
@@ -144,7 +144,7 @@ reactor Car{
     input brake_in
     input actuate_in 
     input head_pos_in  
-    input eye_pos_in
+    // input eye_pos_in
 
     state acceleration_net
     state velocity_init = 0.0
@@ -153,15 +153,18 @@ reactor Car{
     output velocity
     output steer
     output head_pos
-    output eye_pos
+    // output eye_pos
     
 
-    reaction(accel_in, brake_in, actuate_in)->velocity, steer, head_pos, eye_pos{=
+    reaction(accel_in, brake_in, steer_in, actuate_in, head_pos_in)->velocity, steer, head_pos{=
         amsg = accel_in.value if accel_in.is_present else 0.0
         bmsg = brake_in.value if brake_in.is_present else 0.0
         amsg = 0.0 if amsg is None else float(amsg)
         bmsg = 0.0 if bmsg is None else float(bmsg)
+        act  = actuate_in.value if actuate_in.is_present else None
 
+        smsg = steer_in.value if steer_in.is_present else 2
+        hmsg = head_pos_in.value if head_pos_in.is_present else 5
 
         def acel_cal(p):
             p = max(0.0, min(1.0, p))
@@ -179,13 +182,26 @@ reactor Car{
                 return -(5.4 * p)
             else:
                 return -(9.0*(p**2))
-        if bmsg > 0.0:
-            self.acceleration_net = brake_cal(bmsg)
-        elif amsg > 0.0:
-            self.acceleration_net = acel_cal(amsg)
+        # if bmsg > 0.0:
+        #     self.acceleration_net = brake_cal(bmsg)
+        # elif amsg > 0.0:
+        #     self.acceleration_net = acel_cal(amsg)
+        # else:
+        #     #for coasting 
+        #     self.acceleration_net = -0.5
+
+        if act == 11:
+            #external
+            self.acceleration_net = -9.0
+
         else:
-            #for coasting 
-            self.acceleration_net = -0.5
+            #NORMAL DRIVER CONTROL
+            if bmsg > 0.0:
+                self.acceleration_net = brake_cal(bmsg)
+            elif amsg > 0.0:
+                self.acceleration_net = acel_cal(amsg)
+            else:
+                self.acceleration_net = -0.5
 
         vel = self.velocity_init + self.acceleration_net * 0.1
 
@@ -198,6 +214,9 @@ reactor Car{
         print(f"from car Distance: {d}", flush=True)
 
         velocity.set(vel)
+        steer.set(smsg)
+        head_pos.set(hmsg)
+        # eye_pos.set(emsg)
 
         self.velocity_init = vel
         self.dist_init = d
@@ -229,215 +248,225 @@ reactor Environment{
     =}
 }
 
-// reactor LLMInference {
-//     input s
-//     input v
-//     input st 
-//     input h
+reactor LLMInference {
+    input s
+    input v
+    input st 
+    input h
     
 
-//     output control
-//     output instruction
+    output control
+    output instruction
 
-//     state last_dl_tok = ""
-//     state last_dl_msg = ""
+    state last_dl_tok = ""
+    state last_dl_msg = ""
 
-//     reaction(s, v, st, h) -> control, instruction {=
+    reaction(s, v, st, h) -> control, instruction {=
       
-//         rd_val = s.value if s.value is not None else 0.0
-//         v_val  = v.value if v.value is not None else 0.0
+        rd_val = s.value if s.value is not None else 0.0
+        v_val  = v.value if v.value is not None else 0.0
+        st_val = st.value
+
+        if st_val==0:
+            steer = "LEFT"
+        elif st_val == 1:
+            steer = "RIGHT"
+        else:
+            steer = "CENTER"
 
         
-//         if rd_val <= 0.0:
-//             control.set("NONE")
-//             instruction.set("")
-//             return
+        if rd_val <= 0.0:
+            control.set("NONE")
+            instruction.set("")
+            return
 
-//         print("#################LoggingforReference###############################", flush=True)
-//         print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
-//         print("------------------------------------------------", flush=True)
-//         print(f"[speed]: {v_val:.2f}", flush=True)
-//         print("------------------------------------------------", flush=True)
-//         print("logical", lf.time.logical_elapsed()/1e6, flush=True)
-//         print("physical", lf.time.physical_elapsed()/1e6, flush=True)
+        print("#################LoggingforReference###############################", flush=True)
+        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print(f"[speed]: {v_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print(f"[steer]: {steer}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
 
-//         tok, llm_instruction, ms = run_llm_message(rd_val, v_val)
-
-        
-//         self.check_deadline()
-
-//         control.set(tok)
-//         instruction.set(llm_instruction)
-
-//         print(f"[LLM] {ms:.1f} ms -> {tok} | {llm_instruction}", flush=True)
-//     =}
-
-//     deadline(250 msec) {=
-//         rd_val = s.value if s.value is not None else 0.0
-//         v_val  = v.value  if v.value is not None else 0.0
-
-
-//         if rd_val <= 0.0:
-//             tok, llm_instruction = "NONE", ""
-//         else:
-//             tok, llm_instruction = fallback_policy(rd_val, v_val)
+        tok, llm_instruction, ms = run_llm_message(rd_val, v_val)
 
         
-//         if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
-//             return
-//         self.last_dl_tok = tok
-//         self.last_dl_msg = llm_instruction
+        self.check_deadline()
 
-//         ctrl.set(tok)
-//         instruction.set(llm_instruction)
+        control.set(tok)
+        instruction.set(llm_instruction)
 
-//         print("#################LoggingforReference###############################", flush=True)
-//         print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
-//         print("------------------------------------------------", flush=True)
+        print(f"[LLM] {ms:.1f} ms -> {tok} | {llm_instruction}", flush=True)
+    =}
 
-//         print(f"[speed]: {v_val:.2f}", flush=True)
-//         print("------------------------------------------------", flush=True)
-//         print("logical", lf.time.logical_elapsed()/1e6, flush=True)
-//         print("physical", lf.time.physical_elapsed()/1e6, flush=True)
-//         print(f"[DEADLINE] fallback -> {tok} | {llm_instruction}", flush=True)
-//     =}
-// }
+    deadline(250 msec) {=
+        rd_val = s.value if s.value is not None else 0.0
+        v_val  = v.value  if v.value is not None else 0.0
 
 
-// reactor Planner {
-//   input ctrl
-//   input instr
-//   input s
-//   input v
-//   output act
-//   output planned_instr
+        if rd_val <= 0.0:
+            tok, llm_instruction = "NONE", ""
+        else:
+            tok, llm_instruction = fallback_policy(rd_val, v_val)
+
+        
+        if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
+            return
+        self.last_dl_tok = tok
+        self.last_dl_msg = llm_instruction
+
+        control.set(tok)
+        instruction.set(llm_instruction)
+
+        print("#################LoggingforReference###############################", flush=True)
+        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+
+        print(f"[speed]: {v_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
+        print(f"[DEADLINE] fallback -> {tok} | {llm_instruction}", flush=True)
+    =}
+}
+
+
+reactor Planner {
+  input ctrl
+  input instr
+  input s
+  input v
+  output act
+  output planned_instr
   
 
-//   state last_warn_ns = -1000000000000
-//   state last_printed = ""
+  state last_warn_ns = -1000000000000
+  state last_printed = ""
 
-//   initial mode monitoring {
-//     reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
-//       throttle = 1000000000
-//       kw  = (ctrl.value or "NONE").strip()
-//       instruction = (instr.value or "").strip()
-//       rd  = s.value if s.value is not None else 0.0
+  initial mode monitoring {
+    reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
+      throttle = 1000000000
+      kw  = (ctrl.value or "NONE").strip()
+      instruction = (instr.value or "").strip()
+      rd  = s.value if s.value is not None else 0.0
 
-//       now_ns = lf.time.logical_elapsed()
+      now_ns = lf.time.logical_elapsed()
 
      
-//       if kw == "ACTUATE" and rd > 0.0:
-//         if instruction and instruction != self.last_printed:
-//         #   print(f"[VERBAL] {kw} | {instruction}", flush=True)
-//           i = f"[VERBAL] {kw} | {instruction}"
-//           planned_instr.set(i)
-//           self.last_printed = instruction
-//         actuate.set()
-//         return
+      if kw == "ACTUATE" and rd > 0.0:
+        if instruction and instruction != self.last_printed:
+        #   print(f"[VERBAL] {kw} | {instruction}", flush=True)
+          i = f"[VERBAL] {kw} | {instruction}"
+          planned_instr.set(i)
+          self.last_printed = instruction
+        actuate.set()
+        return
 
       
-//       if kw == "WARNING":
-//         if (now_ns - self.last_warn_ns) >= throttle:
-//           if instruction and instruction != self.last_printed:
-//             # print(f"[VERBAL] {kw} | {instruction}", flush=True)
-//             i = f"[VERBAL] {kw} | {instruction}"
-//             planned_instr.set(i)
-//             self.last_printed = instruction
-//           self.last_warn_ns = now_ns
-//         warning.set()
-//         return
-//     =}
-//   }
+      if kw == "WARNING":
+        if (now_ns - self.last_warn_ns) >= throttle:
+          if instruction and instruction != self.last_printed:
+            # print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            i = f"[VERBAL] {kw} | {instruction}"
+            planned_instr.set(i)
+            self.last_printed = instruction
+          self.last_warn_ns = now_ns
+        warning.set()
+        return
+    =}
+  }
 
-//   mode warning {
-//     reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
-//       throttle = 1000000000
-//       kw  = (ctrl.value or "NONE").strip()
-//       instruction = (instr.value or "").strip()
-//       rd  = s.value if s.value is not None else 0.0
+  mode warning {
+    reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
+      throttle = 1000000000
+      kw  = (ctrl.value or "NONE").strip()
+      instruction = (instr.value or "").strip()
+      rd  = s.value if s.value is not None else 0.0
 
-//       now_ns = lf.time.logical_elapsed()
+      now_ns = lf.time.logical_elapsed()
 
-//       if kw == "ACTUATE" and rd > 0.0:
-//         if instruction and instruction != self.last_printed:
-//           i = f"[VERBAL] {kw} | {instruction}"
-//           planned_instr.set(i)
-//           self.last_printed = instruction
-//         actuate.set()
-//         return
+      if kw == "ACTUATE" and rd > 0.0:
+        if instruction and instruction != self.last_printed:
+          i = f"[VERBAL] {kw} | {instruction}"
+          planned_instr.set(i)
+          self.last_printed = instruction
+        actuate.set()
+        return
 
-//       if kw == "NONE":
-//         monitoring.set()
-//         return
+      if kw == "NONE":
+        monitoring.set()
+        return
 
-//       if kw == "WARNING":
-//         if (now_ns - self.last_warn_ns) >= throttle:
-//           if instruction and instruction != self.last_printed:
-//             # print(f"[VERBAL] {kw} | {instruction}", flush=True)
-//             i = f"[VERBAL] {kw} | {instruction}"
-//             planned_instr.set(i)
-//             self.last_printed = instruction
-//           self.last_warn_ns = now_ns
-//         return
-//     =}
-//   }
+      if kw == "WARNING":
+        if (now_ns - self.last_warn_ns) >= throttle:
+          if instruction and instruction != self.last_printed:
+            # print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            i = f"[VERBAL] {kw} | {instruction}"
+            planned_instr.set(i)
+            self.last_printed = instruction
+          self.last_warn_ns = now_ns
+        return
+    =}
+  }
 
-//   mode actuate {
-//     reaction(ctrl, s, v) -> act, monitoring, planned_instr {=
-//       kw = (ctrl.value or "NONE").strip()
-//       rd = s.value if s.value is not None else 0.0
+  mode actuate {
+    reaction(ctrl, s, v) -> act, monitoring, planned_instr {=
+      kw = (ctrl.value or "NONE").strip()
+      rd = s.value if s.value is not None else 0.0
 
-//       if kw != "ACTUATE" or rd <= 0.0:
-//         monitoring.set()
-//         return
-//       i = f"[VERBAL] {kw} | Sent EmergencyBraking"
+      if kw != "ACTUATE" or rd <= 0.0:
+        monitoring.set()
+        return
+      i = f"[VERBAL] {kw} | Sent EmergencyBraking"
      
-//       act.set(Brake(6).name)
-//       planned_instr.set(i)
+      act.set(11)
+      planned_instr.set(i)
 
-//       monitoring.set()
-//     =}
-//   }
-// }
-// reactor Coach{
-//     input s
-//     input v
-//     input st 
-//     input h
+      monitoring.set()
+    =}
+  }
+}
+reactor Coach{
+    input s
+    input v
+    input st 
+    input h
 
-//     output act
-//     output instr
+    output act
+    output instr
 
-//     llm = new LLMInference()
-//     a = new Planner()
+    llm = new LLMInference()
+    a = new Planner()
 
-//     s -> llm.s
-//     v  -> llm.v
-//     st -> llm.st
-//     h -> llm.h
+    s -> llm.s
+    v  -> llm.v
+    st -> llm.st
+    h -> llm.h
 
-//     llm.control -> a.ctrl
-//     llm.instruction -> a.instr
+    llm.control -> a.ctrl
+    llm.instruction -> a.instr
 
-//     s -> a.s
-//     v  -> a.v
+    s -> a.s
+    v  -> a.v
     
-//     a.act -> act
-//     a.planned_instr -> instr
-// }
+    a.act -> act
+    a.planned_instr -> instr
+}
 
 federated reactor at 10.218.100.78 {
     d = new Driver()
     // sen = new SensorInputs()
     c = new Car()
     en = new Environment()
-    // adc = new Coach()
+    adc = new Coach()
 
     d.accelerator -> c.accel_in 
     d.brake -> c.brake_in 
     d.steer -> c.steer_in 
     d.head-> c.head_pos_in 
-    d.eye -> c.eye_pos_in 
+    // d.eye -> c.eye_pos_in 
 
     // sen.eye_msg -> d.eye_reading
     // sen.brake_msg -> d.brake_reading
@@ -446,13 +475,13 @@ federated reactor at 10.218.100.78 {
     // sen.steer_msg -> d.steer_reading
 
     c.velocity -> en.v
-    // c.velocity -> adc.v
-    // c.steer -> adc.st
-    // c.head_pos -> adc.h
+    c.velocity -> adc.v
+    c.steer -> adc.st
+    c.head_pos -> adc.h
 
-    // en.displacement -> adc.s
+    en.displacement -> adc.s
 
 
-    // adc.act -> c.actuate_in after 200 ms
-    // adc.instr -> d.instr  
+    adc.act -> c.actuate_in after 200 ms
+    // adc.instr -> d.instr  after 200 ms
 }
