@@ -179,6 +179,7 @@ reactor LLMInference {
         ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
         def run_llm_message(self, rd_val, v_val):
+            import time
             print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
             try:
