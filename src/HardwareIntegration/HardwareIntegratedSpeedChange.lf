@@ -161,7 +161,7 @@ reactor Environment{
     state started = False
 
     input v
-    state pos_stop_sign = 100.0
+    state pos_speed_change = 100.0
     state passed = False
     output displacement
 
@@ -177,12 +177,12 @@ reactor Environment{
         step = vn * 0.1
 
         if not self.passed:
-            self.pos_stop_sign -= step
-            if self.pos_stop_sign <= 0.0:
-                self.pos_stop_sign = 0.0
+            self.pos_speed_change -= step
+            if self.pos_speed_change <= 0.0:
+                self.pos_speed_change = 0.0
                 self.passed = True
 
-            displacement.set(self.pos_stop_sign)
+            displacement.set(self.pos_speed_change)
         else:
             displacement.set(0.0)
 
