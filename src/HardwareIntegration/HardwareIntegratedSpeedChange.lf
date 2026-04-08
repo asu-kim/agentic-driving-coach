@@ -14,7 +14,7 @@ reactor Driver{
     sen = new SensorInputs()
 
     reaction(startup) {=
-        a.schedule(800 msec)
+        a.schedule(800_000_000)
     =}
 
     reaction(a) {=
@@ -76,7 +76,7 @@ reactor Car{
     output head_pos
 
     reaction(startup) {=
-        a.schedule(800 msec)
+        a.schedule(800_000_000)
     =}
 
     reaction(a) {=
@@ -155,7 +155,7 @@ reactor Environment{
     output displacement
 
     reaction(startup) {=
-        a.schedule(800 msec)
+        a.schedule(800_000_000)
     =}
 
     reaction(a) {=
