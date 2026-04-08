@@ -21,11 +21,10 @@ reactor Driver{
         if not self.started:
             return
 
-        eye1 = sen.eye_msg.value
-        head1 = sen.head_msg.value
-        brake1 = sen.brake_msg.value
-        accelerator1 = sen.accel_msg.value
-        steer1 = sen.steer_msg.value
+        head1 = sen.head_msg.value if sen.head_msg.is_present else 5
+        steer1 = sen.steer_msg.value if sen.steer_msg.is_present else 2
+        brake1 = sen.brake_msg.value if sen.brake_msg.is_present else 0.0
+        accelerator1 = sen.accel_msg.value if sen.accel_msg.is_present else 0.0
 
         steer.set(steer1)
         accelerator.set(accelerator1)
@@ -179,6 +178,7 @@ reactor LLMInference {
         ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
         def run_llm_message(self, rd_val, v_val):
+            import ollama
             import time
             print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
