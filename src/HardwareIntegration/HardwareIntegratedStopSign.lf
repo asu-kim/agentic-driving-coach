@@ -269,38 +269,45 @@ reactor LLMInference {
         ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
         def run_llm_message(self, rd_val, v_val):
+            print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
+            try:
 
-            r = ollama.chat(
-                model="llama3:8b",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": (
-                            "You are an agentic driving coach."
-                            "Output exactly ONE line: TOKEN|Message"
-                            "TOKEN must be one of: NONE, WARNING, ACTUATE"
-                            "Message must be one sentence, about stop sign approaching only."
-                            "Use distance_to_stop is s and measured in meters"
-                            "velocity is v measured using m/s only."
+                r = ollama.chat(
+                    model="llama3:8b",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": (
+                                "You are an agentic driving coach."
+                                "Output exactly ONE line: TOKEN|Message"
+                                "TOKEN must be one of: NONE, WARNING, ACTUATE"
+                                "Message must be one sentence, about stop sign approaching only."
+                                "Use distance_to_stop is s and measured in meters"
+                                "velocity is v measured using m/s only."
 
-                            "Rules for TOKEN:"
-                            "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
-                            "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
-                            "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
-                            "else TOKEN=NONE"
+                                "Rules for TOKEN:"
+                                "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
+                                "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
+                                "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
+                                "else TOKEN=NONE"
 
-                            "If TOKEN=NONE, output: NONE|"
-                            "Do not output anything else."
-                        ),
-                    },
-                    {
-                        "role": "user",
-                        "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
-                    },
-                ],
-                options={"temperature": 0.0, "num_predict": 30},
-            )
+                                "If TOKEN=NONE, output: NONE|"
+                                "Do not output anything else."
+                            ),
+                        },
+                        {
+                            "role": "user",
+                            "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
+                        },
+                    ],
+                    options={"temperature": 0.0, "num_predict": 30},
+                )
+            except Exception as e:
+                print(">>> LLM ERROR:", e, flush=True)
+                return "NONE", "", 0.0
+
+            print(">>> LLM RETURNED", flush=True)
 
             ms = (time.perf_counter() - t0) * 1000.0
             raw = (r.get("message", {}).get("content", "") or "").strip()
