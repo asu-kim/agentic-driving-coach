@@ -268,7 +268,7 @@ reactor LLMInference {
         
         ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
-        def run_llm_message(rd_val, v_val):
+        def run_llm_message(self, rd_val, v_val):
             t0 = time.perf_counter()
 
             r = ollama.chat(
@@ -337,7 +337,7 @@ reactor LLMInference {
 
             return tok, msg, ms
 
-        def fallback_policy(rd_val, v_val):
+        def fallback_policy(self, rd_val, v_val):
             if rd_val <= 0.0:
                 return "NONE", ""
 
