@@ -2,8 +2,7 @@ target Python
 
 preamble {=
     import os
-    # os.environ["OMP_NUM_THREADS"] = "1"
-    # os.environ["OPENBLAS_NUM_THREADS"] = "1"
+   
 
     import cv2
     import numpy as np
@@ -19,7 +18,7 @@ reactor FaceLandmark{
     state sock
 
     reaction(startup) {=
-        import socket
+        # import socket
 
         # try:
         #     self.sock = socket.socket()
