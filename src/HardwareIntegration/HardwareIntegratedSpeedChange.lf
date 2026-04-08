@@ -182,7 +182,7 @@ reactor LLMInference {
             import time
             print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
-             ALLOWED = {"NONE", "WARNING", "ACTUATE"}
+            ALLOWED = {"NONE", "WARNING", "ACTUATE"}
             try:
                 r = ollama.chat(
                     model="llama3:8b",
