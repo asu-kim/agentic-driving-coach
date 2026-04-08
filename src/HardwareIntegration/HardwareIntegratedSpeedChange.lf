@@ -523,8 +523,8 @@ reactor Coach{
     =}
 
     reaction(coachclock) {=
-        if not llm.is_ready:
-            return
+        # if not llm.is_ready:
+        #     return
 
         llm.s.set(self.s_val)
         llm.v.set(self.v_val)
