@@ -22,12 +22,28 @@ reactor FaceLandmark{
         if img is None:
             return
 
-        out = self.detector.process(img)
-
-        if out is None:
+        if not isinstance(img, np.ndarray):
             return
 
-        head_msg.set(out["head"])
-        eye_msg.set(out["eye"])
+        if img.ndim != 3:
+            return
+
+        # SAFE COPY
+        img = img.copy()
+        img = np.ascontiguousarray(img)
+
+        try:
+            result = self.detector.process(img)
+        except Exception as e:
+            print("Detection error:", e, flush=True)
+            return
+
+        if result is None:
+            head_msg.set(5)
+            eye_msg.set(8)
+            return
+
+        head_msg.set(result["head"])
+        eye_msg.set(result["eye"])
     =}
 }
