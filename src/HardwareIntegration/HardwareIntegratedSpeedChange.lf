@@ -87,6 +87,12 @@ reactor Car{
     state acceleration_net
     state velocity_init = 0.0
     state dist_init = 0.0
+    timer carclock(0, 100 msec)
+    state accel_val = 0.0
+    state brake_val = 0.0
+    state steer_val = 2
+    state head_val = 5
+    state act_val 
 
     output velocity
     output steer
@@ -95,61 +101,109 @@ reactor Car{
     reaction(start_signal) {=
         self.started = True
     =}
+    reaction(accel_in, brake_in, steer_in, actuate_in, head_pos_in) {=
+        if accel_in.is_present:
+            self.accel_val = float(accel_in.value)
 
-    reaction(accel_in, brake_in, steer_in, actuate_in, head_pos_in)->velocity, steer, head_pos {=
+        if brake_in.is_present:
+            self.brake_val = float(brake_in.value)
+
+        if steer_in.is_present:
+            self.steer_val = steer_in.value
+
+        if head_pos_in.is_present:
+            self.head_val = head_pos_in.value
+
+        if actuate_in.is_present:
+            self.act_val = actuate_in.value
+    =}
+
+    // reaction(accel_in, brake_in, steer_in, actuate_in, head_pos_in)->velocity, steer, head_pos {=
+    //     if not self.started:
+    //         return
+
+    //     amsg = accel_in.value if accel_in.is_present else 0.0
+    //     bmsg = brake_in.value if brake_in.is_present else 0.0
+    //     amsg = 0.0 if amsg is None else float(amsg)
+    //     bmsg = 0.0 if bmsg is None else float(bmsg)
+    //     act  = actuate_in.value if actuate_in.is_present else None
+
+    //     smsg = steer_in.value if steer_in.is_present else 2
+    //     hmsg = head_pos_in.value if head_pos_in.is_present else 5
+
+    //     def acel_cal(p):
+    //         p = max(0.0, min(1.0, p))
+    //         if p<0.1:
+    //             return p
+    //         elif p<0.6:
+    //             return 2.4 * p
+    //         else:
+    //             return 4.0*(p**2)
+
+    //     def brake_cal(p):
+    //         p = max(0.0, min(1.0, p))
+    //         if p<0.1:
+    //             return p
+    //         elif p<0.6:
+    //             return -(5.4 * p)
+    //         else:
+    //             return -(9.0*(p**2))
+
+    //     if act == 11:
+    //         self.acceleration_net = -9.0
+    //     else:
+    //         if bmsg > 0.0:
+    //             self.acceleration_net = brake_cal(bmsg)
+    //         elif amsg > 0.0:
+    //             self.acceleration_net = acel_cal(amsg)
+    //         else:
+    //             self.acceleration_net = -0.5
+
+    //     vel = self.velocity_init + self.acceleration_net * 0.1
+
+    //     if vel < 0.0:
+    //         vel = 0.0
+
+    //     d = self.dist_init + vel * 0.1
+
+    //     print(f"from car Velocity: {vel}", flush=True)
+    //     print(f"from car Distance: {d}", flush=True)
+
+    //     velocity.set(vel)
+    //     steer.set(smsg)
+    //     head_pos.set(hmsg)
+
+    //     self.velocity_init = vel
+    //     self.dist_init = d
+    // =}
+    reaction(carclock) -> velocity, steer, head_pos {=
         if not self.started:
             return
 
-        amsg = accel_in.value if accel_in.is_present else 0.0
-        bmsg = brake_in.value if brake_in.is_present else 0.0
-        amsg = 0.0 if amsg is None else float(amsg)
-        bmsg = 0.0 if bmsg is None else float(bmsg)
-        act  = actuate_in.value if actuate_in.is_present else None
+        amsg = self.accel_val
+        bmsg = self.brake_val
+        act  = self.act_val
 
-        smsg = steer_in.value if steer_in.is_present else 2
-        hmsg = head_pos_in.value if head_pos_in.is_present else 5
-
-        def acel_cal(p):
-            p = max(0.0, min(1.0, p))
-            if p<0.1:
-                return p
-            elif p<0.6:
-                return 2.4 * p
-            else:
-                return 4.0*(p**2)
-
-        def brake_cal(p):
-            p = max(0.0, min(1.0, p))
-            if p<0.1:
-                return p
-            elif p<0.6:
-                return -(5.4 * p)
-            else:
-                return -(9.0*(p**2))
-
+        # thresholds (IMPORTANT)
         if act == 11:
-            self.acceleration_net = -9.0
+            acc_net = -9.0
+        elif bmsg > 0.2:
+            acc_net = -(5.4 * bmsg)
+        elif amsg > 0.05:
+            acc_net = 2.4 * amsg
         else:
-            if bmsg > 0.0:
-                self.acceleration_net = brake_cal(bmsg)
-            elif amsg > 0.0:
-                self.acceleration_net = acel_cal(amsg)
-            else:
-                self.acceleration_net = -0.5
+            acc_net = 0.3
 
-        vel = self.velocity_init + self.acceleration_net * 0.1
-
-        if vel < 0.0:
-            vel = 0.0
+        vel = self.velocity_init + acc_net * 0.1
+        vel = max(0.0, vel)
 
         d = self.dist_init + vel * 0.1
 
-        print(f"from car Velocity: {vel}", flush=True)
-        print(f"from car Distance: {d}", flush=True)
+        print(f"[CAR CLOCK] vel={vel} acc={acc_net}", flush=True)
 
         velocity.set(vel)
-        steer.set(smsg)
-        head_pos.set(hmsg)
+        steer.set(self.steer_val)
+        head_pos.set(self.head_val)
 
         self.velocity_init = vel
         self.dist_init = d
@@ -164,20 +218,45 @@ reactor Environment{
     state pos_speed_change = 100.0
     state passed = False
     output displacement
+    timer envclock(0, 100 msec)
+    state v_val = 0.0
 
     reaction(start_signal) {=
         self.started = True
     =}
+    reaction(v) {=
+        if v.is_present:
+            self.v_val = float(v.value)
+    =}
  
-    reaction(v)->displacement {=
+    // reaction(v)->displacement {=
+    //     if not self.started:
+    //         return
+
+    //     vn = float(v.value)
+    //     step = vn * 0.1
+
+    //     if not self.passed:
+    //         self.pos_speed_change -= step
+    //         if self.pos_speed_change <= 0.0:
+    //             self.pos_speed_change = 0.0
+    //             self.passed = True
+
+    //         displacement.set(self.pos_speed_change)
+    //     else:
+    //         displacement.set(0.0)
+
+    //     print(f"displacement from the environment: {displacement.value}", flush=True)
+    // =}
+    reaction(envclock) -> displacement {=
         if not self.started:
             return
 
-        vn = float(v.value)
-        step = vn * 0.1
+        step = self.v_val * 0.1
 
         if not self.passed:
             self.pos_speed_change -= step
+
             if self.pos_speed_change <= 0.0:
                 self.pos_speed_change = 0.0
                 self.passed = True
@@ -186,7 +265,7 @@ reactor Environment{
         else:
             displacement.set(0.0)
 
-        print(f"displacement from the environment: {displacement.value}", flush=True)
+        print(f"[ENV CLOCK] disp={self.pos_speed_change}", flush=True)
     =}
 }
 
