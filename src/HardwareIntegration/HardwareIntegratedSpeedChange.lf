@@ -508,7 +508,7 @@ reactor LLMInference {
     //     control.set(tok)
     //     instruction.set(msg)
     // =}
-    reaction(s, v, st, h, llmclock) -> control, instruction {=
+    reaction(llmclock) -> control, instruction {=
         current = lf.time.logical_elapsed()/1e6
         physical = lf.time.physical_elapsed()/1e6
 
