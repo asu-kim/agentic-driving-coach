@@ -218,7 +218,7 @@ reactor Environment{
     state pos_speed_change = 100.0
     state passed = False
     output displacement
-    timer envclock(0, 100 msec)
+    timer envclock(0, 200 msec)
     state v_val = 0.0
 
     reaction(start_signal) {=
