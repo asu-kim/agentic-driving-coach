@@ -14,7 +14,7 @@ reactor Driver{
     output accelerator
     output brake
     output head
-    timer sensorclock(0, 200 msec)
+    timer sensorclock(0, 100 msec)
 
     sen = new SensorInputs()
 
@@ -87,7 +87,7 @@ reactor Car{
     state acceleration_net
     state velocity_init = 0.0
     state dist_init = 0.0
-    timer carclock(0, 200 msec)
+    timer carclock(0, 100 msec)
     state accel_val = 0.0
     state brake_val = 0.0
     state steer_val = 2
@@ -238,7 +238,7 @@ reactor Environment{
     state pos_speed_change = 100.0
     state passed = False
     output displacement
-    timer envclock(0, 200 msec)
+    timer envclock(0, 100 msec)
     state v_val = 0.0
 
     reaction(start_signal) {=
@@ -308,7 +308,7 @@ reactor LLMInference {
     state v_val = 0.0
     state st_val = 2
     state h_val = 5
-    timer llmclock(0, 200 msec)
+    timer llmclock(0, 100 msec)
 
     preamble{=
         import ollama
