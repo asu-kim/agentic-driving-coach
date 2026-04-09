@@ -184,16 +184,36 @@ reactor Car{
         bmsg = self.brake_val
         act  = self.act_val
 
-        # thresholds (IMPORTANT)
+        def acel_cal(p):
+            p = max(0.0, min(1.0, p))
+            if p < 0.1:
+                return p
+            elif p < 0.6:
+                return 2.4 * p
+            else:
+                return 4.0 * (p**2)
+
+        def brake_cal(p):
+            p = max(0.0, min(1.0, p))
+            if p < 0.1:
+                return p
+            elif p < 0.6:
+                return -(5.4 * p)
+            else:
+                return -(9.0 * (p**2))
+
+        # --- FIXED USAGE (IMPORTANT) ---
         if act == 11:
             acc_net = -9.0
-        elif bmsg > 0.0:
-            acc_net = -(5.4 * bmsg)
-        elif amsg > 0.0:
-            acc_net = 2.4 * amsg
         else:
-            acc_net = - 0.1
+            if bmsg > 0.15:          # dead zone (fixes your issue)
+                acc_net = brake_cal(bmsg)
+            elif amsg > 0.05:        # small threshold
+                acc_net = acel_cal(amsg)
+            else:
+                acc_net = 0.0        # NOT -0.1 (was slowing you down always)
 
+        # --- DYNAMICS ---
         vel = self.velocity_init + acc_net * 0.1
         vel = max(0.0, vel)
 
