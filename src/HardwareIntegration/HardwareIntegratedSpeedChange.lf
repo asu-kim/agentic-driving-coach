@@ -70,7 +70,7 @@ reactor Driver{
         head.set(self.head_val)
 
         print("----- sensor clock-----")
-        print(f"logical time: {current_dri:.2f} steer={self.steer_val} accel={self.accel_val} brake={self.brake_val}")
+        print(f"[DRIVER] logical time: {current_dri:.2f} steer={self.steer_val} accel={self.accel_val} brake={self.brake_val}")
     =}
 }
 
@@ -179,7 +179,7 @@ reactor Car{
     reaction(carclock) -> velocity, steer, head_pos {=
         if not self.started:
             return
-
+        current_dri = lf.time.logical_elapsed()/1e6
         amsg = self.accel_val
         bmsg = self.brake_val
         act  = self.act_val
@@ -187,19 +187,19 @@ reactor Car{
         # thresholds (IMPORTANT)
         if act == 11:
             acc_net = -9.0
-        elif bmsg > 0.2:
+        elif bmsg > 0.0:
             acc_net = -(5.4 * bmsg)
-        elif amsg > 0.05:
+        elif amsg > 0.0:
             acc_net = 2.4 * amsg
         else:
-            acc_net = 0.3
+            acc_net = - 0.1
 
         vel = self.velocity_init + acc_net * 0.1
         vel = max(0.0, vel)
 
         d = self.dist_init + vel * 0.1
 
-        print(f"[CAR CLOCK] vel={vel} acc={acc_net}", flush=True)
+        print(f"[CAR CLOCK] logical time: {current_dri:.2f} vel={vel} acc={acc_net}", flush=True)
 
         velocity.set(vel)
         steer.set(self.steer_val)
@@ -251,6 +251,8 @@ reactor Environment{
     reaction(envclock) -> displacement {=
         if not self.started:
             return
+        current_dri = lf.time.logical_elapsed()/1e6
+        
 
         step = self.v_val * 0.1
 
@@ -265,7 +267,7 @@ reactor Environment{
         else:
             displacement.set(0.0)
 
-        print(f"[ENV CLOCK] disp={self.pos_speed_change}", flush=True)
+        print(f"[ENV CLOCK] logical time: {current_dri:.2f} disp={self.pos_speed_change}", flush=True)
     =}
 }
 
