@@ -509,7 +509,7 @@ reactor LLMInference {
         instruction.set(msg)
     =}
 
-    deadline(500 msec) {=
+    deadline(1500 msec) {=
         rd_val = self.s_val
         v_val  = self.v_val
 
