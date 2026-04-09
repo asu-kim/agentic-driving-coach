@@ -384,6 +384,7 @@ reactor LLMInference {
 
         rd_val = self.s_val
         v_val  = self.v_val
+        steer = self.st_val
 
         if rd_val <= 0.0:
             control.set("NONE")
