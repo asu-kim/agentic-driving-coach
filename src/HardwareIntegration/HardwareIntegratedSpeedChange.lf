@@ -302,6 +302,15 @@ reactor LLMInference {
                 msg = ""
 
             return tok, msg, ms
+        def fallback_policy(self, rd_val, v_val):
+            if rd_val <= 25 and v_val > 2.5:
+                return "ACTUATE", "Brake now."
+            elif 50 <= rd_val <= 60 and (v_val < 8 or v_val > 10):
+                return "WARNING", "Adjust speed for upcoming stop."
+            elif rd_val >= 99 and (v_val < 8 or v_val > 12):
+                return "WARNING", "Maintain appropriate speed."
+            else:
+                return "NONE", ""
     =}
 
     reaction(startup) -> ready {=
@@ -382,6 +391,15 @@ reactor LLMInference {
             return
 
         print("----- LLM CLOCK -----", flush=True)
+        print("#################LoggingforReference###############################", flush=True)
+        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print(f"[speed]: {v_val:.2f}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print(f"[steer]: {steer}", flush=True)
+        print("------------------------------------------------", flush=True)
+        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
 
         tok, msg, ms = self.run_llm_message(rd_val, v_val)
 
