@@ -323,9 +323,9 @@ reactor LLMInference {
 
                                 "Rules:\n"
                                 "- If s <= 25 AND v > 2.5 then TOKEN=ACTUATE\n"
-                                "- Else if 50 <= s <= 60 AND (v < 8 OR v > 10) → TOKEN=WARNING\n"
-                                "- Else if s >= 99 AND (v < 8 OR v > 12) → TOKEN=WARNING\n"
-                                "- Else → TOKEN=NONE\n\n"
+                                "- Else if 50 <= s <= 60 AND (v < 8 OR v > 10)  TOKEN=WARNING\n"
+                                "- Else if s >= 99 AND (v < 8 OR v > 12)  TOKEN=WARNING\n"
+                                "- Else  TOKEN=NONE\n\n"
 
                                 "If TOKEN=NONE, output exactly: NONE|\n"
                                 "Do not output anything else."
