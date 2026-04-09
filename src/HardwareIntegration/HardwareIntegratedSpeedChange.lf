@@ -399,7 +399,7 @@ reactor LLMInference {
                 msg = ""
 
             return tok, msg, ms
-        def fallback_policy(rd_val, v_val):
+        def fallback_policy(self, rd_val, v_val):
                 if rd_val <= 0.0:
                     return "NONE", ""
 
