@@ -439,117 +439,39 @@ reactor LLMInference {
             self.st_val = st.value
         if h.is_present:
             self.h_val = h.value
+
+        print(f"[LLM INPUT] t={lf.time.logical_elapsed()/1e6:.2f} s={self.s_val:.2f} v={self.v_val:.2f}", flush=True)
     =}
 
-    // reaction(s, v, st, h) -> control, instruction {=
-    //     if not self.is_ready:
-    //         print("Waiting for LLM...", flush=True)
-    //         return
-
-    //     rd_val = s.value if s.value is not None else 0.0
-    //     v_val  = v.value if v.value is not None else 0.0
-    //     st_val = st.value
-
-    //     if st_val==0:
-    //         steer = "LEFT"
-    //     elif st_val == 1:
-    //         steer = "RIGHT"
-    //     else:
-    //         steer = "CENTER"
-
-    //     if rd_val <= 0.0:
-    //         control.set("NONE")
-    //         instruction.set("")
-    //         return
-
-    //     print("#################LoggingforReference###############################", flush=True)
-    //     print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
-    //     print("------------------------------------------------", flush=True)
-    //     print(f"[speed]: {v_val:.2f}", flush=True)
-    //     print("------------------------------------------------", flush=True)
-    //     print(f"[steer]: {steer}", flush=True)
-    //     print("------------------------------------------------", flush=True)
-    //     print("logical", lf.time.logical_elapsed()/1e6, flush=True)
-    //     print("physical", lf.time.physical_elapsed()/1e6, flush=True)
-
-    //     tok, llm_instruction, ms = self.run_llm_message(rd_val, v_val)
-
-    //     control.set(tok)
-    //     instruction.set(llm_instruction)
-
-    //     print(f"[LLM] {ms:.1f} ms -> {tok} | {llm_instruction}", flush=True)
-    // =}
-    // reaction(llmclock) -> control, instruction {=
-    //     if not self.is_ready:
-    //         return
-
-    //     rd_val = self.s_val
-    //     v_val  = self.v_val
-    //     steer = self.st_val
-
-    //     if rd_val <= 0.0:
-    //         control.set("NONE")
-    //         instruction.set("")
-    //         return
-
-    //     print("----- LLM CLOCK -----", flush=True)
-    //     print("#################LoggingforReference###############################", flush=True)
-    //     print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
-    //     print("------------------------------------------------", flush=True)
-    //     print(f"[speed]: {v_val:.2f}", flush=True)
-    //     print("------------------------------------------------", flush=True)
-    //     print(f"[steer]: {steer}", flush=True)
-    //     print("------------------------------------------------", flush=True)
-    //     print("logical", lf.time.logical_elapsed()/1e6, flush=True)
-    //     print("physical", lf.time.physical_elapsed()/1e6, flush=True)
-
-    //     tok, msg, ms = self.run_llm_message(rd_val, v_val)
-
-    //     control.set(tok)
-    //     instruction.set(msg)
-    // =}
+    
     reaction(llmclock) -> control, instruction {=
         current = lf.time.logical_elapsed()/1e6
-        physical = lf.time.physical_elapsed()/1e6
 
-        print("\n===== LLM REACTION TRIGGERED =====", flush=True)
-        print(f"[TIME] logical={current:.2f} ms | physical={physical:.2f} ms", flush=True)
-
-        # Identify what triggered the reaction
-        print(f"[TRIGGERS] s={s.is_present} v={v.is_present} st={st.is_present} h={h.is_present} clock={llmclock.is_present}", flush=True)
+        print("\n===== LLM CLOCK =====", flush=True)
+        print(f"time={current:.2f}", flush=True)
 
         if not self.is_ready:
-            print("[LLM] not ready, skipping", flush=True)
+            print("LLM not ready", flush=True)
             return
 
-        # Use stored state values
         rd_val = self.s_val
         v_val  = self.v_val
-        steer  = self.st_val
 
-        print(f"[STATE] distance={rd_val:.2f} speed={v_val:.2f} steer={steer}", flush=True)
+        print(f"state: s={rd_val:.2f}, v={v_val:.2f}", flush=True)
 
         if rd_val <= 0.0:
-            print("[LLM] distance <= 0, skipping", flush=True)
             control.set("NONE")
             instruction.set("")
             return
 
-        # Only execute LLM on timer tick (optional but recommended)
-        if not llmclock.is_present:
-            print("[LLM] skipping, not triggered by clock", flush=True)
-            return
-
-        print("[LLM] entering call", flush=True)
+        print("calling LLM...", flush=True)
 
         tok, msg, ms = self.run_llm_message(rd_val, v_val)
 
-        print(f"[LLM RESULT] token={tok} message={msg} latency={ms:.1f} ms", flush=True)
+        print(f"LLM RESULT: {tok} | {msg} ({ms:.1f} ms)", flush=True)
 
         control.set(tok)
         instruction.set(msg)
-
-        print("===== END LLM REACTION =====\n", flush=True)
     =}
 
     deadline(1500 msec) {=
