@@ -63,14 +63,14 @@ reactor Driver{
     reaction(sensorclock) -> accelerator, brake, steer, head {=
         if not self.started:
             return
-
+        current_dri = lf.time.logical_elapsed()/1e6
         steer.set(self.steer_val)
         accelerator.set(self.accel_val)
         brake.set(self.brake_val)
         head.set(self.head_val)
 
         print("----- sensor clock-----")
-        print(f"steer={self.steer_val} accel={self.accel_val} brake={self.brake_val}")
+        print(f"logical time: {current_dri:.2f} steer={self.steer_val} accel={self.accel_val} brake={self.brake_val}")
     =}
 }
 
@@ -203,6 +203,11 @@ reactor LLMInference {
     state last_dl_tok = ""
     state last_dl_msg = ""
     state is_ready = False
+    state s_val = 0.0
+    state v_val = 0.0
+    state st_val = 2
+    state h_val = 5
+    timer llmclock(0, 100 msec)
 
     preamble{=
         import ollama
@@ -315,49 +320,78 @@ reactor LLMInference {
         self.is_ready = True
         ready.set(True)
     =}
+    reaction(s, v, st, h) {=
+        if s.is_present:
+            self.s_val = s.value
+        if v.is_present:
+            self.v_val = v.value
+        if st.is_present:
+            self.st_val = st.value
+        if h.is_present:
+            self.h_val = h.value
+    =}
 
-    reaction(s, v, st, h) -> control, instruction {=
+    // reaction(s, v, st, h) -> control, instruction {=
+    //     if not self.is_ready:
+    //         print("Waiting for LLM...", flush=True)
+    //         return
+
+    //     rd_val = s.value if s.value is not None else 0.0
+    //     v_val  = v.value if v.value is not None else 0.0
+    //     st_val = st.value
+
+    //     if st_val==0:
+    //         steer = "LEFT"
+    //     elif st_val == 1:
+    //         steer = "RIGHT"
+    //     else:
+    //         steer = "CENTER"
+
+    //     if rd_val <= 0.0:
+    //         control.set("NONE")
+    //         instruction.set("")
+    //         return
+
+    //     print("#################LoggingforReference###############################", flush=True)
+    //     print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+    //     print("------------------------------------------------", flush=True)
+    //     print(f"[speed]: {v_val:.2f}", flush=True)
+    //     print("------------------------------------------------", flush=True)
+    //     print(f"[steer]: {steer}", flush=True)
+    //     print("------------------------------------------------", flush=True)
+    //     print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+    //     print("physical", lf.time.physical_elapsed()/1e6, flush=True)
+
+    //     tok, llm_instruction, ms = self.run_llm_message(rd_val, v_val)
+
+    //     control.set(tok)
+    //     instruction.set(llm_instruction)
+
+    //     print(f"[LLM] {ms:.1f} ms -> {tok} | {llm_instruction}", flush=True)
+    // =}
+    reaction(llmclock) -> control, instruction {=
         if not self.is_ready:
-            print("Waiting for LLM...", flush=True)
             return
 
-        rd_val = s.value if s.value is not None else 0.0
-        v_val  = v.value if v.value is not None else 0.0
-        st_val = st.value
-
-        if st_val==0:
-            steer = "LEFT"
-        elif st_val == 1:
-            steer = "RIGHT"
-        else:
-            steer = "CENTER"
+        rd_val = self.s_val
+        v_val  = self.v_val
 
         if rd_val <= 0.0:
             control.set("NONE")
             instruction.set("")
             return
 
-        print("#################LoggingforReference###############################", flush=True)
-        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
-        print("------------------------------------------------", flush=True)
-        print(f"[speed]: {v_val:.2f}", flush=True)
-        print("------------------------------------------------", flush=True)
-        print(f"[steer]: {steer}", flush=True)
-        print("------------------------------------------------", flush=True)
-        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
-        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
+        print("----- LLM CLOCK -----", flush=True)
 
-        tok, llm_instruction, ms = self.run_llm_message(rd_val, v_val)
+        tok, msg, ms = self.run_llm_message(rd_val, v_val)
 
         control.set(tok)
-        instruction.set(llm_instruction)
-
-        print(f"[LLM] {ms:.1f} ms -> {tok} | {llm_instruction}", flush=True)
+        instruction.set(msg)
     =}
 
     deadline(250 msec) {=
-        rd_val = s.value if s.value is not None else 0.0
-        v_val  = v.value if v.value is not None else 0.0
+        rd_val = self.s_val
+        v_val  = self.v_val
 
         if rd_val <= 0.0:
             tok, llm_instruction = "NONE", ""
@@ -489,20 +523,19 @@ reactor Coach{
     input st 
     input h
 
+    
+
     output act
     output instr
     output ready
 
-    state s_val = 0.0
-    state v_val = 0.0
-    state st_val = 2
-    state h_val = 5
-
-    timer coachclock(0, 100 msec)
-
     llm = new LLMInference()
     a = new Planner()
-
+    s -> llm.s
+    v -> llm.v
+    st -> llm.st
+    h -> llm.h
+   
     llm.control -> a.ctrl
     llm.instruction -> a.instr
 
@@ -511,29 +544,7 @@ reactor Coach{
 
     llm.ready -> ready
 
-    reaction(s, v, st, h) {=
-        if s.is_present:
-            self.s_val = s.value
-        if v.is_present:
-            self.v_val = v.value
-        if st.is_present:
-            self.st_val = st.value
-        if h.is_present:
-            self.h_val = h.value
-    =}
-
-    reaction(coachclock) {=
-        # if not llm.is_ready:
-        #     return
-
-        llm.s.set(self.s_val)
-        llm.v.set(self.v_val)
-        llm.st.set(self.st_val)
-        llm.h.set(self.h_val)
-
-        print("----- coach clock -----")
-        print(f"s={self.s_val} v={self.v_val}", flush=True)
-    =}
+    
 }
 
 federated reactor at 10.218.100.78 {
