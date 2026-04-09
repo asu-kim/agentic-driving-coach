@@ -491,6 +491,8 @@ reactor Planner {
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
+      cmd = f"espeak \"{instruction}\" --stdout | aplay &"
+
 
       now_ns = lf.time.logical_elapsed()
 
@@ -498,6 +500,8 @@ reactor Planner {
         if instruction and instruction != self.last_printed:
           i = f"[VERBAL] {kw} | {instruction}"
           planned_instr.set(i)
+          if instruction:
+            os.system(cmd)
           self.last_printed = instruction
         actuate.set()
         return
@@ -511,6 +515,8 @@ reactor Planner {
           if instruction and instruction != self.last_printed:
             i = f"[VERBAL] {kw} | {instruction}"
             planned_instr.set(i)
+            if instruction:
+                os.system(cmd)
             self.last_printed = instruction
           self.last_warn_ns = now_ns
         return
@@ -521,6 +527,8 @@ reactor Planner {
     reaction(ctrl, s, v) -> act, monitoring, planned_instr {=
       kw = (ctrl.value or "NONE").strip()
       rd = s.value if s.value is not None else 0.0
+      cmd = f"espeak \"{instruction}\" --stdout | aplay &"
+
 
       if kw != "ACTUATE" or rd <= 0.0:
         monitoring.set()
@@ -529,6 +537,8 @@ reactor Planner {
       i = f"[VERBAL] {kw} | Sent EmergencyBraking"
       act.set(11)
       planned_instr.set(i)
+      if instruction:
+            os.system(cmd)
 
       monitoring.set()
     =}
