@@ -333,23 +333,19 @@ reactor LLMInference {
                         {
                             "role": "system",
                             "content": (
-                                "You are an agentic driving coach.\n"
-                                "Output exactly ONE line: TOKEN|Message\n\n"
+                                "Output exactly ONE line: TOKEN|Message"
+                                "TOKEN must be one of: NONE, WARNING, ACTUATE"
+                                "Message must be one sentence, about speed change only."
+                                "Use distance_to_sign is s and measured in meters"
+                                "velocity is v measured using m/s only."
 
-                                "TOKEN must be one of: NONE, WARNING, ACTUATE.\n"
-                                "Message must be one sentence about stop sign approaching.\n\n"
+                                "Rules for TOKEN:"
+                                "if s is lesser than or equal to 25 and v is greater than 12 or lesser than 11 then TOKEN=ACTUATE\n"
+                                "else if s lies in between 50 to 60 and v is in between 15 to 13 then TOKEN=WARNING"
+                                "else if s is greater than 80 and v is not in between 18 to 16 then TOKEN=WARNING\n"
+                                "else TOKEN=NONE\n"
 
-                                "Inputs:\n"
-                                "- distance_to_stop (s) in meters\n"
-                                "- speed (v) in m/s\n\n"
-
-                                "Rules:\n"
-                                "- If s <= 25 AND v > 2.5 then TOKEN=ACTUATE\n"
-                                "- Else if 50 <= s <= 60 AND (v < 8 OR v > 10)  TOKEN=WARNING\n"
-                                "- Else if s >= 99 AND (v < 8 OR v > 12)  TOKEN=WARNING\n"
-                                "- Else  TOKEN=NONE\n\n"
-
-                                "If TOKEN=NONE, output exactly: NONE|\n"
+                                "If TOKEN=NONE, output: NONE|\n"
                                 "Do not output anything else."
                             ),
                         },
@@ -403,14 +399,18 @@ reactor LLMInference {
                 msg = ""
 
             return tok, msg, ms
-        def fallback_policy(self, rd_val, v_val):
-            if rd_val <= 25 and v_val > 2.5:
-                return "ACTUATE", "Brake now."
-            elif 50 <= rd_val <= 60 and (v_val < 8 or v_val > 10):
-                return "WARNING", "Adjust speed for upcoming stop."
-            elif rd_val >= 99 and (v_val < 8 or v_val > 12):
-                return "WARNING", "Maintain appropriate speed."
-            else:
+        def fallback_policy(rd_val, v_val):
+                if rd_val <= 0.0:
+                    return "NONE", ""
+
+                if rd_val <= 25 and (v_val>12 or v_val<11):
+                    return "ACTUATE", "Brake now."
+
+                if rd_val >= 80.0 and (v_val > 18 or v_val<16) :
+                    return "WARNING", "Speed limit change ahead."
+                if 50.0 < rd_val <= 60.0 and (v_val > 15 or v_val<13):
+                    return "WARNING", "Slow down to 11 m/s."
+
                 return "NONE", ""
     =}
 
