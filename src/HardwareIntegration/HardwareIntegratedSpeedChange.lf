@@ -215,7 +215,7 @@ reactor Environment{
     state started = False
 
     input v
-    state pos_speed_change = 200.0
+    state pos_speed_change = 100.0
     state passed = False
     output displacement
     timer envclock(0, 100 msec)
