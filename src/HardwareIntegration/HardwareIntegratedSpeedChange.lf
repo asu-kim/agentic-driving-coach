@@ -780,7 +780,8 @@ reactor Coach{
    
     llm.control -> a.ctrl
     llm.instruction -> a.instr
-
+    s -> a.s
+    v -> a.v
     a.act -> act
     a.planned_instr -> instr
 
