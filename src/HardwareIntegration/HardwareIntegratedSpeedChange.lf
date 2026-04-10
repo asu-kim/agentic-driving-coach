@@ -125,14 +125,14 @@ reactor Car{
             else:
                 return -(9.0 * (p**2))
 
-        
+        vel_prev = self.velocity_init
         if act == 11:
-            if vel > 12.0:
-                acc_net = -9.0      # brake
-            elif vel < 11.0:
-                acc_net = 4.0       # accelerate
+            if vel_prev > 12.0:
+                acc_net = -9.0
+            elif vel_prev < 11.0:
+                acc_net = 4.0
             else:
-                acc_net = 0.0       # stable
+                acc_net = 0.0
         else:
             if bmsg > 0.15:          # dead zone (fixes your issue)
                 acc_net = brake_cal(bmsg)
