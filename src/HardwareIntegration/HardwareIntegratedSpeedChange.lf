@@ -127,7 +127,12 @@ reactor Car{
 
         
         if act == 11:
-            acc_net = -9.0
+            if vel > 12.0:
+                acc_net = -9.0      # brake
+            elif vel < 11.0:
+                acc_net = 4.0       # accelerate
+            else:
+                acc_net = 0.0       # stable
         else:
             if bmsg > 0.15:          # dead zone (fixes your issue)
                 acc_net = brake_cal(bmsg)
@@ -593,25 +598,27 @@ reactor Planner {
 
       now_ns = lf.time.logical_elapsed()
 
-      if rd <= 5.0 and not self.reached:
+      if rd = < 2 and not self.reached:
         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
         print(log, flush=True)
         planned_instr.set(log)
         act.set(11)
 
         try:
-          if self.speech_proc is not None:
-            self.speech_proc.kill()
+            if self.speech_proc is not None:
+                self.speech_proc.kill()
         except:
-          pass
+            pass
 
         self.speech_proc = subprocess.Popen(
-          ["espeak", "-s", "130", "You have reached the stop sign"],
-          stdout=subprocess.DEVNULL,
-          stderr=subprocess.DEVNULL
+            ["espeak", "-s", "130", "You have reached the stop sign"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
         )
 
         self.reached = True
+
+        request_stop()
         return
 
       if kw == "ACTUATE" and rd > 0.0:
@@ -678,25 +685,27 @@ reactor Planner {
 
       now_ns = lf.time.logical_elapsed()
 
-      if rd <= 5.0 and not self.reached:
+      if rd = < 2 and not self.reached:
         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
         print(log, flush=True)
         planned_instr.set(log)
         act.set(11)
 
         try:
-          if self.speech_proc is not None:
-            self.speech_proc.kill()
+            if self.speech_proc is not None:
+                self.speech_proc.kill()
         except:
-          pass
+            pass
 
         self.speech_proc = subprocess.Popen(
-          ["espeak", "-s", "130", "You have reached the stop sign"],
-          stdout=subprocess.DEVNULL,
-          stderr=subprocess.DEVNULL
+            ["espeak", "-s", "130", "You have reached the stop sign"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
         )
 
         self.reached = True
+
+        request_stop()
         return
 
       if kw == "ACTUATE" and rd > 0.0:
@@ -764,7 +773,7 @@ reactor Planner {
 
         now_ns = lf.time.logical_elapsed()
 
-        if rd <= 5.0 and not self.reached:
+        if rd = < 2 and not self.reached:
             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
             print(log, flush=True)
             planned_instr.set(log)
@@ -783,6 +792,8 @@ reactor Planner {
             )
 
             self.reached = True
+
+            request_stop()
             return
 
         if kw != "ACTUATE" or rd <= 0.0:
