@@ -520,8 +520,33 @@ reactor LLMInference {
                 r = ollama.chat(
                     model="llama3:8b",
                     messages=[
-                        {"role": "system", "content": "Output TOKEN|Message"},
-                        {"role": "user", "content": f"s={rd_val:.2f}, v={v_val:.2f}"}
+                        {
+                            "role": "system",
+                            "content": (
+                                "Output exactly ONE line: TOKEN|Message\n"
+                                "TOKEN must be one of: NONE, WARNING, ACTUATE\n"
+                                "Message must be one sentence about speed change only.\n"
+                                "distance_to_sign is s (meters), velocity is v (m/s)\n\n"
+
+                                "Rules:\n"
+                                "- If s <= 25 and (v < 11 or v > 12) → ACTUATE\n"
+                                "- If 50 <= s <= 60 and (v < 13 or v > 15) → WARNING\n"
+                                "- If s >= 80 and (v < 16 or v > 18) → WARNING\n"
+                                "- Otherwise → NONE\n\n"
+
+                                "Strict output format:\n"
+                                "TOKEN|Message\n"
+
+                                "If TOKEN=NONE, output exactly:\n"
+                                "NONE|\n"
+
+                                "Do NOT output anything else."
+                            )
+                        },
+                        {
+                            "role": "user",
+                            "content": f"s={rd_val:.2f}, v={v_val:.2f}"
+                        }
                     ],
                     options={"temperature": 0.0, "num_predict": 30},
                 )
