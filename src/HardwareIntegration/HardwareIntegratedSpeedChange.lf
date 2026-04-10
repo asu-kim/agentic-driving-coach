@@ -68,7 +68,7 @@ reactor Car{
     input head_pos_in  
 
     state acceleration_net
-    state velocity_init = 18
+    state velocity_init = 30
     state dist_init = 0.0
   
     state accel_val = 0.0
