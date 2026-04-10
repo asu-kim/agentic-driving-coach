@@ -557,12 +557,12 @@ reactor LLMInference {
             ms = (time.perf_counter() - t0) * 1000.0
             raw = (r.get("message", {}).get("content", "") or "").strip()
 
-            print(f">>> RAW LLM OUTPUT: {raw}", flush=True)
+            # print(f">>> RAW LLM OUTPUT: {raw}", flush=True)
 
             return "NONE", raw, ms
 
         def fallback_policy(self, rd_val, v_val):
-            print(f"[FALLBACK POLICY] evaluating s={rd_val:.2f}, v={v_val:.2f}", flush=True)
+            # print(f"[FALLBACK POLICY] evaluating s={rd_val:.2f}, v={v_val:.2f}", flush=True)
 
             if rd_val <= 0.0:
                 return "NONE", ""
@@ -589,11 +589,11 @@ reactor LLMInference {
     =}
 
     reaction(s, v, st, h) -> control, instruction {=
-        print("\n=== INPUT REACTION TRIGGERED ===", flush=True)
-        print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
-        print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
+        # print("\n=== INPUT REACTION TRIGGERED ===", flush=True)
+        # print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
+        # print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
 
-        print(f"[PRESENCE] s={s.is_present}, v={v.is_present}, st={st.is_present}, h={h.is_present}", flush=True)
+        # print(f"[PRESENCE] s={s.is_present}, v={v.is_present}, st={st.is_present}, h={h.is_present}", flush=True)
 
         if s.is_present:
             self.s_val = s.value
@@ -604,31 +604,31 @@ reactor LLMInference {
         if h.is_present:
             self.h_val = h.value
 
-        print(f"[STATE UPDATE] s_val={self.s_val:.2f}, v_val={self.v_val:.2f}", flush=True)
+        # print(f"[STATE UPDATE] s_val={self.s_val:.2f}, v_val={self.v_val:.2f}", flush=True)
 
     =}
 
     reaction(llmclock) -> control, instruction {=
-        print("\n=== LLM CLOCK TRIGGERED ===", flush=True)
+        # print("\n=== LLM CLOCK TRIGGERED ===", flush=True)
 
         current_logical = lf.time.logical_elapsed()/1e6
-        print(f"[TIME] logical={current_logical:.2f}", flush=True)
+        # print(f"[TIME] logical={current_logical:.2f}", flush=True)
 
         if not self.is_ready:
-            print("[SKIP] LLM not ready", flush=True)
+            # print("[SKIP] LLM not ready", flush=True)
             return
 
         rd_val = self.s_val
         v_val  = self.v_val
 
-        print(f"[STATE READ] s={rd_val:.2f}, v={v_val:.2f}", flush=True)
+        # print(f"[STATE READ] s={rd_val:.2f}, v={v_val:.2f}", flush=True)
 
         if rd_val <= 0.0:
             control.set("NONE")
             instruction.set("")
             return
 
-        print("[LLM] calling model...", flush=True)
+        # print("[LLM] calling model...", flush=True)
 
         tok_raw, msg_raw, ms = self.run_llm_message(rd_val, v_val)
         self.check_deadline()
@@ -644,21 +644,21 @@ reactor LLMInference {
         tok = tok.strip()
         msg = msg.strip()
 
-        print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
+        # print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
 
         control.set(tok)
         instruction.set(msg)
 
     =} 
     deadline(100 sec) {=
-        print("\n=== DEADLINE TRIGGERED ===", flush=True)
+        # print("\n=== DEADLINE TRIGGERED ===", flush=True)
 
         rd_val = self.s_val
         v_val  = self.v_val
 
         tok, msg = self.fallback_policy(rd_val, v_val)
 
-        print(f"[FALLBACK RESULT] {tok} | {msg}", flush=True)
+        # print(f"[FALLBACK RESULT] {tok} | {msg}", flush=True)
 
         control.set(tok)
         instruction.set(msg)
