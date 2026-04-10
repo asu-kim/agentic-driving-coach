@@ -456,37 +456,37 @@ reactor LLMInference {
     //     instruction.set(msg)
     // =}
 
-    deadline(1500 msec) {=
-        current = lf.time.logical_elapsed()/1e6
+    // deadline(1500 msec) {=
+    //     current = lf.time.logical_elapsed()/1e6
 
-        print("\n===== deadline start time =====", flush=True)
-        print(f"time={current:.2f}", flush=True)
-        rd_val = self.s_val
-        v_val  = self.v_val
+    //     print("\n===== deadline start time =====", flush=True)
+    //     print(f"time={current:.2f}", flush=True)
+    //     rd_val = self.s_val
+    //     v_val  = self.v_val
 
-        if rd_val <= 0.0:
-            tok, llm_instruction = "NONE", ""
-        else:
-            tok, llm_instruction = self.fallback_policy(rd_val, v_val)
+    //     if rd_val <= 0.0:
+    //         tok, llm_instruction = "NONE", ""
+    //     else:
+    //         tok, llm_instruction = self.fallback_policy(rd_val, v_val)
 
-        if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
-            return
+    //     if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
+    //         return
 
-        self.last_dl_tok = tok
-        self.last_dl_msg = llm_instruction
+    //     self.last_dl_tok = tok
+    //     self.last_dl_msg = llm_instruction
 
-        control.set(tok)
-        instruction.set(llm_instruction)
+    //     control.set(tok)
+    //     instruction.set(llm_instruction)
 
-        print("#################LoggingforReference###############################", flush=True)
-        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
-        print("------------------------------------------------", flush=True)
-        print(f"[speed]: {v_val:.2f}", flush=True)
-        print("------------------------------------------------", flush=True)
-        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
-        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
-        print(f"[DEADLINE] fallback -> {tok} | {llm_instruction}", flush=True)
-    =}
+    //     print("#################LoggingforReference###############################", flush=True)
+    //     print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+    //     print("------------------------------------------------", flush=True)
+    //     print(f"[speed]: {v_val:.2f}", flush=True)
+    //     print("------------------------------------------------", flush=True)
+    //     print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+    //     print("physical", lf.time.physical_elapsed()/1e6, flush=True)
+    //     print(f"[DEADLINE] fallback -> {tok} | {llm_instruction}", flush=True)
+    // =}
 }
 
 reactor Planner {
