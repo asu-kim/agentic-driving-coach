@@ -689,7 +689,7 @@ reactor Planner {
         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
         print(log, flush=True)
         planned_instr.set(log)
-        act.set(11)
+        # act.set(11)
 
         try:
             if self.speech_proc is not None:
@@ -777,7 +777,7 @@ reactor Planner {
             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
             print(log, flush=True)
             planned_instr.set(log)
-            act.set(11)
+            # act.set(11)
 
             try:
                 if self.speech_proc is not None:
