@@ -301,7 +301,7 @@ reactor LLMInference {
         print("[STATUS] LLM READY", flush=True)
     =}
 
-    reaction(s, v, st, h) -> control, instruction {=
+    reaction(s, v, st, h){=
         # print("\n=== INPUT REACTION TRIGGERED ===", flush=True)
         # print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
         # print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
@@ -378,6 +378,126 @@ reactor LLMInference {
     =}
 }
 
+// reactor Planner {
+//   input ctrl
+//   input instr
+//   input s
+//   input v
+//   output act
+//   output planned_instr
+
+//   state last_warn_ns = -1000000000000
+//   state last_printed = ""
+//   preamble{=
+//     import os
+//   =}
+
+//   initial mode monitoring {
+    
+//     reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
+//       throttle = 1000000000
+//       kw  = (ctrl.value or "NONE").strip()
+//       instruction = (instr.value or "").strip()
+//       rd  = s.value if s.value is not None else 0.0
+//       v_val = v.value if v.value is not None else 0.0
+//       cmd = f'espeak "{instruction}"'
+
+//       now_ns = lf.time.logical_elapsed()
+
+//       if kw == "ACTUATE" and rd > 0.0:
+//         if instruction and instruction != self.last_printed:
+//           log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//           print(log, flush=True)
+//           planned_instr.set(log)
+//           if instruction:
+//             os.system(cmd)
+//           self.last_printed = instruction
+//         actuate.set()
+//         return
+
+//       if kw == "WARNING":
+//         if (now_ns - self.last_warn_ns) >= throttle:
+//           if instruction and instruction != self.last_printed:
+//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//             print(log, flush=True)
+//             planned_instr.set(log)
+//             if instruction:
+//                 os.system(cmd)
+//             self.last_printed = instruction
+//           self.last_warn_ns = now_ns
+//         warning.set()
+//         return
+//     =}
+//   }
+
+//   mode warning {
+//     reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
+//       throttle = 1000000000
+//       kw  = (ctrl.value or "NONE").strip()
+//       instruction = (instr.value or "").strip()
+//       rd  = s.value if s.value is not None else 0.0
+//       v_val = v.value if v.value is not None else 0.0
+//       cmd = f'espeak "{instruction}"'
+
+//       now_ns = lf.time.logical_elapsed()
+
+//       if kw == "ACTUATE" and rd > 0.0:
+//         if instruction and instruction != self.last_printed:
+//           log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//           print(log, flush=True)
+//           planned_instr.set(log)
+//           if instruction:
+//             os.system(cmd)
+//           self.last_printed = instruction
+//         actuate.set()
+//         return
+
+//       if kw == "NONE":
+//         monitoring.set()
+//         return
+
+//       if kw == "WARNING":
+//         if (now_ns - self.last_warn_ns) >= throttle:
+//           if instruction and instruction != self.last_printed:
+//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//             print(log, flush=True)
+//             planned_instr.set(log)
+//             if instruction:
+//                 os.system(cmd)
+//             self.last_printed = instruction
+//           self.last_warn_ns = now_ns
+//         return
+//     =}
+//   }
+
+//   mode actuate {
+//     reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
+//         kw = (ctrl.value or "NONE").strip()
+//         rd = s.value if s.value is not None else 0.0
+//         v_val = v.value if v.value is not None else 0.0
+//         instruction = (instr.value or "").strip()   
+
+//         cmd = f'espeak "{instruction}"'
+
+//         if kw != "ACTUATE" or rd <= 0.0:
+//             monitoring.set()
+//             return
+
+//         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//         print(log, flush=True)
+
+//         i = f"[VERBAL] {kw} | Sent EmergencyBraking"
+//         act.set(11)
+//         planned_instr.set(log)
+
+//         if instruction:
+//             os.system(cmd)
+
+//         monitoring.set()
+//     =}
+//   }
+// }
+
 reactor Planner {
   input ctrl
   input instr
@@ -388,8 +508,10 @@ reactor Planner {
 
   state last_warn_ns = -1000000000000
   state last_printed = ""
+  state speech_proc 
+
   preamble{=
-    import os
+    import subprocess
   =}
 
   initial mode monitoring {
@@ -400,7 +522,6 @@ reactor Planner {
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
-      cmd = f'espeak "{instruction}"'
 
       now_ns = lf.time.logical_elapsed()
 
@@ -409,8 +530,20 @@ reactor Planner {
           log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
           print(log, flush=True)
           planned_instr.set(log)
+
           if instruction:
-            os.system(cmd)
+            try:
+              if self.speech_proc is not None:
+                self.speech_proc.kill()
+            except:
+              pass
+
+            self.speech_proc = subprocess.Popen(
+              ["espeak", instruction],
+              stdout=subprocess.DEVNULL,
+              stderr=subprocess.DEVNULL
+            )
+
           self.last_printed = instruction
         actuate.set()
         return
@@ -421,8 +554,20 @@ reactor Planner {
             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
             print(log, flush=True)
             planned_instr.set(log)
+
             if instruction:
-                os.system(cmd)
+              try:
+                if self.speech_proc is not None:
+                  self.speech_proc.kill()
+              except:
+                pass
+
+              self.speech_proc = subprocess.Popen(
+                ["espeak", instruction],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+              )
+
             self.last_printed = instruction
           self.last_warn_ns = now_ns
         warning.set()
@@ -437,7 +582,6 @@ reactor Planner {
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
-      cmd = f'espeak "{instruction}"'
 
       now_ns = lf.time.logical_elapsed()
 
@@ -446,8 +590,20 @@ reactor Planner {
           log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
           print(log, flush=True)
           planned_instr.set(log)
+
           if instruction:
-            os.system(cmd)
+            try:
+              if self.speech_proc is not None:
+                self.speech_proc.kill()
+            except:
+              pass
+
+            self.speech_proc = subprocess.Popen(
+              ["espeak", instruction],
+              stdout=subprocess.DEVNULL,
+              stderr=subprocess.DEVNULL
+            )
+
           self.last_printed = instruction
         actuate.set()
         return
@@ -462,8 +618,20 @@ reactor Planner {
             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
             print(log, flush=True)
             planned_instr.set(log)
+
             if instruction:
-                os.system(cmd)
+              try:
+                if self.speech_proc is not None:
+                  self.speech_proc.kill()
+              except:
+                pass
+
+              self.speech_proc = subprocess.Popen(
+                ["espeak", instruction],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+              )
+
             self.last_printed = instruction
           self.last_warn_ns = now_ns
         return
@@ -477,8 +645,6 @@ reactor Planner {
         v_val = v.value if v.value is not None else 0.0
         instruction = (instr.value or "").strip()   
 
-        cmd = f'espeak "{instruction}"'
-
         if kw != "ACTUATE" or rd <= 0.0:
             monitoring.set()
             return
@@ -486,12 +652,21 @@ reactor Planner {
         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
         print(log, flush=True)
 
-        i = f"[VERBAL] {kw} | Sent EmergencyBraking"
         act.set(11)
         planned_instr.set(log)
 
         if instruction:
-            os.system(cmd)
+          try:
+            if self.speech_proc is not None:
+              self.speech_proc.kill()
+          except:
+            pass
+
+          self.speech_proc = subprocess.Popen(
+            ["espeak", instruction],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+          )
 
         monitoring.set()
     =}
