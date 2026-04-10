@@ -3,6 +3,7 @@ target Python {keepalive: true}
 import SensorInputs from "SensorInputs.lf"
 preamble{=
     import time
+    import subprocess
 =}
 
 reactor Driver{
