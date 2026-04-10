@@ -611,12 +611,7 @@ reactor LLMInference {
         print("\n=== LLM CLOCK TRIGGERED ===", flush=True)
 
         current_logical = lf.time.logical_elapsed()/1e6
-        current_physical = lf.time.physical_elapsed()/1e6
-
         print(f"[TIME] logical={current_logical:.2f}", flush=True)
-        print(f"[TIME] physical={current_physical:.2f}", flush=True)
-
-        print(f"[READY] is_ready={self.is_ready}", flush=True)
 
         if not self.is_ready:
             print("[SKIP] LLM not ready", flush=True)
@@ -628,7 +623,6 @@ reactor LLMInference {
         print(f"[STATE READ] s={rd_val:.2f}, v={v_val:.2f}", flush=True)
 
         if rd_val <= 0.0:
-            print("[LLM] distance <= 0 → NONE", flush=True)
             control.set("NONE")
             instruction.set("")
             return
@@ -643,41 +637,18 @@ reactor LLMInference {
         control.set(tok)
         instruction.set(msg)
 
-        print("[OUTPUT] control + instruction set", flush=True)
-    =}
-
-    deadline(1500 msec) {=
+    =} deadline(1500 msec) {=
         print("\n=== DEADLINE TRIGGERED ===", flush=True)
-
-        current_logical = lf.time.logical_elapsed()/1e6
-        current_physical = lf.time.physical_elapsed()/1e6
-
-        print(f"[TIME] logical={current_logical:.2f}", flush=True)
-        print(f"[TIME] physical={current_physical:.2f}", flush=True)
 
         rd_val = self.s_val
         v_val  = self.v_val
 
-        print(f"[STATE READ] s={rd_val:.2f}, v={v_val:.2f}", flush=True)
+        tok, msg = self.fallback_policy(rd_val, v_val)
 
-        if rd_val <= 0.0:
-            tok, llm_instruction = "NONE", ""
-        else:
-            tok, llm_instruction = self.fallback_policy(rd_val, v_val)
-
-        print(f"[FALLBACK RESULT] {tok} | {llm_instruction}", flush=True)
-
-        if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
-            print("[SKIP] same as last output", flush=True)
-            return
-
-        self.last_dl_tok = tok
-        self.last_dl_msg = llm_instruction
+        print(f"[FALLBACK RESULT] {tok} | {msg}", flush=True)
 
         control.set(tok)
-        instruction.set(llm_instruction)
-
-        print("[DEADLINE OUTPUT] control + instruction set", flush=True)
+        instruction.set(msg)
     =}
 }
 
