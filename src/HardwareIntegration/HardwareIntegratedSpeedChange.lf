@@ -598,7 +598,7 @@ reactor Planner {
 
       now_ns = lf.time.logical_elapsed()
 
-      if rd = < 2 and not self.reached:
+      if rd <= 2 and not self.reached:
         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
         print(log, flush=True)
         planned_instr.set(log)
@@ -685,7 +685,7 @@ reactor Planner {
 
       now_ns = lf.time.logical_elapsed()
 
-      if rd = < 2 and not self.reached:
+      if rd <= 2 and not self.reached:
         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
         print(log, flush=True)
         planned_instr.set(log)
@@ -773,7 +773,7 @@ reactor Planner {
 
         now_ns = lf.time.logical_elapsed()
 
-        if rd = < 2 and not self.reached:
+        if rd <= 2 and not self.reached:
             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
             print(log, flush=True)
             planned_instr.set(log)
