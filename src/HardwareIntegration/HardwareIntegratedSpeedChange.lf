@@ -212,6 +212,7 @@ reactor LLMInference {
     state v_val = 0.0
     state st_val = 2
     state h_val = 5
+    logical action trigger_llm
     timer llmclock(0, 100 msec)
 
     preamble{=
@@ -345,10 +346,11 @@ reactor LLMInference {
             self.h_val = h.value
 
         print(f"[LLM INPUT] t={lf.time.logical_elapsed()/1e6:.2f} s={self.s_val:.2f} v={self.v_val:.2f}", flush=True)
+        trigger_llm.schedule(0)
     =}
 
     
-    reaction(llmclock) -> control, instruction {=
+    reaction(trigger_llm) -> control, instruction {=
         current = lf.time.logical_elapsed()/1e6
 
         print("\n===== LLM CLOCK =====", flush=True)
@@ -375,7 +377,7 @@ reactor LLMInference {
 
         if rd_val <= 25 and v_val > 2.5:
             tok = "ACTUATE"
-            msg = "Brake now."
+            msg = "accelerate now."
         elif 50 <= rd_val <= 60:
             tok = "WARNING"
             msg = "Slow down."
