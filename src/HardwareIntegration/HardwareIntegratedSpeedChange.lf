@@ -17,7 +17,7 @@ reactor Driver{
     output accelerator
     output brake
     output head
-    timer sensorclock(0, 100 msec)
+    timer sensorclock(0, 250 msec)
 
     sen = new SensorInputs()
 
