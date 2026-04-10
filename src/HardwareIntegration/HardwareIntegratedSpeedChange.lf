@@ -346,7 +346,7 @@ reactor LLMInference {
             self.h_val = h.value
 
         print(f"[LLM INPUT] t={lf.time.logical_elapsed()/1e6:.2f} s={self.s_val:.2f} v={self.v_val:.2f}", flush=True)
-        trigger_llm.schedule(0)
+        self.trigger_llm.schedule(0)
     =}
 
     
