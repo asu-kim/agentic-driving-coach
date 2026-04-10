@@ -195,6 +195,224 @@ reactor Environment{
     =}
 }
 
+// reactor LLMInference {
+//     input s
+//     input v
+//     input st 
+//     input h
+
+//     output ready
+//     output control
+//     output instruction
+
+//     state last_dl_tok = ""
+//     state last_dl_msg = ""
+//     state is_ready = False
+//     state s_val = 0.0
+//     state v_val = 0.0
+//     state st_val = 2
+//     state h_val = 5
+
+//     timer llmclock(0, 250 msec)
+
+//     preamble{=
+//         import ollama
+//         import time
+//         from enum import Enum
+
+       
+
+//         def run_llm_message(self, rd_val, v_val):
+//             import ollama
+//             import time
+
+//             print(">>> ENTERING LLM CALL", flush=True)
+//             t0 = time.perf_counter()
+
+//             ALLOWED = {"NONE", "WARNING", "ACTUATE"}
+
+//             try:
+//                 r = ollama.chat(
+//                     model="llama3:8b",
+//                     messages=[
+//                         {
+//                             "role": "system",
+//                             "content": (
+//                                 "Output exactly ONE line: TOKEN|Message"
+//                                 "TOKEN must be one of: NONE, WARNING, ACTUATE"
+//                                 "Message must be one sentence, about speed change only."
+//                                 "Use distance_to_sign is s and measured in meters"
+//                                 "velocity is v measured using m/s only."
+
+//                                 "Rules for TOKEN:"
+//                                 "if s is lesser than or equal to 25 and v is greater than 12 or lesser than 11 then TOKEN=ACTUATE\n"
+//                                 "else if s lies in between 50 to 60 and v is in between 15 to 13 then TOKEN=WARNING"
+//                                 "else if s is greater than 80 and v is not in between 18 to 16 then TOKEN=WARNING\n"
+//                                 "else TOKEN=NONE\n"
+
+//                                 "If TOKEN=NONE, output: NONE|\n"
+//                                 "Do not output anything else."
+//                             ),
+//                         },
+//                         {
+//                             "role": "user",
+//                             "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
+//                         },
+//                     ],
+//                     options={"temperature": 0.0, "num_predict": 30},
+//                 )
+//             except Exception as e:
+//                 print(">>> LLM ERROR:", e, flush=True)
+//                 return "NONE", "", 0.0
+
+//             print(">>> LLM RETURNED", flush=True)
+
+//             ms = (time.perf_counter() - t0) * 1000.0
+//             raw = (r.get("message", {}).get("content", "") or "").strip()
+
+//             tok = "NONE"
+//             msg = ""
+
+//             if raw:
+//                 line = raw.splitlines()[0].strip()
+//                 parts = [p.strip() for p in line.split("|", 1)]
+//                 if len(parts) >= 1:
+//                     tok = parts[0].upper().strip()
+//                 if len(parts) == 2:
+//                     msg = parts[1].strip()
+
+//             # enforce valid token
+//             if tok not in ALLOWED:
+//                 tok = "NONE"
+//                 msg = ""
+
+//             # sanitize message
+//             msg = msg.replace("$", "").replace("`", "").strip().strip('"').strip("'")
+
+//             bad = ["token", "message", "rd=", "v=", "distance_to", "speed="]
+//             if any(b in msg.lower() for b in bad):
+//                 msg = ""
+
+//             # fallback message if empty
+//             if tok != "NONE" and not msg:
+//                 if tok == "WARNING":
+//                     msg = "Slow down and prepare to stop."
+//                 elif tok == "ACTUATE":
+//                     msg = "Brake now."
+
+//             if tok == "NONE":
+//                 msg = ""
+
+//             return tok, msg, ms
+//         def fallback_policy(self, rd_val, v_val):
+//                 if rd_val <= 0.0:
+//                     return "NONE", ""
+
+//                 if rd_val <= 25 and (v_val>12 or v_val<11):
+//                     return "ACTUATE", "Brake now."
+
+//                 if rd_val >= 80.0 and (v_val > 18 or v_val<16) :
+//                     return "WARNING", "Speed limit change ahead."
+//                 if 50.0 < rd_val <= 60.0 and (v_val > 15 or v_val<13):
+//                     return "WARNING", "Slow down to 11 m/s."
+
+//                 return "NONE", ""
+//     =}
+
+//     reaction(startup) -> ready {=
+//         import ollama
+//         import time
+//         print("Loading LLM...", flush=True)
+//         print("[DEBUG] Starting warmup call...", flush=True)
+
+//         t0 = time.perf_counter()
+
+//         response = ollama.chat(
+//             model="llama3:8b",
+//             messages=[{"role": "user", "content": "hi"}],
+//             options={"num_predict": 1}
+//         )
+
+//         t1 = time.perf_counter()
+
+//         print("[DEBUG] Warmup response received", flush=True)
+//         print(f"[DEBUG] Response: {response.get('message', {}).get('content', '')}", flush=True)
+//         print(f"[DEBUG] Warmup latency: {(t1 - t0)*1000:.2f} ms", flush=True)
+
+//         print("LLM READY", flush=True)
+
+//         self.is_ready = True
+//         ready.set(True)
+//     =}
+//     reaction(s, v, st, h) {=
+//         if s.is_present:
+//             self.s_val = s.value
+//         if v.is_present:
+//             self.v_val = v.value
+//         if st.is_present:
+//             self.st_val = st.value
+//         if h.is_present:
+//             self.h_val = h.value
+
+//         print(f"[LLM INPUT] t={lf.time.logical_elapsed()/1e6:.2f} s={self.s_val:.2f} v={self.v_val:.2f}", flush=True)
+//     =}
+
+//     reaction(llmclock) -> control, instruction {=
+//         current = lf.time.logical_elapsed()/1e6
+
+//         print("\n===== llm start time =====", flush=True)
+//         print(f"time={current:.2f}", flush=True)
+//         if not self.is_ready:
+//             return
+
+//         rd_val = s.value if s.is_present else 0.0
+//         v_val  = v.value if v.is_present else 0.0
+
+//         print(f"[LLM EXEC] t={current:.2f} s={rd_val:.2f} v={v_val:.2f}", flush=True)
+
+//         if rd_val <= 0.0:
+//             control.set("NONE")
+//             instruction.set("")
+//             return
+
+//         tok, msg, ms = run_llm_message(self, rd_val, v_val)
+//         self.check_deadline()
+
+//         control.set(tok)
+//         instruction.set(msg)
+//     =} deadline(1500 msec) {=
+//         current = lf.time.logical_elapsed()/1e6
+
+//         print("\n===== deadline start time =====", flush=True)
+//         print(f"time={current:.2f}", flush=True)
+//         rd_val = self.s_val
+//         v_val  = self.v_val
+
+//         if rd_val <= 0.0:
+//             tok, llm_instruction = "NONE", ""
+//         else:
+//             tok, llm_instruction = self.fallback_policy(rd_val, v_val)
+
+//         if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
+//             return
+
+//         self.last_dl_tok = tok
+//         self.last_dl_msg = llm_instruction
+
+//         control.set(tok)
+//         instruction.set(llm_instruction)
+
+//         print("#################LoggingforReference###############################", flush=True)
+//         print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
+//         print("------------------------------------------------", flush=True)
+//         print(f"[speed]: {v_val:.2f}", flush=True)
+//         print("------------------------------------------------", flush=True)
+//         print("logical", lf.time.logical_elapsed()/1e6, flush=True)
+//         print("physical", lf.time.physical_elapsed()/1e6, flush=True)
+//         print(f"[DEADLINE] fallback -> {tok} | {llm_instruction}", flush=True)
+//     =}
+// }
+
 reactor LLMInference {
     input s
     input v
@@ -218,46 +436,17 @@ reactor LLMInference {
     preamble{=
         import ollama
         import time
-        from enum import Enum
-
-       
 
         def run_llm_message(self, rd_val, v_val):
-            import ollama
-            import time
-
             print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
-
-            ALLOWED = {"NONE", "WARNING", "ACTUATE"}
 
             try:
                 r = ollama.chat(
                     model="llama3:8b",
                     messages=[
-                        {
-                            "role": "system",
-                            "content": (
-                                "Output exactly ONE line: TOKEN|Message"
-                                "TOKEN must be one of: NONE, WARNING, ACTUATE"
-                                "Message must be one sentence, about speed change only."
-                                "Use distance_to_sign is s and measured in meters"
-                                "velocity is v measured using m/s only."
-
-                                "Rules for TOKEN:"
-                                "if s is lesser than or equal to 25 and v is greater than 12 or lesser than 11 then TOKEN=ACTUATE\n"
-                                "else if s lies in between 50 to 60 and v is in between 15 to 13 then TOKEN=WARNING"
-                                "else if s is greater than 80 and v is not in between 18 to 16 then TOKEN=WARNING\n"
-                                "else TOKEN=NONE\n"
-
-                                "If TOKEN=NONE, output: NONE|\n"
-                                "Do not output anything else."
-                            ),
-                        },
-                        {
-                            "role": "user",
-                            "content": f"distance_to_stop={rd_val:.2f}m speed={v_val:.2f}m/s",
-                        },
+                        {"role": "system", "content": "Output TOKEN|Message"},
+                        {"role": "user", "content": f"s={rd_val:.2f}, v={v_val:.2f}"}
                     ],
                     options={"temperature": 0.0, "num_predict": 30},
                 )
@@ -265,86 +454,47 @@ reactor LLMInference {
                 print(">>> LLM ERROR:", e, flush=True)
                 return "NONE", "", 0.0
 
-            print(">>> LLM RETURNED", flush=True)
-
             ms = (time.perf_counter() - t0) * 1000.0
             raw = (r.get("message", {}).get("content", "") or "").strip()
 
-            tok = "NONE"
-            msg = ""
+            print(f">>> RAW LLM OUTPUT: {raw}", flush=True)
 
-            if raw:
-                line = raw.splitlines()[0].strip()
-                parts = [p.strip() for p in line.split("|", 1)]
-                if len(parts) >= 1:
-                    tok = parts[0].upper().strip()
-                if len(parts) == 2:
-                    msg = parts[1].strip()
+            return "NONE", raw, ms
 
-            # enforce valid token
-            if tok not in ALLOWED:
-                tok = "NONE"
-                msg = ""
-
-            # sanitize message
-            msg = msg.replace("$", "").replace("`", "").strip().strip('"').strip("'")
-
-            bad = ["token", "message", "rd=", "v=", "distance_to", "speed="]
-            if any(b in msg.lower() for b in bad):
-                msg = ""
-
-            # fallback message if empty
-            if tok != "NONE" and not msg:
-                if tok == "WARNING":
-                    msg = "Slow down and prepare to stop."
-                elif tok == "ACTUATE":
-                    msg = "Brake now."
-
-            if tok == "NONE":
-                msg = ""
-
-            return tok, msg, ms
         def fallback_policy(self, rd_val, v_val):
-                if rd_val <= 0.0:
-                    return "NONE", ""
+            print(f"[FALLBACK POLICY] evaluating s={rd_val:.2f}, v={v_val:.2f}", flush=True)
 
-                if rd_val <= 25 and (v_val>12 or v_val<11):
-                    return "ACTUATE", "Brake now."
-
-                if rd_val >= 80.0 and (v_val > 18 or v_val<16) :
-                    return "WARNING", "Speed limit change ahead."
-                if 50.0 < rd_val <= 60.0 and (v_val > 15 or v_val<13):
-                    return "WARNING", "Slow down to 11 m/s."
-
+            if rd_val <= 0.0:
                 return "NONE", ""
+
+            if rd_val <= 25:
+                return "ACTUATE", "Brake now."
+
+            if rd_val >= 80:
+                return "WARNING", "Speed limit ahead."
+
+            return "NONE", ""
     =}
 
     reaction(startup) -> ready {=
-        import ollama
         import time
-        print("Loading LLM...", flush=True)
-        print("[DEBUG] Starting warmup call...", flush=True)
-
-        t0 = time.perf_counter()
-
-        response = ollama.chat(
-            model="llama3:8b",
-            messages=[{"role": "user", "content": "hi"}],
-            options={"num_predict": 1}
-        )
-
-        t1 = time.perf_counter()
-
-        print("[DEBUG] Warmup response received", flush=True)
-        print(f"[DEBUG] Response: {response.get('message', {}).get('content', '')}", flush=True)
-        print(f"[DEBUG] Warmup latency: {(t1 - t0)*1000:.2f} ms", flush=True)
-
-        print("LLM READY", flush=True)
+        print("\n=== STARTUP ===", flush=True)
+        print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
+        print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
 
         self.is_ready = True
         ready.set(True)
+
+        print("[STATUS] LLM READY", flush=True)
     =}
+
     reaction(s, v, st, h) {=
+        print("\n=== INPUT REACTION TRIGGERED ===", flush=True)
+        print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
+        print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
+
+        print(f"[PRESENCE] s={s.is_present}, v={v.is_present}, st={st.is_present}, h={h.is_present}", flush=True)
+
         if s.is_present:
             self.s_val = s.value
         if v.is_present:
@@ -354,46 +504,70 @@ reactor LLMInference {
         if h.is_present:
             self.h_val = h.value
 
-        print(f"[LLM INPUT] t={lf.time.logical_elapsed()/1e6:.2f} s={self.s_val:.2f} v={self.v_val:.2f}", flush=True)
+        print(f"[STATE UPDATE] s_val={self.s_val:.2f}, v_val={self.v_val:.2f}", flush=True)
     =}
 
     reaction(llmclock) -> control, instruction {=
-        current = lf.time.logical_elapsed()/1e6
+        print("\n=== LLM CLOCK TRIGGERED ===", flush=True)
 
-        print("\n===== llm start time =====", flush=True)
-        print(f"time={current:.2f}", flush=True)
+        current_logical = lf.time.logical_elapsed()/1e6
+        current_physical = lf.time.physical_elapsed()/1e6
+
+        print(f"[TIME] logical={current_logical:.2f}", flush=True)
+        print(f"[TIME] physical={current_physical:.2f}", flush=True)
+
+        print(f"[READY] is_ready={self.is_ready}", flush=True)
+
         if not self.is_ready:
+            print("[SKIP] LLM not ready", flush=True)
             return
 
-        rd_val = s.value if s.is_present else 0.0
-        v_val  = v.value if v.is_present else 0.0
+        rd_val = self.s_val
+        v_val  = self.v_val
 
-        print(f"[LLM EXEC] t={current:.2f} s={rd_val:.2f} v={v_val:.2f}", flush=True)
+        print(f"[STATE READ] s={rd_val:.2f}, v={v_val:.2f}", flush=True)
 
         if rd_val <= 0.0:
+            print("[LLM] distance <= 0 → NONE", flush=True)
             control.set("NONE")
             instruction.set("")
             return
 
+        print("[LLM] calling model...", flush=True)
+
         tok, msg, ms = run_llm_message(self, rd_val, v_val)
-        self.check_deadline()
+
+        print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
 
         control.set(tok)
         instruction.set(msg)
-    =} deadline(1500 msec) {=
-        current = lf.time.logical_elapsed()/1e6
 
-        print("\n===== deadline start time =====", flush=True)
-        print(f"time={current:.2f}", flush=True)
+        print("[OUTPUT] control + instruction set", flush=True)
+    =}
+
+    deadline(1500 msec) {=
+        print("\n=== DEADLINE TRIGGERED ===", flush=True)
+
+        current_logical = lf.time.logical_elapsed()/1e6
+        current_physical = lf.time.physical_elapsed()/1e6
+
+        print(f"[TIME] logical={current_logical:.2f}", flush=True)
+        print(f"[TIME] physical={current_physical:.2f}", flush=True)
+
         rd_val = self.s_val
         v_val  = self.v_val
+
+        print(f"[STATE READ] s={rd_val:.2f}, v={v_val:.2f}", flush=True)
 
         if rd_val <= 0.0:
             tok, llm_instruction = "NONE", ""
         else:
             tok, llm_instruction = self.fallback_policy(rd_val, v_val)
 
+        print(f"[FALLBACK RESULT] {tok} | {llm_instruction}", flush=True)
+
         if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
+            print("[SKIP] same as last output", flush=True)
             return
 
         self.last_dl_tok = tok
@@ -402,14 +576,7 @@ reactor LLMInference {
         control.set(tok)
         instruction.set(llm_instruction)
 
-        print("#################LoggingforReference###############################", flush=True)
-        print(f"[Relative DISTANCE]: {rd_val:.2f}", flush=True)
-        print("------------------------------------------------", flush=True)
-        print(f"[speed]: {v_val:.2f}", flush=True)
-        print("------------------------------------------------", flush=True)
-        print("logical", lf.time.logical_elapsed()/1e6, flush=True)
-        print("physical", lf.time.physical_elapsed()/1e6, flush=True)
-        print(f"[DEADLINE] fallback -> {tok} | {llm_instruction}", flush=True)
+        print("[DEADLINE OUTPUT] control + instruction set", flush=True)
     =}
 }
 
