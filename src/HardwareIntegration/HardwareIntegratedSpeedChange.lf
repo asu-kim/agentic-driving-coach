@@ -323,12 +323,21 @@ reactor LLMInference {
         import ollama
 
         print("Loading LLM...", flush=True)
+        print("[DEBUG] Starting warmup call...", flush=True)
 
-        ollama.chat(
+        t0 = time.perf_counter()
+
+        response = ollama.chat(
             model="llama3:8b",
             messages=[{"role": "user", "content": "hi"}],
             options={"num_predict": 1}
         )
+
+        t1 = time.perf_counter()
+
+        print("[DEBUG] Warmup response received", flush=True)
+        print(f"[DEBUG] Response: {response.get('message', {}).get('content', '')}", flush=True)
+        print(f"[DEBUG] Warmup latency: {(t1 - t0)*1000:.2f} ms", flush=True)
 
         print("LLM READY", flush=True)
 
@@ -351,6 +360,8 @@ reactor LLMInference {
     reaction(llmclock) -> control, instruction {=
         current = lf.time.logical_elapsed()/1e6
 
+        print("\n===== llm start time =====", flush=True)
+        print(f"time={current:.2f}", flush=True)
         if not self.is_ready:
             return
 
