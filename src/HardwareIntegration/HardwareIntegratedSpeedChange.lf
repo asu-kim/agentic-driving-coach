@@ -22,28 +22,7 @@ reactor Driver{
         self.started = True
     =}
 
-    // reaction(sen.eye_msg, sen.head_msg, sen.steer_msg, sen.accel_msg, sen.brake_msg)-> accelerator, brake, steer, head {=
-    //     if not self.started:
-    //         return
-
-    //     head1 = sen.head_msg.value if sen.head_msg.is_present else 5
-    //     steer1 = sen.steer_msg.value if sen.steer_msg.is_present else 2
-    //     brake1 = sen.brake_msg.value if sen.brake_msg.is_present else 0.0
-    //     accelerator1 = sen.accel_msg.value if sen.accel_msg.is_present else 0.0
-
-    //     steer.set(steer1)
-    //     accelerator.set(accelerator1)
-    //     brake.set(brake1)
-    //     head.set(head1)
-
-    //     print("---------------------------------------")
-    //     print(f"from driver head: {head1} \n")
-    //     print(f"from driver brake: {brake1} \n")
-    //     print(f"from driver accelerator: {accelerator1} \n")
-    //     print(f"from driver steer: {steer1} \n")
-    //     print("---------------------------------------")
-    // =}
-    #to store the state variable
+    
     reaction(sen.eye_msg, sen.head_msg, sen.steer_msg, sen.accel_msg, sen.brake_msg) {=
         if not self.started:
             return
@@ -118,64 +97,7 @@ reactor Car{
             self.act_val = actuate_in.value
     =}
 
-    // reaction(accel_in, brake_in, steer_in, actuate_in, head_pos_in)->velocity, steer, head_pos {=
-    //     if not self.started:
-    //         return
-
-    //     amsg = accel_in.value if accel_in.is_present else 0.0
-    //     bmsg = brake_in.value if brake_in.is_present else 0.0
-    //     amsg = 0.0 if amsg is None else float(amsg)
-    //     bmsg = 0.0 if bmsg is None else float(bmsg)
-    //     act  = actuate_in.value if actuate_in.is_present else None
-
-    //     smsg = steer_in.value if steer_in.is_present else 2
-    //     hmsg = head_pos_in.value if head_pos_in.is_present else 5
-
-    //     def acel_cal(p):
-    //         p = max(0.0, min(1.0, p))
-    //         if p<0.1:
-    //             return p
-    //         elif p<0.6:
-    //             return 2.4 * p
-    //         else:
-    //             return 4.0*(p**2)
-
-    //     def brake_cal(p):
-    //         p = max(0.0, min(1.0, p))
-    //         if p<0.1:
-    //             return p
-    //         elif p<0.6:
-    //             return -(5.4 * p)
-    //         else:
-    //             return -(9.0*(p**2))
-
-    //     if act == 11:
-    //         self.acceleration_net = -9.0
-    //     else:
-    //         if bmsg > 0.0:
-    //             self.acceleration_net = brake_cal(bmsg)
-    //         elif amsg > 0.0:
-    //             self.acceleration_net = acel_cal(amsg)
-    //         else:
-    //             self.acceleration_net = -0.5
-
-    //     vel = self.velocity_init + self.acceleration_net * 0.1
-
-    //     if vel < 0.0:
-    //         vel = 0.0
-
-    //     d = self.dist_init + vel * 0.1
-
-    //     print(f"from car Velocity: {vel}", flush=True)
-    //     print(f"from car Distance: {d}", flush=True)
-
-    //     velocity.set(vel)
-    //     steer.set(smsg)
-    //     head_pos.set(hmsg)
-
-    //     self.velocity_init = vel
-    //     self.dist_init = d
-    // =}
+    
     reaction(carclock) -> velocity, steer, head_pos {=
         if not self.started:
             return
@@ -202,7 +124,7 @@ reactor Car{
             else:
                 return -(9.0 * (p**2))
 
-        # --- FIXED USAGE (IMPORTANT) ---
+        
         if act == 11:
             acc_net = -9.0
         else:
@@ -213,7 +135,7 @@ reactor Car{
             else:
                 acc_net = 0.0        # NOT -0.1 (was slowing you down always)
 
-        # --- DYNAMICS ---
+       
         vel = self.velocity_init + acc_net * 0.1
         vel = max(0.0, vel)
 
@@ -249,25 +171,7 @@ reactor Environment{
             self.v_val = float(v.value)
     =}
  
-    // reaction(v)->displacement {=
-    //     if not self.started:
-    //         return
-
-    //     vn = float(v.value)
-    //     step = vn * 0.1
-
-    //     if not self.passed:
-    //         self.pos_speed_change -= step
-    //         if self.pos_speed_change <= 0.0:
-    //             self.pos_speed_change = 0.0
-    //             self.passed = True
-
-    //         displacement.set(self.pos_speed_change)
-    //     else:
-    //         displacement.set(0.0)
-
-    //     print(f"displacement from the environment: {displacement.value}", flush=True)
-    // =}
+    
     reaction(envclock) -> displacement {=
         if not self.started:
             return
@@ -488,6 +392,10 @@ reactor LLMInference {
     =}
 
     deadline(1500 msec) {=
+        current = lf.time.logical_elapsed()/1e6
+
+        print("\n===== deadline start time =====", flush=True)
+        print(f"time={current:.2f}", flush=True)
         rd_val = self.s_val
         v_val  = self.v_val
 
