@@ -1,6 +1,9 @@
 target Python {keepalive: true}
 
 import SensorInputs from "SensorInputs.lf"
+preamble{=
+    import time
+=}
 
 reactor Driver{
     input start_signal
