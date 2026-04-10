@@ -321,7 +321,7 @@ reactor LLMInference {
 
     reaction(startup) -> ready {=
         import ollama
-
+        import time
         print("Loading LLM...", flush=True)
         print("[DEBUG] Starting warmup call...", flush=True)
 
