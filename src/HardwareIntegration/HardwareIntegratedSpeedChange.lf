@@ -365,6 +365,7 @@ reactor LLMInference {
             return
 
         tok, msg, ms = run_llm_message(self, rd_val, v_val)
+        self.check_deadline()
 
         control.set(tok)
         instruction.set(msg)
