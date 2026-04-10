@@ -511,6 +511,8 @@ reactor LLMInference {
         import time
 
         def run_llm_message(self, rd_val, v_val):
+            import ollama
+            import time
             print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
 
@@ -740,26 +742,28 @@ reactor Planner {
     =}
   }
 
-  mode actuate {
-    reaction(ctrl, s, v) -> act, monitoring, planned_instr {=
-      kw = (ctrl.value or "NONE").strip()
-      rd = s.value if s.value is not None else 0.0
-      cmd = f"espeak \"{instruction}\" --stdout | aplay &"
+    mode actuate {
+    reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
+        kw = (ctrl.value or "NONE").strip()
+        rd = s.value if s.value is not None else 0.0
+        instruction = (instr.value or "").strip()   
 
+        cmd = f"espeak \"{instruction}\" --stdout | aplay &"
 
-      if kw != "ACTUATE" or rd <= 0.0:
-        monitoring.set()
-        return
+        if kw != "ACTUATE" or rd <= 0.0:
+            monitoring.set()
+            return
 
-      i = f"[VERBAL] {kw} | Sent EmergencyBraking"
-      act.set(11)
-      planned_instr.set(i)
-      if instruction:
+        i = f"[VERBAL] {kw} | Sent EmergencyBraking"
+        act.set(11)
+        planned_instr.set(i)
+
+        if instruction:
             os.system(cmd)
 
-      monitoring.set()
+        monitoring.set()
     =}
-  }
+    }
 }
 
 reactor Coach{
