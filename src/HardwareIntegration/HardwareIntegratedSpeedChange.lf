@@ -667,7 +667,7 @@ reactor LLMInference {
     //     instruction.set(msg)
 
     // =} 
-    deadline(1500 msec) {=
+    deadline(100 sec) {=
         print("\n=== DEADLINE TRIGGERED ===", flush=True)
 
         rd_val = self.s_val
