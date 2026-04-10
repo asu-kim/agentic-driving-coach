@@ -630,8 +630,19 @@ reactor LLMInference {
 
         print("[LLM] calling model...", flush=True)
 
-        tok, msg, ms = self.run_llm_message(rd_val, v_val)
+        tok_raw, msg_raw, ms = self.run_llm_message(rd_val, v_val)
         self.check_deadline()
+
+        raw = (msg_raw or "").strip()
+
+        if "|" in raw:
+            tok, msg = raw.split("|", 1)
+        else:
+            tok = tok_raw or "NONE"
+            msg = raw
+
+        tok = tok.strip()
+        msg = msg.strip()
 
         print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
 
@@ -675,14 +686,16 @@ reactor Planner {
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
-      cmd = f"espeak \"{instruction}\" --stdout | aplay &"
+      v_val = v.value if v.value is not None else 0.0
+      cmd = f'espeak "{instruction}" &'
 
       now_ns = lf.time.logical_elapsed()
 
       if kw == "ACTUATE" and rd > 0.0:
         if instruction and instruction != self.last_printed:
-          i = f"[VERBAL] {kw} | {instruction}"
-          planned_instr.set(i)
+          log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+          print(log, flush=True)
+          planned_instr.set(log)
           if instruction:
             os.system(cmd)
           self.last_printed = instruction
@@ -692,8 +705,9 @@ reactor Planner {
       if kw == "WARNING":
         if (now_ns - self.last_warn_ns) >= throttle:
           if instruction and instruction != self.last_printed:
-            i = f"[VERBAL] {kw} | {instruction}"
-            planned_instr.set(i)
+            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+            print(log, flush=True)
+            planned_instr.set(log)
             if instruction:
                 os.system(cmd)
             self.last_printed = instruction
@@ -709,15 +723,16 @@ reactor Planner {
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
-      cmd = f"espeak \"{instruction}\" --stdout | aplay &"
-
+      v_val = v.value if v.value is not None else 0.0
+      cmd = f'espeak "{instruction}" &'
 
       now_ns = lf.time.logical_elapsed()
 
       if kw == "ACTUATE" and rd > 0.0:
         if instruction and instruction != self.last_printed:
-          i = f"[VERBAL] {kw} | {instruction}"
-          planned_instr.set(i)
+          log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+          print(log, flush=True)
+          planned_instr.set(log)
           if instruction:
             os.system(cmd)
           self.last_printed = instruction
@@ -731,8 +746,9 @@ reactor Planner {
       if kw == "WARNING":
         if (now_ns - self.last_warn_ns) >= throttle:
           if instruction and instruction != self.last_printed:
-            i = f"[VERBAL] {kw} | {instruction}"
-            planned_instr.set(i)
+            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+            print(log, flush=True)
+            planned_instr.set(log)
             if instruction:
                 os.system(cmd)
             self.last_printed = instruction
@@ -741,28 +757,32 @@ reactor Planner {
     =}
   }
 
-    mode actuate {
+  mode actuate {
     reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
         kw = (ctrl.value or "NONE").strip()
         rd = s.value if s.value is not None else 0.0
+        v_val = v.value if v.value is not None else 0.0
         instruction = (instr.value or "").strip()   
 
-        cmd = f"espeak \"{instruction}\" --stdout | aplay &"
+        cmd = f'espeak "{instruction}" &'
 
         if kw != "ACTUATE" or rd <= 0.0:
             monitoring.set()
             return
 
+        log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+        print(log, flush=True)
+
         i = f"[VERBAL] {kw} | Sent EmergencyBraking"
         act.set(11)
-        planned_instr.set(i)
+        planned_instr.set(log)
 
         if instruction:
             os.system(cmd)
 
         monitoring.set()
     =}
-    }
+  }
 }
 
 reactor Coach{
