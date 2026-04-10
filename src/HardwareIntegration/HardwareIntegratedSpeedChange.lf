@@ -605,7 +605,7 @@ reactor LLMInference {
 
         print("[LLM] calling model...", flush=True)
 
-        tok, msg, ms = self.run_llm_message(self, rd_val, v_val)
+        tok, msg, ms = self.run_llm_message(rd_val, v_val)
 
         print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
 
