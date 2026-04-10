@@ -504,7 +504,7 @@ reactor LLMInference {
     state st_val = 2
     state h_val = 5
 
-    timer llmclock(0, 250 msec)
+    // timer llmclock(0, 250 msec)
 
     preamble{=
         import ollama
@@ -588,7 +588,7 @@ reactor LLMInference {
         print("[STATUS] LLM READY", flush=True)
     =}
 
-    reaction(s, v, st, h) {=
+    reaction(s, v, st, h) -> control, instruction {=
         print("\n=== INPUT REACTION TRIGGERED ===", flush=True)
         print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
         print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
@@ -605,9 +605,6 @@ reactor LLMInference {
             self.h_val = h.value
 
         print(f"[STATE UPDATE] s_val={self.s_val:.2f}, v_val={self.v_val:.2f}", flush=True)
-    =}
-
-    reaction(llmclock) -> control, instruction {=
         print("\n=== LLM CLOCK TRIGGERED ===", flush=True)
 
         current_logical = lf.time.logical_elapsed()/1e6
@@ -637,7 +634,40 @@ reactor LLMInference {
         control.set(tok)
         instruction.set(msg)
 
-    =} deadline(1500 msec) {=
+    =}
+
+    // reaction(llmclock) -> control, instruction {=
+    //     print("\n=== LLM CLOCK TRIGGERED ===", flush=True)
+
+    //     current_logical = lf.time.logical_elapsed()/1e6
+    //     print(f"[TIME] logical={current_logical:.2f}", flush=True)
+
+    //     if not self.is_ready:
+    //         print("[SKIP] LLM not ready", flush=True)
+    //         return
+
+    //     rd_val = self.s_val
+    //     v_val  = self.v_val
+
+    //     print(f"[STATE READ] s={rd_val:.2f}, v={v_val:.2f}", flush=True)
+
+    //     if rd_val <= 0.0:
+    //         control.set("NONE")
+    //         instruction.set("")
+    //         return
+
+    //     print("[LLM] calling model...", flush=True)
+
+    //     tok, msg, ms = self.run_llm_message(rd_val, v_val)
+    //     self.check_deadline()
+
+    //     print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
+
+    //     control.set(tok)
+    //     instruction.set(msg)
+
+    // =} 
+    deadline(1500 msec) {=
         print("\n=== DEADLINE TRIGGERED ===", flush=True)
 
         rd_val = self.s_val
