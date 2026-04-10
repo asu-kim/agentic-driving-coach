@@ -335,7 +335,7 @@ reactor LLMInference {
         self.is_ready = True
         ready.set(True)
     =}
-    reaction(s, v, st, h) -> control, instruction{=
+    reaction(s, v, st, h) {=
         if s.is_present:
             self.s_val = s.value
         if v.is_present:
@@ -346,11 +346,14 @@ reactor LLMInference {
             self.h_val = h.value
 
         print(f"[LLM INPUT] t={lf.time.logical_elapsed()/1e6:.2f} s={self.s_val:.2f} v={self.v_val:.2f}", flush=True)
-        print("\n===== LLM CLOCK =====", flush=True)
+    =}
+    reaction(s) -> control, instruction {=
+        current = lf.time.logical_elapsed()/1e6
+
+        print("\n===== LLM EXEC =====", flush=True)
         print(f"time={current:.2f}", flush=True)
 
         if not self.is_ready:
-            print("LLM not ready", flush=True)
             return
 
         rd_val = self.s_val
@@ -363,14 +366,10 @@ reactor LLMInference {
             instruction.set("")
             return
 
-        print("calling LLM...", flush=True)
-
-        # tok, msg, ms = self.run_llm_message(rd_val, v_val)
-        t0 = lf.time.physical_elapsed()
-
+        # dummy logic
         if rd_val <= 25 and v_val > 2.5:
             tok = "ACTUATE"
-            msg = "accelerate now."
+            msg = "Brake now."
         elif 50 <= rd_val <= 60:
             tok = "WARNING"
             msg = "Slow down."
@@ -378,13 +377,10 @@ reactor LLMInference {
             tok = "NONE"
             msg = ""
 
-        ms = lf.time.physical_elapsed() - t0
-
-        print(f"[DUMMY LLM] {tok} | {msg} ({ms:.2f} ms)", flush=True)
+        print(f"[LLM OUTPUT] {tok} | {msg}", flush=True)
 
         control.set(tok)
         instruction.set(msg)
-        
     =}
 
     
