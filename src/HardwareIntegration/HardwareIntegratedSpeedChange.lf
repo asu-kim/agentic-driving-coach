@@ -119,35 +119,44 @@ reactor Car{
         def brake_cal(p):
             p = max(0.0, min(1.0, p))
             if p < 0.1:
-                return p
+                return -p
             elif p < 0.6:
                 return -(5.4 * p)
             else:
                 return -(9.0 * (p**2))
 
-        vel_prev = self.velocity_init
-        if act == 11:
-            if vel_prev > 12.0:
-                acc_net = -9.0
-            elif vel_prev < 11.0:
-                acc_net = 4.0
-            else:
-                acc_net = 0.0
-        else:
-            if bmsg > 0.15:          # dead zone (fixes your issue)
-                acc_net = brake_cal(bmsg)
-            elif amsg > 0.05:        # small threshold
-                acc_net = acel_cal(amsg)
-            else:
-                acc_net = 0.0        # NOT -0.1 (was slowing you down always)
+        # CLEAN INPUT
+        if bmsg < 0.2:
+            bmsg = 0.0
+        if amsg < 0.05:
+            amsg = 0.0
 
-       
-        vel = self.velocity_init + acc_net * 0.1
+        vel_prev = self.velocity_init
+
+        # ACTUATE (ADAS CONTROL)
+        if act == 11:
+            target_speed = 11.5
+            error = target_speed - vel_prev
+            Kp = 1.5
+            acc_net = Kp * error
+            acc_net = max(-6.0, min(6.0, acc_net))
+
+        # DRIVER CONTROL
+        else:
+            acc_net = 0.0
+
+            if amsg > 0.0:
+                acc_net += acel_cal(amsg)
+
+            if bmsg > 0.0:
+                acc_net += brake_cal(bmsg)
+
+        vel = vel_prev + acc_net * 0.1
         vel = max(0.0, vel)
 
         d = self.dist_init + vel * 0.1
 
-        print(f"[CAR CLOCK] logical time: {current_dri:.2f} vel={vel} acc={acc_net}", flush=True)
+        print(f"[CAR CLOCK] logical time: {current_dri:.2f} vel={vel:.2f} acc={acc_net:.2f}", flush=True)
 
         velocity.set(vel)
         steer.set(self.steer_val)
@@ -166,7 +175,7 @@ reactor Environment{
     state started = False
 
     input v
-    state pos_speed_change = 100.0
+    state pos_speed_change = 200.0
     state passed = False
     output displacement
     // timer envclock(0, 100 msec)
@@ -249,8 +258,8 @@ reactor LLMInference {
 
                                 "Rules:\n"
                                 "- If s <= 25 and (v < 11 or v > 12) → ACTUATE\n"
-                                "- If 50 <= s <= 60 and (v < 13 or v > 15) → WARNING\n"
-                                "- If s >= 80 and (v < 16 or v > 18) → WARNING\n"
+                                "- If 60 <= s <= 80 and (v < 13 or v > 15) → WARNING\n"
+                                "- If s >= 100 and (v < 20 or v > 30) → WARNING\n"
                                 "- Otherwise → NONE\n\n"
 
                                 "Strict output format:\n"
@@ -588,7 +597,7 @@ reactor Planner {
   initial mode monitoring {
     
     reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
-      throttle = 3000000000
+      throttle = 9000000000
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
@@ -599,10 +608,10 @@ reactor Planner {
       now_ns = lf.time.logical_elapsed()
 
       if rd <= 2 and not self.reached:
-        log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
+        log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
         print(log, flush=True)
         planned_instr.set(log)
-        act.set(11)
+        # act.set(11)
 
         try:
             if self.speech_proc is not None:
@@ -611,7 +620,7 @@ reactor Planner {
             pass
 
         self.speech_proc = subprocess.Popen(
-            ["espeak", "-s", "130", "You have reached the stop sign"],
+            ["espeak", "-s", "100", "You have reached the Speed limit"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
@@ -639,7 +648,7 @@ reactor Planner {
               pass
 
             self.speech_proc = subprocess.Popen(
-              ["espeak", "-s", "140", instruction],
+              ["espeak", "-s", "100", instruction],
               stdout=subprocess.DEVNULL,
               stderr=subprocess.DEVNULL
             )
@@ -661,7 +670,7 @@ reactor Planner {
               pass
 
             self.speech_proc = subprocess.Popen(
-              ["espeak", "-s", "140", instruction],
+              ["espeak", "-s", "100", instruction],
               stdout=subprocess.DEVNULL,
               stderr=subprocess.DEVNULL
             )
@@ -675,7 +684,7 @@ reactor Planner {
 
   mode warning {
     reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
-      throttle = 3000000000
+      throttle = 9000000000
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
@@ -686,7 +695,7 @@ reactor Planner {
       now_ns = lf.time.logical_elapsed()
 
       if rd <= 2 and not self.reached:
-        log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
+        log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
         print(log, flush=True)
         planned_instr.set(log)
         # act.set(11)
@@ -698,7 +707,7 @@ reactor Planner {
             pass
 
         self.speech_proc = subprocess.Popen(
-            ["espeak", "-s", "130", "You have reached the stop sign"],
+            ["espeak", "-s", "100", "You have reached the Speed limit"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
@@ -726,7 +735,7 @@ reactor Planner {
               pass
 
             self.speech_proc = subprocess.Popen(
-              ["espeak", "-s", "140", instruction],
+              ["espeak", "-s", "100", instruction],
               stdout=subprocess.DEVNULL,
               stderr=subprocess.DEVNULL
             )
@@ -752,7 +761,7 @@ reactor Planner {
               pass
 
             self.speech_proc = subprocess.Popen(
-              ["espeak", "-s", "140", instruction],
+              ["espeak", "-s", "100", instruction],
               stdout=subprocess.DEVNULL,
               stderr=subprocess.DEVNULL
             )
@@ -774,7 +783,7 @@ reactor Planner {
         now_ns = lf.time.logical_elapsed()
 
         if rd <= 2 and not self.reached:
-            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Stopped near sign"
+            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
             print(log, flush=True)
             planned_instr.set(log)
             # act.set(11)
@@ -786,7 +795,7 @@ reactor Planner {
                 pass
 
             self.speech_proc = subprocess.Popen(
-                ["espeak", "-s", "130", "You have reached the stop sign"],
+                ["espeak", "-s", "100", "You have reached the Speed limit"],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL
             )
@@ -817,7 +826,7 @@ reactor Planner {
                     pass
 
                 self.speech_proc = subprocess.Popen(
-                    ["espeak", "-s", "135", instruction],
+                    ["espeak", "-s", "100", instruction],
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL
                 )
