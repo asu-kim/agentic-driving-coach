@@ -18,7 +18,7 @@ reactor Driver{
     output accelerator
     output brake
     output head
-    timer sensorclock(0, 250 msec)
+    timer sensorclock(0, 100 msec)
 
     sen = new SensorInputs()
 
@@ -135,26 +135,37 @@ reactor Car{
 
         # ACTUATE (ADAS CONTROL)
         if act == 11:
-            target_speed = 11.5
-            error = target_speed - vel_prev
-            Kp = 1.5
-            acc_net = Kp * error
-            acc_net = max(-6.0, min(6.0, acc_net))
+            target_speed = 11.0
 
-        # DRIVER CONTROL
+            error = target_speed - vel_prev
+
+            Kp = 1.2
+            acc_net = Kp * error
+
+            acc_net = max(-4.0, min(3.0, acc_net))
+
+
+        # -------- DRIVER / RECOVERY --------
         else:
             acc_net = 0.0
 
-            if amsg > 0.0:
+            # RECOVERY: prevent stall
+            if vel_prev < 9.5:
+                acc_net = 1.5   # gentle push forward
+
+            elif amsg > 0.0:
                 acc_net += acel_cal(amsg)
 
-            if bmsg > 0.0:
+            elif bmsg > 0.0:
                 acc_net += brake_cal(bmsg)
 
+
+        # -------- UPDATE VELOCITY --------
         vel = vel_prev + acc_net * 0.1
         vel = max(0.0, vel)
 
-        d = self.dist_init + vel * 0.1
+
+        d = max(0.0, self.dist_init - vel * 0.2)
 
         print(f"[CAR CLOCK] logical time: {current_dri:.2f} vel={vel:.2f} acc={acc_net:.2f}", flush=True)
 
@@ -232,7 +243,7 @@ reactor LLMInference {
     state st_val = 2
     state h_val = 5
 
-    timer llmclock(0, 250 msec)
+    timer llmclock(0, 100 msec)
 
     preamble{=
         import ollama
@@ -251,25 +262,23 @@ reactor LLMInference {
                         {
                             "role": "system",
                             "content": (
-                                "Output exactly ONE line: TOKEN|Message\n"
-                                "TOKEN must be one of: NONE, WARNING, ACTUATE\n"
-                                "Message must be one sentence about speed change only.\n"
-                                "distance_to_sign is s (meters), velocity is v (m/s)\n\n"
+                                        " You are a real-time driving coach.\n"
+                                        
+                                        "Output exactly ONE line: TOKEN|Message"
+                                        "TOKEN must be one of: NONE, WARNING, ACTUATE"
+                                        "Message must be one sentence, about speed change only."
+                                        "Use distance_to_sign is s and measured in meters"
+                                        "velocity is v measured using m/s only."
 
-                                "Rules:\n"
-                                "- If s <= 25 and (v < 11 or v > 12) → ACTUATE\n"
-                                "- If 60 <= s <= 80 and (v < 13 or v > 15) → WARNING\n"
-                                "- If s >= 100 and (v < 20 or v > 30) → WARNING\n"
-                                "- Otherwise → NONE\n\n"
+                                        "Rules for TOKEN:"
+                                        "if s is lesser than or equal to 25 and v is greater than 12 or lesser than 11 then TOKEN=ACTUATE\n"
+                                        "else if s lies in between 50 to 60 and v is in between 15 to 13 then TOKEN=WARNING"
+                                        "else if s is greater than 80 and v is not in between 18 to 16 then TOKEN=WARNING\n"
+                                        "else TOKEN=NONE\n"
 
-                                "Strict output format:\n"
-                                "TOKEN|Message\n"
-
-                                "If TOKEN=NONE, output exactly:\n"
-                                "NONE|\n"
-
-                                "Do NOT output anything else."
-                            )
+                                        "If TOKEN=NONE, output: NONE|\n"
+                                        "Do not output anything else."
+                                    )
                         },
                         {
                             "role": "user",
@@ -352,9 +361,10 @@ reactor LLMInference {
         # print(f"[STATE READ] s={rd_val:.2f}, v={v_val:.2f}", flush=True)
 
         if rd_val <= 0.0:
-            control.set("NONE")
-            instruction.set("")
-            return
+            rd_val = 0.0
+            # control.set("NONE")
+            # instruction.set("")
+            # return
 
         # print("[LLM] calling model...", flush=True)
 
@@ -372,7 +382,7 @@ reactor LLMInference {
         tok = tok.strip()
         msg = msg.strip()
 
-        # print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
+        print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
 
         control.set(tok)
         instruction.set(msg)
@@ -394,188 +404,6 @@ reactor LLMInference {
 }
 
 
-// reactor Planner {
-//   input ctrl
-//   input instr
-//   input s
-//   input v
-//   output act
-//   output planned_instr
-
-//   state last_warn_ns = -10000000000000
-//   state last_act_ns = -1000000000000
-//   state last_printed = ""
-//   state speech_proc 
-
-//   preamble{=
-//     import subprocess
-//   =}
-
-//   initial mode monitoring {
-    
-//     reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
-//       throttle = 3000000000
-//       kw  = (ctrl.value or "NONE").strip()
-//       instruction = (instr.value or "").strip()
-//       rd  = s.value if s.value is not None else 0.0
-//       v_val = v.value if v.value is not None else 0.0
-
-//       now_ns = lf.time.logical_elapsed()
-
-//       if kw == "ACTUATE" and rd > 0.0:
-//         if instruction and instruction != self.last_printed:
-//           log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-//           print(log, flush=True)
-//           planned_instr.set(log)
-
-//           if instruction:
-//             try:
-//               if self.speech_proc is not None:
-//                 self.speech_proc.kill()
-//             except:
-//               pass
-
-//             self.speech_proc = subprocess.Popen(
-//               ["espeak", "-s", "140", instruction],
-//               stdout=subprocess.DEVNULL,
-//               stderr=subprocess.DEVNULL
-//             )
-
-//           self.last_printed = instruction
-//         actuate.set()
-//         return
-
-//       if kw == "WARNING":
-//         if (now_ns - self.last_warn_ns) >= throttle:
-//           if instruction and instruction != self.last_printed:
-//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-//             print(log, flush=True)
-//             planned_instr.set(log)
-
-//             if instruction:
-//               try:
-//                 if self.speech_proc is not None:
-//                   self.speech_proc.kill()
-//               except:
-//                 pass
-
-//               self.speech_proc = subprocess.Popen(
-//                 ["espeak", "-s", "140", instruction],
-//                 stdout=subprocess.DEVNULL,
-//                 stderr=subprocess.DEVNULL
-//               )
-
-//             self.last_printed = instruction
-//           self.last_warn_ns = now_ns
-//         warning.set()
-//         return
-//     =}
-//   }
-
-//   mode warning {
-//     reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
-//       throttle = 3000000000
-//       kw  = (ctrl.value or "NONE").strip()
-//       instruction = (instr.value or "").strip()
-//       rd  = s.value if s.value is not None else 0.0
-//       v_val = v.value if v.value is not None else 0.0
-
-//       now_ns = lf.time.logical_elapsed()
-
-//       if kw == "ACTUATE" and rd > 0.0:
-//         if instruction and instruction != self.last_printed:
-//           log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-//           print(log, flush=True)
-//           planned_instr.set(log)
-
-//           if instruction:
-//             try:
-//               if self.speech_proc is not None:
-//                 self.speech_proc.kill()
-//             except:
-//               pass
-
-//             self.speech_proc = subprocess.Popen(
-//               ["espeak", "-s", "140", instruction],
-//               stdout=subprocess.DEVNULL,
-//               stderr=subprocess.DEVNULL
-//             )
-
-//           self.last_printed = instruction
-//         actuate.set()
-//         return
-
-//       if kw == "NONE":
-//         monitoring.set()
-//         return
-
-//       if kw == "WARNING":
-//         if (now_ns - self.last_warn_ns) >= throttle:
-//           if instruction and instruction != self.last_printed:
-//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-//             print(log, flush=True)
-//             planned_instr.set(log)
-
-//             if instruction:
-//               try:
-//                 if self.speech_proc is not None:
-//                   self.speech_proc.kill()
-//               except:
-//                 pass
-
-//               self.speech_proc = subprocess.Popen(
-//                 ["espeak", "-s", "140", instruction],
-//                 stdout=subprocess.DEVNULL,
-//                 stderr=subprocess.DEVNULL
-//               )
-
-//             self.last_printed = instruction
-//           self.last_warn_ns = now_ns
-//         return
-//     =}
-//   }
-
-//   mode actuate {
-//     reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
-//         kw = (ctrl.value or "NONE").strip()
-//         rd = s.value if s.value is not None else 0.0
-//         v_val = v.value if v.value is not None else 0.0
-//         instruction = (instr.value or "").strip()   
-
-//         if kw != "ACTUATE" or rd <= 0.0:
-//             monitoring.set()
-//             return
-
-//         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-//         print(log, flush=True)
-
-//         act.set(11)
-//         planned_instr.set(log)
-
-//         act_throttle = 1500000000  # 1.5 sec
-//         now_ns = lf.time.logical_elapsed()
-
-//         if (now_ns - self.last_act_ns) >= act_throttle:
-//             if instruction:
-//                 try:
-//                     if self.speech_proc is not None:
-//                         self.speech_proc.kill()
-//                 except:
-//                     pass
-
-//                 self.speech_proc = subprocess.Popen(
-//                     ["espeak", "-s", "135", instruction],
-//                     stdout=subprocess.DEVNULL,
-//                     stderr=subprocess.DEVNULL
-//                 )
-
-//             self.last_act_ns = now_ns
-
-//         monitoring.set()
-//     =}
-//   }
-// }
-
 reactor Planner {
   input ctrl
   input instr
@@ -589,6 +417,7 @@ reactor Planner {
   state last_printed = ""
   state speech_proc 
   state reached = False
+  state stable_count = 0
 
   preamble{=
     import subprocess
@@ -597,7 +426,8 @@ reactor Planner {
   initial mode monitoring {
     
     reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
-      throttle = 9000000000
+      throttle = 3000000000
+
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
@@ -607,39 +437,50 @@ reactor Planner {
 
       now_ns = lf.time.logical_elapsed()
 
-      if rd <= 2 and not self.reached:
-        log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
-        print(log, flush=True)
-        planned_instr.set(log)
-        # act.set(11)
+      # -------- FINAL ZONE --------
+      if rd <= 2:
+        target = 11.0
+        error = abs(v_val - target)
 
-        try:
+        if error > 0.5:
+          actuate.set()
+          self.stable_count = 0
+          print(f"[CORRECTING] v={v_val:.2f} → target 11", flush=True)
+          return
+
+        self.stable_count += 1
+        print(f"[STABILIZING] v={v_val:.2f} ({self.stable_count}/5)", flush=True)
+
+        if self.stable_count >= 5 and not self.reached:
+          log = f"[FINAL] v={v_val:.2f} | Stable at target"
+          print(log, flush=True)
+          planned_instr.set(log)
+
+          try:
             if self.speech_proc is not None:
-                self.speech_proc.kill()
-        except:
+              self.speech_proc.kill()
+          except:
             pass
 
-        self.speech_proc = subprocess.Popen(
-            ["espeak", "-s", "100", "You have reached the Speed limit"],
+          self.speech_proc = subprocess.Popen(
+            ["espeak", "-s", "100", "Good job. Speed maintained well"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
-        )
+          )
 
-        self.reached = True
+          self.reached = True
+          request_stop()
 
-        request_stop()
         return
 
+      # -------- ACTUATE --------
       if kw == "ACTUATE" and rd > 0.0:
         actuate.set()
 
-        act_throttle = 1500000000
-
-        if (now_ns - self.last_act_ns) >= act_throttle:
+        if (now_ns - self.last_act_ns) >= 1500000000:
           if instruction:
-            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-            print(log, flush=True)
-            planned_instr.set(log)
+            print(f"[LOG] v={v_val:.2f} | s={rd:.2f} | ACTUATE | {instruction}", flush=True)
+            planned_instr.set(f"[LOG] {instruction}")
 
             try:
               if self.speech_proc is not None:
@@ -656,12 +497,12 @@ reactor Planner {
           self.last_act_ns = now_ns
         return
 
+      # -------- WARNING --------
       if kw == "WARNING":
         if (now_ns - self.last_warn_ns) >= throttle:
           if instruction:
-            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-            print(log, flush=True)
-            planned_instr.set(log)
+            print(f"[LOG] v={v_val:.2f} | s={rd:.2f} | WARNING | {instruction}", flush=True)
+            planned_instr.set(f"[LOG] {instruction}")
 
             try:
               if self.speech_proc is not None:
@@ -684,7 +525,8 @@ reactor Planner {
 
   mode warning {
     reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
-      throttle = 9000000000
+      throttle = 3000000000
+
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
@@ -694,149 +536,329 @@ reactor Planner {
 
       now_ns = lf.time.logical_elapsed()
 
-      if rd <= 2 and not self.reached:
-        log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
-        print(log, flush=True)
-        planned_instr.set(log)
-        # act.set(11)
+      # same FINAL logic
+      if rd <= 2:
+        target = 11.0
+        error = abs(v_val - target)
 
-        try:
-            if self.speech_proc is not None:
-                self.speech_proc.kill()
-        except:
-            pass
+        if error > 0.5:
+          actuate.set()
+          self.stable_count = 0
+          print(f"[CORRECTING] v={v_val:.2f} → target 11", flush=True)
+          return
 
-        self.speech_proc = subprocess.Popen(
-            ["espeak", "-s", "100", "You have reached the Speed limit"],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
-        )
+        self.stable_count += 1
+        print(f"[STABILIZING] v={v_val:.2f} ({self.stable_count}/5)", flush=True)
 
-        self.reached = True
+        if self.stable_count >= 5 and not self.reached:
+          print(f"[FINAL] v={v_val:.2f} | Stable at target", flush=True)
+          request_stop()
 
-        request_stop()
         return
 
       if kw == "ACTUATE" and rd > 0.0:
         actuate.set()
-
-        act_throttle = 1500000000
-
-        if (now_ns - self.last_act_ns) >= act_throttle:
-          if instruction:
-            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-            print(log, flush=True)
-            planned_instr.set(log)
-
-            try:
-              if self.speech_proc is not None:
-                self.speech_proc.kill()
-            except:
-              pass
-
-            self.speech_proc = subprocess.Popen(
-              ["espeak", "-s", "100", instruction],
-              stdout=subprocess.DEVNULL,
-              stderr=subprocess.DEVNULL
-            )
-
-          self.last_act_ns = now_ns
         return
 
       if kw == "NONE":
         monitoring.set()
-        return
-
-      if kw == "WARNING":
-        if (now_ns - self.last_warn_ns) >= throttle:
-          if instruction:
-            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-            print(log, flush=True)
-            planned_instr.set(log)
-
-            try:
-              if self.speech_proc is not None:
-                self.speech_proc.kill()
-            except:
-              pass
-
-            self.speech_proc = subprocess.Popen(
-              ["espeak", "-s", "100", instruction],
-              stdout=subprocess.DEVNULL,
-              stderr=subprocess.DEVNULL
-            )
-
-          self.last_warn_ns = now_ns
         return
     =}
   }
 
   mode actuate {
     reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
-        kw = (ctrl.value or "NONE").strip()
-        rd = s.value if s.value is not None else 0.0
-        v_val = v.value if v.value is not None else 0.0
-        instruction = (instr.value or "").strip()   
+      kw = (ctrl.value or "NONE").strip()
+      rd = s.value if s.value is not None else 0.0
+      v_val = v.value if v.value is not None else 0.0
 
-        print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+      print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
-        now_ns = lf.time.logical_elapsed()
+      # FINAL handled here too
+      if rd <= 2:
+        target = 11.0
+        error = abs(v_val - target)
 
-        if rd <= 2 and not self.reached:
-            log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
-            print(log, flush=True)
-            planned_instr.set(log)
-            # act.set(11)
+        if error > 0.5:
+          act.set(11)
+          print(f"[CORRECTING] v={v_val:.2f} → target 11", flush=True)
+          return
 
-            try:
-                if self.speech_proc is not None:
-                    self.speech_proc.kill()
-            except:
-                pass
+        print(f"[FINAL] v={v_val:.2f} | Stable at target", flush=True)
+        request_stop()
+        return
 
-            self.speech_proc = subprocess.Popen(
-                ["espeak", "-s", "100", "You have reached the Speed limit"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL
-            )
-
-            self.reached = True
-
-            request_stop()
-            return
-
-        if kw != "ACTUATE" or rd <= 0.0:
-            monitoring.set()
-            return
-
-        act.set(11)
-
-        act_throttle = 1500000000
-
-        if (now_ns - self.last_act_ns) >= act_throttle:
-            if instruction:
-                log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
-                print(log, flush=True)
-                planned_instr.set(log)
-
-                try:
-                    if self.speech_proc is not None:
-                        self.speech_proc.kill()
-                except:
-                    pass
-
-                self.speech_proc = subprocess.Popen(
-                    ["espeak", "-s", "100", instruction],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL
-                )
-
-            self.last_act_ns = now_ns
-
+      if kw != "ACTUATE":
         monitoring.set()
+        return
+
+      act.set(11)
+      monitoring.set()
     =}
   }
 }
+
+// reactor Planner {
+//   input ctrl
+//   input instr
+//   input s
+//   input v
+//   output act
+//   output planned_instr
+
+//   state last_warn_ns = -10000000000000
+//   state last_act_ns = -1000000000000
+//   state last_printed = ""
+//   state speech_proc 
+//   state reached = False
+
+//   preamble{=
+//     import subprocess
+//   =}
+
+//   initial mode monitoring {
+    
+//     reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
+//       throttle = 9000000000
+//       kw  = (ctrl.value or "NONE").strip()
+//       instruction = (instr.value or "").strip()
+//       rd  = s.value if s.value is not None else 0.0
+//       v_val = v.value if v.value is not None else 0.0
+
+//       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+
+//       now_ns = lf.time.logical_elapsed()
+
+//       if rd <= 2 and not self.reached:
+//         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
+//         print(log, flush=True)
+//         planned_instr.set(log)
+//         # act.set(11)
+
+//         try:
+//             if self.speech_proc is not None:
+//                 self.speech_proc.kill()
+//         except:
+//             pass
+
+//         self.speech_proc = subprocess.Popen(
+//             ["espeak", "-s", "100", "you reached the speed limit for the distance"],
+//             stdout=subprocess.DEVNULL,
+//             stderr=subprocess.DEVNULL
+//         )
+
+//         self.reached = True
+
+//         request_stop()
+//         return
+
+//       if kw == "ACTUATE" and rd > 0.0:
+//         actuate.set()
+
+//         act_throttle = 1500000000
+
+//         if (now_ns - self.last_act_ns) >= act_throttle:
+//           if instruction:
+//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//             print(log, flush=True)
+//             planned_instr.set(log)
+
+//             try:
+//               if self.speech_proc is not None:
+//                 self.speech_proc.kill()
+//             except:
+//               pass
+
+//             self.speech_proc = subprocess.Popen(
+//               ["espeak", "-s", "100", instruction],
+//               stdout=subprocess.DEVNULL,
+//               stderr=subprocess.DEVNULL
+//             )
+
+//           self.last_act_ns = now_ns
+//         return
+
+//       if kw == "WARNING":
+//         if (now_ns - self.last_warn_ns) >= throttle:
+//           if instruction:
+//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//             print(log, flush=True)
+//             planned_instr.set(log)
+
+//             try:
+//               if self.speech_proc is not None:
+//                 self.speech_proc.kill()
+//             except:
+//               pass
+
+//             self.speech_proc = subprocess.Popen(
+//               ["espeak", "-s", "100", instruction],
+//               stdout=subprocess.DEVNULL,
+//               stderr=subprocess.DEVNULL
+//             )
+
+//           self.last_warn_ns = now_ns
+
+//         warning.set()
+//         return
+//     =}
+//   }
+
+//   mode warning {
+//     reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
+//       throttle = 9000000000
+//       kw  = (ctrl.value or "NONE").strip()
+//       instruction = (instr.value or "").strip()
+//       rd  = s.value if s.value is not None else 0.0
+//       v_val = v.value if v.value is not None else 0.0
+
+//       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+
+//       now_ns = lf.time.logical_elapsed()
+
+//       if rd <= 2 and not self.reached:
+//         log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
+//         print(log, flush=True)
+//         planned_instr.set(log)
+//         # act.set(11)
+
+//         try:
+//             if self.speech_proc is not None:
+//                 self.speech_proc.kill()
+//         except:
+//             pass
+
+//         self.speech_proc = subprocess.Popen(
+//             ["espeak", "-s", "100", "you reached the speed limit for the distance"],
+//             stdout=subprocess.DEVNULL,
+//             stderr=subprocess.DEVNULL
+//         )
+
+//         self.reached = True
+
+//         request_stop()
+//         return
+
+//       if kw == "ACTUATE" and rd > 0.0:
+//         actuate.set()
+
+//         act_throttle = 1500000000
+
+//         if (now_ns - self.last_act_ns) >= act_throttle:
+//           if instruction:
+//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//             print(log, flush=True)
+//             planned_instr.set(log)
+
+//             try:
+//               if self.speech_proc is not None:
+//                 self.speech_proc.kill()
+//             except:
+//               pass
+
+//             self.speech_proc = subprocess.Popen(
+//               ["espeak", "-s", "100", instruction],
+//               stdout=subprocess.DEVNULL,
+//               stderr=subprocess.DEVNULL
+//             )
+
+//           self.last_act_ns = now_ns
+//         return
+
+//       if kw == "NONE":
+//         monitoring.set()
+//         return
+
+//       if kw == "WARNING":
+//         if (now_ns - self.last_warn_ns) >= throttle:
+//           if instruction:
+//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//             print(log, flush=True)
+//             planned_instr.set(log)
+
+//             try:
+//               if self.speech_proc is not None:
+//                 self.speech_proc.kill()
+//             except:
+//               pass
+
+//             self.speech_proc = subprocess.Popen(
+//               ["espeak", "-s", "100", instruction],
+//               stdout=subprocess.DEVNULL,
+//               stderr=subprocess.DEVNULL
+//             )
+
+//           self.last_warn_ns = now_ns
+//         return
+//     =}
+//   }
+
+//   mode actuate {
+//     reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
+//         kw = (ctrl.value or "NONE").strip()
+//         rd = s.value if s.value is not None else 0.0
+//         v_val = v.value if v.value is not None else 0.0
+//         instruction = (instr.value or "").strip()   
+
+//         print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+
+//         now_ns = lf.time.logical_elapsed()
+
+//         if rd <= 2 and not self.reached:
+//             log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | REACHED | Reached near sign"
+//             print(log, flush=True)
+//             planned_instr.set(log)
+//             # act.set(11)
+
+//             try:
+//                 if self.speech_proc is not None:
+//                     self.speech_proc.kill()
+//             except:
+//                 pass
+
+//             self.speech_proc = subprocess.Popen(
+//                 ["espeak", "-s", "100", "you reached the speed limit for the distance"],
+//                 stdout=subprocess.DEVNULL,
+//                 stderr=subprocess.DEVNULL
+//             )
+
+//             self.reached = True
+
+//             request_stop()
+//             return
+
+//         if kw != "ACTUATE" or rd <= 0.0:
+//             monitoring.set()
+//             return
+
+//         act.set(11)
+
+//         act_throttle = 1500000000
+
+//         if (now_ns - self.last_act_ns) >= act_throttle:
+//             if instruction:
+//                 log = f"[LOG] v={v_val:.2f} | s={rd:.2f} | {kw} | {instruction}"
+//                 print(log, flush=True)
+//                 planned_instr.set(log)
+
+//                 try:
+//                     if self.speech_proc is not None:
+//                         self.speech_proc.kill()
+//                 except:
+//                     pass
+
+//                 self.speech_proc = subprocess.Popen(
+//                     ["espeak", "-s", "100", instruction],
+//                     stdout=subprocess.DEVNULL,
+//                     stderr=subprocess.DEVNULL
+//                 )
+
+//             self.last_act_ns = now_ns
+
+//         monitoring.set()
+//     =}
+//   }
+// }
 
 reactor Coach{
     input s
