@@ -14,17 +14,17 @@ class FaceDetector:
         if frame is None:
             return None
 
-        # -------- SAFETY --------
+      
         if not isinstance(frame, np.ndarray):
             return None
         if frame.ndim != 3:
             return None
 
-        # -------- RESIZE (VERY IMPORTANT) --------
+  
         small = cv2.resize(frame, (320, 240))
         gray = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)
 
-        # -------- FACE DETECTION (TUNED) --------
+     
         faces = self.face_cascade.detectMultiScale(
             gray,
             scaleFactor=1.1,
@@ -39,13 +39,12 @@ class FaceDetector:
 
         x, y, w, h = faces[0]
 
-        # -------- SCALE BACK --------
         scale_x = frame.shape[1] / 320
         frame_w = frame.shape[1]
 
         face_center = (x + w / 2) * scale_x
 
-        # -------- HEAD --------
+   
         if face_center < frame_w * 0.4:
             head = 4
         elif face_center > frame_w * 0.6:
@@ -53,7 +52,7 @@ class FaceDetector:
         else:
             head = 5
 
-        # -------- EYE DETECTION --------
+   
         roi_gray = gray[y:y+h, x:x+w]
 
         eyes = self.eye_cascade.detectMultiScale(

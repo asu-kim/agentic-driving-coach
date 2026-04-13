@@ -28,7 +28,7 @@ reactor FaceLandmark{
         if img.ndim != 3:
             return
 
-        # SAFE COPY
+      
         img = img.copy()
         img = np.ascontiguousarray(img)
 
