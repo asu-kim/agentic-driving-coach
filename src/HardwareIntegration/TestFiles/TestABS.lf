@@ -1,0 +1,70 @@
+target Python {keepalive: true}
+
+reactor KeyboardLogger {
+
+    timer poll(0, 500 msec)
+    state t0 
+    state dev 
+    state file 
+
+    preamble {=
+        import evdev
+
+        def init_device(self, path):
+            from evdev import InputDevice
+            self.dev = InputDevice(path)
+            print(self.dev, flush=True)
+
+        def init_file(self):
+            self.file = open("keyboard_log.csv", "w")
+            self.file.write("lf_time_ms,event_time_ms,key,state\n")
+            self.file.flush()
+    =}
+
+    reaction(startup) {=
+        self.init_device("/dev/input/event4")
+        self.init_file()
+    =}
+
+    reaction(poll) {=
+        from evdev import ecodes, categorize
+
+        now_ms = lf.time.logical_elapsed() / 1e6
+
+        try:
+            events = list(self.dev.read())
+        except BlockingIOError:
+            events = []
+
+        print(f"\n===== POLL @ {now_ms:.3f} ms =====")
+
+        if not events:
+            print("No events")
+            print("================")
+            return
+
+        for e in events:
+            if e.type == ecodes.EV_KEY:
+
+                abs_ms = e.sec * 1000 + e.usec / 1000
+
+                if self.t0 is None:
+                    self.t0 = abs_ms
+
+                global_ms = abs_ms - self.t0
+
+                key = categorize(e).keycode
+                state = "DOWN" if e.value == 1 else "UP" if e.value == 0 else "HOLD"
+
+                print(f"{global_ms:.3f} | LF {now_ms:.3f} | {key} {state}")
+
+                self.file.write(f"{now_ms:.3f},{global_ms:.3f},{key},{state}\n")
+
+        self.file.flush()
+        print("================")
+    =}
+}
+
+main reactor {
+    k = new KeyboardLogger()
+}

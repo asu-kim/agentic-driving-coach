@@ -1,0 +1,84 @@
+******* Using Python version: 3.12.3
+
+=== STARTUP ===
+[TIME] logical=0.00
+[TIME] physical=0.27
+[STATUS] LLM READY
+[DATA] v=30.00 | s=97.00
+[LOG] v=30.00 | s=97.00 | WARNING | Speed change from outside the warning zone to within the warning zone (v > 18).
+[DATA] v=29.15 | s=94.09
+[DATA] v=28.25 | s=91.26
+[DATA] v=27.35 | s=88.53
+[DATA] v=26.45 | s=85.88
+[DATA] v=25.55 | s=83.33
+[DATA] v=24.65 | s=80.86
+[DATA] v=23.75 | s=78.49
+[DATA] v=22.85 | s=76.20
+[DATA] v=21.95 | s=74.01
+[DATA] v=21.05 | s=71.90
+[DATA] v=20.18 | s=69.88
+[DATA] v=19.33 | s=67.95
+[DATA] v=18.55 | s=66.09
+[DATA] v=17.78 | s=64.32
+[DATA] v=17.02 | s=62.61
+[DATA] v=16.42 | s=60.97
+[DATA] v=15.73 | s=59.40
+[DATA] v=14.85 | s=57.91
+[DATA] v=14.05 | s=56.51
+[DATA] v=13.22 | s=55.19
+[DATA] v=12.38 | s=53.95
+[DATA] v=11.54 | s=52.79
+[DATA] v=10.84 | s=51.71
+[DATA] v=10.68 | s=50.64
+[DATA] v=10.59 | s=49.58
+[DATA] v=10.92 | s=48.49
+[DATA] v=11.25 | s=47.37
+[DATA] v=11.16 | s=46.25
+[DATA] v=11.06 | s=45.15
+[DATA] v=10.97 | s=44.05
+[DATA] v=10.85 | s=42.96
+[DATA] v=10.72 | s=41.89
+[DATA] v=10.60 | s=40.83
+[DATA] v=10.31 | s=39.80
+[DATA] v=10.02 | s=38.80
+[DATA] v=9.75 | s=37.82
+[LOG] v=9.75 | s=37.82 | WARNING | Speed change from 9.75 m/s to ? not within the recommended range for this distance.
+[DATA] v=9.53 | s=36.87
+[DATA] v=9.39 | s=35.93
+[DATA] v=9.24 | s=35.01
+[DATA] v=8.96 | s=34.11
+[DATA] v=8.60 | s=33.25
+[DATA] v=8.22 | s=32.43
+[LOG] v=8.22 | s=32.43 | ACTUATE | Speed must be increased to 11 m/s or decreased to 12 m/s within the next 25 meters.
+[DATA] v=7.94 | s=31.64
+[DATA] v=8.34 | s=30.80
+[DATA] v=8.74 | s=29.93
+[DATA] v=9.14 | s=29.02
+[DATA] v=9.54 | s=28.06
+[DATA] v=9.94 | s=27.07
+[DATA] v=10.34 | s=26.04
+[DATA] v=10.74 | s=24.96
+[DATA] v=11.14 | s=23.85
+[DATA] v=11.14 | s=22.74
+[DATA] v=11.14 | s=21.62
+[LOG] v=11.14 | s=21.62 | ACTUATE | Speed change: Velocity is too low at 11.14 m/s to maintain speed while approaching the sign at a distance of
+[DATA] v=11.14 | s=20.51
+[DATA] v=11.14 | s=19.39
+[DATA] v=11.14 | s=18.28
+[DATA] v=11.14 | s=17.17
+[DATA] v=11.14 | s=16.05
+[DATA] v=11.14 | s=14.94
+[DATA] v=11.14 | s=13.83
+[DATA] v=11.14 | s=12.71
+[LOG] v=11.14 | s=12.71 | ACTUATE | Speed change: Velocity is too low to maintain speed at this distance from the sign.
+[DATA] v=11.14 | s=11.60
+[DATA] v=11.14 | s=10.49
+[DATA] v=11.14 | s=9.37
+[DATA] v=11.14 | s=8.26
+[DATA] v=11.14 | s=7.15
+[DATA] v=11.14 | s=6.03
+[DATA] v=11.14 | s=4.92
+[DATA] v=11.14 | s=3.80
+[DATA] v=11.14 | s=2.69
+[DATA] v=11.14 | s=1.58
+[LOG] v=11.14 | s=1.58 | REACHED | Stopped near sign

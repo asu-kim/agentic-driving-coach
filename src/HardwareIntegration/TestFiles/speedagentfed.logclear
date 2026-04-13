@@ -1,0 +1,2462 @@
+******* Using Python version: 3.12.3
+
+=== STARTUP ===
+[TIME] logical=0.00
+[TIME] physical=1.41
+[STATUS] LLM READY
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=0.00
+[TIME] physical=2308.17
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=100.00, v_val=0.00
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=0.00
+[STATE READ] s=100.00, v=0.00
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: NONE|The speed is not changing at the sign.
+[LLM RESULT] NONE | NONE|The speed is not changing at the sign. | 2278.78 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=250.00
+[TIME] physical=4686.38
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=100.00, v_val=0.03
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=250.00
+[STATE READ] s=100.00, v=0.03
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: NONE|The speed is not changing at this distance.
+[LLM RESULT] NONE | NONE|The speed is not changing at this distance. | 211.97 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=500.00
+[TIME] physical=5157.28
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.98, v_val=0.18
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=500.00
+[STATE READ] s=99.98, v=0.18
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity exceeds recommended limit of 16 m/s at a distance of 99.98 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity exceeds recommended limit of 16 m/s at a distance of 99.98 meters from the sign. | 246.87 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=750.00
+[TIME] physical=5590.66
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.94, v_val=0.39
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=750.00
+[STATE READ] s=99.94, v=0.39
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (meters). | 198.27 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=1000.00
+[TIME] physical=6072.07
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.88, v_val=0.56
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=1000.00
+[STATE READ] s=99.88, v=0.56
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (meters). | 205.39 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=1250.00
+[TIME] physical=6627.03
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.82, v_val=0.66
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=1250.00
+[STATE READ] s=99.82, v=0.66
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (meters). | 194.01 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=1500.00
+[TIME] physical=7172.91
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.75, v_val=0.69
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=1500.00
+[STATE READ] s=99.75, v=0.69
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (meters). | 183.82 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=1750.00
+[TIME] physical=7728.15
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.67, v_val=0.84
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=1750.00
+[STATE READ] s=99.67, v=0.84
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (99.67 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (99.67 m). | 204.27 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=2000.00
+[TIME] physical=8268.90
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.57, v_val=0.95
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=2000.00
+[STATE READ] s=99.57, v=0.95
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (99.57 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (99.57 m). | 207.17 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=2250.00
+[TIME] physical=8743.51
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.47, v_val=1.00
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=2250.00
+[STATE READ] s=99.47, v=1.00
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (99.47 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (99.47 m). | 203.01 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=2500.00
+[TIME] physical=9308.45
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.36, v_val=1.10
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=2500.00
+[STATE READ] s=99.36, v=1.10
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (1.10 m/s) at a distance of 99.36 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (1.10 m/s) at a distance of 99.36 meters from the sign. | 246.16 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=2750.00
+[TIME] physical=9828.19
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.23, v_val=1.28
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=2750.00
+[STATE READ] s=99.23, v=1.28
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high at 1.28 m/s for distance to sign of 99.23 meters.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high at 1.28 m/s for distance to sign of 99.23 meters. | 250.93 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=3000.00
+[TIME] physical=10486.98
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=99.10, v_val=1.37
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=3000.00
+[STATE READ] s=99.10, v=1.37
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (99.10 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (99.10 m). | 200.84 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=3250.00
+[TIME] physical=10907.54
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=98.95, v_val=1.49
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=3250.00
+[STATE READ] s=98.95, v=1.49
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (1.49 m/s) for distance to sign (98.95 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (1.49 m/s) for distance to sign (98.95 meters). | 234.08 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=3500.00
+[TIME] physical=11474.58
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=98.76, v_val=1.86
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=3500.00
+[STATE READ] s=98.76, v=1.86
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (1.86 m/s) for distance to sign (98.76 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (1.86 m/s) for distance to sign (98.76 meters). | 237.67 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=3750.00
+[TIME] physical=11945.12
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=98.57, v_val=1.95
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=3750.00
+[STATE READ] s=98.57, v=1.95
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (1.95 m/s) for distance to sign (98.57 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (1.95 m/s) for distance to sign (98.57 meters). | 236.52 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=4000.00
+[TIME] physical=12558.28
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=98.35, v_val=2.19
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=4000.00
+[STATE READ] s=98.35, v=2.19
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.19 m/s) at a distance of 98.35 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.19 m/s) at a distance of 98.35 meters from the sign. | 247.95 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=4250.00
+[TIME] physical=12919.03
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=98.09, v_val=2.59
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=4250.00
+[STATE READ] s=98.09, v=2.59
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.59 m/s) at a distance of 98.09 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.59 m/s) at a distance of 98.09 meters from the sign. | 251.09 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=4500.00
+[TIME] physical=13487.07
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=97.82, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=4500.00
+[STATE READ] s=97.82, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 97.82 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 97.82 meters from the sign. | 250.73 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=4750.00
+[TIME] physical=13912.78
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=97.55, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=4750.00
+[STATE READ] s=97.55, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 97.55 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 97.55 meters from the sign. | 254.63 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=5000.00
+[TIME] physical=14248.32
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=97.28, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=5000.00
+[STATE READ] s=97.28, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 97.28 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 97.28 meters from the sign. | 250.34 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=5250.00
+[TIME] physical=14557.29
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=97.02, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=5250.00
+[STATE READ] s=97.02, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 97.02 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 97.02 meters from the sign. | 258.07 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=5500.00
+[TIME] physical=14891.93
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=96.75, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=5500.00
+[STATE READ] s=96.75, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 96.75 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 96.75 meters from the sign. | 258.19 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=5750.00
+[TIME] physical=15187.22
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=96.48, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=5750.00
+[STATE READ] s=96.48, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high (2.67 m/s) at a distance of 96.48 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high (2.67 m/s) at a distance of 96.48 meters from the sign. | 252.57 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=6000.00
+[TIME] physical=15517.07
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=96.21, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=6000.00
+[STATE READ] s=96.21, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (96.21 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (96.21 meters). | 237.93 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=6250.00
+[TIME] physical=15794.35
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=95.95, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=6250.00
+[STATE READ] s=95.95, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (95.95 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (95.95 meters). | 235.61 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=6500.00
+[TIME] physical=16111.88
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=95.68, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=6500.00
+[STATE READ] s=95.68, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 95.68 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 95.68 meters from the sign. | 263.65 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=6750.00
+[TIME] physical=16416.00
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=95.41, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=6750.00
+[STATE READ] s=95.41, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (95.41 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (95.41 m). | 210.63 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=7000.00
+[TIME] physical=16704.19
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=95.14, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=7000.00
+[STATE READ] s=95.14, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (95.14 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (95.14 meters). | 247.44 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=7250.00
+[TIME] physical=16990.58
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=94.88, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=7250.00
+[STATE READ] s=94.88, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (94.88 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (94.88 meters). | 251.85 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=7500.00
+[TIME] physical=17320.71
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=94.61, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=7500.00
+[STATE READ] s=94.61, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (94.61 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (94.61 meters). | 236.63 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=7750.00
+[TIME] physical=17614.77
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=94.34, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=7750.00
+[STATE READ] s=94.34, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 94.34 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 94.34 meters from the sign. | 253.14 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=8000.00
+[TIME] physical=17948.03
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=94.07, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=8000.00
+[STATE READ] s=94.07, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (94.07 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (94.07 meters). | 251.14 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=8250.00
+[TIME] physical=18235.52
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=93.81, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=8250.00
+[STATE READ] s=93.81, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 93.81 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 93.81 meters from the sign. | 251.16 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=8500.00
+[TIME] physical=18571.80
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=93.54, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=8500.00
+[STATE READ] s=93.54, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (93.54 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) for distance to sign (93.54 meters). | 243.42 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=8750.00
+[TIME] physical=18917.89
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=93.27, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=8750.00
+[STATE READ] s=93.27, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 2.67 m/s to ? not within recommended range for distance 93.27 meters.
+[LLM RESULT] NONE | WARNING|Speed change from 2.67 m/s to ? not within recommended range for distance 93.27 meters. | 231.80 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=9000.00
+[TIME] physical=19308.60
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=93.00, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=9000.00
+[STATE READ] s=93.00, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 93 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (2.67 m/s) at a distance of 93 meters from the sign. | 240.21 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=9250.00
+[TIME] physical=19685.59
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=92.74, v_val=2.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=9250.00
+[STATE READ] s=92.74, v=2.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high (2.67 m/s) for distance to sign (92.74 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high (2.67 m/s) for distance to sign (92.74 meters). | 232.57 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=9500.00
+[TIME] physical=20156.03
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=92.43, v_val=3.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=9500.00
+[STATE READ] s=92.43, v=3.07
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.07 m/s) at a distance of 92.43 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.07 m/s) at a distance of 92.43 meters from the sign. | 257.22 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=9750.00
+[TIME] physical=20736.70
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=92.10, v_val=3.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=9750.00
+[STATE READ] s=92.10, v=3.27
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.27 m/s) for distance to sign (92.10 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.27 m/s) for distance to sign (92.10 meters). | 238.72 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=10000.00
+[TIME] physical=21509.89
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=91.77, v_val=3.36
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=10000.00
+[STATE READ] s=91.77, v=3.36
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.36 m/s) for distance to sign (91.77 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.36 m/s) for distance to sign (91.77 meters). | 235.00 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=10250.00
+[TIME] physical=22159.36
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=91.43, v_val=3.41
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=10250.00
+[STATE READ] s=91.43, v=3.41
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too high for distance to sign (91.43 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too high for distance to sign (91.43 m). | 217.14 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=10500.00
+[TIME] physical=22756.50
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=91.08, v_val=3.41
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=10500.00
+[STATE READ] s=91.08, v=3.41
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.41 m/s) for distance to sign (91.08 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.41 m/s) for distance to sign (91.08 meters). | 233.92 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=10750.00
+[TIME] physical=23309.70
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=90.74, v_val=3.41
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=10750.00
+[STATE READ] s=90.74, v=3.41
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from less than 16 m/s to more than 18 m/s at a distance of approximately 90.74 meters.
+[LLM RESULT] NONE | WARNING|Speed change from less than 16 m/s to more than 18 m/s at a distance of approximately 90.74 meters. | 244.51 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=11000.00
+[TIME] physical=23733.03
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=90.40, v_val=3.41
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=11000.00
+[STATE READ] s=90.40, v=3.41
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.41 m/s) for distance to sign (90.40 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.41 m/s) for distance to sign (90.40 meters). | 240.02 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=11250.00
+[TIME] physical=24051.33
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=90.06, v_val=3.41
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=11250.00
+[STATE READ] s=90.06, v=3.41
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.41 m/s) at a distance of 90.06 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.41 m/s) at a distance of 90.06 meters from the sign. | 248.90 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=11500.00
+[TIME] physical=24630.93
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=89.72, v_val=3.45
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=11500.00
+[STATE READ] s=89.72, v=3.45
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.45 m/s) at a distance of 89.72 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.45 m/s) at a distance of 89.72 meters from the sign. | 250.50 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=11750.00
+[TIME] physical=25048.75
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=89.37, v_val=3.45
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=11750.00
+[STATE READ] s=89.37, v=3.45
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.45 m/s) for distance to sign (89.37 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.45 m/s) for distance to sign (89.37 meters). | 232.62 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=12000.00
+[TIME] physical=25487.31
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=89.02, v_val=3.55
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=12000.00
+[STATE READ] s=89.02, v=3.55
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.55 m/s) at a distance of 89.02 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.55 m/s) at a distance of 89.02 meters from the sign. | 244.32 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=12250.00
+[TIME] physical=26004.25
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=88.64, v_val=3.79
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=12250.00
+[STATE READ] s=88.64, v=3.79
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (3.79 m/s) for distance to sign (88.64 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (3.79 m/s) for distance to sign (88.64 meters). | 267.92 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=12500.00
+[TIME] physical=26558.18
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=88.22, v_val=4.19
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=12500.00
+[STATE READ] s=88.22, v=4.19
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.19 m/s) at a distance of 88.22 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.19 m/s) at a distance of 88.22 meters from the sign. | 248.27 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=12750.00
+[TIME] physical=26884.47
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=87.76, v_val=4.59
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=12750.00
+[STATE READ] s=87.76, v=4.59
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.59 m/s) for distance to sign (87.76 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.59 m/s) for distance to sign (87.76 meters). | 235.89 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=13000.00
+[TIME] physical=27406.29
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=87.29, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=13000.00
+[STATE READ] s=87.29, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 87.29 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 87.29 meters from the sign. | 261.62 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=13250.00
+[TIME] physical=27966.12
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=86.82, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=13250.00
+[STATE READ] s=86.82, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 86.82 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 86.82 meters from the sign. | 250.73 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=13500.00
+[TIME] physical=28383.59
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=86.35, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=13500.00
+[STATE READ] s=86.35, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 86.35 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 86.35 meters from the sign. | 260.08 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=13750.00
+[TIME] physical=28682.45
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=85.89, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=13750.00
+[STATE READ] s=85.89, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 85.89 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 85.89 meters from the sign. | 254.32 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=14000.00
+[TIME] physical=29114.51
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=85.42, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=14000.00
+[STATE READ] s=85.42, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) for distance to sign (85.42 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) for distance to sign (85.42 meters). | 248.94 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=14250.00
+[TIME] physical=29475.71
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=84.95, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=14250.00
+[STATE READ] s=84.95, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 84.95 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 84.95 meters from the sign. | 248.53 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=14500.00
+[TIME] physical=29921.42
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=84.48, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=14500.00
+[STATE READ] s=84.48, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 84.48 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 84.48 meters from the sign. | 252.99 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=14750.00
+[TIME] physical=30297.73
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=84.02, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=14750.00
+[STATE READ] s=84.02, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) for distance to sign (84.02 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) for distance to sign (84.02 meters). | 235.27 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=15000.00
+[TIME] physical=30675.86
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=83.55, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=15000.00
+[STATE READ] s=83.55, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 83.55 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 83.55 meters from the sign. | 256.07 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=15250.00
+[TIME] physical=31042.06
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=83.08, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=15250.00
+[STATE READ] s=83.08, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 83.08 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 83.08 meters from the sign. | 253.53 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=15500.00
+[TIME] physical=31533.12
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=82.61, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=15500.00
+[STATE READ] s=82.61, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from >18 to <16).
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from >18 to <16). | 226.13 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=15750.00
+[TIME] physical=31917.12
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=82.15, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=15750.00
+[STATE READ] s=82.15, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) for distance to sign (82.15 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) for distance to sign (82.15 meters). | 248.07 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=16000.00
+[TIME] physical=32392.21
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=81.68, v_val=4.68
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=16000.00
+[STATE READ] s=81.68, v=4.68
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 81.68 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.68 m/s) at a distance of 81.68 meters from the sign. | 252.73 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=16250.00
+[TIME] physical=32999.81
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=81.19, v_val=4.89
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=16250.00
+[STATE READ] s=81.19, v=4.89
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (4.89 m/s) for distance to sign (81.19 meters).
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (4.89 m/s) for distance to sign (81.19 meters). | 240.34 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=16500.00
+[TIME] physical=33451.48
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=80.66, v_val=5.29
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=16500.00
+[STATE READ] s=80.66, v=5.29
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (5.29 m/s) at a distance of 80.66 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (5.29 m/s) at a distance of 80.66 meters from the sign. | 248.33 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=16750.00
+[TIME] physical=33805.27
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=80.09, v_val=5.69
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=16750.00
+[STATE READ] s=80.09, v=5.69
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (5.69 m/s) at a distance of 80.09 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (5.69 m/s) at a distance of 80.09 meters from the sign. | 252.10 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=17000.00
+[TIME] physical=34405.00
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=79.50, v_val=5.90
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=17000.00
+[STATE READ] s=79.50, v=5.90
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone (79.50m) to within the warning zone (velocity 5.90m/s).
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone (79.50m) to within the warning zone (velocity 5.90m/s). | 250.56 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=17250.00
+[TIME] physical=34940.22
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=78.88, v_val=6.24
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=17250.00
+[STATE READ] s=78.88, v=6.24
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (78.88 meters, 6.24 m/s).
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (78.88 meters, 6.24 m/s). | 250.31 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=17500.00
+[TIME] physical=35443.17
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=78.23, v_val=6.49
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=17500.00
+[STATE READ] s=78.23, v=6.49
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (78.23m, 6.49m/s).
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (78.23m, 6.49m/s). | 240.58 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=17750.00
+[TIME] physical=35876.12
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=77.55, v_val=6.78
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=17750.00
+[STATE READ] s=77.55, v=6.78
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (distance_to_sign: 77.55 m, velocity: 6.
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (distance_to_sign: 77.55 m, velocity: 6. | 266.93 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=18000.00
+[TIME] physical=36521.45
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=76.86, v_val=6.91
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=18000.00
+[STATE READ] s=76.86, v=6.91
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (76.86m, 6.91m/s).
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (76.86m, 6.91m/s). | 239.67 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=18250.00
+[TIME] physical=37014.00
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=76.16, v_val=6.96
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=18250.00
+[STATE READ] s=76.16, v=6.96
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (6.96 m/s) at a distance of 76.16 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (6.96 m/s) at a distance of 76.16 meters from the sign. | 250.23 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=18500.00
+[TIME] physical=37451.81
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=75.47, v_val=6.96
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=18500.00
+[STATE READ] s=75.47, v=6.96
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (distance_to_sign: 75.47 meters, velocity: 6.
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (distance_to_sign: 75.47 meters, velocity: 6. | 255.23 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=18750.00
+[TIME] physical=37782.56
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=74.77, v_val=6.96
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=18750.00
+[STATE READ] s=74.77, v=6.96
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is too low (6.96 m/s) at a distance of 74.77 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is too low (6.96 m/s) at a distance of 74.77 meters from the sign. | 251.99 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=19000.00
+[TIME] physical=38308.19
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=74.07, v_val=6.97
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=19000.00
+[STATE READ] s=74.07, v=6.97
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside zone to zone with speed limit 13-15 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside zone to zone with speed limit 13-15 m/s. | 204.38 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=19250.00
+[TIME] physical=38730.77
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=73.38, v_val=6.97
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=19250.00
+[STATE READ] s=73.38, v=6.97
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (73.38 meters, 6.97 m/s).
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (73.38 meters, 6.97 m/s). | 246.39 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=19500.00
+[TIME] physical=39365.29
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=72.66, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=19500.00
+[STATE READ] s=72.66, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <=
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <= | 255.81 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=19750.00
+[TIME] physical=39796.78
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=71.94, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=19750.00
+[STATE READ] s=71.94, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from less than 16 m/s to less than 13 m
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from less than 16 m/s to less than 13 m | 249.79 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=20000.00
+[TIME] physical=40132.46
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=71.23, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=20000.00
+[STATE READ] s=71.23, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from less than 16 m/s to greater than 15 m
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from less than 16 m/s to greater than 15 m | 259.20 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=20250.00
+[TIME] physical=40445.51
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=70.51, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=20250.00
+[STATE READ] s=70.51, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <=
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <= | 265.76 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=20500.00
+[TIME] physical=40791.04
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=69.80, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=20500.00
+[STATE READ] s=69.80, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 7.15 m/s to ? not recommended for distance 69.80 meters.
+[LLM RESULT] NONE | WARNING|Speed change from 7.15 m/s to ? not recommended for distance 69.80 meters. | 232.20 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=20750.00
+[TIME] physical=41062.43
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=69.08, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=20750.00
+[STATE READ] s=69.08, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 7.15 m/s to ? not within the recommended range for distance 69.08 meters.
+[LLM RESULT] NONE | WARNING|Speed change from 7.15 m/s to ? not within the recommended range for distance 69.08 meters. | 236.10 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=21000.00
+[TIME] physical=41381.11
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=68.37, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=21000.00
+[STATE READ] s=68.37, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from less than 13 m/s to less than 15 m
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from less than 13 m/s to less than 15 m | 247.48 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=21250.00
+[TIME] physical=41667.15
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=67.65, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=21250.00
+[STATE READ] s=67.65, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the recommended range for distance 67.65 meters and velocity 7.15 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside the recommended range for distance 67.65 meters and velocity 7.15 m/s. | 226.03 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=21500.00
+[TIME] physical=41976.27
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=66.94, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=21500.00
+[STATE READ] s=66.94, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the recommended zone (50 <= s <= 60) and velocity is not within the range of 13 to 15
+[LLM RESULT] NONE | WARNING|Speed change from outside the recommended zone (50 <= s <= 60) and velocity is not within the range of 13 to 15 | 245.04 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=21750.00
+[TIME] physical=42256.89
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=66.22, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=21750.00
+[STATE READ] s=66.22, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (distance_to_sign: 66.22 m, velocity: 7.
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (distance_to_sign: 66.22 m, velocity: 7. | 252.74 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=22000.00
+[TIME] physical=42594.90
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=65.51, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=22000.00
+[STATE READ] s=65.51, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the recommended zone (50 <= s <= 60) and velocity is not within the range of 13 to 15
+[LLM RESULT] NONE | WARNING|Speed change from outside the recommended zone (50 <= s <= 60) and velocity is not within the range of 13 to 15 | 244.64 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=22250.00
+[TIME] physical=42875.25
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=64.79, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=22250.00
+[STATE READ] s=64.79, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the recommended zone (50 <= s <= 60 and (v < 13 or v > 15)).
+[LLM RESULT] NONE | WARNING|Speed change from outside the recommended zone (50 <= s <= 60 and (v < 13 or v > 15)). | 241.63 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=22500.00
+[TIME] physical=43200.15
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=64.08, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=22500.00
+[STATE READ] s=64.08, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 7.15 m/s to ? not within the recommended range for distance 64.08 meters.
+[LLM RESULT] NONE | WARNING|Speed change from 7.15 m/s to ? not within the recommended range for distance 64.08 meters. | 236.50 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=22750.00
+[TIME] physical=43478.81
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=63.36, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=22750.00
+[STATE READ] s=63.36, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 7.15 m/s to ? not recommended at this distance (63.36 meters).
+[LLM RESULT] NONE | WARNING|Speed change from 7.15 m/s to ? not recommended at this distance (63.36 meters). | 221.93 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=23000.00
+[TIME] physical=43886.47
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=62.65, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=23000.00
+[STATE READ] s=62.65, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the recommended zone (50 <= s <= 60 and (v < 13 or v > 15)).
+[LLM RESULT] NONE | WARNING|Speed change from outside the recommended zone (50 <= s <= 60 and (v < 13 or v > 15)). | 244.67 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=23250.00
+[TIME] physical=44291.35
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=61.93, v_val=7.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=23250.00
+[STATE READ] s=61.93, v=7.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from > 15 m/s to < 13 m/s).
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (velocity changed from > 15 m/s to < 13 m/s). | 252.47 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=23500.00
+[TIME] physical=44752.52
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=61.21, v_val=7.22
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=23500.00
+[STATE READ] s=61.21, v=7.22
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <=
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <= | 254.74 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=23750.00
+[TIME] physical=45237.59
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=60.48, v_val=7.30
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=23750.00
+[STATE READ] s=60.48, v=7.30
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed must be increased to 13 m/s or more at a distance of 60.48 meters from the sign.
+[LLM RESULT] NONE | WARNING|Speed must be increased to 13 m/s or more at a distance of 60.48 meters from the sign. | 228.19 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=24000.00
+[TIME] physical=45803.21
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=59.74, v_val=7.42
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=24000.00
+[STATE READ] s=59.74, v=7.42
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the allowed range for distance 59.74 meters and velocity 7.42 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside the allowed range for distance 59.74 meters and velocity 7.42 m/s. | 231.73 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=24250.00
+[TIME] physical=46255.76
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=58.98, v_val=7.55
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=24250.00
+[STATE READ] s=58.98, v=7.55
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the allowed range for distance 58.98 meters and velocity 7.55 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside the allowed range for distance 58.98 meters and velocity 7.55 m/s. | 229.46 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=24500.00
+[TIME] physical=46767.60
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=58.21, v_val=7.77
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=24500.00
+[STATE READ] s=58.21, v=7.77
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the allowed range for distance 58.21 meters and velocity 7.77 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside the allowed range for distance 58.21 meters and velocity 7.77 m/s. | 246.65 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=24750.00
+[TIME] physical=47230.00
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=57.40, v_val=8.09
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=24750.00
+[STATE READ] s=57.40, v=8.09
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the recommended range for distance to sign at 57.40 meters.
+[LLM RESULT] NONE | WARNING|Speed change from outside the recommended range for distance to sign at 57.40 meters. | 210.46 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=25000.00
+[TIME] physical=47553.82
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=56.56, v_val=8.41
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=25000.00
+[STATE READ] s=56.56, v=8.41
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the allowed range for distance 56.56 meters and velocity 8.41 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside the allowed range for distance 56.56 meters and velocity 8.41 m/s. | 243.28 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=25250.00
+[TIME] physical=47942.20
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=55.68, v_val=8.76
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=25250.00
+[STATE READ] s=55.68, v=8.76
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <=
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <= | 252.45 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=25500.00
+[TIME] physical=48343.38
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=54.76, v_val=9.16
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=25500.00
+[STATE READ] s=54.76, v=9.16
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 9.16 m/s to ? not within the recommended range for distance 54.76 meters.
+[LLM RESULT] NONE | WARNING|Speed change from 9.16 m/s to ? not within the recommended range for distance 54.76 meters. | 238.03 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=25750.00
+[TIME] physical=48728.83
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=53.81, v_val=9.50
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=25750.00
+[STATE READ] s=53.81, v=9.50
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 9.5 m/s to ? not within the recommended range for this distance.
+[LLM RESULT] NONE | WARNING|Speed change from 9.5 m/s to ? not within the recommended range for this distance. | 212.98 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=26000.00
+[TIME] physical=49327.74
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=52.84, v_val=9.73
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=26000.00
+[STATE READ] s=52.84, v=9.73
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 9.73 m/s to ? not within the recommended range for this distance.
+[LLM RESULT] NONE | WARNING|Speed change from 9.73 m/s to ? not within the recommended range for this distance. | 215.66 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=26250.00
+[TIME] physical=49749.49
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=51.85, v_val=9.90
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=26250.00
+[STATE READ] s=51.85, v=9.90
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 9.90 m/s to ? required.
+[LLM RESULT] NONE | WARNING|Speed change from 9.90 m/s to ? required. | 182.31 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=26500.00
+[TIME] physical=50232.88
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=50.85, v_val=10.03
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=26500.00
+[STATE READ] s=50.85, v=10.03
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 10.03 m/s to ? recommended.
+[LLM RESULT] NONE | WARNING|Speed change from 10.03 m/s to ? recommended. | 185.34 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=26750.00
+[TIME] physical=50589.66
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=49.83, v_val=10.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=26750.00
+[STATE READ] s=49.83, v=10.15
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 10.15 m/s to ? recommended.
+[LLM RESULT] NONE | WARNING|Speed change from 10.15 m/s to ? recommended. | 187.76 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=27000.00
+[TIME] physical=51008.02
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=48.81, v_val=10.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=27000.00
+[STATE READ] s=48.81, v=10.27
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 10.27 m/s to ? not within the recommended range for this distance.
+[LLM RESULT] NONE | WARNING|Speed change from 10.27 m/s to ? not within the recommended range for this distance. | 211.42 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=27250.00
+[TIME] physical=51651.64
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=47.74, v_val=10.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=27250.00
+[STATE READ] s=47.74, v=10.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <=
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone (50 <= s <= 60) and velocity is not within the allowed range (13 <= v <= | 252.52 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=27500.00
+[TIME] physical=52036.61
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=46.63, v_val=11.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=27500.00
+[STATE READ] s=46.63, v=11.07
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 11 to 13 or more is required at this distance.
+[LLM RESULT] NONE | WARNING|Speed change from 11 to 13 or more is required at this distance. | 209.76 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=27750.00
+[TIME] physical=52348.50
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=45.49, v_val=11.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=27750.00
+[STATE READ] s=45.49, v=11.47
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is below the recommended range for this distance.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is below the recommended range for this distance. | 185.55 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=28000.00
+[TIME] physical=52644.71
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=44.30, v_val=11.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=28000.00
+[STATE READ] s=44.30, v=11.87
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 11 to 15 m/s is required at this distance.
+[LLM RESULT] NONE | WARNING|Speed change from 11 to 15 m/s is required at this distance. | 201.18 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=28250.00
+[TIME] physical=52908.38
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=43.07, v_val=12.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=28250.00
+[STATE READ] s=43.07, v=12.27
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 12 to 13 or more is approaching the sign at a distance of 43.07 meters.
+[LLM RESULT] NONE | WARNING|Speed change from 12 to 13 or more is approaching the sign at a distance of 43.07 meters. | 234.05 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=28500.00
+[TIME] physical=53294.56
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=41.81, v_val=12.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=28500.00
+[STATE READ] s=41.81, v=12.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 12 to 13 or more is approaching the sign at a distance of 41.81 meters.
+[LLM RESULT] NONE | WARNING|Speed change from 12 to 13 or more is approaching the sign at a distance of 41.81 meters. | 230.69 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=28750.00
+[TIME] physical=53573.56
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=40.50, v_val=13.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=28750.00
+[STATE READ] s=40.50, v=13.07
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is outside the recommended range for this distance.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is outside the recommended range for this distance. | 198.68 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=29000.00
+[TIME] physical=53896.78
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=39.15, v_val=13.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=29000.00
+[STATE READ] s=39.15, v=13.47
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 13 to 14 m/s is not within the allowed range for this distance.
+[LLM RESULT] NONE | WARNING|Speed change from 13 to 14 m/s is not within the allowed range for this distance. | 221.83 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=29250.00
+[TIME] physical=54240.53
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=37.77, v_val=13.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=29250.00
+[STATE READ] s=37.77, v=13.87
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 13 to 14 m/s at a distance of 37.77 meters.
+[LLM RESULT] NONE | WARNING|Speed change from 13 to 14 m/s at a distance of 37.77 meters. | 223.03 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=29500.00
+[TIME] physical=54532.30
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=36.34, v_val=14.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=29500.00
+[STATE READ] s=36.34, v=14.27
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 14.27 m/s to ? (distance_to_sign is 36.34 meters)
+[LLM RESULT] NONE | WARNING|Speed change from 14.27 m/s to ? (distance_to_sign is 36.34 meters) | 237.38 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=29750.00
+[TIME] physical=54809.05
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=34.87, v_val=14.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=29750.00
+[STATE READ] s=34.87, v=14.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the warning zone to within the warning zone (50 <= s <= 60 and 13 <= v <= 15).
+[LLM RESULT] NONE | WARNING|Speed change from outside the warning zone to within the warning zone (50 <= s <= 60 and 13 <= v <= 15). | 252.50 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=30000.00
+[TIME] physical=55135.91
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=33.37, v_val=15.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=30000.00
+[STATE READ] s=33.37, v=15.07
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the allowed range for distance 33.37 meters and velocity 15.07 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside the allowed range for distance 33.37 meters and velocity 15.07 m/s. | 224.63 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=30250.00
+[TIME] physical=55395.57
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=31.82, v_val=15.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=30250.00
+[STATE READ] s=31.82, v=15.47
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity is outside the recommended range for this distance.
+[LLM RESULT] NONE | WARNING|Speed change: velocity is outside the recommended range for this distance. | 178.12 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=30500.00
+[TIME] physical=55648.65
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=30.23, v_val=15.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=30500.00
+[STATE READ] s=30.23, v=15.87
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the allowed range for distance 30.23 meters.
+[LLM RESULT] NONE | WARNING|Speed change from outside the allowed range for distance 30.23 meters. | 193.93 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=30750.00
+[TIME] physical=55880.94
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=28.61, v_val=16.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=30750.00
+[STATE READ] s=28.61, v=16.27
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity exceeds recommended range for distance to sign (28.61 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity exceeds recommended range for distance to sign (28.61 m). | 193.41 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=31000.00
+[TIME] physical=56146.34
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=26.94, v_val=16.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=31000.00
+[STATE READ] s=26.94, v=16.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity exceeds recommended range for distance to sign (26.94 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity exceeds recommended range for distance to sign (26.94 m). | 217.95 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=31250.00
+[TIME] physical=56399.28
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=25.23, v_val=17.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=31250.00
+[STATE READ] s=25.23, v=17.07
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity exceeds recommended range for distance to sign (25.23 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity exceeds recommended range for distance to sign (25.23 m). | 204.91 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=31500.00
+[TIME] physical=56678.01
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=23.49, v_val=17.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=31500.00
+[STATE READ] s=23.49, v=17.47
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside the allowed range for distance 23.49 meters and velocity 17.47 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside the allowed range for distance 23.49 meters and velocity 17.47 m/s. | 238.78 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=31750.00
+[TIME] physical=56954.53
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=21.70, v_val=17.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=31750.00
+[STATE READ] s=21.70, v=17.87
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside zone to zone with speed limit 13-15 m/s.
+[LLM RESULT] NONE | WARNING|Speed change from outside zone to zone with speed limit 13-15 m/s. | 213.01 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=32000.00
+[TIME] physical=57245.73
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=19.87, v_val=18.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=32000.00
+[STATE READ] s=19.87, v=18.27
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from 18.27 m/s to ? (distance_to_sign is 19.87 meters)
+[LLM RESULT] NONE | WARNING|Speed change from 18.27 m/s to ? (distance_to_sign is 19.87 meters) | 227.49 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=32250.00
+[TIME] physical=57514.43
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=18.00, v_val=18.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=32250.00
+[STATE READ] s=18.00, v=18.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change detected: velocity increased from 16 to 19 m/s within a distance of 80 meters.
+[LLM RESULT] NONE | WARNING|Speed change detected: velocity increased from 16 to 19 m/s within a distance of 80 meters. | 231.25 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=32500.00
+[TIME] physical=57816.51
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=16.10, v_val=19.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=32500.00
+[STATE READ] s=16.10, v=19.07
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change detected: velocity exceeds recommended range at distance 16.10 meters.
+[LLM RESULT] NONE | WARNING|Speed change detected: velocity exceeds recommended range at distance 16.10 meters. | 199.46 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=32750.00
+[TIME] physical=58057.69
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=14.15, v_val=19.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=32750.00
+[STATE READ] s=14.15, v=19.47
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change detected: velocity increased from less than 16 m/s to more than 18 m/s at a distance of approximately 14.
+[LLM RESULT] NONE | WARNING|Speed change detected: velocity increased from less than 16 m/s to more than 18 m/s at a distance of approximately 14. | 261.02 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=33000.00
+[TIME] physical=58396.64
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=12.16, v_val=19.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=33000.00
+[STATE READ] s=12.16, v=19.87
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change detected: velocity exceeds recommended range for distance to sign (12.16 m).
+[LLM RESULT] NONE | WARNING|Speed change detected: velocity exceeds recommended range for distance to sign (12.16 m). | 211.13 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=33250.00
+[TIME] physical=58647.88
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=10.14, v_val=20.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=33250.00
+[STATE READ] s=10.14, v=20.27
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: ACTUATE|Speed change: Velocity exceeds 12 m/s at a distance of 10.14 meters from the sign.
+[LLM RESULT] NONE | ACTUATE|Speed change: Velocity exceeds 12 m/s at a distance of 10.14 meters from the sign. | 248.30 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=33500.00
+[TIME] physical=58977.01
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=8.07, v_val=20.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=33500.00
+[STATE READ] s=8.07, v=20.67
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: ACTUATE|Speed change: Velocity exceeds 12 m/s at a distance of 8.07 meters from the sign.
+[LLM RESULT] NONE | ACTUATE|Speed change: Velocity exceeds 12 m/s at a distance of 8.07 meters from the sign. | 229.12 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=33750.00
+[TIME] physical=59244.43
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=5.96, v_val=21.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=33750.00
+[STATE READ] s=5.96, v=21.07
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: ACTUATE|Speed change: velocity exceeds 12 m/s at a distance of 5.96 meters from the sign.
+[LLM RESULT] NONE | ACTUATE|Speed change: velocity exceeds 12 m/s at a distance of 5.96 meters from the sign. | 249.19 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=34000.00
+[TIME] physical=59563.48
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=3.82, v_val=21.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=34000.00
+[STATE READ] s=3.82, v=21.47
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change: velocity exceeds recommended range for distance to sign (3.82 m).
+[LLM RESULT] NONE | WARNING|Speed change: velocity exceeds recommended range for distance to sign (3.82 m). | 209.56 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=34250.00
+[TIME] physical=59850.91
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=1.63, v_val=21.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=34250.00
+[STATE READ] s=1.63, v=21.87
+[LLM] calling model...
+>>> ENTERING LLM CALL
+>>> RAW LLM OUTPUT: WARNING|Speed change from outside zone to zone with speed limit 15 m/s or higher.
+[LLM RESULT] NONE | WARNING|Speed change from outside zone to zone with speed limit 15 m/s or higher. | 206.55 ms
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=34500.00
+[TIME] physical=60150.49
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=22.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=34500.00
+[STATE READ] s=0.00, v=22.27
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=34750.00
+[TIME] physical=60226.48
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=22.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=34750.00
+[STATE READ] s=0.00, v=22.67
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=35000.00
+[TIME] physical=60519.51
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=23.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=35000.00
+[STATE READ] s=0.00, v=23.07
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=35250.00
+[TIME] physical=60764.78
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=23.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=35250.00
+[STATE READ] s=0.00, v=23.47
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=35500.00
+[TIME] physical=61014.42
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=23.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=35500.00
+[STATE READ] s=0.00, v=23.87
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=35750.00
+[TIME] physical=61246.77
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=24.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=35750.00
+[STATE READ] s=0.00, v=24.27
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=36000.00
+[TIME] physical=61515.15
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=24.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=36000.00
+[STATE READ] s=0.00, v=24.67
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=36250.00
+[TIME] physical=61727.79
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=25.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=36250.00
+[STATE READ] s=0.00, v=25.07
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=36500.00
+[TIME] physical=62015.14
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=25.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=36500.00
+[STATE READ] s=0.00, v=25.47
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=36750.00
+[TIME] physical=62223.82
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=25.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=36750.00
+[STATE READ] s=0.00, v=25.87
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=37000.00
+[TIME] physical=62517.72
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=26.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=37000.00
+[STATE READ] s=0.00, v=26.27
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=37250.00
+[TIME] physical=62726.64
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=26.67
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=37250.00
+[STATE READ] s=0.00, v=26.67
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=37500.00
+[TIME] physical=63019.74
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=27.07
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=37500.00
+[STATE READ] s=0.00, v=27.07
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=37750.00
+[TIME] physical=63228.40
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=27.47
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=37750.00
+[STATE READ] s=0.00, v=27.47
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=38000.00
+[TIME] physical=63518.89
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=27.87
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=38000.00
+[STATE READ] s=0.00, v=27.87
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=38250.00
+[TIME] physical=63791.65
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.09
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=38250.00
+[STATE READ] s=0.00, v=28.09
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=38500.00
+[TIME] physical=64171.42
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.16
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=38500.00
+[STATE READ] s=0.00, v=28.16
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=38750.00
+[TIME] physical=64460.78
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.19
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=38750.00
+[STATE READ] s=0.00, v=28.19
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=39000.00
+[TIME] physical=64717.88
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.20
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=39000.00
+[STATE READ] s=0.00, v=28.20
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=39250.00
+[TIME] physical=65043.99
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.20
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=39250.00
+[STATE READ] s=0.00, v=28.20
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=39500.00
+[TIME] physical=65180.76
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.20
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=39500.00
+[STATE READ] s=0.00, v=28.20
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=39750.00
+[TIME] physical=65254.72
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.20
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=39750.00
+[STATE READ] s=0.00, v=28.20
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=40000.00
+[TIME] physical=65516.63
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.20
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=40000.00
+[STATE READ] s=0.00, v=28.20
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=40250.00
+[TIME] physical=65805.94
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.20
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=40250.00
+[STATE READ] s=0.00, v=28.20
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=40500.00
+[TIME] physical=66149.03
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.22
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=40500.00
+[STATE READ] s=0.00, v=28.22
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=40750.00
+[TIME] physical=66469.89
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.27
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=40750.00
+[STATE READ] s=0.00, v=28.27
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=41000.00
+[TIME] physical=66787.92
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.33
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=41000.00
+[STATE READ] s=0.00, v=28.33
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=41250.00
+[TIME] physical=67065.72
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.42
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=41250.00
+[STATE READ] s=0.00, v=28.42
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=41500.00
+[TIME] physical=67364.42
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.54
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=41500.00
+[STATE READ] s=0.00, v=28.54
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=41750.00
+[TIME] physical=67667.21
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.66
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=41750.00
+[STATE READ] s=0.00, v=28.66
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=42000.00
+[TIME] physical=67939.05
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=28.81
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=42000.00
+[STATE READ] s=0.00, v=28.81
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=42250.00
+[TIME] physical=68263.29
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=29.15
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=42250.00
+[STATE READ] s=0.00, v=29.15
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=42500.00
+[TIME] physical=68495.49
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=29.49
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=42500.00
+[STATE READ] s=0.00, v=29.49
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=42750.00
+[TIME] physical=68804.61
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=29.83
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=42750.00
+[STATE READ] s=0.00, v=29.83
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=43000.00
+[TIME] physical=69087.53
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=30.23
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=43000.00
+[STATE READ] s=0.00, v=30.23
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=43250.00
+[TIME] physical=69169.85
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=30.63
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=43250.00
+[STATE READ] s=0.00, v=30.63
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=43500.00
+[TIME] physical=69349.89
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=31.03
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=43500.00
+[STATE READ] s=0.00, v=31.03
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=43750.00
+[TIME] physical=69539.51
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=31.43
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=43750.00
+[STATE READ] s=0.00, v=31.43
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=44000.00
+[TIME] physical=69935.77
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=31.57
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=44000.00
+[STATE READ] s=0.00, v=31.57
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=44250.00
+[TIME] physical=70293.08
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=31.63
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=44250.00
+[STATE READ] s=0.00, v=31.63
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=44500.00
+[TIME] physical=70573.60
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=31.66
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=44500.00
+[STATE READ] s=0.00, v=31.66
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=44750.00
+[TIME] physical=70878.18
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=31.76
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=44750.00
+[STATE READ] s=0.00, v=31.76
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=45000.00
+[TIME] physical=71236.50
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=32.01
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=45000.00
+[STATE READ] s=0.00, v=32.01
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=45250.00
+[TIME] physical=71404.54
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=32.25
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=45250.00
+[STATE READ] s=0.00, v=32.25
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=45500.00
+[TIME] physical=71573.80
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=32.48
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=45500.00
+[STATE READ] s=0.00, v=32.48
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=45750.00
+[TIME] physical=71754.45
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=32.71
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=45750.00
+[STATE READ] s=0.00, v=32.71
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=46000.00
+[TIME] physical=72036.43
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=32.95
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=46000.00
+[STATE READ] s=0.00, v=32.95
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=46250.00
+[TIME] physical=72237.02
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=33.19
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=46250.00
+[STATE READ] s=0.00, v=33.19
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=46500.00
+[TIME] physical=72564.99
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=33.44
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=46500.00
+[STATE READ] s=0.00, v=33.44
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=46750.00
+[TIME] physical=72833.76
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=33.74
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=46750.00
+[STATE READ] s=0.00, v=33.74
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=47000.00
+[TIME] physical=73126.94
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=34.06
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=47000.00
+[STATE READ] s=0.00, v=34.06
+
+=== INPUT REACTION TRIGGERED ===
+[TIME] logical=47250.00
+[TIME] physical=73383.88
+[PRESENCE] s=True, v=True, st=True, h=True
+[STATE UPDATE] s_val=0.00, v_val=34.40
+
+=== LLM CLOCK TRIGGERED ===
+[TIME] logical=47250.00
+[STATE READ] s=0.00, v=34.40
+---- System clock resolution: 1 nsec
+---- Start execution on Fri Apr 10 11:37:47 2026 ---- plus 823715510 nanoseconds
+Fed 3 (adc_main): Connected to 10.218.100.78:15045.
+Fed 3 (adc_main): Starting timestamp is: 1775846268824506754.
