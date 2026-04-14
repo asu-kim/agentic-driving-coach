@@ -28,10 +28,10 @@ reactor steering_wheel{
             steer_msg.set(0)
         elif s > dz:
             # steer_msg.set("RIGHT")
-            steer_msg.set(1)
+            steer_msg.set(2)
         else:
             # steer_msg.set("STRAIGHT")
-            steer_msg.set(2)
+            steer_msg.set(1)
    =}
 }
 

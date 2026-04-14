@@ -39,8 +39,8 @@ reactor FaceLandmark{
             return
 
         if result is None:
-            head_msg.set(5)
-            eye_msg.set(8)
+            head_msg.set(1)
+            eye_msg.set(1)
             return
 
         head_msg.set(result["head"])
