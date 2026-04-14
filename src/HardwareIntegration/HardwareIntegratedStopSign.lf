@@ -246,6 +246,7 @@ reactor LLMInference {
     input v
     input st 
     input h
+    input e
 
     output ready
     output control
@@ -268,7 +269,6 @@ reactor LLMInference {
         def run_llm_message(self, rd_val, v_val):
             import ollama
             import time
-            # print(">>> ENTERING LLM CALL", flush=True)
             t0 = time.perf_counter()
 
             try:
@@ -278,22 +278,20 @@ reactor LLMInference {
                         {
                             "role": "system",
                             "content": (
-                                        " You are a real-time driving coach.\n"
-                                        
+                                       "You are an agentic driving coach."
                                         "Output exactly ONE line: TOKEN|Message"
                                         "TOKEN must be one of: NONE, WARNING, ACTUATE"
-                                        "Message must be one sentence or 12 words, about speed change only from 30m/s to 11m/s."
-                                        "Use distance_to_sign is s and measured in meters"
+                                        "Message must be one sentence, about stop sign approaching only."
+                                        "Use distance_to_stop is s and measured in meters"
                                         "velocity is v measured using m/s only."
-                                        "If speed is 11 then say maintain speed else give good guidance"
 
                                         "Rules for TOKEN:"
-                                        "if s is lesser than or equal to 25 and v is greater than 12 or lesser than 11 then TOKEN=ACTUATE\n"
-                                        "else if s lies in between 50 to 60 and v is in between 15 to 13 then TOKEN=WARNING"
-                                        "else if s is greater than 80 and v is not in between 18 to 16 then TOKEN=WARNING\n"
-                                        "else TOKEN=NONE\n"
+                                        "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
+                                        "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
+                                        "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
+                                        "else TOKEN=NONE"
 
-                                        "If TOKEN=NONE, output: NONE|\n"
+                                        "If TOKEN=NONE, output: NONE|"
                                         "Do not output anything else."
                                     )
                         },
@@ -311,21 +309,24 @@ reactor LLMInference {
             ms = (time.perf_counter() - t0) * 1000.0
             raw = (r.get("message", {}).get("content", "") or "").strip()
 
-            # print(f">>> RAW LLM OUTPUT: {raw}", flush=True)
+      
 
             return "NONE", raw, ms
 
         def fallback_policy(self, rd_val, v_val):
-            # print(f"[FALLBACK POLICY] evaluating s={rd_val:.2f}, v={v_val:.2f}", flush=True)
+       
 
             if rd_val <= 0.0:
                 return "NONE", ""
 
-            if rd_val <= 25:
+            if rd_val <= 25.0 and v_val > 2.5:
                 return "ACTUATE", "Brake now."
 
-            if rd_val >= 80:
-                return "WARNING", "Speed limit ahead."
+            if 50.0 < rd_val <= 60.0 and (v_val > 10.0 or v_val < 8.0):
+                return "WARNING", "Adjust speed and prepare to stop."
+
+            if rd_val >= 99.0 and (v_val > 12.0 or v_val < 8.0):
+                return "WARNING", "Stop sign ahead."
 
             return "NONE", ""
     =}
@@ -342,7 +343,7 @@ reactor LLMInference {
         print("[STATUS] LLM READY", flush=True)
     =}
 
-    reaction(s, v, st, h){=
+    reaction(s, v, st, h, e){=
         
         if s.is_present:
             self.s_val = s.value
@@ -352,6 +353,8 @@ reactor LLMInference {
             self.st_val = st.value
         if h.is_present:
             self.h_val = h.value
+        if e.is_present:
+            self.e_val = e.value
 
 
     =}
@@ -575,6 +578,7 @@ reactor Coach{
     input v
     input st 
     input h
+    input e
 
     
 
@@ -588,6 +592,7 @@ reactor Coach{
     v -> llm.v
     st -> llm.st
     h -> llm.h
+    e -> llm.e
    
     llm.control -> a.ctrl
     llm.instruction -> a.instr
@@ -601,26 +606,23 @@ reactor Coach{
     
 }
 
-main reactor {
-    // d = new Driver()
+federated reactor at 10.218.100.78 {
+
     c = new Car()
     en = new Environment()
     adc = new Coach()
 
-    // adc.ready -> d.start_signal
+
     adc.ready -> c.start_signal
     adc.ready -> en.start_signal
 
-    // d.accelerator -> c.accel_in 
-    // d.brake -> c.brake_in 
-    // d.steer -> c.steer_in 
-    // d.head -> c.head_pos_in 
-    // d.eye -> c.eye_pos_in
+
 
     c.velocity -> en.v
     c.velocity -> adc.v
     c.steer -> adc.st
     c.head_pos -> adc.h
+    c.eye_pos -> adc.e
 
     en.displacement -> adc.s
 
