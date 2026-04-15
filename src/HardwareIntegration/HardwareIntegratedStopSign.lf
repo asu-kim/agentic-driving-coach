@@ -1,4 +1,4 @@
-target Python {keepalive: true}
+target Python {keepalive: true, files: "rag.py"}
 
 import SensorInputs from "SensorInputs.lf"
 preamble{=
@@ -9,7 +9,7 @@ preamble{=
 reactor Driver{
     // input start_signal
     // state started = False
-    state steer_val = 2
+    state steer_val = 1
     state accel_val = 0.0
     state brake_val = 0.0
     state head_val = 1
@@ -119,12 +119,11 @@ reactor Car{
     reaction(d.accelerator, d.brake, d.eye, d.head, d.steer, actuate_in)-> velocity, steer, head_pos, eye_pos {=
         if not self.started:
             return
-        if accel_in.is_present:
+        if d.accelerator.is_present:
             self.accel_val = float(d.accelerator.value)
 
-        if brake_in.is_present:
+        if d.brake.is_present:
             self.brake_val = float(d.brake.value)
-
 
 
         if actuate_in.is_present:
@@ -183,7 +182,7 @@ reactor Car{
         vel = max(0.0, vel)
 
 
-        d = max(0.0, self.dist_init - vel * 0.2)
+        dist = max(0.0, self.dist_init - vel * 0.1)
         print(f"---------------------------------------------------------", flush=True)
         print(f"[CAR CLOCK] logical time: {current_dri:.2f}", flush=True)
         print(f"velocity={vel:.2f} acceleration={acc_net:.2f}", flush=True)
@@ -195,7 +194,7 @@ reactor Car{
         eye_pos.set(d.eye.value)
 
         self.velocity_init = vel
-        self.dist_init = d
+        self.dist_init = dist
     =}
 
 }
@@ -257,65 +256,15 @@ reactor LLMInference {
     state is_ready = False
     state s_val = 0.0
     state v_val = 0.0
-    state st_val = 2
-    state h_val = 5
+    state st_val = 1
+    state h_val = 1
+    state e_val = 1
 
     timer llmclock(0, 100 msec)
 
     preamble{=
-        import ollama
-        import time
-
-        def run_llm_message(self, rd_val, v_val):
-            import ollama
-            import time
-            t0 = time.perf_counter()
-
-            try:
-                r = ollama.chat(
-                    model="llama3:8b",
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": (
-                                       "You are an agentic driving coach."
-                                        "Output exactly ONE line: TOKEN|Message"
-                                        "TOKEN must be one of: NONE, WARNING, ACTUATE"
-                                        "Message must be one sentence, about stop sign approaching only."
-                                        "Use distance_to_stop is s and measured in meters"
-                                        "velocity is v measured using m/s only."
-
-                                        "Rules for TOKEN:"
-                                        "if s is less than or equal to 25 and v is greater than 2.5 then TOKEN=ACTUATE"
-                                        "else if s lies between 50 and 60 and v is not between 8 and 10 then TOKEN=WARNING"
-                                        "else if s is greater than 99 and v is not between 8 and 12 then TOKEN=WARNING"
-                                        "else TOKEN=NONE"
-
-                                        "If TOKEN=NONE, output: NONE|"
-                                        "Do not output anything else."
-                                    )
-                        },
-                        {
-                            "role": "user",
-                            "content": f"s={rd_val:.2f}, v={v_val:.2f}"
-                        }
-                    ],
-                    options={"temperature": 0.0, "num_predict": 30},
-                )
-            except Exception as e:
-                print(">>> LLM ERROR:", e, flush=True)
-                return "NONE", "", 0.0
-
-            ms = (time.perf_counter() - t0) * 1000.0
-            raw = (r.get("message", {}).get("content", "") or "").strip()
-
-      
-
-            return "NONE", raw, ms
-
+        from rag import generate_response
         def fallback_policy(self, rd_val, v_val):
-       
-
             if rd_val <= 0.0:
                 return "NONE", ""
 
@@ -370,6 +319,9 @@ reactor LLMInference {
 
         rd_val = self.s_val
         v_val  = self.v_val
+        h_val = self.h_val
+        e_val = self.e_val
+        st_val = self.st_val
 
 
 
@@ -377,21 +329,15 @@ reactor LLMInference {
             rd_val = 0.0
 
 
-        tok_raw, msg_raw, ms = self.run_llm_message(rd_val, v_val)
+        tok_raw, msg_raw = generate_response(rd_val, v_val, st_val, h_val, e_val)
+
         self.check_deadline()
 
-        raw = (msg_raw or "").strip()
-
-        if "|" in raw:
-            tok, msg = raw.split("|", 1)
-        else:
-            tok = tok_raw or "NONE"
-            msg = raw
+        tok = tok_raw or "NONE"
+        msg = msg_raw or "There is a stop sign ahead"
 
         tok = tok.strip()
         msg = msg.strip()
-
-
 
         control.set(tok)
         instruction.set(msg)
@@ -457,21 +403,13 @@ reactor Planner {
 
 
       if rd <= 2:
-        target = 11.0
-        error = abs(v_val - target)
+        if kw == "ACTUATE":
+            actuate.set()
 
-        if error > 0.5:
-          actuate.set()
-          self.stable_count = 0
-          return
-
-        self.stable_count += 1
-
-        if self.stable_count >= 5 and not self.reached:
-          planned_instr.set(f"[FINAL] v={v_val:.2f}")
-          self.speak("speed limit achieved but maintain speed")
-          self.reached = True
-          request_stop()
+        if instruction:
+            print(f"[LLM STOP] {instruction}", flush=True)
+            planned_instr.set(instruction)
+            self.speak(instruction)
 
         return
 
@@ -514,19 +452,13 @@ reactor Planner {
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
       if rd <= 2:
-        target = 11.0
-        error = abs(v_val - target)
+        if kw == "ACTUATE":
+            actuate.set()
 
-        if error > 0.5:
-          actuate.set()
-          self.stable_count = 0
-          return
-
-        self.stable_count += 1
-
-        if self.stable_count >= 5 and not self.reached:
-          self.speak("speed limit achieved but maintain speed")
-          request_stop()
+        if instruction:
+            print(f"[LLM STOP] {instruction}", flush=True)
+            planned_instr.set(instruction)
+            self.speak(instruction)
 
         return
 
@@ -550,15 +482,14 @@ reactor Planner {
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
       if rd <= 2:
-        target = 11.0
-        error = abs(v_val - target)
+        if kw == "ACTUATE":
+            act.set(11)
 
-        if error > 0.5:
-          act.set(11)
-          return
+        if instruction:
+            print(f"[LLM STOP] {instruction}", flush=True)
+            planned_instr.set(instruction)
+            self.speak(instruction)
 
-        self.speak("speed limit achieved but maintain speed")
-        request_stop()
         return
 
       if kw != "ACTUATE":
