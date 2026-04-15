@@ -180,6 +180,8 @@ reactor Car{
         
         vel = vel_prev + acc_net * 0.1
         vel = max(0.0, vel)
+        if vel < 0.5 and self.dist_init > 0.5:
+            vel = 0.5
 
 
         dist = max(0.0, self.dist_init - vel * 0.1)
