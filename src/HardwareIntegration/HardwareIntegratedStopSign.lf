@@ -158,9 +158,12 @@ reactor Car{
         if act == 11:
             target_speed = 0.0
             error = target_speed - vel_prev
+            if self.dist_init <= 0.0:
+                vel = 0.0
+                acc_net = 0.0
 
             if vel_prev > 10:
-                acc_net = -8.0   # aggressive braking
+                acc_net = -9.0   
             elif vel_prev > 3:
                 acc_net = -5.0
             else:
@@ -181,11 +184,14 @@ reactor Car{
         
         vel = vel_prev + acc_net * 0.1
         vel = max(0.0, vel)
+        dist = max(0.0, self.dist_init - vel * 0.1)
+        self.velocity_init = vel
+        self.dist_init = dist
         if vel < 0.5 and self.dist_init > 0.5:
             vel = 0.5
 
 
-        dist = max(0.0, self.dist_init - vel * 0.1)
+        
         print(f"---------------------------------------------------------", flush=True)
         print(f"[CAR CLOCK] logical time: {current_dri:.2f}", flush=True)
         print(f"velocity={vel:.2f} acceleration={acc_net:.2f}", flush=True)
@@ -196,8 +202,7 @@ reactor Car{
         head_pos.set(d.head.value)
         eye_pos.set(d.eye.value)
 
-        self.velocity_init = vel
-        self.dist_init = dist
+
     =}
 
 }
@@ -448,7 +453,7 @@ reactor Planner {
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
-      now_ns = lf.time.logical_elapsed()   # ✅ FIX ADDED HERE
+      now_ns = lf.time.logical_elapsed()  
 
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
