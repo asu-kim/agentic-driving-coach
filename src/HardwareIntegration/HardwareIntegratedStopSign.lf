@@ -163,7 +163,7 @@ reactor Car{
             Kp = 1.2
             acc_net = Kp * error
 
-            acc_net = max(-4.0, min(3.0, acc_net))
+            acc_net = max(-9.0, min(4.0, acc_net))
 
 
         # DRIVER RECOVERY
@@ -398,26 +398,25 @@ reactor Planner {
       v_val = v.value if v.value is not None else 0.0
       now_ns = lf.time.logical_elapsed()
 
-      # PRINT FIRST
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
-
 
       if rd <= 2:
         if kw == "ACTUATE":
             actuate.set()
 
-        if instruction:
-            print(f"[LLM STOP] {instruction}", flush=True)
-            planned_instr.set(instruction)
-            self.speak(instruction)
+        if (now_ns - self.last_act_ns) >= 3000000000:
+            if instruction:
+                print(f"[LLM STOP] {instruction}", flush=True)
+                planned_instr.set(instruction)
+                self.speak(instruction)
+            self.last_act_ns = now_ns
 
         return
 
-      
       if kw == "ACTUATE" and rd > 0.0:
         actuate.set()
 
-        if (now_ns - self.last_act_ns) >= 1500000000:
+        if (now_ns - self.last_act_ns) >= 3000000000:
           if instruction:
             print(f"[LLM] ACTUATE | {instruction}", flush=True)
             planned_instr.set(instruction)
@@ -425,7 +424,6 @@ reactor Planner {
 
           self.last_act_ns = now_ns
         return
-
 
       if kw == "WARNING":
         if (now_ns - self.last_warn_ns) >= 3000000000:
@@ -447,19 +445,19 @@ reactor Planner {
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
+      now_ns = lf.time.logical_elapsed()   # ✅ FIX ADDED HERE
 
-      # ALWAYS PRINT
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
       if rd <= 2:
         if kw == "ACTUATE":
             actuate.set()
-
-        if instruction:
-            print(f"[LLM STOP] {instruction}", flush=True)
-            planned_instr.set(instruction)
-            self.speak(instruction)
-
+        if (now_ns - self.last_act_ns) >= 3000000000:
+            if instruction:
+                print(f"[LLM STOP] {instruction}", flush=True)
+                planned_instr.set(instruction)
+                self.speak(instruction)
+            self.last_act_ns = now_ns
         return
 
       if kw == "ACTUATE" and rd > 0.0:
@@ -478,19 +476,20 @@ reactor Planner {
       instruction = (instr.value or "").strip()
       rd = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
+      now_ns = lf.time.logical_elapsed()
 
-      # ALWAYS PRINT
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
       if rd <= 2:
         if kw == "ACTUATE":
             act.set(11)
 
-        if instruction:
-            print(f"[LLM STOP] {instruction}", flush=True)
-            planned_instr.set(instruction)
-            self.speak(instruction)
-
+        if (now_ns - self.last_act_ns) >= 3000000000:
+            if instruction:
+                print(f"[LLM STOP] {instruction}", flush=True)
+                planned_instr.set(instruction)
+                self.speak(instruction)
+            self.last_act_ns = now_ns
         return
 
       if kw != "ACTUATE":
