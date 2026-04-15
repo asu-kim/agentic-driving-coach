@@ -157,13 +157,14 @@ reactor Car{
         #ACTUATE
         if act == 11:
             target_speed = 0.0
-
             error = target_speed - vel_prev
 
-            Kp = 1.2
-            acc_net = Kp * error
-
-            acc_net = max(-9.0, min(4.0, acc_net))
+            if vel_prev > 10:
+                acc_net = -8.0   # aggressive braking
+            elif vel_prev > 3:
+                acc_net = -5.0
+            else:
+                acc_net = -2.0
 
 
         # DRIVER RECOVERY

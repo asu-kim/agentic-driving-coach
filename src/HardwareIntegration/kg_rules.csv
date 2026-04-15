@@ -1,0 +1,10 @@
+subject,predicate,object,type
+s<=25 & v>5,control,ACTUATE,rule
+50<=s<=60 & (v<8 or v>10),control,WARNING,rule
+s>99 & (v<8 or v>12),control,WARNING,rule
+s<=2 & v<=1,state,STOPPED,state
+STOPPED & h==1,action,TURN_HEAD_LEFT_RIGHT,action
+STOPPED & e==1,action,CHECK_EYES_LEFT_RIGHT,action
+h==0,state,LEFT_CHECK_DONE,state
+h==2,state,RIGHT_CHECK_DONE,state
+LEFT_CHECK_DONE & RIGHT_CHECK_DONE,state,SAFE_TO_PROCEED,state

@@ -1,14 +1,12 @@
+import csv
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
-
 from torch import cuda
 import ollama
 
-
 device = f'cuda:{cuda.current_device()}' if cuda.is_available() else 'cpu'
-
 
 embed_model = HuggingFaceEmbeddings(
     model_name='sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
@@ -16,47 +14,39 @@ embed_model = HuggingFaceEmbeddings(
     encode_kwargs={'device': device, 'batch_size': 32}
 )
 
+KG = []
+with open("kg_rules.csv", "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        KG.append(row)
+
+def evaluate_condition(cond, s, v, st, h, e):
+    try:
+        cond = cond.replace("&", "and")
+        return eval(cond)
+    except:
+        return False
+
+def get_token_from_kg(s, v, st, h, e):
+    for row in KG:
+        if row["type"] != "rule":
+            continue
+        if evaluate_condition(row["subject"], s, v, st, h, e):
+            return row["object"]
+    return "NONE"
 
 Rules = """Output exactly ONE line: TOKEN|Message
 
-TOKEN must be one of: NONE, WARNING, ACTUATE
+        Variables:
+        - s = distance to stop
+        - v = velocity
+        - st = steering
+        - h = head
+        - e = eye
 
-Variables:
-- s = distance to stop (meters)
-- v = velocity (m/s)
-- st = steering (0=LEFT,1=CENTER,2=RIGHT)
-- h = head position (0=LEFT,1=CENTER,2=RIGHT)
-- e = eye position (0=LEFT,1=CENTER,2=RIGHT)
-
-Interpretation:
-- LEFT = 0 -> looking/steering left
-- CENTER = 1 -> straight
-- RIGHT = 2 -> looking/steering right
-
-Rules for TOKEN:
-- If s <= 25 and v > 2.5 -> ACTUATE
-- If 50 <= s <= 60 and v not in [8,10] -> WARNING
-- If s > 99 and v not in [8,12] -> WARNING
-- If s <= 2 and v <= 0.5 -> ACTUATE
-- Otherwise -> NONE
-
-CRITICAL BEHAVIOR RULES:
-- You MUST use h and e to determine driver awareness
-- If h == 1 (CENTER) -> driver is NOT checking sides -> instruct head movement
-- If e == 1 (CENTER) -> driver is NOT scanning -> instruct eye movement
-- If both h and e are CENTER at stop -> MUST say "turn your head left and right and check both sides"
-- If h or e already LEFT/RIGHT -> acknowledge and guide next action
-
-Rules for Message:
-- One short sentence only
-- MUST include action based on current values
-- DO NOT give generic advice
-- DO NOT repeat the same message
-- MUST reference behavior (head/eye/steer) when s <= 10
-
-If TOKEN=NONE -> still give light but specific feedback based on inputs
-"""
-
+        Use h and e strictly for guidance.
+        Generate only one short sentence.
+        """
 
 documents = [Document(page_content=Rules)]
 
@@ -68,64 +58,42 @@ split_docs = RecursiveCharacterTextSplitter(
 vectorstore = FAISS.from_documents(split_docs, embed_model)
 retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
 
-
 def llm(prompt):
     response = ollama.chat(
-        model="llama3:8b",   
+        model="llama3:8b",
         messages=[
-            {"role": "system", "content": "You are a calm and helpful driving coach."},
+            {"role": "system", "content": "You are a driving coach."},
             {"role": "user", "content": prompt}
         ],
         options={"temperature": 0.0, "num_predict": 30},
     )
     return (response.get("message", {}).get("content", "") or "").strip()
 
+def generate_response(s, v, st, h, e):
+    token = get_token_from_kg(s, v, st, h, e)
 
-def generate_response(self, s, v, st, h, e):
     query = f"""
-            Current driving state:
-            - Distance to stop (s): {s:.2f} meters
-            - Velocity (v): {v:.2f} m/s
-            - Steering (st): {st}
-            - Head position (h): {h}
-            - Eye position (e): {e}
-
-            Interpret and generate driving guidance.
-            """
+    s={s}, v={v}, st={st}, h={h}, e={e}
+    """
 
     docs = retriever.invoke(query)
     context = "\n".join([d.page_content for d in docs])
 
     prompt = f"""
-            {context}
+    {context}
 
-            You MUST base your response on ALL provided variables (s, v, st, h, e).
+    TOKEN is fixed: {token}
 
-            Query:
-            {query}
+    Generate message using h and e.
 
-            Output exactly ONE line in format TOKEN|Message
-            """
+    Output: {token}|Message
+    """
 
-    try:
-        raw = llm(prompt)
+    raw = llm(prompt)
 
-      
-        if "|" in raw:
-            token, msg = raw.split("|", 1)
-            return token.strip(), msg.strip()
-        else:
-            return "NONE", ""
+    if "|" in raw:
+        _, msg = raw.split("|", 1)
+        return token, msg.strip()
+    else:
+        return token, ""
 
-    except Exception as e:
-        print("RAG ERROR:", e, flush=True)
-        return "NONE", ""
-
-
-if __name__ == "__main__":
-    s = 20.0
-    v = 5.0
-    st, h, e = 2, 2, 2
-
-    token, msg = generate_response(s, v, st, h, e)
-    print("OUTPUT:", token, "|", msg)
