@@ -283,6 +283,7 @@ reactor LLMInference {
 
     reaction(startup) -> ready {=
         import time
+        import ollama
         print("\n=== STARTUP ===", flush=True)
         print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
         print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
@@ -303,7 +304,7 @@ reactor LLMInference {
                     ],
                     options={"temperature": 0.0, "num_predict": 10},
                 )
-            except Exception as e:
+        except Exception as e:
                 print(">>> LLM ERROR:", e, flush=True)
                 return "NONE", "", 0.0
         self.is_ready = True
@@ -392,7 +393,6 @@ reactor Planner {
   state last_act_ns = -1000000000000
   state speech_proc 
   state reached = False
-  state stable_count = 0
 
   preamble{=
     import subprocess
@@ -422,11 +422,14 @@ reactor Planner {
       now_ns = lf.time.logical_elapsed()
 
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+
       if rd <= 2 and v_val <= 0.5:
+        self.reached = False
         return
 
       if rd <= 2:
-        if kw == "ACTUATE":
+        if kw == "ACTUATE" or self.reached:
+            self.reached = True
             actuate.set()
 
         if (now_ns - self.last_act_ns) >= 3000000000:
@@ -438,7 +441,8 @@ reactor Planner {
 
         return
 
-      if kw == "ACTUATE" and rd > 0.0:
+      if kw == "ACTUATE" or self.reached:
+        self.reached = True
         actuate.set()
 
         if (now_ns - self.last_act_ns) >= 3000000000:
@@ -473,12 +477,16 @@ reactor Planner {
       now_ns = lf.time.logical_elapsed()  
 
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+
       if rd <= 2 and v_val <= 0.5:
+        self.reached = False
         return
 
       if rd <= 2:
-        if kw == "ACTUATE":
+        if kw == "ACTUATE" or self.reached:
+            self.reached = True
             actuate.set()
+
         if (now_ns - self.last_act_ns) >= 3000000000:
             if instruction:
                 print(f"[LLM STOP] {instruction}", flush=True)
@@ -487,7 +495,8 @@ reactor Planner {
             self.last_act_ns = now_ns
         return
 
-      if kw == "ACTUATE" and rd > 0.0:
+      if kw == "ACTUATE" or self.reached:
+        self.reached = True
         actuate.set()
         return
 
@@ -506,11 +515,14 @@ reactor Planner {
       now_ns = lf.time.logical_elapsed()
 
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+
       if rd <= 2 and v_val <= 0.5:
+        self.reached = False
         return
 
       if rd <= 2:
-        if kw == "ACTUATE":
+        if kw == "ACTUATE" or self.reached:
+            self.reached = True
             act.set(11)
 
         if (now_ns - self.last_act_ns) >= 3000000000:
@@ -521,10 +533,11 @@ reactor Planner {
             self.last_act_ns = now_ns
         return
 
-      if kw != "ACTUATE":
+      if kw != "ACTUATE" and not self.reached:
         monitoring.set()
         return
 
+      self.reached = True
       act.set(11)
       monitoring.set()
     =}
@@ -586,5 +599,5 @@ federated reactor at 10.218.100.78 {
 
     en.displacement -> adc.s
 
-    adc.act -> c.actuate_in after 200 ms
+    adc.act -> c.actuate_in after 100 ms
 }
