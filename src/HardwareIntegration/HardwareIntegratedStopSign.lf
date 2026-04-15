@@ -156,25 +156,23 @@ reactor Car{
 
         #ACTUATE
         if act == 11:
-            target_speed = 0.0
-            error = target_speed - vel_prev
-            if self.dist_init <= 0.0:
-                vel = 0.0
+            if vel_prev > 5.0:
+                acc_net = -9.0
+            elif vel_prev > 1.0:
+                acc_net = -5.0
+            elif vel_prev > 0.1:
+                acc_net = -2.0
+            else:
                 acc_net = 0.0
-
-            Kp = 1.5
-            acc_net = -Kp * vel_prev
-            acc_net = max(-9.0, acc_net)
-
-
-        # DRIVER RECOVERY
+                if amsg > 0.0:
+                    acc_net += acel_cal(amsg)
+                if bmsg > 0.0:
+                    acc_net += brake_cal(bmsg)
         else:
             acc_net = 0.0
-
             if amsg > 0.0:
                 acc_net += acel_cal(amsg)
-
-            elif bmsg > 0.0:
+            if bmsg > 0.0:
                 acc_net += brake_cal(bmsg)
 
 
@@ -424,7 +422,7 @@ reactor Planner {
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
       if rd <= 2 and v_val <= 0.5:
-        self.reached = False
+        self.reached = True
         return
 
       if rd <= 2:
@@ -479,7 +477,7 @@ reactor Planner {
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
       if rd <= 2 and v_val <= 0.5:
-        self.reached = False
+        self.reached = True
         return
 
       if rd <= 2:
@@ -517,7 +515,7 @@ reactor Planner {
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
       if rd <= 2 and v_val <= 0.5:
-        self.reached = False
+        self.reached = True
         return
 
       if rd <= 2:
