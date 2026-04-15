@@ -77,13 +77,13 @@ reactor Driver{
         else:
             steer_str = "RIGHT"
 
-        # print("----- sensor clock-----")
-        # print(f"[DRIVER] logical time: {current_dri:.2f} ", flush=True)
-        # print(f"Head: {self.head_val} ({head_str})", flush=True)
-        # print(f"Eye: {self.eye_val} ({eye_str})", flush=True)
-        # print(f"Accelerator: {self.accel_val}", flush=True)
-        # print(f"Brake: {self.brake_val}", flush=True)
-        # print(f"Steer: {self.steer_val} ({steer_str})", flush=True)
+        print("----- sensor clock-----")
+        print(f"[DRIVER] logical time: {current_dri:.2f} ", flush=True)
+        print(f"Head: {self.head_val} ({head_str})", flush=True)
+        print(f"Eye: {self.eye_val} ({eye_str})", flush=True)
+        print(f"Accelerator: {self.accel_val}", flush=True)
+        print(f"Brake: {self.brake_val}", flush=True)
+        print(f"Steer: {self.steer_val} ({steer_str})", flush=True)
     =}
 }
 
@@ -162,12 +162,9 @@ reactor Car{
                 vel = 0.0
                 acc_net = 0.0
 
-            if vel_prev > 10:
-                acc_net = -9.0   
-            elif vel_prev > 3:
-                acc_net = -5.0
-            else:
-                acc_net = -2.0
+            Kp = 1.5
+            acc_net = -Kp * vel_prev
+            acc_net = max(-9.0, acc_net)
 
 
         # DRIVER RECOVERY
@@ -187,11 +184,7 @@ reactor Car{
         dist = max(0.0, self.dist_init - vel * 0.1)
         self.velocity_init = vel
         self.dist_init = dist
-        if vel < 0.5 and self.dist_init > 0.5:
-            vel = 0.5
 
-
-        
         print(f"---------------------------------------------------------", flush=True)
         print(f"[CAR CLOCK] logical time: {current_dri:.2f}", flush=True)
         print(f"velocity={vel:.2f} acceleration={acc_net:.2f}", flush=True)
@@ -293,7 +286,26 @@ reactor LLMInference {
         print("\n=== STARTUP ===", flush=True)
         print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
         print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
-
+        try:
+                r = ollama.chat(
+                    model="llama3:70b",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": (
+                                        " You are a real-time driving coach.\n"
+                                    )
+                        },
+                        {
+                            "role": "user",
+                            "content": f"provide a greeting message"
+                        }
+                    ],
+                    options={"temperature": 0.0, "num_predict": 10},
+                )
+            except Exception as e:
+                print(">>> LLM ERROR:", e, flush=True)
+                return "NONE", "", 0.0
         self.is_ready = True
         ready.set(True)
 
@@ -319,7 +331,8 @@ reactor LLMInference {
     reaction(llmclock) -> control, instruction {=
 
         current_logical = lf.time.logical_elapsed()/1e6
-
+        current_physical = lf.time.physical_elapsed()/1e9
+        print(f"PHYSICAL TIME: {current_physical:.2f} S ")
 
         if not self.is_ready:
 
@@ -343,6 +356,7 @@ reactor LLMInference {
 
         tok = tok_raw or "NONE"
         msg = msg_raw or "There is a stop sign ahead"
+        print(f"[LLM RESULT] {tok} | {msg} ", flush=True)
 
         tok = tok.strip()
         msg = msg.strip()
@@ -400,6 +414,7 @@ reactor Planner {
   initial mode monitoring {
     
     reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
+      
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
@@ -407,6 +422,8 @@ reactor Planner {
       now_ns = lf.time.logical_elapsed()
 
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+      if rd <= 2 and v_val <= 0.5:
+        return
 
       if rd <= 2:
         if kw == "ACTUATE":
@@ -456,6 +473,8 @@ reactor Planner {
       now_ns = lf.time.logical_elapsed()  
 
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+      if rd <= 2 and v_val <= 0.5:
+        return
 
       if rd <= 2:
         if kw == "ACTUATE":
@@ -487,6 +506,8 @@ reactor Planner {
       now_ns = lf.time.logical_elapsed()
 
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+      if rd <= 2 and v_val <= 0.5:
+        return
 
       if rd <= 2:
         if kw == "ACTUATE":

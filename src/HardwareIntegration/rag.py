@@ -72,12 +72,12 @@ retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
 
 def llm(prompt):
     response = ollama.chat(
-        model="llama3:8b",   
+        model="llama3:70b",   
         messages=[
             {"role": "system", "content": "You are a calm and helpful driving coach."},
             {"role": "user", "content": prompt}
         ],
-        options={"temperature": 0.0, "num_predict": 30},
+        options={"temperature": 0.4, "num_predict": 30},
     )
     return (response.get("message", {}).get("content", "") or "").strip()
 
@@ -121,3 +121,11 @@ def generate_response(self, s, v, st, h, e):
     except Exception as e:
         print("RAG ERROR:", e, flush=True)
         return "NONE", ""
+    
+# if __name__ == "__main__":
+#     s = 20.0
+#     v = 25.0
+#     st, h, e = 2, 2, 2
+
+#     token, msg = generate_response(s, v, st, h, e)
+#     print("OUTPUT:", token, "|", msg)
