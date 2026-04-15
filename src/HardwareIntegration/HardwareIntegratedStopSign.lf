@@ -329,7 +329,7 @@ reactor LLMInference {
             rd_val = 0.0
 
 
-        tok_raw, msg_raw = generate_response(rd_val, v_val, st_val, h_val, e_val)
+        tok_raw, msg_raw = self.generate_response(rd_val, v_val, st_val, h_val, e_val)
 
         self.check_deadline()
 
@@ -475,6 +475,7 @@ reactor Planner {
   mode actuate {
     reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
       kw = (ctrl.value or "NONE").strip()
+      instruction = (instr.value or "").strip()
       rd = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
 

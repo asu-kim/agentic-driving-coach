@@ -68,7 +68,7 @@ def llm(prompt):
     return (response.get("message", {}).get("content", "") or "").strip()
 
 
-def generate_response(s, v, st, h, e):
+def generate_response(self, s, v, st, h, e):
     query = (
         f"s={s:.2f}, v={v:.2f}, st={st}, h={h}, e={e}. "
         "Give driving guidance for approaching a stop sign."
