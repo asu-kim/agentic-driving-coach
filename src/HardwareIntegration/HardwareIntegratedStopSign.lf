@@ -333,7 +333,7 @@ reactor LLMInference {
 
         current_logical = lf.time.logical_elapsed()/1e6
         current_physical = lf.time.physical_elapsed()/1e9
-        print(f"PHYSICAL TIME: {current_physical:.2f} S ")
+        # print(f"PHYSICAL TIME: {current_physical:.2f} S ")
 
         if not self.is_ready:
 
@@ -357,7 +357,7 @@ reactor LLMInference {
 
         tok = tok_raw or "NONE"
         msg = msg_raw or "There is a stop sign ahead"
-        print(f"[LLM RESULT] {tok} | {msg} ", flush=True)
+        # print(f"[LLM RESULT] {tok} | {msg} ", flush=True)
 
         tok = tok.strip()
         msg = msg.strip()
@@ -508,40 +508,50 @@ reactor Planner {
 
   mode actuate {
     reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
-      kw = (ctrl.value or "NONE").strip()
-      instruction = (instr.value or "").strip()
-      rd = s.value if s.value is not None else 0.0
-      v_val = v.value if v.value is not None else 0.0
-      now_ns = lf.time.logical_elapsed()
+        instruction = (instr.value or "").strip()
+        rd = s.value if s.value is not None else 0.0
+        v_val = v.value if v.value is not None else 0.0
+        now_ns = lf.time.logical_elapsed()
 
-      print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
+        print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
-      if rd <= 2 and v_val <= 0.5:
-        self.reached = True
-        return
-
-      if rd <= 2:
-        if kw == "ACTUATE" or self.reached:
+        if rd <= 2 and v_val <= 0.5:
             self.reached = True
+            return
+
+        if rd > 99 and (11 <= v_val <= 12):
+            return
+
+        if 50 <= rd <= 60 and (8 <= v_val <= 10):
+            return
+
+        if rd > 25 and v_val <= 2.5:
+            return
+
+        if rd <= 25 and v_val > 2.5:
             act.set(11)
+
+        elif 50 <= rd <= 60 and not (8 <= v_val <= 10):
+            act.set(11)
+
+        elif rd > 99 and not (8 <= v_val <= 12):
+            act.set(11)
+
+        else:
+            monitoring.set()
+            return
 
         if (now_ns - self.last_act_ns) >= 3000000000:
             if instruction:
-                print(f"[LLM STOP] {instruction}", flush=True)
+                print(f"[SYSTEM ACTION] {instruction}", flush=True)
                 planned_instr.set(instruction)
                 self.speak(instruction)
             self.last_act_ns = now_ns
-        return
 
-      if kw != "ACTUATE" and not self.reached:
+        self.reached = True
         monitoring.set()
-        return
-
-      self.reached = True
-      act.set(11)
-      monitoring.set()
     =}
-  }
+    }
 }
 
 

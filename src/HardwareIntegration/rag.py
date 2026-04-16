@@ -34,12 +34,12 @@ Interpretation:
 - RIGHT = 2
 
 STRICT TOKEN RULES:
-- If v == 0 and s > 2 -> NONE
-- If s <= 25 and v > 2.5 -> ACTUATE
-- If 50 <= s <= 60 and v not in [8,10] -> WARNING
-- If s > 99 and v not in [8,12] -> WARNING
-- If s <= 2 and v <= 0.5 -> NONE
-- Otherwise -> NONE
+If the vehicle has stopped (velocity is zero) and the stop sign is still far away (distance greater than 2), then take no action.
+If the vehicle is close to the stop sign (distance less than or equal to 25) and is still moving faster than 2.5, then initiate braking (actuate).
+If the vehicle is at a medium distance from the stop sign (between 50 and 60) and its speed is outside the safe range of 8 to 10, then issue a warning to adjust speed.
+If the stop sign is far away (distance greater than 99) and the vehicle speed is outside the range of 8 to 12, then issue a warning indicating a stop sign ahead.
+If the vehicle is very close to the stop sign (distance less than or equal to 2) and is already almost stopped (velocity less than or equal to 0.5), then take no action.
+In all other situations, take no action.
 
 YOU MUST:
 - Follow numeric rules exactly
@@ -47,10 +47,10 @@ YOU MUST:
 - Do not override rules with language reasoning
 
 STOP BEHAVIOR (s <= 2 and v <= 0.5):
-- If h == 1 -> instruct turning head LEFT and RIGHT
-- If e == 1 -> instruct checking both sides with eyes
-- If both h and e == 1 -> instruct BOTH actions
-- If already looking one side -> guide to check the other side
+If the head is centered, instruct the driver to turn their head to both the left and right sides.
+If the eyes are centered, instruct the driver to check both sides using their eyes.
+If both the head and eyes are centered, instruct the driver to perform both actions (turn the head and check with the eyes).
+If the driver is already looking toward one side, guide them to check the opposite side.
 
 MESSAGE RULES:
 - One short sentence only
@@ -79,7 +79,7 @@ def llm(prompt):
             {"role": "system", "content": "You strictly follow numeric rules and output only valid control tokens."},
             {"role": "user", "content": prompt}
         ],
-        options={"temperature": 0.0, "num_predict": 30},
+        options={"temperature": 0.0, "num_predict": 20},
     )
     return (response.get("message", {}).get("content", "") or "").strip()
 
