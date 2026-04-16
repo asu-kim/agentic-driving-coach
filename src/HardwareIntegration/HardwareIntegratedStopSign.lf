@@ -157,21 +157,21 @@ reactor Car{
         #ACTUATE
         if act == 11:
             target_speed = 0.0
+
             error = target_speed - vel_prev
-            if self.dist_init <= 0.0:
-                vel = 0.0
-                acc_net = 0.0
 
-            Kp = 1.5
-            acc_net = -Kp * vel_prev
-            acc_net = max(-9.0, acc_net)
+            Kp = 1.2
+            acc_net = Kp * error
+
+            acc_net = max(-9.0, min(4.0, acc_net))
 
 
-        # DRIVER RECOVERY
+      
         else:
             acc_net = 0.0
 
-            if amsg > 0.0:
+
+            elif amsg > 0.0:
                 acc_net += acel_cal(amsg)
 
             elif bmsg > 0.0:
