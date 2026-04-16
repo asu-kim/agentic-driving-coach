@@ -289,7 +289,7 @@ reactor LLMInference {
         print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
         try:
                 r = ollama.chat(
-                    model="llama3:70b",
+                    model="llama3:8b",
                     messages=[
                         {
                             "role": "system",
