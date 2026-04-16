@@ -171,10 +171,10 @@ reactor Car{
             acc_net = 0.0
 
 
-            elif amsg > 0.0:
+            if amsg > 0.0:
                 acc_net += acel_cal(amsg)
 
-            elif bmsg > 0.0:
+            if bmsg > 0.0:
                 acc_net += brake_cal(bmsg)
 
 
