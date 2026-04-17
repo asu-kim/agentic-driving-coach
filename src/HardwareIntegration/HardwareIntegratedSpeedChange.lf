@@ -313,8 +313,9 @@ reactor LLMInference {
     state is_ready = False
     state s_val = 0.0
     state v_val = 0.0
-    state st_val = 2
-    state h_val = 5
+    state st_val = 1
+    state h_val = 1
+    state e_val = 1
 
     timer llmclock(0, 100 msec)
 
@@ -422,7 +423,7 @@ reactor LLMInference {
 
         tok = tok_raw or "NONE"
         msg = msg_raw or "There is a speed change"
-        # print(f"[LLM RESULT] {tok} | {msg} ", flush=True)
+        print(f"[LLM RESULT] {tok} | {msg} ", flush=True)
 
         tok = tok.strip()
         msg = msg.strip()
@@ -459,17 +460,19 @@ reactor Planner {
   state last_act_ns = -1000000000000
   state speech_proc 
   state reached = False
-  state stable_count = 0
 
   preamble{=
     import subprocess
 
     def speak(self, msg):
         try:
-            if self.speech_proc is not None:
-                self.speech_proc.kill()
+            # Do not interrupt ongoing speech
+            if self.speech_proc is not None and self.speech_proc.poll() is None:
+                return
         except:
             pass
+
+        print(f"[SPEAKING] {msg}", flush=True)
 
         self.speech_proc = subprocess.Popen(
             ["espeak", "-s", "120", msg],
@@ -481,56 +484,54 @@ reactor Planner {
   initial mode monitoring {
     
     reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
+      
       kw  = (ctrl.value or "NONE").strip()
       instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
       now_ns = lf.time.logical_elapsed()
 
-      
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
-     
+      target = 11.0
+      error = abs(v_val - target)
+
+      # Stabilization
+      if error <= 0.5:
+        self.reached = True
+      elif error > 1.5:
+        self.reached = False
+
+      # FINAL ZONE
       if rd <= 2:
-        target = 11.0
-        error = abs(v_val - target)
-
-        if error > 0.5:
+        if not self.reached:
           actuate.set()
-          self.stable_count = 0
-          return
-
-        self.stable_count += 1
-
-        if self.stable_count >= 5 and not self.reached:
-          planned_instr.set(f"[FINAL] v={v_val:.2f}")
+        else:
           self.speak("speed limit achieved but maintain speed")
-          self.reached = True
           request_stop()
-
         return
 
-      
-      if kw == "ACTUATE" and rd > 0.0:
-        actuate.set()
+      # 
+      if kw == "ACTUATE" and not self.reached:
+
+          actuate.set()
 
         if (now_ns - self.last_act_ns) >= 3000000000:
           if instruction:
             print(f"[LLM] ACTUATE | {instruction}", flush=True)
             planned_instr.set(instruction)
             self.speak(instruction)
-
           self.last_act_ns = now_ns
+
         return
 
-      
-      if kw == "WARNING":
+      # WARNING
+      if kw == "WARNING" and not self.reached:
         if (now_ns - self.last_warn_ns) >= 3000000000:
           if instruction:
             print(f"[LLM] WARNING | {instruction}", flush=True)
             planned_instr.set(instruction)
             self.speak(instruction)
-
           self.last_warn_ns = now_ns
 
         warning.set()
@@ -540,32 +541,25 @@ reactor Planner {
 
   mode warning {
     reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
+      
       kw  = (ctrl.value or "NONE").strip()
-      instruction = (instr.value or "").strip()
       rd  = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
 
-      
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
+      target = 11.0
+      error = abs(v_val - target)
+
+      if error <= 0.5:
+        self.reached = True
+
       if rd <= 2:
-        target = 11.0
-        error = abs(v_val - target)
-
-        if error > 0.5:
+        if not self.reached:
           actuate.set()
-          self.stable_count = 0
-          return
-
-        self.stable_count += 1
-
-        if self.stable_count >= 5 and not self.reached:
-          self.speak("speed limit achieved but maintain speed")
-          request_stop()
-
         return
 
-      if kw == "ACTUATE" and rd > 0.0:
+      if kw == "ACTUATE" and not self.reached:
         actuate.set()
         return
 
@@ -577,30 +571,63 @@ reactor Planner {
 
   mode actuate {
     reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
-      kw = (ctrl.value or "NONE").strip()
+      
+      instruction = (instr.value or "").strip()
       rd = s.value if s.value is not None else 0.0
       v_val = v.value if v.value is not None else 0.0
+      now_ns = lf.time.logical_elapsed()
 
-     
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
+      target = 11.0
+      error = abs(v_val - target)
+
+      if error <= 0.5:
+        self.reached = True
+
+      # FINAL ZONE
       if rd <= 2:
-        target = 11.0
-        error = abs(v_val - target)
-
-        if error > 0.5:
+        if not self.reached:
           act.set(11)
-          return
-
-        self.speak("speed limit achieved but maintain speed")
-        request_stop()
+        else:
+          self.speak("speed limit achieved but maintain speed")
+          request_stop()
         return
 
-      if kw != "ACTUATE":
+      # SPEED CHANGE ZONES
+      if rd > 80:
+        if not (16 <= v_val <= 18):
+          act.set(11)
+        else:
+          monitoring.set()
+          return
+
+      elif 50 <= rd <= 60:
+        if not (13 <= v_val <= 15):
+          act.set(11)
+        else:
+          monitoring.set()
+          return
+
+      elif rd <= 25:
+        if v_val > 12 or v_val < 11:
+          act.set(11)
+        else:
+          monitoring.set()
+          return
+
+      else:
         monitoring.set()
         return
 
-      act.set(11)
+      # Speech 
+      if (now_ns - self.last_act_ns) >= 3000000000:
+        if instruction:
+          print(f"[SYSTEM ACTION] {instruction}", flush=True)
+          planned_instr.set(instruction)
+          self.speak(instruction)
+        self.last_act_ns = now_ns
+
       monitoring.set()
     =}
   }
