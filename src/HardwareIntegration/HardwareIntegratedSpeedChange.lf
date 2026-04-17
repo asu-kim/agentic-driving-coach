@@ -23,10 +23,11 @@ reactor Driver{
     output head
     output eye
     output ready
-    state sensor_ready = False
+   
     timer sensorclock(0, 100 msec)
 
     sen = new SensorInputs()
+    
 
     reaction(start_signal) {=
         self.started = True
@@ -34,11 +35,8 @@ reactor Driver{
 
     
     reaction(sen.eye_msg, sen.head_msg, sen.accel_msg, sen.brake_msg, sen.steer_msg)->ready {=
-        if not self.sensor_ready:
-            if sen.accel_msg.is_present or sen.brake_msg.is_present or sen.steer_msg.is_present:
-                self.sensor_ready = True
-                print("[SENSOR READY]", flush=True)
-                ready.set(True)
+        
+              
         if not self.started:
             return
 
@@ -788,11 +786,7 @@ reactor Coach{
     input st 
     input h
     input e
-    input sensor_ready
-    state llm_ready = False
-    state sensor_ready_flag = False
-    state fired = False
-
+    
     
 
     output act
@@ -816,18 +810,7 @@ reactor Coach{
     a.planned_instr -> instr
 
     llm.ready -> ready
-    reaction(ready, sensor_ready) -> ready {=
-        if ready.is_present:
-            self.llm_ready = True
-
-        if sensor_ready.is_present:
-            self.sensor_ready_flag = True
-
-        if self.llm_ready and self.sensor_ready_flag and not self.fired:
-            self.fired = True
-            print("[SYSTEM READY]", flush=True)
-            ready.set(True)
-    =}
+   
     
 }
 
@@ -838,7 +821,7 @@ federated reactor at 10.218.100.78 {
     adc = new Coach()
     // sim = new Simulation() 
     
-    d.ready -> adc.sensor_ready
+
 
     adc.ready -> d.start_signal
     adc.ready -> c.start_signal
@@ -858,6 +841,7 @@ federated reactor at 10.218.100.78 {
     c.velocity -> adc.v
     c.steer -> adc.st
     c.head_pos -> adc.h
+    c.eye_pos -> adc.e
     // c.velocity -> sim.velocity_in
     // c.steer -> sim.steer_in
 
