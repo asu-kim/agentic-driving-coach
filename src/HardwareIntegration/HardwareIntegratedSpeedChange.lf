@@ -1,6 +1,8 @@
 target Python {keepalive: true}
 
 import SensorInputs from "SensorInputs.lf"
+import MuJoCoCar from "/home/raspdeeksha/agentic-driving-coach/mujoco-py/src/lib/MuJoCoCar.lf"
+
 preamble{=
     import time
     import subprocess
@@ -87,6 +89,44 @@ reactor Driver{
     =}
 }
 
+reactor Simulation{
+    input start_signal
+    state started = False
+
+    input steer_in
+    input velocity_in
+
+    m = new MuJoCoCar()
+    
+    reaction(start_signal) {=
+        self.started = True
+    =}
+
+    reaction(steer_in, velocity_in) -> m.forward, m.turn {=
+        if not self.started:
+            return
+
+        vel = velocity_in.value if velocity_in.is_present else 0.0
+        st  = steer_in.value if steer_in.is_present else 1
+
+        
+        forward_cmd = vel / 33.6   
+        forward_cmd = max(-1.0, min(1.0, forward_cmd))
+
+        #
+        if st == 0:
+            turn_cmd = -1.0
+        elif st == 2:
+            turn_cmd = 1.0
+        else:
+            turn_cmd = 0.0
+
+        m.forward.set(forward_cmd)
+        m.turn.set(turn_cmd)
+        =}
+
+}
+
 reactor Car{
     input start_signal
     state started = False
@@ -111,7 +151,9 @@ reactor Car{
     output eye_pos
     
     d = new Driver()
-
+    
+    
+    
     reaction(start_signal) {=
         self.started = True
     =}
@@ -132,6 +174,7 @@ reactor Car{
         amsg = self.accel_val
         bmsg = self.brake_val
         act  = self.act_val
+      
 
         def acel_cal(p):
             p = max(0.0, min(1.0, p))
@@ -203,12 +246,12 @@ reactor Car{
         head_pos.set(d.head.value)
         eye_pos.set(d.eye.value)
 
-        
-    =}
+    =}   
+    
 
-    
-    
 }
+
+
 
 reactor Environment{
     input start_signal
@@ -631,10 +674,14 @@ federated reactor at 10.218.100.78 {
     c = new Car()
     en = new Environment()
     adc = new Coach()
+    sim = new Simulation()
 
     // adc.ready -> d.start_signal
     adc.ready -> c.start_signal
     adc.ready -> en.start_signal
+    adc.ready -> sim.start_signal
+  
+
 
     // d.accelerator -> c.accel_in 
     // d.brake -> c.brake_in 
@@ -645,6 +692,8 @@ federated reactor at 10.218.100.78 {
     c.velocity -> adc.v
     c.steer -> adc.st
     c.head_pos -> adc.h
+    c.velocity -> sim.velocity_in
+    c.steer -> sim.steer_in
 
     en.displacement -> adc.s
 
