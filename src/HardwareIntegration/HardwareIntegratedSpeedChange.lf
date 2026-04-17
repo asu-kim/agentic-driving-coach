@@ -48,7 +48,7 @@ reactor Driver{
 
         if sen.brake_msg.is_present:
             self.brake_val = sen.brake_msg.value
-        print(f"[SENSOR RAW] brake={self.brake_val}", flush=True)
+        print(f"[DRIVER STATE] accel={self.accel_val} brake={self.brake_val}", flush=True)
     =}
     reaction(sensorclock) -> head, eye, accelerator, brake, steer {=
         # if not self.started:
@@ -132,11 +132,12 @@ reactor Car{
     input start_signal
     state started = False
 
-    // input steer_in
-    // input accel_in
-    // input brake_in
+    input steer_in
+    input accel_in
+    input brake_in
     input actuate_in 
-    // input head_pos_in  
+    input head_pos_in  
+    input eye_pos_in
 
     state acceleration_net
     state velocity_init = 30
@@ -151,14 +152,14 @@ reactor Car{
     output head_pos
     output eye_pos
     
-    d = new Driver()
+    // d = new Driver()
     
     
     
     reaction(start_signal) {=
         self.started = True
     =}
-    reaction(d.accelerator, d.brake, d.eye, d.head, d.steer, actuate_in)-> velocity, steer, head_pos, eye_pos {=
+    reaction(accel_in, brake_in, eye_pos_in, head_pos_in, steer_in, actuate_in)-> velocity, steer, head_pos, eye_pos {=
         if not self.started:
             return
         if d.accelerator.is_present:
@@ -204,32 +205,56 @@ reactor Car{
         vel_prev = self.velocity_init
 
         #ACTUATE 
-        if act == 11:
-            target_speed = 11.0
+        # if act == 11:
+        #     target_speed = 11.0
 
-            error = target_speed - vel_prev
+        #     error = target_speed - vel_prev
 
-            Kp = 1.2
-            acc_net = Kp * error
+        #     Kp = 1.2
+        #     acc_net = Kp * error
 
-            acc_net = max(-4.0, min(3.0, acc_net))
+        #     acc_net = max(-4.0, min(3.0, acc_net))
 
 
       
-        else:
-            acc_net = 0.0
+        # else:
+        #     acc_net = 0.0
 
     
-            if vel_prev < 9.5:
-                acc_net = 1.5   
+        #     if vel_prev < 9.5:
+        #         acc_net = 1.5   
 
-            elif amsg > 0.0:
-                acc_net += acel_cal(amsg)
+        #     elif amsg > 0.0:
+        #         acc_net += acel_cal(amsg)
 
-            elif bmsg > 0.0:
-                acc_net += brake_cal(bmsg)
+        #     elif bmsg > 0.0:
+        #         acc_net += brake_cal(bmsg)
 
+        acc_net = 0.0
 
+        # --- DRIVER INPUT (always considered) ---
+        if amsg > 0.0:
+            acc_net += acel_cal(amsg)
+
+        if bmsg > 0.0:
+            acc_net += brake_cal(bmsg)
+
+        # --- LLM ASSIST (only nudges, not overrides) ---
+        if act == 11:
+            target_speed = 11.0
+            error = target_speed - vel_prev
+
+            Kp = 1.0
+            llm_acc = Kp * error
+
+            # limit LLM influence so it doesn't dominate
+            llm_acc = max(-2.0, min(2.0, llm_acc))
+
+            acc_net += llm_acc
+
+        # --- LOW SPEED AUTO BOOST (optional) ---
+        if vel_prev < 9.5 and amsg == 0 and bmsg == 0:
+            acc_net += 1.5
        
         vel = vel_prev + acc_net * 0.1
         vel = max(0.0, vel)
@@ -786,7 +811,7 @@ reactor Coach{
 }
 
 federated reactor at 10.218.100.78 {
-    // d = new Driver()
+    d = new Driver()
     c = new Car()
     en = new Environment()
     adc = new Coach()
@@ -799,10 +824,11 @@ federated reactor at 10.218.100.78 {
   
 
 
-    // d.accelerator -> c.accel_in 
-    // d.brake -> c.brake_in 
-    // d.steer -> c.steer_in 
-    // d.head -> c.head_pos_in 
+    d.accelerator -> c.accel_in 
+    d.brake -> c.brake_in 
+    d.steer -> c.steer_in 
+    d.head -> c.head_pos_in 
+    d.eye -> c.eye_pos_in
 
     c.velocity -> en.v
     c.velocity -> adc.v
