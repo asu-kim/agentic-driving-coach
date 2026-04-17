@@ -302,6 +302,7 @@ reactor LLMInference {
     input v
     input st 
     input h
+    input e
 
     output ready
     output control
@@ -318,6 +319,10 @@ reactor LLMInference {
     timer llmclock(0, 100 msec)
 
     preamble{=
+        import sys
+        import os
+
+        sys.path.append("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/HardwareIntegration")
 
        
         from rag_speed import generate_response
@@ -373,7 +378,7 @@ reactor LLMInference {
         print("[STATUS] LLM READY", flush=True)
     =}
 
-    reaction(s, v, st, h){=
+    reaction(s, v, st, h, e){=
        
         if s.is_present:
             self.s_val = s.value
@@ -383,6 +388,8 @@ reactor LLMInference {
             self.st_val = st.value
         if h.is_present:
             self.h_val = h.value
+        if e.is_present:
+            self.e_val = e.value
 
 
 
@@ -606,6 +613,7 @@ reactor Coach{
     input v
     input st 
     input h
+    input e
 
     
 
@@ -619,6 +627,7 @@ reactor Coach{
     v -> llm.v
     st -> llm.st
     h -> llm.h
+    e -> llm.e
    
     llm.control -> a.ctrl
     llm.instruction -> a.instr
