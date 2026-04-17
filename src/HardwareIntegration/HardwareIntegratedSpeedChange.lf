@@ -162,11 +162,11 @@ reactor Car{
     reaction(accel_in, brake_in, eye_pos_in, head_pos_in, steer_in, actuate_in)-> velocity, steer, head_pos, eye_pos {=
         if not self.started:
             return
-        if d.accelerator.is_present:
-            self.accel_val = float(d.accelerator.value)
+        if accel_in.is_present:
+            self.accel_val = float(accel_in.value)
 
-        if d.brake.is_present:
-            self.brake_val = float(d.brake.value)
+        if brake_in.is_present:
+            self.brake_val = float(brake_in.value)
 
 
         if actuate_in.is_present:
@@ -268,9 +268,9 @@ reactor Car{
         print(f"acceleration={acc_net:.2f}", flush=True)
 
         velocity.set(vel)
-        steer.set(d.steer.value)
-        head_pos.set(d.head.value)
-        eye_pos.set(d.eye.value)
+        steer.set(steer_in.value)
+        head_pos.set(head_pos_in.value)
+        eye_pos.set(eye_pos_in.value)
 
     =}   
     
@@ -360,37 +360,40 @@ reactor LLMInference {
                         {
                             "role": "system",
                             "content": (
-                                        """You are a real-time driving coach.
+                                        """Role: Real-time driving coach
 
-                                            Output exactly one line:
-                                            TOKEN|Message
+                                            State:
+                                            distance = {s} meters
+                                            velocity = {v} meter per second
+                                            target_speed = 11 meter per second
 
-                                            TOKEN ∈ {NONE, WARNING, ACTUATE}
+                                            TOKEN in {NONE, WARNING, ACTUATE}
 
                                             Inputs:
                                             s = distance (meters)
                                             v = velocity (meter per second)
                                             Target speed = 11 meter per second
 
-                                            Rules:
-                                            - If s ≤ 80 and v > 13 → ACTUATE
-                                            - Else if s ≤ 150 and v > 18 → WARNING
-                                            - Else if s > 150 and v > 20 → WARNING
+                                            Policy:
+                                            - If s ≤ 50 and v > 12 → ACTUATE
+                                            - Else if s ≤ 100 and v > 20 → WARNING
+                                            - Else if s > 150 and v > 30 → WARNING
                                             - Else → NONE
 
-                                            Message:
+                                            Special:
+                                            IF 10.5 ≤ velocity ≤ 11.5 → maintain steady speed
+
+                                            Output Format:
+                                            TOKEN|Message
+
+                                            Action:
+                                            - Generate correct token and message
                                             - Max 12 words
                                             - About speed control only
                                             - Use "meter per second" (not m/s)
                                             - Include s or v when useful
 
-                                            Special:
-                                            - If 10.5 ≤ v ≤ 11.5 → say maintain steady speed
-
-                                            Output:
-                                            - If NONE → exactly: NONE|
-                                            - No extra text
-
+                                         
                                             Examples:
                                             ACTUATE|Slow down from 18 meter per second
                                             WARNING|At 55 meters reduce speed from 16
