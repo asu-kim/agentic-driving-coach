@@ -360,51 +360,42 @@ reactor LLMInference {
                         {
                             "role": "system",
                             "content": (
-                                        "You are a real-time driving coach.\n"
+                                        """You are a real-time driving coach.
 
-                                        "Output exactly ONE line in the format:\n"
-                                        "TOKEN|Message\n"
+                                            Output exactly one line:
+                                            TOKEN|Message
 
-                                        "TOKEN must be one of: NONE, WARNING, ACTUATE\n"
+                                            TOKEN ∈ {NONE, WARNING, ACTUATE}
 
-                                        "Variables:\n"
-                                        "s = distance to speed change zone (meters)\n"
-                                        "v = velocity (meter per second)\n"
+                                            Inputs:
+                                            s = distance (meters)
+                                            v = velocity (meter per second)
+                                            Target speed = 11 meter per second
 
-                                        "Target speed is 11 meter per second.\n"
+                                            Rules:
+                                            - If s ≤ 80 and v > 13 → ACTUATE
+                                            - Else if s ≤ 150 and v > 18 → WARNING
+                                            - Else if s > 150 and v > 20 → WARNING
+                                            - Else → NONE
 
-                                        "TOKEN RULES (strict):\n"
-                                       
-                                        "if s <= 80 and v > 13 → ACTUATE\n"
-                                        "else if s <= 150 and v > 18 → WARNING\n"
-                                        "else if s > 150 and v > 20 → WARNING\n"
-                                        "else TOKEN=NONE\n"
+                                            Message:
+                                            - Max 12 words
+                                            - About speed control only
+                                            - Use "meter per second" (not m/s)
+                                            - Include s or v when useful
 
-                                        "MESSAGE RULES:\n"
-                                        "- One short sentence (max 12 words)\n"
-                                        "- Must include current values of s or v when useful\n"
-                                        "- Must describe speed control action only\n"
-                                        "- Use 'meter per second', not m/s\n"
-                                        "- Be slightly varied and natural (avoid repeating same phrase)\n"
+                                            Special:
+                                            - If 10.5 ≤ v ≤ 11.5 → say maintain steady speed
 
-                                        "GUIDANCE STYLE:\n"
-                                        "- If speed is high: suggest slowing down smoothly\n"
-                                        "- If speed is low: suggest increasing gently\n"
-                                        "- If near target: suggest maintaining steady speed\n"
-                                        "- If close to zone: be more precise using distance\n"
+                                            Output:
+                                            - If NONE → exactly: NONE|
+                                            - No extra text
 
-                                        "SPECIAL CASE:\n"
-                                        "If 10.5 <= v <= 11.5, say maintain steady speed.\n"
-
-                                        "OUTPUT RULE:\n"
-                                        "If TOKEN is NONE, output exactly: NONE|\n"
-                                        "Do not add any extra text.\n"
-
-                                        "EXAMPLES:\n"
-                                        "ACTUATE| System takeover!!! Slow down from 18 meter per second to reach 11\n"
-                                        "WARNING|At 55 meters, prepare to reduce speed from 16\n"
-                                        "ACTUATE|Increase speed slightly from 9 meter per second\n"
-                                        "NONE|"
+                                            Examples:
+                                            ACTUATE|Slow down from 18 meter per second
+                                            WARNING|At 55 meters reduce speed from 16
+                                            ACTUATE|Increase speed slightly from 9 meter per second
+                                            NONE|"""
                                     )
                         },
                         {
@@ -564,6 +555,7 @@ reactor LLMInference {
         # print("[LLM] calling model...", flush=True)
 
         tok_raw, msg_raw, ms = self.run_llm_message(rd_val, v_val)
+        # tok_raw, msg_raw, ms = "NONE|", "WARNING|Speed change ahead", 32
         self.check_deadline()
 
         raw = (msg_raw or "").strip()
