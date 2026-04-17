@@ -9,13 +9,14 @@ preamble{=
 =}
 
 reactor Driver{
-    input start_signal
-    state started = False
+    // input start_signal
+    // state started = False
     state steer_val = 1
     state accel_val = 0.0
     state brake_val = 0.0
     state head_val = 1
     state eye_val = 1
+    state sensor_ready = False
 
     output steer
     output accelerator
@@ -29,16 +30,21 @@ reactor Driver{
     sen = new SensorInputs()
     
 
-    reaction(start_signal) {=
-        self.started = True
-    =}
+    // reaction(start_signal) {=
+    //     self.started = True
+    // =}
 
     
     reaction(sen.eye_msg, sen.head_msg, sen.accel_msg, sen.brake_msg, sen.steer_msg) {=
-        
+        # if not self.sensor_ready:
+        #     if sen.accel_msg.is_present or sen.brake_msg.is_present or sen.steer_msg.is_present:
+        #         self.sensor_ready = True
+        #         print("[SENSOR READY]", flush=True)
+        #     else:
+        #         return
               
-        if not self.started:
-            return
+        # if not self.started:
+        #     return
 
         if sen.head_msg.is_present:
             self.head_val = sen.head_msg.value
@@ -56,8 +62,10 @@ reactor Driver{
         print(f"[DRIVER STATE] accel={self.accel_val} brake={self.brake_val}", flush=True)
     =}
     reaction(sensorclock) -> head, eye, accelerator, brake, steer {=
-        if not self.started:
-            return
+        # if not self.started:
+        #     return
+        # if not self.started or not self.sensor_ready:
+        #     return
         current_dri = lf.time.logical_elapsed()/1e6
         steer.set(self.steer_val)
         accelerator.set(self.accel_val)
@@ -134,8 +142,8 @@ reactor Driver{
 // }
 
 reactor Car{
-    input start_signal
-    state started = False
+    // input start_signal
+    // state started = False
 
     input steer_in
     input accel_in
@@ -161,12 +169,12 @@ reactor Car{
     
     
     
-    reaction(start_signal) {=
-        self.started = True
-    =}
+    // reaction(start_signal) {=
+    //     self.started = True
+    // =}
     reaction(accel_in, brake_in, eye_pos_in, head_pos_in, steer_in, actuate_in)-> velocity, steer, head_pos, eye_pos {=
-        if not self.started:
-            return
+        # if not self.started:
+        #     return
         if accel_in.is_present:
             self.accel_val = float(accel_in.value)
 
@@ -285,8 +293,8 @@ reactor Car{
 
 
 reactor Environment{
-    input start_signal
-    state started = False
+    // input start_signal
+    // state started = False
 
     input v
     state pos_speed_change = 200.0
@@ -295,12 +303,12 @@ reactor Environment{
     
     state v_val = 0.0
 
-    reaction(start_signal) {=
-        self.started = True
-    =}
+    // reaction(start_signal) {=
+    //     self.started = True
+    // =}
     reaction(v) -> displacement{=
-        if not self.started:
-            return
+        # if not self.started:
+        #     return
         if v.is_present:
             self.v_val = float(v.value)
         current_dri = lf.time.logical_elapsed()/1e6
@@ -335,13 +343,13 @@ reactor LLMInference {
     input h
     input e
 
-    output ready
+    // output ready
     output control
     output instruction
 
     state last_dl_tok = ""
     state last_dl_msg = ""
-    state is_ready = False
+    // state is_ready = False
     state s_val = 0.0
     state v_val = 0.0
     state st_val = 2
@@ -471,54 +479,54 @@ reactor LLMInference {
             )
     =}
 
-    reaction(startup) -> ready {=
-        import time
-        import ollama
+    // reaction(startup)  {=
+    //     import time
+    //     import ollama
 
-        print("\n=== STARTUP ===", flush=True)
-        print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
-        print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
+    //     print("\n=== STARTUP ===", flush=True)
+    //     print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
+    //     print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
 
-        try:
-            r = ollama.chat(
-                model="llama3:8b",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a friendly driving coach."
-                    },
-                    {
-                        "role": "user",
-                        "content": "Output exactly: Hi. All the best."
-                    }
-                ],
-                options={"temperature": 0.0, "num_predict": 10},
-            )
+    //     try:
+    //         r = ollama.chat(
+    //             model="llama3:8b",
+    //             messages=[
+    //                 {
+    //                     "role": "system",
+    //                     "content": "You are a friendly driving coach."
+    //                 },
+    //                 {
+    //                     "role": "user",
+    //                     "content": "Output exactly: Hi. All the best."
+    //                 }
+    //             ],
+    //             options={"temperature": 0.0, "num_predict": 10},
+    //         )
 
-            msg = (r.get("message", {}).get("content", "") or "").strip()
+    //         msg = (r.get("message", {}).get("content", "") or "").strip()
 
-            if msg:
-                print(f"[LLM GREETING] {msg}", flush=True)
-                self.speak(msg)
+    //         if msg:
+    //             print(f"[LLM GREETING] {msg}", flush=True)
+    //             self.speak(msg)
 
-                # wait until speech completes
-                if self.speech_proc is not None:
-                    self.speech_proc.wait()
+    //             # wait until speech completes
+    //             if self.speech_proc is not None:
+    //                 self.speech_proc.wait()
 
-        except Exception as e:
-            print(">>> LLM ERROR:", e, flush=True)
+    //     except Exception as e:
+    //         print(">>> LLM ERROR:", e, flush=True)
 
-            self.speak("Hi. All the best.")
+    //         self.speak("Hi. All the best.")
 
-            if self.speech_proc is not None:
-                self.speech_proc.wait()
+    //         if self.speech_proc is not None:
+    //             self.speech_proc.wait()
 
-        # only after speech finishes
-        self.is_ready = True
-        ready.set(True)
+    //     # only after speech finishes
+    //     self.is_ready = True
+    //     ready.set(True)
 
-        print("[STATUS] LLM READY", flush=True)
-    =}
+    //     print("[STATUS] LLM READY", flush=True)
+    // =}
 
     reaction(s, v, st, h){=
         # print("\n=== INPUT REACTION TRIGGERED ===", flush=True)
@@ -791,7 +799,7 @@ reactor Coach{
 
     output act
     output instr
-    output ready
+    // output ready
 
     llm = new LLMInference()
     a = new Planner()
@@ -809,7 +817,7 @@ reactor Coach{
     a.act -> act
     a.planned_instr -> instr
 
-    llm.ready -> ready
+    // llm.ready -> ready
    
     
 }
@@ -823,9 +831,9 @@ federated reactor at 10.218.100.78 {
     
 
 
-    adc.ready -> d.start_signal
-    adc.ready -> c.start_signal
-    adc.ready -> en.start_signal
+    // adc.ready -> d.start_signal
+    // adc.ready -> c.start_signal
+    // adc.ready -> en.start_signal
     // adc.ready -> sim.start_signal
   
 
