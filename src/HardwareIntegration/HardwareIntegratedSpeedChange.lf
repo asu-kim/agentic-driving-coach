@@ -48,6 +48,7 @@ reactor Driver{
 
         if sen.brake_msg.is_present:
             self.brake_val = sen.brake_msg.value
+        print(f"[SENSOR RAW] brake={self.brake_val}", flush=True)
     =}
     reaction(sensorclock) -> head, eye, accelerator, brake, steer {=
         # if not self.started:
@@ -58,34 +59,34 @@ reactor Driver{
         brake.set(self.brake_val)
         head.set(self.head_val)
         eye.set(self.eye_val)
-        if self.head_val == 0:
-            head_str = "LEFT"
-        elif self.head_val == 1:
-            head_str = "CENTER"
-        else:
-            head_str = "RIGHT"
+        # if self.head_val == 0:
+        #     head_str = "LEFT"
+        # elif self.head_val == 1:
+        #     head_str = "CENTER"
+        # else:
+        #     head_str = "RIGHT"
 
-        if self.eye_val == 0:
-            eye_str = "LEFT"
-        elif self.eye_val == 1:
-            eye_str = "CENTER"
-        else:
-            eye_str = "RIGHT"
+        # if self.eye_val == 0:
+        #     eye_str = "LEFT"
+        # elif self.eye_val == 1:
+        #     eye_str = "CENTER"
+        # else:
+        #     eye_str = "RIGHT"
 
-        if self.steer_val == 0:
-            steer_str = "LEFT"
-        elif self.steer_val == 1:
-            steer_str = "CENTER"
-        else:
-            steer_str = "RIGHT"
+        # if self.steer_val == 0:
+        #     steer_str = "LEFT"
+        # elif self.steer_val == 1:
+        #     steer_str = "CENTER"
+        # else:
+        #     steer_str = "RIGHT"
 
-        print("----- sensor clock-----")
-        print(f"[DRIVER] logical time: {current_dri:.2f} ", flush=True)
-        print(f"Head: {self.head_val} ({head_str})", flush=True)
-        print(f"Eye: {self.eye_val} ({eye_str})", flush=True)
-        print(f"Accelerator: {self.accel_val}", flush=True)
-        print(f"Brake: {self.brake_val}", flush=True)
-        print(f"Steer: {self.steer_val} ({steer_str})", flush=True)
+        # print("----- sensor clock-----")
+        # print(f"[DRIVER] logical time: {current_dri:.2f} ", flush=True)
+        # print(f"Head: {self.head_val} ({head_str})", flush=True)
+        # print(f"Eye: {self.eye_val} ({eye_str})", flush=True)
+        # print(f"Accelerator: {self.accel_val}", flush=True)
+        # print(f"Brake: {self.brake_val}", flush=True)
+        # print(f"Steer: {self.steer_val} ({steer_str})", flush=True)
     =}
 }
 
@@ -334,23 +335,51 @@ reactor LLMInference {
                         {
                             "role": "system",
                             "content": (
-                                        " You are a real-time driving coach.\n"
-                                        
-                                        "Output exactly ONE line: TOKEN|Message"
-                                        "TOKEN must be one of: NONE, WARNING, ACTUATE"
-                                        "Message must be one sentence or 12 words, about speed change only from 30meter per second to 11meter per second."
-                                        "Use distance_to_speed change is s and measured in meters"
-                                        "velocity is v measured using meter per second only."
-                                        "If speed is 11 then say maintain speed else give good guidance"
+                                        "You are a real-time driving coach.\n"
 
-                                        "Rules for TOKEN:"
-                                        "if s is lesser than or equal to 25 and v is greater than 12 or lesser than 11 then TOKEN=ACTUATE\n"
-                                        "else if s lies in between 50 to 60 and v is in between 15 to 13 then TOKEN=WARNING\n"
-                                        "else if s is greater than 80 and v is not in between 18 to 16 then TOKEN=WARNING\n"
+                                        "Output exactly ONE line in the format:\n"
+                                        "TOKEN|Message\n"
+
+                                        "TOKEN must be one of: NONE, WARNING, ACTUATE\n"
+
+                                        "Variables:\n"
+                                        "s = distance to speed change zone (meters)\n"
+                                        "v = velocity (meter per second)\n"
+
+                                        "Target speed is 11 meter per second.\n"
+
+                                        "TOKEN RULES (strict):\n"
+                                       
+                                        "if s <= 80 and v > 13 → ACTUATE\n"
+                                        "else if s <= 150 and v > 18 → WARNING\n"
+                                        "else if s > 150 and v > 20 → WARNING\n"
                                         "else TOKEN=NONE\n"
 
-                                        "If TOKEN=NONE, output: NONE|\n"
-                                        "Do not output anything else."
+                                        "MESSAGE RULES:\n"
+                                        "- One short sentence (max 12 words)\n"
+                                        "- Must include current values of s or v when useful\n"
+                                        "- Must describe speed control action only\n"
+                                        "- Use 'meter per second', not m/s\n"
+                                        "- Be slightly varied and natural (avoid repeating same phrase)\n"
+
+                                        "GUIDANCE STYLE:\n"
+                                        "- If speed is high: suggest slowing down smoothly\n"
+                                        "- If speed is low: suggest increasing gently\n"
+                                        "- If near target: suggest maintaining steady speed\n"
+                                        "- If close to zone: be more precise using distance\n"
+
+                                        "SPECIAL CASE:\n"
+                                        "If 10.5 <= v <= 11.5, say maintain steady speed.\n"
+
+                                        "OUTPUT RULE:\n"
+                                        "If TOKEN is NONE, output exactly: NONE|\n"
+                                        "Do not add any extra text.\n"
+
+                                        "EXAMPLES:\n"
+                                        "ACTUATE| System takeover!!! Slow down from 18 meter per second to reach 11\n"
+                                        "WARNING|At 55 meters, prepare to reduce speed from 16\n"
+                                        "ACTUATE|Increase speed slightly from 9 meter per second\n"
+                                        "NONE|"
                                     )
                         },
                         {
@@ -384,14 +413,82 @@ reactor LLMInference {
                 return "WARNING", "Speed limit ahead."
 
             return "NONE", ""
+
+        def speak(self, msg):
+            if not msg:
+                return
+
+        
+            msg_lower = msg.lower()
+            if "speed limit achieved" in msg_lower:
+                msg = "Speed limit achieved. Maintain speed."
+
+        
+            msg = msg.replace("m/s", "meter per second")
+            msg = msg.replace("mps", "meter per second")
+
+            
+            import re
+            msg = re.sub(r"(\d+)\.(\d+)", r"\1", msg)
+
+            print(f"[DEBUG SPEAK] {msg}", flush=True)
+
+            try:
+                if self.speech_proc is not None:
+                    self.speech_proc.kill()
+            except:
+                pass
+
+            self.speech_proc = subprocess.Popen(
+                ["espeak", "-s", "120", msg],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
     =}
 
     reaction(startup) -> ready {=
         import time
+        import ollama
+
         print("\n=== STARTUP ===", flush=True)
         print(f"[TIME] logical={lf.time.logical_elapsed()/1e6:.2f}", flush=True)
         print(f"[TIME] physical={lf.time.physical_elapsed()/1e6:.2f}", flush=True)
 
+        try:
+            r = ollama.chat(
+                model="llama3:8b",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are a friendly driving coach."
+                    },
+                    {
+                        "role": "user",
+                        "content": "Output exactly: Hi. All the best."
+                    }
+                ],
+                options={"temperature": 0.0, "num_predict": 10},
+            )
+
+            msg = (r.get("message", {}).get("content", "") or "").strip()
+
+            if msg:
+                print(f"[LLM GREETING] {msg}", flush=True)
+                self.speak(msg)
+
+                # wait until speech completes
+                if self.speech_proc is not None:
+                    self.speech_proc.wait()
+
+        except Exception as e:
+            print(">>> LLM ERROR:", e, flush=True)
+
+            self.speak("Hi. All the best.")
+
+            if self.speech_proc is not None:
+                self.speech_proc.wait()
+
+        # only after speech finishes
         self.is_ready = True
         ready.set(True)
 
@@ -495,11 +592,30 @@ reactor Planner {
     import subprocess
 
     def speak(self, msg):
-        try:
-            if self.speech_proc is not None:
-                self.speech_proc.kill()
-        except:
-            pass
+        if not msg:
+            return
+
+        import re
+
+        # Convert m/s to km/h
+        def convert_mps_to_kmph(match):
+            val = float(match.group(1))
+            kmph = int(val * 3.6)
+            return f"{kmph} kilometers per hour"
+
+        # handle all formats
+        msg = re.sub(r"(\d+\.?\d*)\s*m/s", convert_mps_to_kmph, msg)
+        msg = re.sub(r"(\d+\.?\d*)\s*mps", convert_mps_to_kmph, msg)
+        msg = re.sub(r"(\d+\.?\d*)\s*meter per second", convert_mps_to_kmph, msg)
+
+        # Remove decimals for cleaner speech
+        msg = re.sub(r"(\d+)\.(\d+)", r"\1", msg)
+
+        print(f"[DEBUG SPEAK] {msg}", flush=True)
+
+        # Wait for previous speech to finish
+        if self.speech_proc is not None:
+            self.speech_proc.wait()
 
         self.speech_proc = subprocess.Popen(
             ["espeak", "-s", "120", msg],
@@ -521,7 +637,7 @@ reactor Planner {
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
      
-      if rd <= 2:
+      if rd <= 1:
         target = 11.0
         error = abs(v_val - target)
 
@@ -578,7 +694,7 @@ reactor Planner {
       
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
-      if rd <= 2:
+      if rd <= 1:
         target = 11.0
         error = abs(v_val - target)
 
@@ -614,7 +730,7 @@ reactor Planner {
      
       print(f"[DATA] v={v_val:.2f} | s={rd:.2f}", flush=True)
 
-      if rd <= 2:
+      if rd <= 1:
         target = 11.0
         error = abs(v_val - target)
 
