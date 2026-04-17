@@ -264,7 +264,7 @@ reactor LLMInference {
     timer llmclock(0, 100 msec)
 
     preamble{=
-        from rag import generate_response
+        from rag_stop import generate_response
         def fallback_policy(self, rd_val, v_val):
             if rd_val <= 0.0:
                 return "NONE", ""
