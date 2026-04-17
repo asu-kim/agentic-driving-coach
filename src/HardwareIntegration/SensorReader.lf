@@ -66,24 +66,48 @@ reactor DeviceReader {
       xinfo = dev.absinfo(ecodes.ABS_X)
       xmin, xmax = xinfo.min, xinfo.max
 
-      for e in dev.read_loop():
-        if e.type != ecodes.EV_ABS:
-          continue
+      # for e in dev.read_loop():
+      #   if e.type != ecodes.EV_ABS:
+      #     continue
 
-        if e.code == ecodes.ABS_X:
-            #since the values are 0, 128, 255 we normalize
-          s = ( 2 * (e.value - xmin) / (xmax - xmin) ) - 1.0
-          s = float(clamp(s, -1.0, 1.0))
-          action.schedule(0, ("steer", s))
+      #   if e.code == ecodes.ABS_X:
+      #       #since the values are 0, 128, 255 we normalize
+      #     s = ( 2 * (e.value - xmin) / (xmax - xmin) ) - 1.0
+      #     s = float(clamp(s, -1.0, 1.0))
+      #     action.schedule(0, ("steer", s))
 
-        elif e.code == ecodes.ABS_BRAKE:
-          b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
-          action.schedule(0, ("brake", b))
+      #   elif e.code == ecodes.ABS_BRAKE:
+      #     b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
+      #     action.schedule(0, ("brake", b))
 
-        elif e.code == ecodes.ABS_GAS:
-            #this is for accelerator for this specific device
-          tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
-          action.schedule(0, ("throttle", tval))
+      #   elif e.code == ecodes.ABS_GAS:
+      #       #this is for accelerator for this specific device
+      #     tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
+      #     action.schedule(0, ("throttle", tval))
+      import select
+
+      while True:
+          r, _, _ = select.select([dev], [], [], 0)
+
+          if r:
+              for e in dev.read():
+                  if e.type != ecodes.EV_ABS:
+                      continue
+
+                  if e.code == ecodes.ABS_X:
+                      s = (2 * (e.value - xmin) / (xmax - xmin)) - 1.0
+                      s = float(clamp(s, -1.0, 1.0))
+                      action.schedule(0, ("steer", s))
+
+                  elif e.code == ecodes.ABS_BRAKE:
+                      b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
+                      # print(f"[EVDEV] brake raw={e.value} norm={b:.3f}", flush=True)
+                      action.schedule(0, ("brake", b))
+
+                  elif e.code == ecodes.ABS_GAS:
+                      tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
+                      # print(f"[EVDEV] accel raw={e.value} norm={tval:.3f}", flush=True)
+                      action.schedule(0, ("throttle", tval))
 
     # added webcam reader as separate thread 
     # def webcam_reader(action):

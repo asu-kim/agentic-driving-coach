@@ -812,7 +812,7 @@ federated reactor at 10.218.100.78 {
     adc = new Coach()
     // sim = new Simulation()
 
-    // adc.ready -> d.start_signal
+    adc.ready -> d.start_signal
     adc.ready -> c.start_signal
     adc.ready -> en.start_signal
     // adc.ready -> sim.start_signal
