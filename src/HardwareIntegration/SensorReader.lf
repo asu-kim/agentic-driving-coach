@@ -22,138 +22,241 @@ reactor DeviceReader {
   output brake
   output frame
   physical action sensor
-  timer cam_timer(0, 100 msec)
+  timer cam_timer(2 sec, 100 msec)
   state cap
   state cam_ready = False
 
 
-  reaction(startup) -> sensor {=
-    def find_path():
-      for p in list_devices():
-        try:
-          d = InputDevice(p)
-          if "shanwan" in d.name.lower() and "gamepad" in d.name.lower():
-            return p
-        except Exception:
-          pass
-      return None
 
-    path = find_path()
-    if path is None:
-      print("wheel device not found", flush=True)
-      return
-    #fr keeping the values to be in between [-1,1]
-    def clamp(x, lo, hi):
-        if x < lo:
-            return lo
-        elif x>hi:
-            return hi
-        else:
-            return x
-    #since the values are 0, 128, 255 we normalize
-    def norm(dev, code, val):
-      info = dev.absinfo(code)
-      mini, maxi = info.min, info.max
-      if maxi == mini:
-        return 0.0
-      result = (val - mini) / (maxi - mini)
-      return result
 
-    def reader(action, path):
-      dev = InputDevice(path)
-      print(f"The {dev.path} is the path and {dev.name} is the name of the device.\n")
 
-      xinfo = dev.absinfo(ecodes.ABS_X)
-      xmin, xmax = xinfo.min, xinfo.max
+  reaction(startup) -> sensor{=
+      def find_path():
+          for p in list_devices():
+              try:
+                  d = InputDevice(p)
+                  if "shanwan" in d.name.lower() and "gamepad" in d.name.lower():
+                      return p
+              except Exception:
+                  pass
+          return None
 
-      # for e in dev.read_loop():
-      #   if e.type != ecodes.EV_ABS:
-      #     continue
+      path = find_path()
+      if path is None:
+          print("wheel device not found", flush=True)
+          return
 
-      #   if e.code == ecodes.ABS_X:
-      #       #since the values are 0, 128, 255 we normalize
-      #     s = ( 2 * (e.value - xmin) / (xmax - xmin) ) - 1.0
-      #     s = float(clamp(s, -1.0, 1.0))
-      #     action.schedule(0, ("steer", s))
+      def clamp(x, lo, hi):
+          if x < lo:
+              return lo
+          elif x > hi:
+              return hi
+          else:
+              return x
 
-      #   elif e.code == ecodes.ABS_BRAKE:
-      #     b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
-      #     action.schedule(0, ("brake", b))
+      # Normalize to [0, 1]
+      def norm(dev, code, val):
+          info = dev.absinfo(code)
+          mini, maxi = info.min, info.max
+          if maxi == mini:
+              return 0.0
+          return (val - mini) / (maxi - mini)
 
-      #   elif e.code == ecodes.ABS_GAS:
-      #       #this is for accelerator for this specific device
-      #     tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
-      #     action.schedule(0, ("throttle", tval))
-      import select
+      def reader(action, path):
+          dev = InputDevice(path)
+          print(f"The {dev.path} is the path and {dev.name} is the name of the device.\n", flush=True)
 
-      while True:
-          r, _, _ = select.select([dev], [], [], 0)
+          xinfo = dev.absinfo(ecodes.ABS_X)
+          xmin, xmax = xinfo.min, xinfo.max
 
-          if r:
-              for e in dev.read():
-                  if e.type != ecodes.EV_ABS:
-                      continue
+          axis_state = {
+              "steer": {"last": None, "last_sent": 0.0, "eps": 0.01, "min_dt": 0.01},
+              "brake": {"last": None, "last_sent": 0.0, "eps": 0.02, "min_dt": 0.02},
+              "throttle": {"last": None, "last_sent": 0.0, "eps": 0.02, "min_dt": 0.02},
+          }
 
-                  if e.code == ecodes.ABS_X:
-                      s = (2 * (e.value - xmin) / (xmax - xmin)) - 1.0
-                      s = float(clamp(s, -1.0, 1.0))
-                      action.schedule(0, ("steer", s))
+          def maybe_send(name, value):
+              now = time.monotonic()
+              st = axis_state[name]
 
-                  elif e.code == ecodes.ABS_BRAKE:
-                      b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
-                      # print(f"[EVDEV] brake raw={e.value} norm={b:.3f}", flush=True)
-                      action.schedule(0, ("brake", b))
+              if st["last"] is not None:
+                  if abs(value - st["last"]) < st["eps"]:
+                      return
+                  if now - st["last_sent"] < st["min_dt"]:
+                      return
 
-                  elif e.code == ecodes.ABS_GAS:
-                      tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
-                      # print(f"[EVDEV] accel raw={e.value} norm={tval:.3f}", flush=True)
-                      action.schedule(0, ("throttle", tval))
+              st["last"] = value
+              st["last_sent"] = now
+              action.schedule(0, (name, value))
 
-    # added webcam reader as separate thread 
-    # def webcam_reader(action):
-    #   cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
-    #   if not cap.isOpened():
-    #     print("cannot open camera 0")
-    #     return
+          for e in dev.read_loop():
+              if e.type != ecodes.EV_ABS:
+                  continue
 
-    #   count = 0
-    #   print("Webcam started")
-    #   while True:
-    #     ok, img = cap.read()
-    #     if ok:
-    #       count += 1
-    #       action.schedule(0, ("frame", img))
-    #     time.sleep(0.1)
+              if e.code == ecodes.ABS_X:
+                  s = (2 * (e.value - xmin) / (xmax - xmin)) - 1.0
+                  s = float(clamp(s, -1.0, 1.0))
+                  maybe_send("steer", s)
 
-    t = threading.Thread(
-            target=reader,
-            args=(sensor, path),
-            daemon=True
-        )
-    t.start()
+              elif e.code == ecodes.ABS_BRAKE:
+                  b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
+                  maybe_send("brake", b)
 
-    # cam_t = threading.Thread(
-    #         target=webcam_reader,
-    #         args=(sensor,),
-    #         daemon=True
-    #     )
-    # cam_t.start()
+              elif e.code == ecodes.ABS_GAS:
+                  tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
+                  maybe_send("throttle", tval)
 
-    #we open the camera once to avoid segmentation faults 
-    self.cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
-    if not self.cap.isOpened():
-      print("Camera cannot be opened", flush=True)
-      self.cam_ready = False
-    else:
-      cv2.setNumThreads(1)
-      self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-      self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-      self.cap.set(cv2.CAP_PROP_FPS, 10)
-      self.cam_ready = True
-      print("Webcam opened", flush=True)
+      t = threading.Thread(
+          target=reader,
+          args=(sensor, path),
+          daemon=True
+      )
+      t.start()
 
-    print("The devices are connected\n")
-  =}
+      self.cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+      if not self.cap.isOpened():
+          print("Camera cannot be opened", flush=True)
+          self.cam_ready = False
+      else:
+          cv2.setNumThreads(1)
+          self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+          self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+          self.cap.set(cv2.CAP_PROP_FPS, 10)
+          self.cam_ready = True
+          print("Webcam opened", flush=True)
+
+      print("The devices are connected\n")
+    =}
+  // reaction(startup) -> sensor {=
+  //   def find_path():
+  //     for p in list_devices():
+  //       try:
+  //         d = InputDevice(p)
+  //         if "shanwan" in d.name.lower() and "gamepad" in d.name.lower():
+  //           return p
+  //       except Exception:
+  //         pass
+  //     return None
+
+  //   path = find_path()
+  //   if path is None:
+  //     print("wheel device not found", flush=True)
+  //     return
+  //   #fr keeping the values to be in between [-1,1]
+  //   def clamp(x, lo, hi):
+  //       if x < lo:
+  //           return lo
+  //       elif x>hi:
+  //           return hi
+  //       else:
+  //           return x
+  //   #since the values are 0, 128, 255 we normalize
+  //   def norm(dev, code, val):
+  //     info = dev.absinfo(code)
+  //     mini, maxi = info.min, info.max
+  //     if maxi == mini:
+  //       return 0.0
+  //     result = (val - mini) / (maxi - mini)
+  //     return result
+
+  //   def reader(action, path):
+  //     dev = InputDevice(path)
+  //     print(f"The {dev.path} is the path and {dev.name} is the name of the device.\n")
+
+  //     xinfo = dev.absinfo(ecodes.ABS_X)
+  //     xmin, xmax = xinfo.min, xinfo.max
+
+  //     # for e in dev.read_loop():
+  //     #   if e.type != ecodes.EV_ABS:
+  //     #     continue
+
+  //     #   if e.code == ecodes.ABS_X:
+  //     #       #since the values are 0, 128, 255 we normalize
+  //     #     s = ( 2 * (e.value - xmin) / (xmax - xmin) ) - 1.0
+  //     #     s = float(clamp(s, -1.0, 1.0))
+  //     #     action.schedule(0, ("steer", s))
+
+  //     #   elif e.code == ecodes.ABS_BRAKE:
+  //     #     b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
+  //     #     action.schedule(0, ("brake", b))
+
+  //     #   elif e.code == ecodes.ABS_GAS:
+  //     #       #this is for accelerator for this specific device
+  //     #     tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
+  //     #     action.schedule(0, ("throttle", tval))
+
+
+      
+  //     # import select
+
+  //     # while True:
+  //     #     r, _, _ = select.select([dev], [], [], 0)
+
+  //     #     if r:
+  //     #         for e in dev.read():
+  //     #             if e.type != ecodes.EV_ABS:
+  //     #                 continue
+
+  //     #             if e.code == ecodes.ABS_X:
+  //     #                 s = (2 * (e.value - xmin) / (xmax - xmin)) - 1.0
+  //     #                 s = float(clamp(s, -1.0, 1.0))
+  //     #                 action.schedule(0, ("steer", s))
+
+  //     #             elif e.code == ecodes.ABS_BRAKE:
+  //     #                 b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
+  //     #                 # print(f"[EVDEV] brake raw={e.value} norm={b:.3f}", flush=True)
+  //     #                 action.schedule(0, ("brake", b))
+
+  //     #             elif e.code == ecodes.ABS_GAS:
+  //     #                 tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
+  //     #                 # print(f"[EVDEV] accel raw={e.value} norm={tval:.3f}", flush=True)
+  //     #                 action.schedule(0, ("throttle", tval))
+
+  //   # added webcam reader as separate thread 
+  //   # def webcam_reader(action):
+  //   #   cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+  //   #   if not cap.isOpened():
+  //   #     print("cannot open camera 0")
+  //   #     return
+
+  //   #   count = 0
+  //   #   print("Webcam started")
+  //   #   while True:
+  //   #     ok, img = cap.read()
+  //   #     if ok:
+  //   #       count += 1
+  //   #       action.schedule(0, ("frame", img))
+  //   #     time.sleep(0.1)
+
+  //   t = threading.Thread(
+  //           target=reader,
+  //           args=(sensor, path),
+  //           daemon=True
+  //       )
+  //   t.start()
+
+  //   # cam_t = threading.Thread(
+  //   #         target=webcam_reader,
+  //   #         args=(sensor,),
+  //   #         daemon=True
+  //   #     )
+  //   # cam_t.start()
+
+  //   #we open the camera once to avoid segmentation faults 
+  //   self.cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+  //   if not self.cap.isOpened():
+  //     print("Camera cannot be opened", flush=True)
+  //     self.cam_ready = False
+  //   else:
+  //     cv2.setNumThreads(1)
+  //     self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+  //     self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+  //     self.cap.set(cv2.CAP_PROP_FPS, 10)
+  //     self.cam_ready = True
+  //     print("Webcam opened", flush=True)
+
+  //   print("The devices are connected\n")
+  // =}
 
   reaction(cam_timer) -> frame {=
     if not getattr(self, "cam_ready", False) or getattr(self, "cap", None) is None:
