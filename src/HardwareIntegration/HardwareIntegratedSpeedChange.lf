@@ -27,7 +27,7 @@ reactor Driver{
     output eye
     // output ready
    
-    timer sensorclock(2 sec, 100 msec)
+    timer sensorclock(2 sec, 200 msec)
 
     sen = new SensorInputs()
     
@@ -62,6 +62,15 @@ reactor Driver{
         if sen.brake_msg.is_present:
             self.brake_val = sen.brake_msg.value
         print(f"[DRIVER STATE] accel={self.accel_val} brake={self.brake_val}", flush=True)
+        current_dri = lf.time.logical_elapsed()/1e6
+        physical_dri = lf.time.physical_elapsed()/1e6
+        lag = physical_dri - current_dri
+
+        print("----------------------------------------------------------")
+        print(f"[DRIVER REACTION 1] Logical time: {current_dri:.2f} ", flush=True)
+        print(f"[DRIVER REACTION 1] Physical time: {physical_dri:.2f} ", flush=True)
+        print(f"[DRIVER REACTION 1] LAG: {lag:.2f} ", flush=True)
+        print("----------------------------------------------------------")
     =}
     reaction(sensorclock) -> head, eye, accelerator, brake, steer {=
         # if not self.started:
@@ -111,6 +120,7 @@ reactor Driver{
         # print(f"Steer: {self.steer_val} ({steer_str})", flush=True)
     =}
 }
+
 
 // reactor Simulation{
 //     input start_signal

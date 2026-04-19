@@ -22,7 +22,7 @@ reactor DeviceReader {
   output brake
   output frame
   physical action sensor
-  timer cam_timer(2 sec, 100 msec)
+  timer cam_timer(2 sec, 200 msec)
   state cap
   state cam_ready = False
 
@@ -40,7 +40,7 @@ reactor DeviceReader {
               except Exception:
                   pass
           return None
-
+      start_time = time.time()
       path = find_path()
       if path is None:
           print("wheel device not found", flush=True)
@@ -112,7 +112,11 @@ reactor DeviceReader {
           daemon=True
       )
       t.start()
+      end_time = time.time()
+      time_diff = end_time - start_time
+      print(f"Time taken for wheel: {time_diff:.2f}")
 
+      start_time2 = time.time()
       self.cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
       if not self.cap.isOpened():
           print("Camera cannot be opened", flush=True)
@@ -124,6 +128,13 @@ reactor DeviceReader {
           self.cap.set(cv2.CAP_PROP_FPS, 10)
           self.cam_ready = True
           print("Webcam opened", flush=True)
+          #for startup lag warmup
+          self.cap.read()
+      
+      end_time2 = time.time()
+      time_diff2 = end_time2 - start_time2
+      
+      print(f"Time taken for cam: {time_diff2:.2f}")
 
       print("The devices are connected\n")
     =}
@@ -259,26 +270,52 @@ reactor DeviceReader {
   // =}
 
   reaction(cam_timer) -> frame {=
+    current_dri = lf.time.logical_elapsed()/1e6
+    
     if not getattr(self, "cam_ready", False) or getattr(self, "cap", None) is None:
       return
     try:
       ok, img = self.cap.read()
+      physical_dri = lf.time.physical_elapsed()/1e6
+      lag = physical_dri - current_dri
+      print(f"[DEVICE READER CAM read] Physical time: {physical_dri:.2f} ", flush=True)
+      print(f"[DEVICE READER CAM read] LAG: {lag:.2f} ", flush=True)
       if ok and img is not None:
         img = np.ascontiguousarray(img)
+
+
         frame.set(img)
+
     except Exception as e:
+        
       print("camera error reading the frames", e, flush=True)
+    
+    physical_dri = lf.time.physical_elapsed()/1e6
+    lag = physical_dri - current_dri
+    print("----------------------------------------------------------")
+    print(f"[DEVICE READER CAM TIMER] Logical time: {current_dri:.2f} ", flush=True)
+    print(f"[DEVICE READER CAM TIMER] Physical time: {physical_dri:.2f} ", flush=True)
+    print(f"[DEVICE READER CAM TIMER] LAG: {lag:.2f} ", flush=True)
+    print("----------------------------------------------------------")
   =}
 
   reaction(sensor) -> steer, brake, throttle{=
   tag, val = sensor.value
-
+  
   if tag == "steer":
     steer.set(val)
   elif tag == "brake":
     brake.set(val)
   elif tag == "throttle":
     throttle.set(val)
+  current_dri = lf.time.logical_elapsed()/1e6
+  physical_dri = lf.time.physical_elapsed()/1e6
+  lag = physical_dri - current_dri
+  print("----------------------------------------------------------")
+  print(f"[sterr,brake,accel] Logical time: {current_dri:.2f} ", flush=True)
+  print(f"[sterr,brake,accel] Physical time: {physical_dri:.2f} ", flush=True)
+  print(f"[sterr,brake,accel] LAG: {lag:.2f} ", flush=True)
+  print("----------------------------------------------------------")
 
 =}
 

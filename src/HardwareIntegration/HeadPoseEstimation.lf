@@ -34,6 +34,15 @@ reactor FaceLandmark{
 
         try:
             result = self.detector.process(img)
+            current_dri = lf.time.logical_elapsed()/1e6
+            physical_dri = lf.time.physical_elapsed()/1e6
+            lag = physical_dri - current_dri
+
+            print("----------------------------------------------------------")
+            print(f"[FACE DETECTOR] Logical time: {current_dri:.2f} ", flush=True)
+            print(f"[FACE DETECTOR] Physical time: {physical_dri:.2f} ", flush=True)
+            print(f"[FACE DETECTOR] LAG: {lag:.2f} ", flush=True)
+            print("----------------------------------------------------------")
         except Exception as e:
             print("Detection error:", e, flush=True)
             return
