@@ -1,4 +1,6 @@
-target Python {keepalive: true}
+target Python {keepalive: true, 
+    // logging: DEBUG
+    }
 
 import SensorInputs from "SensorInputs.lf"
 // import MuJoCoCar from "/home/raspdeeksha/agentic-driving-coach/mujoco-py/src/lib/MuJoCoCar.lf"
@@ -59,7 +61,7 @@ reactor Driver{
 
         if sen.brake_msg.is_present:
             self.brake_val = sen.brake_msg.value
-        # print(f"[DRIVER STATE] accel={self.accel_val} brake={self.brake_val}", flush=True)
+        print(f"[DRIVER STATE] accel={self.accel_val} brake={self.brake_val}", flush=True)
     =}
     reaction(sensorclock) -> head, eye, accelerator, brake, steer {=
         # if not self.started:
@@ -179,102 +181,64 @@ reactor Car{
     // reaction(start_signal) {=
     //     self.started = True
     // =}
-    reaction(accel_in, brake_in, eye_pos_in, head_pos_in, steer_in, actuate_in)-> velocity, steer, head_pos, eye_pos {=
+    reaction(accel_in, brake_in, eye_pos_in, head_pos_in, steer_in)-> velocity, steer, head_pos, eye_pos {=
         # if not self.started:
         #     return
-        if accel_in.is_present:
-            self.accel_val = float(accel_in.value)
+        # if accel_in.is_present:
+        #     self.accel_val = float(accel_in.value)
 
-        if brake_in.is_present:
-            self.brake_val = float(brake_in.value)
+        # if brake_in.is_present:
+        #     self.brake_val = float(brake_in.value)
 
 
-        if actuate_in.is_present:
-            self.act_val = actuate_in.value
+        # if actuate_in.is_present:
+        #     self.act_val = actuate_in.value
 
         
-        amsg = self.accel_val
-        bmsg = self.brake_val
-        act  = self.act_val
+        amsg = accel_in.value
+        bmsg = brake_in.value
+        MAX_BRAKE = - 10.0
+        MAX_ACCEL = 5.0
+        A_DRAG_COEF = - 0.3
+        # act  = self.act_val
       
+        print(f"The accel pedal position: {amsg:.2f}, The brake pedal: {bmsg:.2f}")
+        # def acel_cal(p):
+        #     p = max(0.0, min(1.0, p))
+        #     if p < 0.1:
+        #         return p
+        #     elif p < 0.6:
+        #         return 2.4 * p
+        #     else:
+        #         return 4.0 * (p**2)
 
-        def acel_cal(p):
-            p = max(0.0, min(1.0, p))
-            if p < 0.1:
-                return p
-            elif p < 0.6:
-                return 2.4 * p
-            else:
-                return 4.0 * (p**2)
+        # def brake_cal(p):
+        #     p = max(0.0, min(1.0, p))
+        #     if p < 0.1:
+        #         return -p
+        #     elif p < 0.6:
+        #         return -(5.4 * p)
+        #     else:
+        #         return -(9.0 * (p**2))
+        accel_brake = bmsg * MAX_BRAKE
+        accel_throt = amsg * MAX_ACCEL 
 
-        def brake_cal(p):
-            p = max(0.0, min(1.0, p))
-            if p < 0.1:
-                return -p
-            elif p < 0.6:
-                return -(5.4 * p)
-            else:
-                return -(9.0 * (p**2))
-
-        # CLEAN INPUT
-        if bmsg < 0.2:
-            bmsg = 0.0
-        if amsg < 0.05:
-            amsg = 0.0
+      
 
         vel_prev = self.velocity_init
+        
+       
 
-        #ACTUATE 
-        # if act == 11:
-        #     target_speed = 11.0
-
-        #     error = target_speed - vel_prev
-
-        #     Kp = 1.2
-        #     acc_net = Kp * error
-
-        #     acc_net = max(-4.0, min(3.0, acc_net))
-
-
-      
-        # else:
-        #     acc_net = 0.0
-
-    
-        #     if vel_prev < 9.5:
-        #         acc_net = 1.5   
-
-        #     elif amsg > 0.0:
-        #         acc_net += acel_cal(amsg)
-
-        #     elif bmsg > 0.0:
-        #         acc_net += brake_cal(bmsg)
 
         acc_net = 0.0
 
-        # --- DRIVER INPUT (always considered) ---
         if amsg > 0.0:
             acc_net += acel_cal(amsg)
 
         if bmsg > 0.0:
             acc_net += brake_cal(bmsg)
 
-        # --- LLM ASSIST (only nudges, not overrides) ---
-        if act == 11:
-            target_speed = 11.0
-            error = target_speed - vel_prev
-
-            Kp = 1.0
-            llm_acc = Kp * error
-
-            # limit LLM influence so it doesn't dominate
-            llm_acc = max(-9.0, min(4.0, llm_acc))
-
-            acc_net += llm_acc
-
-        # --- LOW SPEED AUTO BOOST (optional) ---
-        if vel_prev < 9.5 and amsg == 0 and bmsg == 0:
-            acc_net += 1.5
+  
        
         vel = vel_prev + acc_net * 0.1
         vel = max(0.0, vel)
@@ -293,7 +257,7 @@ reactor Car{
         print(f"---------------------------------------------------------", flush=True)
         # print(f"[CAR CLOCK] logical time: {current_dri:.2f}", flush=True)
         print(f"velocity={vel:.2f} acceleration={acc_net:.2f}", flush=True)
-        print(f"acceleration={acc_net:.2f}", flush=True)
+        # print(f"acceleration={acc_net:.2f}", flush=True)
 
         velocity.set(vel)
         steer.set(steer_in.value)
@@ -530,7 +494,7 @@ reactor LLMInference {
 
     //         if msg:
     //             print(f"[LLM GREETING] {msg}", flush=True)
-    //             self.speak(msg)
+                // self.speak(msg)
 
     //             # wait until speech completes
     //             if self.speech_proc is not None:
@@ -658,41 +622,41 @@ reactor Planner {
     import subprocess
     import re
 
-    def speak(self, msg):
-        import re
-        if not msg:
-            return
+    # def speak(self, msg):
+    #     import re
+    #     if not msg:
+    #         return
 
-        def convert_mps_to_kmph(match):
-            val = float(match.group(1))
-            kmph = int(round(val * 3.6))
-            return f"{kmph} kilometers per hour"
+    #     def convert_mps_to_kmph(match):
+    #         val = float(match.group(1))
+    #         kmph = int(round(val * 3.6))
+    #         return f"{kmph} kilometers per hour"
 
-        msg = re.sub(r"(\d+\.?\d*)\s*m/s", convert_mps_to_kmph, msg)
-        msg = re.sub(r"(\d+\.?\d*)\s*mps", convert_mps_to_kmph, msg)
-        msg = re.sub(r"(\d+\.?\d*)\s*meter per second", convert_mps_to_kmph, msg)
+    #     msg = re.sub(r"(\d+\.?\d*)\s*m/s", convert_mps_to_kmph, msg)
+    #     msg = re.sub(r"(\d+\.?\d*)\s*mps", convert_mps_to_kmph, msg)
+    #     msg = re.sub(r"(\d+\.?\d*)\s*meter per second", convert_mps_to_kmph, msg)
 
-        def round_numbers(match):
-            return str(int(round(float(match.group(0)))))
+    #     def round_numbers(match):
+    #         return str(int(round(float(match.group(0)))))
 
-        msg = re.sub(r"\d+\.?\d*", round_numbers, msg)
+    #     msg = re.sub(r"\d+\.?\d*", round_numbers, msg)
 
-        msg = re.sub(
-            r"from (\d+) kilometers per hour at (\d+) meters",
-            r"\2 meters ahead, slow down from \1 kilometers per hour",
-            msg
-        )
+    #     msg = re.sub(
+    #         r"from (\d+) kilometers per hour at (\d+) meters",
+    #         r"\2 meters ahead, slow down from \1 kilometers per hour",
+    #         msg
+    #     )
 
-        print(f"[DEBUG SPEAK] {msg}", flush=True)
+    #     print(f"[DEBUG SPEAK] {msg}", flush=True)
 
-        if self.speech_proc is not None:
-            self.speech_proc.wait()
+    #     # if self.speech_proc is not None:
+    #         # self.speech_proc.wait()
 
-        self.speech_proc = subprocess.Popen(
-            ["espeak", "-s", "120", "-v", "en+f3", msg],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
-        )
+    #     self.speech_proc = subprocess.Popen(
+    #         ["espeak", "-s", "120", "-v", "en+f3", msg],
+    #         stdout=subprocess.DEVNULL,
+    #         stderr=subprocess.DEVNULL
+    #     )
   =}
 
   initial mode monitoring {
@@ -726,7 +690,7 @@ reactor Planner {
 
         if self.stable_count >= 5 and not self.reached:
           planned_instr.set(f"[FINAL] v={v_val:.2f}")
-          self.speak("speed limit of 40 kilometer per hour achieved but maintain speed")
+        #   self.speak("speed limit of 40 kilometer per hour achieved but maintain speed")
           self.reached = True
         #   request_stop()
           current_dri = lf.time.logical_elapsed()/1e6
@@ -746,7 +710,7 @@ reactor Planner {
           if instruction:
             print(f"[LLM] ACTUATE | {instruction}", flush=True)
             planned_instr.set(instruction)
-            self.speak(instruction)
+            # self.speak(instruction)
 
           self.last_act_ns = now_ns
         current_dri = lf.time.logical_elapsed()/1e6
@@ -764,7 +728,7 @@ reactor Planner {
           if instruction:
             print(f"[LLM] WARNING | {instruction}", flush=True)
             planned_instr.set(instruction)
-            self.speak(instruction)
+            # self.speak(instruction)
 
           self.last_warn_ns = now_ns
         current_dri = lf.time.logical_elapsed()/1e6
@@ -818,7 +782,7 @@ reactor Planner {
         self.stable_count += 1
 
         if self.stable_count >= 5 and not self.reached:
-          self.speak("speed limit of 40 kilometer per hour achieved but maintain speed")
+        #   self.speak("speed limit of 40 kilometer per hour achieved but maintain speed")
         #   request_stop()
           current_dri = lf.time.logical_elapsed()/1e6
           physical_dri = lf.time.physical_elapsed()/1e6
@@ -888,7 +852,7 @@ reactor Planner {
           print("----------------------------------------------------------")
           return
 
-        self.speak("speed limit of 40 kilometer per hour achieved but maintain speed")
+        # self.speak("speed limit of 40 kilometer per hour achieved but maintain speed")
         # request_stop()
         current_dri = lf.time.logical_elapsed()/1e6
         physical_dri = lf.time.physical_elapsed()/1e6
