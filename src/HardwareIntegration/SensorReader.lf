@@ -22,7 +22,7 @@ reactor DeviceReader {
   output brake
   output frame
   physical action sensor
-  timer cam_timer(2 sec, 200 msec)
+  timer cam_timer(4 sec, 200 msec)
   state cap
   state cam_ready = False
 
@@ -76,18 +76,18 @@ reactor DeviceReader {
           }
 
           def maybe_send(name, value):
-              now = time.monotonic()
-              st = axis_state[name]
 
-              if st["last"] is not None:
-                  if abs(value - st["last"]) < st["eps"]:
-                      return
-                  if now - st["last_sent"] < st["min_dt"]:
-                      return
+            now = time.monotonic()
 
-              st["last"] = value
-              st["last_sent"] = now
-              action.schedule(0, (name, value))
+            st = axis_state[name]
+
+            if now - st["last_sent"] >= st["min_dt"]:
+
+                st["last"] = value
+
+                st["last_sent"] = now
+
+                action.schedule(0, (name, value))
 
           for e in dev.read_loop():
               if e.type != ecodes.EV_ABS:
@@ -100,10 +100,12 @@ reactor DeviceReader {
 
               elif e.code == ecodes.ABS_BRAKE:
                   b = float(clamp(norm(dev, ecodes.ABS_BRAKE, e.value), 0.0, 1.0))
+                  print(f"The event throttle: {b}")
                   maybe_send("brake", b)
 
               elif e.code == ecodes.ABS_GAS:
                   tval = float(clamp(norm(dev, ecodes.ABS_GAS, e.value), 0.0, 1.0))
+                  print(f"The event throttle: {tval}")
                   maybe_send("throttle", tval)
 
       t = threading.Thread(
