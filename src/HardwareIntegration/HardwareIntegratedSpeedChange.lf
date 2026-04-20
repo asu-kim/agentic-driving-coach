@@ -186,11 +186,11 @@ reactor Car{
     output eye_pos
     
    preamble{=
-    def actuate_logic():
+    def actuate_logic(self, cmd):
         if cmd == "ACCEL":
             return 0.5, 0.0
         elif cmd == "BRAKE":
-            return 0.0, 0.9
+            return 0.0, 1.0
         elif cmd == "HOLD":
             return 0.2, 0.0
 
@@ -204,9 +204,9 @@ reactor Car{
         # if brake_in.is_present:
         #     self.brake_val = float(brake_in.value)
 
-
-        if actuate_in.is_present:
-            print(f"The actuation command: {actuate_in.value} at logical time: {lf.time.logical_elapsed()/1e6} and physical time : {lf.time.physical_elapsed()/1e6}", flush=True)
+        print(f"[DEBUG] time={lf.time.logical_elapsed()/1e6}, actuate_present={actuate_in.is_present}", flush=True)
+        # if actuate_in.is_present:
+        #     print(f"The actuation command: {actuate_in.value} at logical time: {lf.time.logical_elapsed()/1e6} and physical time : {lf.time.physical_elapsed()/1e6}", flush=True)
 
         ###k = (1/2m)rho* C_d *A
 
@@ -216,8 +216,12 @@ reactor Car{
         # * C_d = 0.3
         # * A = 2.2
         # * m = 1500
-        amsg = accel_in.value
-        bmsg = brake_in.value
+        if actuate_in.is_present:
+            print(f"The actuation command: {actuate_in.value} at logical time: {lf.time.logical_elapsed()/1e6} and physical time : {lf.time.physical_elapsed()/1e6}", flush=True)
+            amsg, bmsg = self.actuate_logic(actuate_in.value)
+        else:
+            amsg = accel_in.value
+            bmsg = brake_in.value
         MAX_BRAKE = - 9.0
         MAX_ACCEL = 4.0
         A_DRAG_COEF = - 0.0002
@@ -230,7 +234,7 @@ reactor Car{
         ## acceleration for throttle is second order polynomial equation
 
         accel_brake = bmsg * MAX_BRAKE
-        accel_throt = amsg* amsg * MAX_ACCEL 
+        accel_throt = (0.6 * amsg + 0.4 * amsg* amsg) * MAX_ACCEL 
         accel_drag = A_DRAG_COEF * self.velocity_init ** 2
         accel_net = accel_brake + accel_throt + accel_drag + A_FRIC_COEFF
 
@@ -377,13 +381,13 @@ reactor LLMInference {
                                             Target speed = 11 meter per second
 
                                             Policy:
-                                            - If s ≤ 50 and v > 12 -> ACTUATE
-                                            - Else if s ≤ 100 and v > 20 -> WARNING
-                                            - Else if s > 150 and v > 30 -> WARNING
-                                            - Else -> NONE
+                                            - If s ≤ 50 and v > 12 → ACTUATE
+                                            - Else if s ≤ 100 and v > 20 → WARNING
+                                            - Else if s > 150 and v > 30 → WARNING
+                                            - Else → NONE
 
                                             Special:
-                                            IF 10.5 ≤ velocity ≤ 11.5 -> maintain steady speed
+                                            IF 10.5 ≤ velocity ≤ 11.5 → maintain steady speed
 
                                             Output Format:
                                             TOKEN|Message
@@ -400,7 +404,7 @@ reactor LLMInference {
                                             ACTUATE|Slow down from 18 meter per second
                                             WARNING|At 55 meters reduce speed from 16
                                             ACTUATE|Increase speed slightly from 9 meter per second
-                                            NONE|"""
+                                            NONE"""
                                     )
                         },
                         {
@@ -792,27 +796,27 @@ reactor Planner {
             rd = s.value if s.value is not None else 0.0
             v_val = v.value if v.value is not None else 0.0
             target = 11.0
-            # error = abs(v_val - target) - If s ≤ 50 and v > 12 → ACTUATE
-                                            # - Else if s ≤ 100 and v > 20 → WARNING
-                                            # - Else if s > 150 and v > 30 → WARNING
-                                            # - Else → NONE
+            # error = abs(v_val - target) - If s <= 50 and v > 12 -> ACTUATE
+                                            # - Else if s <= 100 and v > 20 -> WARNING
+                                            # - Else if s > 150 and v > 30 -> WARNING
+                                            # - Else -> NONE
             
-            if rd_val <= 1:
-                act_cmd.set("BRAKE")
+            if rd <= 1:
+                act.set("BRAKE")
 
             # If far enough either accel or hold
-            elif rd_val > 150:
+            elif rd > 150:
                 if v_val < target - 0.5:
-                    act_cmd.set("ACCEL")
+                    act.set("ACCEL")
                 else:
-                    act_cmd.set("HOLD")
+                    act.set("HOLD")
 
             # If the velocity is too high near the speed limit then break
-            elif rd_val <= 25:
+            elif rd <= 25:
                 if v_val > target + 1:
-                    act_cmd.set("BRAKE")
+                    act.set("BRAKE")
                 else:
-                    act_cmd.set("HOLD")
+                    act.set("HOLD")
 
             # if rd <= 1:
             #     target = 11.0
