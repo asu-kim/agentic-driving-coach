@@ -27,7 +27,7 @@ reactor Driver{
     output eye
     // output ready
    
-    timer sensorclock(2 sec, 200 msec)
+    timer sensorclock(4 sec, 100 msec)
 
     sen = new SensorInputs()
     
@@ -61,6 +61,9 @@ reactor Driver{
 
         if sen.brake_msg.is_present:
             self.brake_val = sen.brake_msg.value
+        else:
+            self.brake_val = 0.0
+        
         print(f"[DRIVER STATE] accel={self.accel_val} brake={self.brake_val}", flush=True)
         current_dri = lf.time.logical_elapsed()/1e6
         physical_dri = lf.time.physical_elapsed()/1e6
@@ -191,7 +194,7 @@ reactor Car{
     // reaction(start_signal) {=
     //     self.started = True
     // =}
-    reaction(accel_in, brake_in, eye_pos_in, head_pos_in, steer_in)-> velocity, steer, head_pos, eye_pos {=
+    reaction(accel_in, brake_in, eye_pos_in, head_pos_in, steer_in, actuate_in)-> velocity, steer, head_pos, eye_pos {=
         # if not self.started:
         #     return
         # if accel_in.is_present:
@@ -201,58 +204,45 @@ reactor Car{
         #     self.brake_val = float(brake_in.value)
 
 
-        # if actuate_in.is_present:
-        #     self.act_val = actuate_in.value
+        if actuate_in.is_present:
+            print(f"The actuation command: {actuate_in.value} at logical time: {lf.time.logical_elapsed()/1e6} and physical time : {lf.time.physical_elapsed()/1e6}", flush=True)
 
-        
+        ###k = (1/2m)rho* C_d *A
+
+        # Typical values of the drag coefficient for calculation:
+
+        # * \rho = 1.2
+        # * C_d = 0.3
+        # * A = 2.2
+        # * m = 1500
         amsg = accel_in.value
         bmsg = brake_in.value
-        MAX_BRAKE = - 10.0
-        MAX_ACCEL = 5.0
-        A_DRAG_COEF = - 0.3
-        # act  = self.act_val
+        MAX_BRAKE = - 9.0
+        MAX_ACCEL = 4.0
+        A_DRAG_COEF = - 0.0002
+        A_FRIC_COEFF = - 0.022
+        DT = 0.1
+        MAX_VEL = 35.0
+        
       
         print(f"The accel pedal position: {amsg:.2f}, The brake pedal: {bmsg:.2f}")
-        # def acel_cal(p):
-        #     p = max(0.0, min(1.0, p))
-        #     if p < 0.1:
-        #         return p
-        #     elif p < 0.6:
-        #         return 2.4 * p
-        #     else:
-        #         return 4.0 * (p**2)
+        ## acceleration for throttle is second order polynomial equation
 
-        # def brake_cal(p):
-        #     p = max(0.0, min(1.0, p))
-        #     if p < 0.1:
-        #         return -p
-        #     elif p < 0.6:
-        #         return -(5.4 * p)
-        #     else:
-        #         return -(9.0 * (p**2))
         accel_brake = bmsg * MAX_BRAKE
-        accel_throt = amsg * MAX_ACCEL 
+        accel_throt = amsg* amsg * MAX_ACCEL 
+        accel_drag = A_DRAG_COEF * self.velocity_init ** 2
+        accel_net = accel_brake + accel_throt + accel_drag + A_FRIC_COEFF
 
-      
-
-        vel_prev = self.velocity_init
         
-       
+        vel = self.velocity_init + accel_net * DT
+        if vel > MAX_VEL:
+
+            vel = MAX_VEL
+
+            
+        dist = self.dist_init + vel * DT
 
 
-        acc_net = 0.0
-
-        if amsg > 0.0:
-            acc_net += acel_cal(amsg)
-
-        if bmsg > 0.0:
-            acc_net += brake_cal(bmsg)
-
-  
-       
-        vel = vel_prev + acc_net * 0.1
-        vel = max(0.0, vel)
-        dist = max(0.0, self.dist_init - vel * 0.1)
         self.velocity_init = vel
         self.dist_init = dist
         current_dri = lf.time.logical_elapsed()/1e6
@@ -265,9 +255,8 @@ reactor Car{
         print(f"[CAR] LAG: {lag:.2f} ", flush=True)
         print("----------------------------------------------------------")
         print(f"---------------------------------------------------------", flush=True)
-        # print(f"[CAR CLOCK] logical time: {current_dri:.2f}", flush=True)
-        print(f"velocity={vel:.2f} acceleration={acc_net:.2f}", flush=True)
-        # print(f"acceleration={acc_net:.2f}", flush=True)
+        print(f"velocity={vel:.2f} acceleration={accel_net:.2f}", flush=True)
+        print(f"Distance travelled={dist:.2f}", flush=True)
 
         velocity.set(vel)
         steer.set(steer_in.value)
@@ -352,7 +341,7 @@ reactor LLMInference {
     state st_val = 2
     state h_val = 5
 
-    timer llmclock(2 sec, 400 msec)
+    timer llmclock(4 sec, 400 msec)
 
     preamble{=
         import ollama
@@ -504,23 +493,12 @@ reactor LLMInference {
 
     //         if msg:
     //             print(f"[LLM GREETING] {msg}", flush=True)
-                // self.speak(msg)
-
-    //             # wait until speech completes
-    //             if self.speech_proc is not None:
-    //                 self.speech_proc.wait()
+            
+              
 
     //     except Exception as e:
     //         print(">>> LLM ERROR:", e, flush=True)
 
-    //         self.speak("Hi. All the best.")
-
-    //         if self.speech_proc is not None:
-    //             self.speech_proc.wait()
-
-    //     # # only after speech finishes
-    //     # self.is_ready = True
-    //     # ready.set(True)
 
     //     print("[STATUS] LLM READY", flush=True)
     // =}
