@@ -620,7 +620,7 @@ reactor Planner {
   initial mode monitoring {
         reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
             kw = (ctrl.value or "NONE").strip()
-            print(f"[PLANNER] control value: {ctrl.value}")
+            # print(f"[PLANNER MONITORING] control value: {ctrl.value}")
             
             instruction = (instr.value or "").strip()
             rd = s.value if s.value is not None else 0.0
@@ -675,9 +675,9 @@ reactor Planner {
                     physical_dri = lf.time.physical_elapsed()/1e6
                     lag = physical_dri - current_dri
                     print("----------------------------------------------------------")
-                    print(f"[PLANNER] Logical time: {current_dri:.2f} ", flush=True)
-                    print(f"[PLANNER] Physical time: {physical_dri:.2f} ", flush=True)
-                    print(f"[PLANNER] LAG: {lag:.2f} ", flush=True)
+                    print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+                    print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+                    print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
                     print("----------------------------------------------------------")
                     return
 
@@ -693,9 +693,9 @@ reactor Planner {
                     physical_dri = lf.time.physical_elapsed()/1e6
                     lag = physical_dri - current_dri
                     print("----------------------------------------------------------")
-                    print(f"[PLANNER] Logical time: {current_dri:.2f} ", flush=True)
-                    print(f"[PLANNER] Physical time: {physical_dri:.2f} ", flush=True)
-                    print(f"[PLANNER] LAG: {lag:.2f} ", flush=True)
+                    print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+                    print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+                    print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
                     print("----------------------------------------------------------")
                     warning.set()
                     return
@@ -703,9 +703,9 @@ reactor Planner {
             physical_dri = lf.time.physical_elapsed()/1e6
             lag = physical_dri - current_dri
             print("----------------------------------------------------------")
-            print(f"[PLANNER] Logical time: {current_dri:.2f} ", flush=True)
-            print(f"[PLANNER] Physical time: {physical_dri:.2f} ", flush=True)
-            print(f"[PLANNER] LAG: {lag:.2f} ", flush=True)
+            print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+            print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+            print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
             print("----------------------------------------------------------")
         =}
   }
@@ -713,7 +713,7 @@ reactor Planner {
   mode warning {
         reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
             kw = (ctrl.value or "NONE").strip()
-            print(f"[PLANNER] control value: {ctrl.value}")
+            # print(f"[PLANNER] control value: {ctrl.value}")
 
             instruction = (instr.value or "").strip()
             rd = s.value if s.value is not None else 0.0
@@ -758,9 +758,9 @@ reactor Planner {
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
                 print("----------------------------------------------------------")
-                print(f"[PLANNER] Logical time: {current_dri:.2f} ", flush=True)
-                print(f"[PLANNER] Physical time: {physical_dri:.2f} ", flush=True)
-                print(f"[PLANNER] LAG: {lag:.2f} ", flush=True)
+                print(f"[PLANNER WARNING ] Logical time: {current_dri:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
                 print("----------------------------------------------------------")
                 return
 
@@ -770,18 +770,18 @@ reactor Planner {
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
                 print("----------------------------------------------------------")
-                print(f"[PLANNER] Logical time: {current_dri:.2f} ", flush=True)
-                print(f"[PLANNER] Physical time: {physical_dri:.2f} ", flush=True)
-                print(f"[PLANNER] LAG: {lag:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
                 print("----------------------------------------------------------")
                 return
             current_dri = lf.time.logical_elapsed()/1e6
             physical_dri = lf.time.physical_elapsed()/1e6
             lag = physical_dri - current_dri
             print("----------------------------------------------------------")
-            print(f"[PLANNER] Logical time: {current_dri:.2f} ", flush=True)
-            print(f"[PLANNER] Physical time: {physical_dri:.2f} ", flush=True)
-            print(f"[PLANNER] LAG: {lag:.2f} ", flush=True)
+            print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
+            print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+            print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
             print("----------------------------------------------------------")
         =}
   }
@@ -789,7 +789,7 @@ reactor Planner {
   mode actuate {
         reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
             kw = (ctrl.value or "NONE").strip()
-            print(f"[PLANNER] control value: {ctrl.value}")
+            # print(f"[PLANNER] control value: {ctrl.value}")
             instruction = (instr.value or "").strip()
             now_ns = lf.time.logical_elapsed()
 
@@ -802,21 +802,31 @@ reactor Planner {
                                             # - Else -> NONE
             
             if rd <= 1:
+                print(f"Act set to BRAKE")
                 act.set("BRAKE")
 
             # If far enough either accel or hold
             elif rd > 150:
                 if v_val < target - 0.5:
+                    print(f"Act set to accel")
                     act.set("ACCEL")
                 else:
+                    print(f"Act set to hold")
                     act.set("HOLD")
 
             # If the velocity is too high near the speed limit then break
             elif rd <= 25:
                 if v_val > target + 1:
+                    print(f"Act set to BRAKE")
                     act.set("BRAKE")
                 else:
+                    print(f"Act set to hold")
                     act.set("HOLD")
+
+            else:
+                #if remaining distance is between 25 to 150 just hold 
+                print(f"Act set to hold")
+                act.set("HOLD")
 
             # if rd <= 1:
             #     target = 11.0
@@ -847,26 +857,27 @@ reactor Planner {
                 # return
 
             if kw != "ACTUATE":
+                # if the llm does not inform to actuiate go to monitor
                 monitoring.set()
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
                 print("----------------------------------------------------------")
-                print(f"[PLANNER] Logical time: {current_dri:.2f} ", flush=True)
-                print(f"[PLANNER] Physical time: {physical_dri:.2f} ", flush=True)
-                print(f"[PLANNER] LAG: {lag:.2f} ", flush=True)
+                print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
+                print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
+                print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
                 print("----------------------------------------------------------")
                 return
 
             # act.set(11)
-            monitoring.set()
+            # monitoring.set()
             current_dri = lf.time.logical_elapsed()/1e6
             physical_dri = lf.time.physical_elapsed()/1e6
             lag = physical_dri - current_dri
             print("----------------------------------------------------------")
-            print(f"[PLANNER] Logical time: {current_dri:.2f} ", flush=True)
-            print(f"[PLANNER] Physical time: {physical_dri:.2f} ", flush=True)
-            print(f"[PLANNER] LAG: {lag:.2f} ", flush=True)
+            print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
+            print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
+            print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
             print("----------------------------------------------------------")
         
         =}
