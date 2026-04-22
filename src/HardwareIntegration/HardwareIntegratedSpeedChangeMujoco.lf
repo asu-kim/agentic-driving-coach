@@ -130,7 +130,7 @@ reactor Simulation {
     input steer_in
     input velocity_in
 
-    m = new MuJoCoCarAuto(model_file={= lf.source_directory() + "/../../mujoco-py/src/models/car.xml" =})
+    m = new MuJoCoCarAuto()
 
     reaction(steer_in, velocity_in) -> m.forward, m.turn {=
         vel = velocity_in.value if velocity_in.is_present else 0.0
@@ -139,9 +139,9 @@ reactor Simulation {
         forward_cmd = vel / 33.6   
         forward_cmd = max(-1.0, min(1.0, forward_cmd))
 
-        if st == 0:
+        if st == 2:
             turn_cmd = -1.0
-        elif st == 2:
+        elif st == 0:
             turn_cmd = 1.0
         else:
             turn_cmd = 0.0
