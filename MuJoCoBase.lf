@@ -1,0 +1,145 @@
+/** @file Base class for reactors using the MuJoCo physics-based simulation framework. */
+target Python {
+  keepalive: true,
+  cmake-args: {
+    Python_EXECUTABLE: "mjpython"
+  }
+}
+
+preamble {=
+  from dataclasses import dataclass
+  from types import SimpleNamespace
+  import numpy as np
+  import mujoco
+  import mujoco.viewer
+
+  # GLFW_PRESS == 1; avoid importing glfw here (no need; keeps key path free of GLFW init).
+  _GLFW_PRESS = 1
+
+  @dataclass
+  class KeyPress:
+      key: int
+      scancode: int
+      act: int
+      mods: int
+
+  class MuJoCoContext:
+      def __init__(self, model, data):
+          self.m = model
+          self.d = data
+          self.viewer = None
+=}
+
+/**
+ * @brief MuJoCo simulation with visualization base class.
+ *
+ * See [README.md](../README.md) for prerequisites and installation instructions.
+ *
+ * Upon startup, this reactor reads the specified `model_file` and opens a window displaying it. Any
+ * time a key is pressed, this reactor schedules a physical action to produce the key information on
+ * the `key` output port.
+ *
+ * This reactor handles some basic manipulations of the visualization:
+ *
+ * - Mouse scroll: Zoom in and out.
+ * - Left mouse press and move: Rotate the view.
+ * - Right mouse press and move: Shift the view up and down. Hold the shift key for in and out.
+ *
+ * Upon receiving a `restart` input, this reactor restarts the simulation.
+ *
+ * This reactor does not advance the simulation. Derived classes must do that.
+ *
+ * On-screen status text: the C target uses `mjr_overlay` in window space (e.g. bottom-left). The
+ * Python `mujoco.viewer.launch_passive` API does not expose the viewer's `MjrContext`, so the same
+ * overlay cannot be drawn from reactor code. Instead, `update_scene` draws `text_to_overlay` as an
+ * `mjGEOM_LABEL` in the passive viewer's `user_scn` (text placed near the current camera lookat). For
+ * true window-space overlays, use `mujoco.mjr_overlay` in a render loop where your code owns the
+ * OpenGL context (see MuJoCo's `basic.cc` / custom GLFW examples).
+ *
+ * This code is based on basic.cc from the [MuJoCo distribution](https://mujoco.com), which is
+ * licensed under the Apache License, Version 2.0 (the "License"),
+ * http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * @author Edward A. Lee
+ */
+reactor MuJoCoBase(
+    model_file = {= lf.source_directory() + "/models/hello.xml" =}) {
+  state context = {= None =}
+  state mujoco_time = 0.0
+  state lf_time = 0
+
+  input restart
+
+  output key
+
+  physical action keypress
+
+  // Advance the MuJoCo simulation to the current logical time.
+  method advance_simulator() {=
+    advance_time_ns = lf.time.logical() - self.lf_time
+    if advance_time_ns <= 0:
+      return
+    advance_time_sec = advance_time_ns * 1.0e-9
+
+    while self.context.d.time - self.mujoco_time < advance_time_sec:
+      mujoco.mj_step(self.context.m, self.context.d)
+    self.mujoco_time = self.context.d.time
+    self.lf_time = lf.time.logical()
+  =}
+
+  method update_scene(text_to_overlay) {=
+    if self.context.viewer is None:
+      return
+      
+    if hasattr(self.context.viewer, "set_texts"):
+      if not text_to_overlay:
+        self.context.viewer.set_texts([])
+      else:
+        # Support string scaling for backwards compatibility, or list of tuples
+        if isinstance(text_to_overlay, str):
+            self.context.viewer.set_texts([
+                (mujoco.mjtFontScale.mjFONTSCALE_300, mujoco.mjtGridPos.mjGRID_TOPLEFT, "INFO:", text_to_overlay)
+            ])
+        else:
+            labels = "\n".join(str(item[0]) for item in text_to_overlay)
+            vals = "\n".join(str(item[1]) for item in text_to_overlay)
+            self.context.viewer.set_texts([
+                (mujoco.mjtFontScale.mjFONTSCALE_300, mujoco.mjtGridPos.mjGRID_TOPLEFT, labels, vals)
+            ])
+
+    self.context.viewer.sync()
+  =}
+
+  reaction(startup) -> keypress {=
+    def on_key(keycode):
+      keypress.schedule(0, KeyPress(keycode, 0, _GLFW_PRESS, 0))
+
+    m = mujoco.MjModel.from_xml_path(self.model_file)
+    d = mujoco.MjData(m)
+    self.context = MuJoCoContext(m, d)
+    self.context.viewer = mujoco.viewer.launch_passive(m, d, key_callback=on_key)
+
+    self.mujoco_time = d.time
+    self.lf_time = lf.time.logical()
+
+    print("Navigation:")
+    print("---- Mouse scroll: Zoom in and out.")
+    print("---- Left mouse press and move: Rotate the view.")
+    print("---- Right mouse press and move: Shift the view up and down. Hold shift for in/out.")
+  =}
+
+  reaction(keypress) -> key {=
+    key.set(keypress.value)
+  =}
+
+  reaction(restart) {=
+    mujoco.mj_resetData(self.context.m, self.context.d)
+    self.mujoco_time = self.context.d.time
+    self.lf_time = lf.time.logical()
+  =}
+
+  reaction(shutdown) {=
+    if self.context is not None and self.context.viewer is not None:
+      self.context.viewer.close()
+  =}
+}

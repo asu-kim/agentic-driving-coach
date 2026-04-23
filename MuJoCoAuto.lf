@@ -1,0 +1,44 @@
+/** @file Base class for reactors using the MuJoCo framework that advances itself. */
+target Python
+
+import MuJoCoBase from "MuJoCoBase.lf"
+
+/**
+ * @brief MuJoCo simulation with visualization.
+ *
+ * See [README.md](../README.md) for prerequisites and installation instructions.
+ *
+ * This reactor extends the base class to advance the simulation automatically using a  
+ * physics timer and output a `tick` event at each step. The `sim_step` parameter,
+ * which defaults to 1 ms, determines the time step for the physics simulation.
+ * In addition, it will periodically update the display with period given by the
+ * `frame_period` parameter, which defaults to 33 ms, using a rendering timer. 
+ * 
+* @author Edward A. Lee
+* @author Chadlia Jerad
+ */
+reactor MuJoCoAuto(frame_period = 33 ms, sim_step = 1 ms) extends MuJoCoBase {
+  preamble {=
+    import mujoco
+  =}
+  output tick
+
+  timer rendering_timer(0, frame_period)
+  timer physics_timer(0, sim_step)
+
+  state overlay_text = {= [] =}
+
+  reaction(rendering_timer) {=
+    self.update_scene(self.overlay_text)
+  =}
+
+reaction(physics_timer) -> tick {=
+    tick.set(True)
+    if self.context.viewer is not None and not self.context.viewer.is_running():
+      lf.request_stop()
+      return
+
+    # Non-blocking stepping: avoid sleep here so keyboard and other reactions stay responsive.
+    mujoco.mj_step(self.context.m, self.context.d)
+  =}
+}

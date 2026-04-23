@@ -26,6 +26,7 @@ reactor MuJoCoCarAuto(
   =}
   input forward
   input turn
+  input rd
 
   output right_force
   output left_force
@@ -34,6 +35,7 @@ reactor MuJoCoCarAuto(
   state turn_index = 0
   state right_address = 0  // Sensor addresses
   state left_address = 0
+  state remaining_dist = 0
 
   reaction(startup) {=
     self.forward_index = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_ACTUATOR, "forward")
@@ -76,8 +78,18 @@ reactor MuJoCoCarAuto(
     self.context.d.ctrl[self.turn_index] = turn.value
   =}
 
+  reaction(rd) {=
+    self.remaining_dist = rd.value
+  =}
+
   reaction(physics_timer) -> right_force, left_force {=
     right_force.set(float(self.context.d.sensordata[self.right_address]))
     left_force.set(float(self.context.d.sensordata[self.left_address]))
+    
+    speed_cmd = self.context.d.ctrl[self.forward_index]
+    self.overlay_text = [
+        ("SPEED CMD:", f"{speed_cmd:.2f}"),
+        ("REMAIN DIST:", f"{self.remaining_dist:.2f}")
+    ]
   =}
 }
