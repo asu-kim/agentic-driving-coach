@@ -91,33 +91,77 @@ reactor MuJoCoBase(
     if self.context.viewer is None:
       return
       
-    if hasattr(self.context.viewer, "set_texts"):
+    if hasattr(self.context.viewer, "set_images"):
       if not text_to_overlay:
-        self.context.viewer.set_texts([])
+        if hasattr(self.context.viewer, "clear_images"):
+          self.context.viewer.clear_images()
       else:
-        # Support string scaling for backwards compatibility, or list of tuples
-        if isinstance(text_to_overlay, str):
-            self.context.viewer.set_texts([
-                (mujoco.mjtFontScale.mjFONTSCALE_300, mujoco.mjtGridPos.mjGRID_TOPLEFT, "INFO:", text_to_overlay)
-            ])
-        else:
-            labels = "\n".join(str(item[0]) for item in text_to_overlay)
-            vals = "\n".join(str(item[1]) for item in text_to_overlay)
-            self.context.viewer.set_texts([
-                (mujoco.mjtFontScale.mjFONTSCALE_300, mujoco.mjtGridPos.mjGRID_TOPLEFT, labels, vals)
-            ])
+        import cv2
+        import numpy as np
+        
+        texts = text_to_overlay if not isinstance(text_to_overlay, str) else [("INFO:", str(text_to_overlay))]
+        
+        # Setup image parameters for a HUGE arcade HUD
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 2.0
+        thickness = 4
+        padding = 20
+        line_spacing = 15
+        
+        # Calculate required image size dynamically
+        max_w = 0
+        total_h = padding
+        lines_info = []
+        
+        for label, val in texts:
+            text_str = f"{label} {val}".strip()
+            (tw, th), base = cv2.getTextSize(text_str, font, font_scale, thickness)
+            max_w = max(max_w, tw)
+            total_h += th + base + line_spacing
+            lines_info.append((text_str, th, base))
+        
+        img_w = max_w + (padding * 2)
+        img_h = total_h + padding
+        
+        # Create dark background
+        img = np.zeros((img_h, img_w, 3), dtype=np.uint8)
+        img[:] = [30, 30, 30] 
+        
+        # Draw neon green text
+        y = padding
+        for text_str, th, base in lines_info:
+            y += th
+            cv2.putText(img, text_str, (padding, y), font, font_scale, (0, 255, 0), thickness)
+            y += base + line_spacing
+        
+        vw = self.context.viewer.viewport.width
+        vh = self.context.viewer.viewport.height
+        if vw > 0 and vh > 0:
+            # Place at top left corner
+            rect = mujoco.MjrRect(20, vh - img_h - 20, img_w, img_h)
+            self.context.viewer.set_images([(rect, img)])
 
     self.context.viewer.sync()
   =}
 
   reaction(startup) -> keypress {=
+    import glfw
+    # Request maximized window before creating the viewer
+    glfw.init()
+    glfw.window_hint(glfw.MAXIMIZED, glfw.TRUE)
+
     def on_key(keycode):
       keypress.schedule(0, KeyPress(keycode, 0, _GLFW_PRESS, 0))
 
     m = mujoco.MjModel.from_xml_path(self.model_file)
     d = mujoco.MjData(m)
     self.context = MuJoCoContext(m, d)
-    self.context.viewer = mujoco.viewer.launch_passive(m, d, key_callback=on_key)
+    
+    # Hide side UIs (options panels)
+    self.context.viewer = mujoco.viewer.launch_passive(
+        m, d, key_callback=on_key,
+        show_left_ui=False, show_right_ui=False
+    )
 
     self.mujoco_time = d.time
     self.lf_time = lf.time.logical()
