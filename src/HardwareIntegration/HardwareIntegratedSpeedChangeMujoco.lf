@@ -129,27 +129,34 @@ reactor Driver{
 reactor Simulation {
     input steer_in
     input velocity_in
-    input rd
+    input rem_dist
 
     m = new MuJoCoCarAuto()
 
-    reaction(steer_in, velocity_in, rd) -> m.forward, m.turn, m.rd {=
+    reaction(steer_in, velocity_in, rem_dist) -> m.forward, m.turn, m.rd {=
         vel = velocity_in.value if velocity_in.is_present else 0.0
         st  = steer_in.value if steer_in.is_present else 1
+        print(f"The value of rd into simulation : {rem_dist.value}")
+        rem_dis = rem_dist.value if rem_dist.is_present else 0.0
+
+        # if rem_dist.is_present:
+        #     self.rem_dis = rem_dist.value
+        #     print(f"The value of rd into simulation : {self.rem_dis}")
+        
 
         forward_cmd = vel    
         # forward_cmd = max(-1.0, min(1.0, forward_cmd))
 
         if st == 2:
-            turn_cmd = -1.0
+            turn_cmd = -0.1
         elif st == 0:
-            turn_cmd = 1.0
+            turn_cmd = 0.1
         else:
             turn_cmd = 0.0
 
         m.forward.set(forward_cmd)
         m.turn.set(turn_cmd)
-        m.rd.set(rd)
+        m.rd.set(rem_dis)
     =}
 }
 
@@ -214,7 +221,7 @@ reactor Car{
         else:
             amsg = accel_in.value
             bmsg = brake_in.value
-        MAX_BRAKE = - 20.0
+        MAX_BRAKE = - 10.0
         MAX_ACCEL = 4.0
         A_DRAG_COEF = - 0.0002
         A_FRIC_COEFF = - 0.022
@@ -869,6 +876,7 @@ reaction(startup) {=
             rd = s.value if s.value is not None else 0.0
             v_val = v.value if v.value is not None else 0.0
             now_ns = lf.time.logical_elapsed()
+            print(f"[RD PLANNER]: {rd:.2f}")
 
             if kw == "ACTUATE":
                 if instruction:
@@ -924,6 +932,10 @@ reaction(startup) {=
             kw = (ctrl.value or "NONE").strip()
             instruction = (instr.value or "").strip()
             now_ns = lf.time.logical_elapsed()
+            rd = s.value if s.value is not None else 0.0
+            print(f"[RD PLANNER]: {rd:.2f}")
+
+            
 
             if kw == "ACTUATE":
                 if instruction:
@@ -971,6 +983,8 @@ reaction(startup) {=
             now_ns = lf.time.logical_elapsed()
 
             rd = s.value if s.value is not None else 0.0
+            print(f"[RD PLANNER]: {rd:.2f}")
+
             v_val = v.value if v.value is not None else 0.0
             target = 11.0
 
@@ -1096,7 +1110,7 @@ federated reactor at 10.218.100.78 {
     c.steer -> sim.steer_in
 
     en.displacement -> adc.s
-    en.displacement -> sim.rd
+    en.displacement -> sim.rem_dist
 
     adc.act -> c.actuate_in after 200 ms
 }
