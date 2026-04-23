@@ -1,0 +1,83 @@
+/** @file Reactor for the basic car demonstrator in MuJoCo using the auto-advance version. */
+target Python {
+  keepalive: true,
+  files: ["../models/car.xml"]
+}
+
+import MuJoCoAuto from "MuJoCoAuto.lf"
+
+/**
+ * @brief Model of a two-wheeled steerable vehicle.
+ *
+ * See [README.md](../README.md) for prerequisites and installation instructions.
+ *
+ * This reactor wraps the basic car demonstration model distributed with MuJoCo. It provides inputs
+ * to control the two actuators defined in the [XML model file](../models/car.xml) and outputs that
+ * report the sensor data from said model. The version uses the auto-advancing version of the base
+ * class.
+ *
+ * @author Edward A. Lee
+ */
+reactor MuJoCoCarAuto(
+    model_file = {= lf.source_directory() + "/models/car.xml" =})
+    extends MuJoCoAuto {
+  preamble {=
+    import mujoco
+  =}
+  input forward
+  input turn
+
+  output right_force
+  output left_force
+
+  state forward_index = 0  // Actuator indexes.
+  state turn_index = 0
+  state right_address = 0  // Sensor addresses
+  state left_address = 0
+
+  reaction(startup) {=
+    self.forward_index = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_ACTUATOR, "forward")
+    self.turn_index = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_ACTUATOR, "turn")
+    right_index = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_SENSOR, "right")
+    left_index = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_SENSOR, "left")
+    if self.forward_index < 0 or self.turn_index < 0 or right_index < 0 or left_index < 0:
+      print("Mismatched model file. Missing sensors or actuators.")
+      lf.request_stop()
+      return
+    self.right_address = int(self.context.m.sensor_adr[right_index])
+    right_dim = int(self.context.m.sensor_dim[right_index])
+    self.left_address = int(self.context.m.sensor_adr[left_index])
+    left_dim = int(self.context.m.sensor_dim[left_index])
+    if right_dim != 1 or left_dim != 1:
+      print("Mismatched model file. Expected sensors of dimension 1.")
+      lf.request_stop()
+      
+    if self.context.viewer is not None:
+      body_id = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_BODY, "car")
+      if body_id >= 0:
+        with self.context.viewer.lock():
+          self.context.viewer.cam.trackbodyid = body_id
+          self.context.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
+          self.context.viewer.cam.distance = 1     # Zoom distance (increase if desired)
+          self.context.viewer.cam.azimuth = 0       # Viewing angle from behind (adjustable in 90-degree increments)
+          self.context.viewer.cam.elevation = -10    # Camera elevation angle (looking slightly downwards)
+  =}
+
+  reaction(restart) {=
+    self.context.d.ctrl[self.forward_index] = 0.0
+    self.context.d.ctrl[self.turn_index] = 0.0
+  =}
+
+  reaction(forward) {=
+    self.context.d.ctrl[self.forward_index] = forward.value
+  =}
+
+  reaction(turn) {=
+    self.context.d.ctrl[self.turn_index] = turn.value
+  =}
+
+  reaction(physics_timer) -> right_force, left_force {=
+    right_force.set(float(self.context.d.sensordata[self.right_address]))
+    left_force.set(float(self.context.d.sensordata[self.left_address]))
+  =}
+}
