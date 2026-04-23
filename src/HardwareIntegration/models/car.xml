@@ -8,16 +8,6 @@
   <asset>
     <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
     <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2"/>
-    <mesh name="chasis" scale=".01 .006 .0015"
-      vertex=" 9   2   0
-              -10  10  10
-               9  -2   0
-               10  3  -10
-               10 -3  -10
-              -8   10 -10
-              -10 -10  10
-              -8  -10 -10
-              -5   0   20"/>
   </asset>
 
   <default>
@@ -27,6 +17,10 @@
     </default>
     <default class="decor">
       <site type="box" rgba=".5 1 .5 1"/>
+    </default>
+    <!-- Steer knuckle joint: larger force range so position actuator can hold angle -->
+    <default class="steer">
+      <joint type="hinge" axis="0 0 1" range="-0.6 0.6" damping="0.1" actuatorfrcrange="-5 5"/>
     </default>
   </default>
 
@@ -168,6 +162,34 @@
     <geom name="dash_27.5_R" type="box" pos="27.5  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
     <geom name="dash_28.0_L" type="box" pos="28.0 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
     <geom name="dash_28.0_R" type="box" pos="28.0  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_28.5_L" type="box" pos="28.5 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_28.5_R" type="box" pos="28.5  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_29.0_L" type="box" pos="29.0 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_29.0_R" type="box" pos="29.0  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_29.5_L" type="box" pos="29.5 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_29.5_R" type="box" pos="29.5  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_30.0_L" type="box" pos="30.0 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_30.0_R" type="box" pos="30.0  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_30.5_L" type="box" pos="30.5 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_30.5_R" type="box" pos="30.5  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_31.0_L" type="box" pos="31.0 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_31.0_R" type="box" pos="31.0  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_31.5_L" type="box" pos="31.5 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_31.5_R" type="box" pos="31.5  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_32.0_L" type="box" pos="32.0 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_32.0_R" type="box" pos="32.0  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_32.5_L" type="box" pos="32.5 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_32.5_R" type="box" pos="32.5  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_33.0_L" type="box" pos="33.0 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_33.0_R" type="box" pos="33.0  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_33.5_L" type="box" pos="33.5 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_33.5_R" type="box" pos="33.5  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_34.0_L" type="box" pos="34.0 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_34.0_R" type="box" pos="34.0  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_34.5_L" type="box" pos="34.5 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_34.5_R" type="box" pos="34.5  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_35.0_L" type="box" pos="35.0 -0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+    <geom name="dash_35.0_R" type="box" pos="35.0  0.125 0.002" size="0.125 0.01 0.001" rgba="1 1 1 1" contype="0" conaffinity="0"/>
     
     <!-- Yellow edge lines (matched to road width) -->
     <geom name="edge_line_L" type="box" pos="15 -0.37 0.002" size="20 0.01 0.001" rgba="1 0.8 0 1" contype="0" conaffinity="0"/>
@@ -206,8 +228,76 @@
     <body name="car" pos="0 0 .03">
       <freejoint/>
       <light name="top light" pos="0 0 2" mode="trackcom" diffuse=".4 .4 .4"/>
-      <geom name="chasis" type="mesh" mesh="chasis"/>
-      <geom name="front wheel" pos=".08 0 -.015" type="sphere" size=".015" condim="1" priority="1"/>
+      <!-- Box chassis: main body slab (taller floor) -->
+      <geom name="chassis_body" type="box" pos="0.005 0 0.012" size="0.077 0.040 0.020" rgba=".45 .45 .5 1"/>
+      <!-- Tall cabin enclosure -->
+      <geom name="chassis_cabin" type="box" pos="0.00 0 0.068" size="0.045 0.033 0.034" rgba=".38 .38 .43 1"/>
+      <!-- Front axle strut (non-collideable visual) -->
+      <geom name="axle_front" type="box" pos="0.08 0 0" size="0.010 0.058 0.007" rgba=".3 .3 .35 1" contype="0" conaffinity="0"/>
+      <!-- Rear axle strut (non-collideable visual) -->
+      <geom name="axle_rear" type="box" pos="-0.07 0 0" size="0.010 0.058 0.007" rgba=".3 .3 .35 1" contype="0" conaffinity="0"/>
+      <!-- Steering column (fixed to chassis, does not rotate) -->
+      <geom name="steering_column" type="cylinder" pos="0.046 0 0.040"
+            size="0.003 0.016" zaxis="-0.70 0 0.70"
+            rgba=".18 .18 .18 1" contype="0" conaffinity="0"/>
+      <!-- Steering wheel body: rotates around column axis when turning.
+           zaxis="-0.707 0 0.707" → body local-Z aligns with the column direction.
+           All child geoms are in the local XY-plane (a circle of radius 0.018). -->
+      <body name="steer_wheel_body" pos="0.028 0 0.058" zaxis="-0.707 0 0.707">
+        <inertial pos="0 0 0" mass="0.005" diaginertia="1e-6 1e-6 1e-6"/>
+        <!-- Joint: hinge around local Z = steering-column axis; high damping to resist drift -->
+        <joint name="steer_visual" type="hinge" axis="0 0 1" damping="500" actuatorfrcrange="-0 0"/>
+        <!-- Hub -->
+        <geom name="sw_hub" type="sphere" pos="0 0 0"
+              size="0.006" rgba=".25 .25 .25 1" contype="0" conaffinity="0"/>
+        <!-- Outer rim: 12 capsule arc segments (30° each, R=0.018m)
+             Midpoint of segment k is at angle (15+30k)°.
+             pos = R*(cos θ, sin θ, 0),  zaxis = (-sin θ, cos θ, 0)
+             Arc chord half-length = R*sin(15°) ≈ 0.0047 -->
+        <geom name="sw_r0"  type="capsule" pos=" 0.01739  0.00466 0" size="0.0018 0.0047" zaxis="-0.259  0.966 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r1"  type="capsule" pos=" 0.01273  0.01273 0" size="0.0018 0.0047" zaxis="-0.707  0.707 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r2"  type="capsule" pos=" 0.00466  0.01739 0" size="0.0018 0.0047" zaxis="-0.966  0.259 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r3"  type="capsule" pos="-0.00466  0.01739 0" size="0.0018 0.0047" zaxis="-0.966 -0.259 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r4"  type="capsule" pos="-0.01273  0.01273 0" size="0.0018 0.0047" zaxis="-0.707 -0.707 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r5"  type="capsule" pos="-0.01739  0.00466 0" size="0.0018 0.0047" zaxis="-0.259 -0.966 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r6"  type="capsule" pos="-0.01739 -0.00466 0" size="0.0018 0.0047" zaxis=" 0.259 -0.966 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r7"  type="capsule" pos="-0.01273 -0.01273 0" size="0.0018 0.0047" zaxis=" 0.707 -0.707 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r8"  type="capsule" pos="-0.00466 -0.01739 0" size="0.0018 0.0047" zaxis=" 0.966 -0.259 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r9"  type="capsule" pos=" 0.00466 -0.01739 0" size="0.0018 0.0047" zaxis=" 0.966  0.259 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r10" type="capsule" pos=" 0.01273 -0.01273 0" size="0.0018 0.0047" zaxis=" 0.707  0.707 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <geom name="sw_r11" type="capsule" pos=" 0.01739 -0.00466 0" size="0.0018 0.0047" zaxis=" 0.259  0.966 0" rgba=".15 .15 .15 1" contype="0" conaffinity="0"/>
+        <!-- 3 spokes: screen-vertical bottom (local -X = 180°), upper-right (60°), upper-left (300°)
+             In camera view: local +X → screen up, local +Y → screen left
+             Symmetric 120° spacing with bottom spoke exactly vertical on screen -->
+        <geom name="sw_sp0" type="capsule" pos="-0.00900  0.00000 0" size="0.0020 0.0090" zaxis="-1.000  0.000 0" rgba=".25 .25 .25 1" contype="0" conaffinity="0"/>
+        <geom name="sw_sp1" type="capsule" pos=" 0.00450 -0.00779 0" size="0.0020 0.0090" zaxis=" 0.500 -0.866 0" rgba=".25 .25 .25 1" contype="0" conaffinity="0"/>
+        <geom name="sw_sp2" type="capsule" pos=" 0.00450  0.00779 0" size="0.0020 0.0090" zaxis=" 0.500  0.866 0" rgba=".25 .25 .25 1" contype="0" conaffinity="0"/>
+      </body>
+      <!-- Driver first-person camera: looking forward ~20° downward to see steering wheel -->
+      <!-- xyaxes: cam_x=(0,-1,0)=car_right, cam_y=(0.342,0,0.940)=up-tilted-fwd → looks in +X and -Z -->
+      <camera name="driver_cam" pos="0.005 0 0.092" xyaxes="0 -1 0 0.342 0 0.940" fovy="75"/>
+      <!-- Front-left: outer body = steer (yaw), inner body = roll (spin) -->
+      <body name="front_left_steer" pos=".08 .06 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-6 1e-6 1e-6"/>
+        <joint name="steer_left" class="steer"/>
+        <body name="front_left_wheel" zaxis="0 1 0">
+          <joint name="roll_front_left" type="hinge" axis="0 0 1" damping="0.002"/>
+          <geom class="wheel" priority="1"/>
+          <site class="decor" size=".006 .025 .012"/>
+          <site class="decor" size=".025 .006 .012"/>
+        </body>
+      </body>
+      <!-- Front-right: outer body = steer (yaw), inner body = roll (spin) -->
+      <body name="front_right_steer" pos=".08 -.06 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="1e-6 1e-6 1e-6"/>
+        <joint name="steer_right" class="steer"/>
+        <body name="front_right_wheel" zaxis="0 1 0">
+          <joint name="roll_front_right" type="hinge" axis="0 0 1" damping="0.002"/>
+          <geom class="wheel" priority="1"/>
+          <site class="decor" size=".006 .025 .012"/>
+          <site class="decor" size=".025 .006 .012"/>
+        </body>
+      </body>
       <light name="front light" pos=".1 0 .02" dir="2 0 -1" diffuse="1 1 1"/>
       <body name="left wheel" pos="-.07 .06 0" zaxis="0 1 0">
         <joint name="left"/>
@@ -225,19 +315,22 @@
   </worldbody>
 
   <tendon>
+    <!-- Rear wheel drive: both rear wheels spin together -->
     <fixed name="forward">
       <joint joint="left" coef=".5"/>
       <joint joint="right" coef=".5"/>
     </fixed>
+    <!-- Front steering: turn knuckle controls both front wheels -->
     <fixed name="turn">
-      <joint joint="left" coef="-.5"/>
-      <joint joint="right" coef=".5"/>
+      <joint joint="steer_left" coef=".5"/>
+      <joint joint="steer_right" coef=".5"/>
     </fixed>
   </tendon>
 
   <actuator>
     <motor name="forward" tendon="forward" ctrlrange="-1 1"/>
-    <motor name="turn" tendon="turn" ctrlrange="-1 1"/>
+    <!-- position actuator: ctrl sets target angle (rad) for front wheel steering -->
+    <position name="turn" tendon="turn" kp="10" ctrlrange="-0.5 0.5"/>
   </actuator>
 
   <sensor>
