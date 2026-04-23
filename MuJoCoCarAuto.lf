@@ -18,8 +18,7 @@ import MuJoCoAuto from "MuJoCoAuto.lf"
  *
  * @author Edward A. Lee
  */
-reactor MuJoCoCarAuto(
-    model_file = {= lf.source_directory() + "/models/car.xml" =})
+reactor MuJoCoCarAuto(model_file = {= lf.source_directory() + "/models/car.xml" =})
     extends MuJoCoAuto {
   preamble {=
     import mujoco
@@ -27,15 +26,20 @@ reactor MuJoCoCarAuto(
   input forward
   input turn
   input rd
+  input cam_toggle
 
   output right_force
   output left_force
 
-  state forward_index = 0  // Actuator indexes.
+  state forward_index = 0      # Actuator indexes.
   state turn_index = 0
-  state right_address = 0  // Sensor addresses
+  state right_address = 0      # Sensor addresses
   state left_address = 0
   state remaining_dist = 0
+  state driver_cam_id = -1     # ID of the driver_cam camera
+  state is_driver_view = True  # Current camera mode
+  state steer_vis_qpos = -1    # qpos address of steer_visual joint
+  state steer_vis_dof = -1     # qvel (dof) address of steer_visual joint
 
   reaction(startup) {=
     self.forward_index = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_ACTUATOR, "forward")
@@ -53,16 +57,36 @@ reactor MuJoCoCarAuto(
     if right_dim != 1 or left_dim != 1:
       print("Mismatched model file. Expected sensors of dimension 1.")
       lf.request_stop()
-      
+    # Resolve steer_visual joint addresses for wheel animation
+    sv_idx = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_JOINT, "steer_visual")
+    if sv_idx >= 0:
+      self.steer_vis_qpos = int(self.context.m.jnt_qposadr[sv_idx])
+      self.steer_vis_dof  = int(self.context.m.jnt_dofadr[sv_idx])
+
     if self.context.viewer is not None:
-      body_id = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_BODY, "car")
-      if body_id >= 0:
+      self.driver_cam_id = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_CAMERA, "driver_cam")
+      if self.driver_cam_id >= 0:
         with self.context.viewer.lock():
-          self.context.viewer.cam.trackbodyid = body_id
-          self.context.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
-          self.context.viewer.cam.distance = 1     # Zoom distance (increase if desired)
-          self.context.viewer.cam.azimuth = 0       # Viewing angle from behind (adjustable in 90-degree increments)
-          self.context.viewer.cam.elevation = -10    # Camera elevation angle (looking slightly downwards)
+          self.context.viewer.cam.fixedcamid = self.driver_cam_id
+          self.context.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_FIXED
+  =}
+
+  reaction(cam_toggle) {=
+    if self.context.viewer is None:
+      return
+    self.is_driver_view = not self.is_driver_view
+    with self.context.viewer.lock():
+      if self.is_driver_view and self.driver_cam_id >= 0:
+        self.context.viewer.cam.fixedcamid = self.driver_cam_id
+        self.context.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_FIXED
+      else:
+        # Switch to free tracking camera (follow car body)
+        body_id = mujoco.mj_name2id(self.context.m, mujoco.mjtObj.mjOBJ_BODY, "car")
+        self.context.viewer.cam.trackbodyid = body_id
+        self.context.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
+        self.context.viewer.cam.distance = 0.8
+        self.context.viewer.cam.azimuth = 0
+        self.context.viewer.cam.elevation = -15
   =}
 
   reaction(restart) {=
@@ -85,11 +109,16 @@ reactor MuJoCoCarAuto(
   reaction(physics_timer) -> right_force, left_force {=
     right_force.set(float(self.context.d.sensordata[self.right_address]))
     left_force.set(float(self.context.d.sensordata[self.left_address]))
-    
+
     speed_cmd = self.context.d.ctrl[self.forward_index]
     self.overlay_text = [
-        ("SPEED CMD:", f"{speed_cmd:.2f}"),
-        ("REMAIN DIST:", f"{self.remaining_dist:.2f}")
+        ("SPEED:", f"{speed_cmd:.2f} km/h"),
+        ("REMAIN DIST:", f"{self.remaining_dist:.2f} m")
     ]
+    # Animate steering wheel: map turn command → wheel rotation (×5 ratio)
+    if self.steer_vis_qpos >= 0:
+      target_angle = self.context.d.ctrl[self.turn_index] * 5.0
+      self.context.d.qpos[self.steer_vis_qpos] = target_angle
+      self.context.d.qvel[self.steer_vis_dof]  = 0.0
   =}
 }
