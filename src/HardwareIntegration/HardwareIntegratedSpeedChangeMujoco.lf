@@ -148,9 +148,9 @@ reactor Simulation {
         # forward_cmd = max(-1.0, min(1.0, forward_cmd))
 
         if st == 2:
-            turn_cmd = -0.1
+            turn_cmd = -0.05
         elif st == 0:
-            turn_cmd = 0.1
+            turn_cmd = 0.05
         else:
             turn_cmd = 0.0
 
@@ -365,37 +365,37 @@ reactor LLMInference {
                             "content": (
                                         """Role: Real-time driving coach
 
-                                            State:
+                                            Input:
                                             distance = {s} meters
                                             velocity = {v} meter per second
                                             target_speed = 11 meter per second
 
-                                            TOKEN in {NONE, WARNING, ACTUATE}
-
-                                            Inputs:
-                                            s = distance (meters)
-                                            v = velocity (meter per second)
-                                            Target speed = 11 meter per second
-
-                                            Policy:
-                                            - If s ≤ 50 and v > 12 -> ACTUATE
-                                            - Else if s ≤ 100 and v > 20 -> WARNING
-                                            - Else if s > 150 and v > 30 -> WARNING
-                                            - Else -> NONE
-
-                                            Special:
-                                            IF 11 ≤ velocity ≤ 13 -> maintain steady speed
-
                                             Output Format:
                                             TOKEN|Message
+                                            
+
+                                            TOKEN in {NONE, WARNING, ACTUATE}
+                                            
+
+
+                                            Policy for token:
+                                            if the distance is 0.0 and IF 11 <= velocity <= 13 -> maintain steady speed 
+
+                                            - Else if  s <= 50 and v > 12 -> ACTUATE
+                                            - Else if s <= 100 and v > 20 -> WARNING
+                                            - Else if s > 150 and v > 30 -> WARNING
+                                            - Else -> NONE
+                                            
+                                            
 
                                             Action:
-                                            - Generate correct token and message
-                                            - Max 12 words
+                                            - Generate correct token and message by using the current speed and distance only 
+
                                             - About speed control either increase or decrease based on the condition
                                             - Use "meter per second" 
                                             - Include s or v when useful 
-
+                                           
+                                        
                                          
                                             Examples:
                                             ACTUATE|Slow down to 11 meter per second
