@@ -127,6 +127,9 @@ reactor Driver{
 
 
 reactor Simulation {
+    preamble {=
+        from mujoco.glfw import glfw
+    =}
     input steer_in
     input velocity_in
     input rem_dist
@@ -157,6 +160,11 @@ reactor Simulation {
         m.forward.set(forward_cmd)
         m.turn.set(turn_cmd)
         m.rd.set(rem_dis)
+    =}
+    reaction(m.key) -> m.cam_toggle {=
+        if m.key.value.act == glfw.PRESS:
+            if m.key.value.key == glfw.KEY_F:
+                m.cam_toggle.set(True)
     =}
 }
 

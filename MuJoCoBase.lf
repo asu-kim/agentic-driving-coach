@@ -2,7 +2,7 @@
 target Python {
   keepalive: true,
   cmake-args: {
-    Python_EXECUTABLE: "mjpython"
+    Python_EXECUTABLE: "python"
   }
 }
 
@@ -113,7 +113,7 @@ reactor MuJoCoBase(
         total_h = padding
         lines_info = []
         
-        for label, val in texts:
+        for label, val, *_ in texts:
             text_str = f"{label} {val}".strip()
             (tw, th), base = cv2.getTextSize(text_str, font, font_scale, thickness)
             max_w = max(max_w, tw)
