@@ -110,7 +110,7 @@ reactor MuJoCoCarAuto(model_file = {= lf.source_directory() + "/models/car.xml" 
     right_force.set(float(self.context.d.sensordata[self.right_address]))
     left_force.set(float(self.context.d.sensordata[self.left_address]))
 
-    speed_cmd = self.context.d.ctrl[self.forward_index]
+    speed_cmd = (self.context.d.ctrl[self.forward_index]) * 3.6
     self.overlay_text = [
         ("SPEED:", f"{speed_cmd:.2f} km/h"),
         ("REMAIN DIST:", f"{self.remaining_dist:.2f} m")
