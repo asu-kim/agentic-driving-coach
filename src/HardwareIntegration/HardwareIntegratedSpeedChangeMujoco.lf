@@ -133,7 +133,7 @@ reactor Simulation {
 
     m = new MuJoCoCarAuto()
 
-    reaction(steer_in, velocity_in, rd) -> m.forward, m.turn {=
+    reaction(steer_in, velocity_in, rd) -> m.forward, m.turn, m.rd {=
         vel = velocity_in.value if velocity_in.is_present else 0.0
         st  = steer_in.value if steer_in.is_present else 1
 
