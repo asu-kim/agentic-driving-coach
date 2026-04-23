@@ -71,36 +71,36 @@
     <geom name="edge_line_L" type="box" pos="15 -0.37 0.002" size="20 0.01 0.001" rgba="1 0.8 0 1" contype="0" conaffinity="0"/>
     <geom name="edge_line_R" type="box" pos="15  0.37 0.002" size="20 0.01 0.001" rgba="1 0.8 0 1" contype="0" conaffinity="0"/>
     
-    <!-- Goal line and visual arch at 18m (scaled proportionally to the narrowed width) -->
-    <site name="goal_site" pos="18 0 0.005" size="0.2 0.375 0.005" type="box" rgba="0 1 0 0.8"/>
-    <geom name="goal_pole_L" type="cylinder" pos="18 -0.375 0.4" size="0.02 0.4" rgba="1 0.2 0.2 1"/>
-    <geom name="goal_pole_R" type="cylinder" pos="18  0.375 0.4" size="0.02 0.4" rgba="1 0.2 0.2 1"/>
-    <geom name="goal_top" type="box" pos="18 0 0.82" size="0.02 0.375 0.02" rgba="1 0.2 0.2 1"/>
+    <!-- Goal line and visual arch at 20.69m (scaled proportionally to the narrowed width) -->
+    <site name="goal_site" pos="20.69 0 0.005" size="0.2 0.375 0.005" type="box" rgba="0 1 0 0.8"/>
+    <geom name="goal_pole_L" type="cylinder" pos="20.69 -0.375 0.4" size="0.02 0.4" rgba="1 0.2 0.2 1"/>
+    <geom name="goal_pole_R" type="cylinder" pos="20.69  0.375 0.4" size="0.02 0.4" rgba="1 0.2 0.2 1"/>
+    <geom name="goal_top" type="box" pos="20.69 0 0.82" size="0.02 0.375 0.02" rgba="1 0.2 0.2 1"/>
     
     <!-- Floating "GOAL" text (bright yellow neon sign effect, hovering above the goal arch) -->
     <!-- "G" (Y center: 0.3) -->
-    <geom name="G_top" type="box" pos="18 0.3 1.025" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="G_bot" type="box" pos="18 0.3 0.875" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="G_left" type="box" pos="18 0.35 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="G_right_bot" type="box" pos="18 0.25 0.9125" size="0.005 0.01 0.0375" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="G_mid" type="box" pos="18 0.275 0.95" size="0.005 0.025 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="G_nub" type="box" pos="18 0.25 1.0125" size="0.005 0.01 0.0125" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="G_top" type="box" pos="20.69 0.3 1.025" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="G_bot" type="box" pos="20.69 0.3 0.875" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="G_left" type="box" pos="20.69 0.35 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="G_right_bot" type="box" pos="20.69 0.25 0.9125" size="0.005 0.01 0.0375" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="G_mid" type="box" pos="20.69 0.275 0.95" size="0.005 0.025 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="G_nub" type="box" pos="20.69 0.25 1.0125" size="0.005 0.01 0.0125" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
 
     <!-- "O" (Y center: 0.1) -->
-    <geom name="O_top" type="box" pos="18 0.1 1.025" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="O_bot" type="box" pos="18 0.1 0.875" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="O_left" type="box" pos="18 0.15 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="O_right" type="box" pos="18 0.05 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="O_top" type="box" pos="20.69 0.1 1.025" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="O_bot" type="box" pos="20.69 0.1 0.875" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="O_left" type="box" pos="20.69 0.15 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="O_right" type="box" pos="20.69 0.05 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
 
     <!-- "A" (Y center: -0.1) -->
-    <geom name="A_top" type="box" pos="18 -0.1 1.025" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="A_mid" type="box" pos="18 -0.1 0.95" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="A_left" type="box" pos="18 -0.05 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="A_right" type="box" pos="18 -0.15 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="A_top" type="box" pos="20.69 -0.1 1.025" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="A_mid" type="box" pos="20.69 -0.1 0.95" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="A_left" type="box" pos="20.69 -0.05 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="A_right" type="box" pos="20.69 -0.15 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
 
     <!-- "L" (Y center: -0.3) -->
-    <geom name="L_left" type="box" pos="18 -0.25 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
-    <geom name="L_bot" type="box" pos="18 -0.3 0.875" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="L_left" type="box" pos="20.69 -0.25 0.95" size="0.005 0.01 0.075" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
+    <geom name="L_bot" type="box" pos="20.69 -0.3 0.875" size="0.005 0.05 0.01" rgba="1 0.9 0 1" contype="0" conaffinity="0"/>
     <body name="car" pos="0 0 .03">
       <freejoint/>
       <light name="top light" pos="0 0 2" mode="trackcom" diffuse=".4 .4 .4"/>
