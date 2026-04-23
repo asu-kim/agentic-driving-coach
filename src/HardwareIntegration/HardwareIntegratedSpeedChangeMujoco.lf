@@ -129,10 +129,11 @@ reactor Driver{
 reactor Simulation {
     input steer_in
     input velocity_in
+    input rd
 
     m = new MuJoCoCarAuto()
 
-    reaction(steer_in, velocity_in) -> m.forward, m.turn {=
+    reaction(steer_in, velocity_in, rd) -> m.forward, m.turn {=
         vel = velocity_in.value if velocity_in.is_present else 0.0
         st  = steer_in.value if steer_in.is_present else 1
 
@@ -148,6 +149,7 @@ reactor Simulation {
 
         m.forward.set(forward_cmd)
         m.turn.set(turn_cmd)
+        m.rd.set(rd)
     =}
 }
 
@@ -1093,6 +1095,7 @@ federated reactor at 10.218.100.78 {
     c.steer -> sim.steer_in
 
     en.displacement -> adc.s
+    en.displacement -> sim.rd
 
     adc.act -> c.actuate_in after 200 ms
 }
