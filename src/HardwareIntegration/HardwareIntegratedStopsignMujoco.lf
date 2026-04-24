@@ -1,0 +1,874 @@
+target Python {keepalive: true, 
+    // logging: DEBUG,
+  DNET: False
+    }
+
+import SensorInputs from "SensorInputs.lf"
+// import MuJoCoCar from "/home/raspdeeksha/agentic-driving-coach/mujoco-py/src/lib/MuJoCoCar.lf"
+
+import MuJoCoCarAuto from "../../mujoco-py/src/lib/MuJoCoCarAuto.lf"
+
+preamble{=
+    import time
+    import subprocess
+    import threading
+=}
+
+reactor Driver{
+    // input start_signal
+    // state started = False
+    state steer_val = 1
+    state accel_val = 0.0
+    state brake_val = 0.0
+    state head_val = 1
+    state eye_val = 1
+    state sensor_ready = False
+
+    output steer
+    output accelerator
+    output brake
+    output head
+    output eye
+    // output ready
+   
+    timer sensorclock(4 sec, 100 msec)
+
+    sen = new SensorInputs()
+    
+
+    // reaction(start_signal) {=
+    //     self.started = True
+    // =}
+
+    
+    reaction(sen.eye_msg, sen.head_msg, sen.accel_msg, sen.brake_msg, sen.steer_msg) {=
+        # if not self.sensor_ready:
+        #     if sen.accel_msg.is_present or sen.brake_msg.is_present or sen.steer_msg.is_present:
+        #         self.sensor_ready = True
+        #         print("[SENSOR READY]", flush=True)
+        #     else:
+        #         return
+              
+        # if not self.started:
+        #     return
+
+        if sen.head_msg.is_present:
+            self.head_val = sen.head_msg.value
+        if sen.eye_msg.is_present:
+            self.eye_val = sen.eye_msg.value
+
+        if sen.steer_msg.is_present:
+            self.steer_val = sen.steer_msg.value
+
+        if sen.accel_msg.is_present:
+            self.accel_val = sen.accel_msg.value
+
+        if sen.brake_msg.is_present:
+            self.brake_val = sen.brake_msg.value
+        
+        print(f"[DRIVER STATE] accel={self.accel_val} brake={self.brake_val}", flush=True)
+        current_dri = lf.time.logical_elapsed()/1e6
+        physical_dri = lf.time.physical_elapsed()/1e6
+        lag = physical_dri - current_dri
+
+        print("----------------------------------------------------------")
+        print(f"[DRIVER REACTION 1] Logical time: {current_dri:.2f} ", flush=True)
+        print(f"[DRIVER REACTION 1] Physical time: {physical_dri:.2f} ", flush=True)
+        print(f"[DRIVER REACTION 1] LAG: {lag:.2f} ", flush=True)
+        print("----------------------------------------------------------")
+    =}
+    reaction(sensorclock) -> head, eye, accelerator, brake, steer {=
+        # if not self.started:
+        #     return
+        # if not self.started or not self.sensor_ready:
+        #     return
+        
+        steer.set(self.steer_val)
+        accelerator.set(self.accel_val)
+        brake.set(self.brake_val)
+        head.set(self.head_val)
+        eye.set(self.eye_val)
+        # if self.head_val == 0:
+        #     head_str = "LEFT"
+        # elif self.head_val == 1:
+        #     head_str = "CENTER"
+        # else:
+        #     head_str = "RIGHT"
+
+        # if self.eye_val == 0:
+        #     eye_str = "LEFT"
+        # elif self.eye_val == 1:
+        #     eye_str = "CENTER"
+        # else:
+        #     eye_str = "RIGHT"
+
+        # if self.steer_val == 0:
+        #     steer_str = "LEFT"
+        # elif self.steer_val == 1:
+        #     steer_str = "CENTER"
+        # else:
+        #     steer_str = "RIGHT"
+        current_dri = lf.time.logical_elapsed()/1e6
+        physical_dri = lf.time.physical_elapsed()/1e6
+        lag = physical_dri - current_dri
+
+        print("----------------------------------------------------------")
+        print(f"[DRIVER] Logical time: {current_dri:.2f} ", flush=True)
+        print(f"[DRIVER] Physical time: {physical_dri:.2f} ", flush=True)
+        print(f"[DRIVER] LAG: {lag:.2f} ", flush=True)
+        print("----------------------------------------------------------")
+
+        # print(f"Head: {self.head_val} ({head_str})", flush=True)
+        # print(f"Eye: {self.eye_val} ({eye_str})", flush=True)
+        # print(f"Accelerator: {self.accel_val}", flush=True)
+        # print(f"Brake: {self.brake_val}", flush=True)
+        # print(f"Steer: {self.steer_val} ({steer_str})", flush=True)
+    =}
+}
+
+
+reactor Simulation {
+    preamble {=
+        from mujoco.glfw import glfw
+    =}
+    input steer_in
+    input velocity_in
+    input rem_dist
+
+    m = new MuJoCoCarAuto()
+
+    reaction(steer_in, velocity_in, rem_dist) -> m.forward, m.turn, m.rd {=
+        vel = velocity_in.value if velocity_in.is_present else 0.0
+        st  = steer_in.value if steer_in.is_present else 1
+        print(f"The value of rd into simulation : {rem_dist.value}")
+        rem_dis = rem_dist.value if rem_dist.is_present else 0.0
+
+        # if rem_dist.is_present:
+        #     self.rem_dis = rem_dist.value
+        #     print(f"The value of rd into simulation : {self.rem_dis}")
+        
+
+        forward_cmd = vel    
+        # forward_cmd = max(-1.0, min(1.0, forward_cmd))
+
+        if st == 2:
+            turn_cmd = -0.05
+        elif st == 0:
+            turn_cmd = 0.05
+        else:
+            turn_cmd = 0.0
+
+        m.forward.set(forward_cmd)
+        m.turn.set(turn_cmd)
+        m.rd.set(rem_dis)
+    =}
+    reaction(m.key) -> m.cam_toggle {=
+        if m.key.value.act == glfw.PRESS:
+            if m.key.value.key == glfw.KEY_F:
+                m.cam_toggle.set(True)
+    =}
+}
+
+reactor Car{
+    // input start_signal
+    // state started = False
+
+    input steer_in
+    input accel_in
+    input brake_in
+    input actuate_in 
+    input head_pos_in  
+    input eye_pos_in
+
+    state acceleration_net
+    state velocity_init = 30
+    state dist_init = 0.0
+  
+    state accel_val = 0.0
+    state brake_val = 0.0
+    state act_val 
+
+    output velocity
+    output steer
+    output head_pos
+    output eye_pos
+    
+   preamble{=
+    def actuate_logic(self, cmd):
+        if cmd == "ACCEL":
+            return 0.5, 0.0
+        elif cmd == "BRAKE":
+            return 0.0, 1.0
+        elif cmd == "HOLD":
+            return 0.2, 0.0
+
+   =}
+    reaction(accel_in, brake_in, eye_pos_in, head_pos_in, steer_in, actuate_in)-> velocity, steer, head_pos, eye_pos {=
+        # if not self.started:
+        #     return
+        # if accel_in.is_present:
+        #     self.accel_val = float(accel_in.value)
+
+        # if brake_in.is_present:
+        #     self.brake_val = float(brake_in.value)
+
+        print(f"[DEBUG] time={lf.time.logical_elapsed()/1e6}, actuate_present={actuate_in.is_present}", flush=True)
+        # if actuate_in.is_present:
+        #     print(f"The actuation command: {actuate_in.value} at logical time: {lf.time.logical_elapsed()/1e6} and physical time : {lf.time.physical_elapsed()/1e6}", flush=True)
+
+        ###k = (1/2m)rho* C_d *A
+
+        # Typical values of the drag coefficient for calculation:
+
+        # * \rho = 1.2
+        # * C_d = 0.3
+        # * A = 2.2
+        # * m = 1500
+        if actuate_in.is_present:
+            print(f"The actuation command: {actuate_in.value} at logical time: {lf.time.logical_elapsed()/1e6} and physical time : {lf.time.physical_elapsed()/1e6}", flush=True)
+            amsg, bmsg = self.actuate_logic(actuate_in.value)
+        else:
+            amsg = accel_in.value
+            bmsg = brake_in.value
+        MAX_BRAKE = - 10.0
+        MAX_ACCEL = 4.0
+        A_DRAG_COEF = - 0.002
+        A_FRIC_COEFF = - 0.022
+        DT = 0.1
+        MAX_VEL = 35.0
+        
+      
+        print(f"The accel pedal position: {amsg:.2f}, The brake pedal: {bmsg:.2f}")
+        ## acceleration for throttle is second order polynomial equation
+
+        accel_brake = bmsg * MAX_BRAKE
+        accel_throt = (0.6 * amsg + 0.4 * amsg* amsg) * MAX_ACCEL 
+        accel_drag = A_DRAG_COEF * self.velocity_init ** 2
+        accel_net = accel_brake + accel_throt + accel_drag + A_FRIC_COEFF
+
+        
+        vel = self.velocity_init + accel_net * DT
+        if vel > MAX_VEL:
+
+            vel = MAX_VEL
+        else:
+            vel = max(0.0, vel)
+            
+        dist = self.dist_init + vel * DT
+
+
+        self.velocity_init = vel
+        self.dist_init = dist
+        current_dri = lf.time.logical_elapsed()/1e6
+        physical_dri = lf.time.physical_elapsed()/1e6
+        lag = physical_dri - current_dri
+
+        print("----------------------------------------------------------")
+        print(f"[CAR] Logical time: {current_dri:.2f} ", flush=True)
+        print(f"[CAR] Physical time: {physical_dri:.2f} ", flush=True)
+        print(f"[CAR] LAG: {lag:.2f} ", flush=True)
+        print("----------------------------------------------------------")
+        print(f"---------------------------------------------------------", flush=True)
+        print(f"velocity={vel:.2f} acceleration={accel_net:.2f}", flush=True)
+        print(f"Distance travelled={dist:.2f}", flush=True)
+
+        velocity.set(vel)
+        steer.set(steer_in.value)
+        head_pos.set(head_pos_in.value)
+        eye_pos.set(eye_pos_in.value)
+
+    =}   
+    
+
+}
+
+
+
+reactor Environment{
+    // input start_signal
+    // state started = False
+
+    input v
+    state pos_speed_change = 500.0
+    state passed = False
+    output displacement
+    
+    state v_val = 0.0
+
+    // reaction(start_signal) {=
+    //     self.started = True
+    // =}
+    reaction(v) -> displacement{=
+        # if not self.started:
+        #     return
+        if v.is_present:
+            self.v_val = float(v.value)
+        
+        
+
+        step = self.v_val * 0.1
+
+        if not self.passed:
+            self.pos_speed_change -= step
+
+            if self.pos_speed_change <= 0.0:
+                self.pos_speed_change = 0.0
+                self.passed = True
+
+            displacement.set(self.pos_speed_change)
+        else:
+            displacement.set(0.0)
+        current_dri = lf.time.logical_elapsed()/1e6
+        physical_dri = lf.time.physical_elapsed()/1e6
+        lag = physical_dri - current_dri
+
+        print(f"[ENV CLOCK] displacement={self.pos_speed_change}", flush=True)
+        print("----------------------------------------------------------")
+        print(f"[ENVIRONMENT] Logical time: {current_dri:.2f} ", flush=True)
+        print(f"[ENVIRONMENT] Physical time: {physical_dri:.2f} ", flush=True)
+        print(f"[ENVIRONMENT] LAG: {lag:.2f} ", flush=True)
+        print("----------------------------------------------------------")
+    =}
+ 
+    
+    
+}
+
+
+
+reactor LLMInference {
+    input s
+    input v
+    input st 
+    input h
+    input e
+
+    // output ready
+    output control
+    output instruction
+
+    state last_dl_tok = ""
+    state last_dl_msg = ""
+    // state is_ready = False
+    state s_val = 0.0
+    state v_val = 0.0
+    state st_val = 2
+    state h_val = 5
+
+    timer llmclock(4 sec, 400 msec)
+
+    preamble{=
+
+        def run_llm_message(self, rd_val, v_val, head, eye):
+            import ollama
+            import time
+
+            t0 = time.perf_counter()
+
+            try:
+                r = ollama.chat(
+                    model="llama3:8b",
+                    messages=[
+                            {
+
+                            "role": "system",
+                            "content": """You are a real-time driving coach.
+
+                                            Scenario:
+                                            - There is a STOP SIGN ahead.
+                                            - Target speed = 0 meter per second.
+
+                                            Output format:
+                                            TOKEN | message
+
+                                            TOKEN must be one of: NONE, WARNING, ACTUATE
+
+                                            Policy:
+                                            - If distance <= 30 and velocity > 5 -> ACTUATE
+                                            - Else if distance <= 60 and velocity > 8 -> WARNING
+                                            - Else if velocity <= 1 -> NONE
+                                            - Else if driver not attentive (head or eye not forward) -> WARNING
+                                            - Else -> NONE
+
+                                            Post-stop behavior:
+
+                                            - If velocity <= 1 (vehicle stopped):
+                                                - Instruct: look left and right before moving
+
+                                            Attention rules:
+                                            - If head is not center OR eyes are not forward → inattentive
+
+                                            Instructions:
+                                            - Generate exactly one line
+                                            - Max 12 words
+                                            - Focus on stopping and safety
+                                            - Use "meter per second"
+                                            - Message must be clear and human-guidable
+                                            Examples:
+                                            ACTUATE | Brake now stop before sign
+                                            WARNING | Look ahead slow down for stop sign
+                                            NONE | Look left and right before moving
+                                            """
+                        },
+                        {
+                            "role": "user",
+                            "content": f"""INPUT:
+                                            distance = {rd_val:.2f}
+                                            velocity = {v_val:.2f}
+                                            head = {head}
+                                            eye = {eye}
+
+                                            Return output:"""
+                        }
+                    ],
+                    options={
+                        "temperature": 0.0,
+                        "num_predict": 30
+                    },
+                )
+            except Exception as e:
+                print(">>> LLM ERROR:", e, flush=True)
+                return "NONE", "", 0.0
+
+            ms = (time.perf_counter() - t0) * 1000.0
+            raw = (r.get("message", {}).get("content", "") or "").strip()
+
+            # Parse token + message properly
+            parts = raw.split("|", 1)
+            token = parts[0].strip() if len(parts) > 0 else "NONE"
+            msg = parts[1].strip() if len(parts) > 1 else ""
+
+            return token, msg, ms
+
+        def fallback_policy(self, rd_val, v_val):
+            # print(f"[FALLBACK POLICY] evaluating s={rd_val:.2f}, v={v_val:.2f}", flush=True)
+
+            if rd_val <= 0.0:
+                return "NONE", ""
+
+            if rd_val <= 25:
+                return "ACTUATE", "Brake now."
+
+            if rd_val >= 80:
+                return "WARNING", "stop sign ahead."
+
+            return "NONE", ""
+
+    =}
+
+    
+
+    reaction(s, v, st, h,e){=
+
+
+        if s.is_present:
+            self.s_val = s.value
+        if v.is_present:
+            self.v_val = v.value
+        if st.is_present:
+            self.st_val = st.value
+        if h.is_present:
+            self.h_val = h.value
+        if e.is_present:
+            self.e_val = e.value
+
+       
+
+    =}
+
+    reaction(llmclock) -> control, instruction {=
+        rd_val = self.s_val
+        v_val  = self.v_val
+        if rd_val <= 0.0:
+            rd_val = 0.0
+
+        if self.h_val == 0:
+            head_str = "LEFT"
+        elif self.h_val == 1:
+            head_str = "CENTER"
+        else:
+            head_str = "RIGHT"
+
+        if self.e_val == 0:
+            eye_str = "LEFT"
+        elif self.e_val == 1:
+            eye_str = "CENTER"
+        else:
+            eye_str = "RIGHT"
+        print(f"[LLM INPUT] DISTANCE: {rd_val:.2f} m  VELOCITY: {v_val} m/s eye: {eye_str} head:{head_str}")
+        tok_raw, msg_raw, ms = self.run_llm_message(rd_val, v_val, head_str, eye_str)
+        current_dri = lf.time.logical_elapsed()/1e6
+        physical_dri = lf.time.physical_elapsed()/1e6
+        lag = physical_dri - current_dri
+        print("----------------------------------------------------------")
+        print(f"[LLM INFERENCE] Logical time: {current_dri:.2f} ", flush=True)
+        print(f"[LLM INFERENCE] Physical time: {physical_dri:.2f} ", flush=True)
+        print(f"[LLM INFERENCE] LAG: {lag:.2f} ", flush=True)
+        print("----------------------------------------------------------")
+        self.check_deadline()
+
+        raw = (msg_raw or "").strip()
+
+        if "|" in raw:
+            tok, msg = raw.split("|", 1)
+        else:
+            tok = tok_raw or "NONE"
+            msg = raw
+
+        tok = tok.strip()
+        msg = msg.strip()
+
+        print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
+
+        control.set(tok)
+        instruction.set(msg)
+
+    =} 
+    deadline(10 sec) {=
+        rd_val = self.s_val
+        v_val  = self.v_val
+        tok, msg = self.fallback_policy(rd_val, v_val)
+        control.set(tok)
+        instruction.set(msg)
+    =}
+}
+
+
+
+reactor Planner {
+  input ctrl
+  input instr
+  input s
+  input v
+  output act
+  output planned_instr
+
+  state last_speak_ns = -10000000000000
+  state speech_proc
+  state reached = False
+  state stable_count = 0
+
+  preamble{=
+    import subprocess
+    import re
+    import threading
+    import tempfile
+    import os
+
+    def speak_worker(self, msg):
+        import re
+        if not msg:
+            return
+
+        def convert_mps_to_kmph(match):
+
+            val = float(match.group(1))
+
+            kmph = int(round(val * 3.6))
+
+            return f"{kmph} kilometers per hour"
+
+        msg = re.sub(r"(\d+\.?\d*)\s*m/s", convert_mps_to_kmph, msg)
+        msg = re.sub(r"(\d+\.?\d*)\s*mps", convert_mps_to_kmph, msg)
+        msg = re.sub(r"(\d+\.?\d*)\s*meter per second", convert_mps_to_kmph, msg)
+
+        msg = re.sub(r"\d+\.?\d*", lambda m: str(int(round(float(m.group(0))))), msg)
+
+        
+
+        msg = re.sub(
+
+            r"(\d+\.?\d*)\s*(m/s|mps|meter per second|meters per second)",
+
+            convert_mps_to_kmph,
+
+            msg,
+
+            flags=re.IGNORECASE
+
+        )
+
+        print(f"[DEBUG SPEAK] {msg}", flush=True)
+
+        wav_path = "/tmp/piper_out.wav"
+
+        proc = subprocess.Popen(
+            f"echo \"{msg}\" | ~/piper/piper "
+            f"--model ~/piper/en_US-lessac-medium.onnx "
+            f"--length_scale 1.15 "
+            f"--noise_scale 0.6 "
+            f"--output_file {wav_path} && aplay {wav_path}",
+            shell=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+
+        with self.speech_lock:
+            self.speech_proc = proc
+
+    def speak(self, msg):
+        t = threading.Thread(target=self.speak_worker, args=(msg,))
+        t.daemon = True
+        t.start()
+
+    def try_speak(self, now_ns, instruction):
+        if not instruction:
+            return
+        if (now_ns - self.last_speak_ns) < 5000000000:
+            return
+        with self.speech_lock:
+            if self.speech_proc and self.speech_proc.poll() is None:
+                self.speech_proc.kill()
+        print(f"[LLM SPEAK] {instruction}", flush=True)
+        self.speak(instruction)
+        self.last_speak_ns = now_ns
+=}
+
+reaction(startup) {=
+    self.speech_proc = None
+    self.speech_lock = threading.Lock()
+=}
+
+  initial mode monitoring {
+        reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
+            kw = (ctrl.value or "NONE").strip()
+            instruction = (instr.value or "").strip()
+            rd = s.value if s.value is not None else 0.0
+            v_val = v.value if v.value is not None else 0.0
+            now_ns = lf.time.physical_elapsed()
+            print(f"[RD PLANNER]: {rd:.2f}")
+
+            if kw == "ACTUATE":
+                if instruction:
+                    print(f"[LLM] ACTUATE | {instruction}", flush=True)
+                    planned_instr.set(instruction)
+                    self.try_speak(now_ns, instruction)
+                current_dri = lf.time.logical_elapsed()/1e6
+                physical_dri = lf.time.physical_elapsed()/1e6
+                lag = physical_dri - current_dri
+                print("----------------------------------------------------------")
+                print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+                print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+                print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
+                print("----------------------------------------------------------")
+                actuate.set()
+                return
+
+            if kw == "WARNING":
+                if instruction:
+                    print(f"[LLM] WARNING | {instruction}", flush=True)
+                    planned_instr.set(instruction)
+                    self.try_speak(now_ns, instruction)
+                current_dri = lf.time.logical_elapsed()/1e6
+                physical_dri = lf.time.physical_elapsed()/1e6
+                lag = physical_dri - current_dri
+                print("----------------------------------------------------------")
+                print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+                print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+                print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
+                print("----------------------------------------------------------")
+                warning.set()
+                return
+
+            if kw == "NONE":
+                if instruction:
+                    print(f"[LLM] NONE | {instruction}", flush=True)
+                    planned_instr.set(instruction)
+                    self.try_speak(now_ns, instruction)
+
+            current_dri = lf.time.logical_elapsed()/1e6
+            physical_dri = lf.time.physical_elapsed()/1e6
+            lag = physical_dri - current_dri
+            print("----------------------------------------------------------")
+            print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+            print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+            print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
+            print("----------------------------------------------------------")
+        =}
+  }
+
+  mode warning {
+        reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
+            kw = (ctrl.value or "NONE").strip()
+            instruction = (instr.value or "").strip()
+            now_ns = lf.time.physical_elapsed()
+            rd = s.value if s.value is not None else 0.0
+            print(f"[RD PLANNER]: {rd:.2f}")
+
+            
+
+            if kw == "ACTUATE":
+                if instruction:
+                    print(f"[LLM] ACTUATE | {instruction}", flush=True)
+                    planned_instr.set(instruction)
+                    self.try_speak(now_ns, instruction)
+                current_dri = lf.time.logical_elapsed()/1e6
+                physical_dri = lf.time.physical_elapsed()/1e6
+                lag = physical_dri - current_dri
+                print("----------------------------------------------------------")
+                print(f"[PLANNER WARNING ] Logical time: {current_dri:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
+                print("----------------------------------------------------------")
+                actuate.set()
+                return
+
+            if kw != "WARNING":
+                current_dri = lf.time.logical_elapsed()/1e6
+                physical_dri = lf.time.physical_elapsed()/1e6
+                lag = physical_dri - current_dri
+                print("----------------------------------------------------------")
+                print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+                print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
+                print("----------------------------------------------------------")
+                monitoring.set()
+                return
+            if instruction:
+                self.try_speak(now_ns, instruction)
+
+            current_dri = lf.time.logical_elapsed()/1e6
+            physical_dri = lf.time.physical_elapsed()/1e6
+            lag = physical_dri - current_dri
+            print("----------------------------------------------------------")
+            print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
+            print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+            print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
+            print("----------------------------------------------------------")
+        =}
+  }
+
+  mode actuate {
+        reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
+            kw = (ctrl.value or "NONE").strip()
+            instruction = (instr.value or "").strip()
+            now_ns = lf.time.physical_elapsed()
+
+            rd = s.value if s.value is not None else 0.0
+            print(f"[RD PLANNER]: {rd:.2f}")
+
+            v_val = v.value if v.value is not None else 0.0
+            target = 0.0
+
+            if rd <= 1:
+                if v_val > target:
+                    print(f"Act set to BRAKE")
+                    act.set("BRAKE")
+
+                    
+            elif rd > 150:
+                if v_val < target - 0.5:
+                    print(f"Act set to accel")
+                    act.set("ACCEL")
+                else:
+                    print(f"Act set to hold")
+                    act.set("HOLD")
+            elif rd <= 25:
+                if v_val > target + 5:
+                    print(f"Act set to BRAKE")
+                    act.set("BRAKE")
+                else:
+                    print(f"Act set to hold")
+                    act.set("HOLD")
+            else:
+                print(f"Act set to hold")
+                act.set("HOLD")
+
+            if kw != "ACTUATE":
+                monitoring.set()
+                current_dri = lf.time.logical_elapsed()/1e6
+                physical_dri = lf.time.physical_elapsed()/1e6
+                lag = physical_dri - current_dri
+                print("----------------------------------------------------------")
+                print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
+                print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
+                print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
+                print("----------------------------------------------------------")
+                return
+
+            if instruction:
+                self.try_speak(now_ns, instruction)
+
+            current_dri = lf.time.logical_elapsed()/1e6
+            physical_dri = lf.time.physical_elapsed()/1e6
+            lag = physical_dri - current_dri
+            print("----------------------------------------------------------")
+            print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
+            print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
+            print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
+            print("----------------------------------------------------------")
+        =}
+  }
+}
+
+
+reactor Coach{
+    input s
+    input v
+    input st 
+    input h
+    input e
+    
+    
+
+    output act
+    output instr
+    // output ready
+
+    llm = new LLMInference()
+    a = new Planner()
+    s -> llm.s
+    v -> llm.v
+    st -> llm.st
+    h -> llm.h
+    e -> llm.e
+   
+    llm.control -> a.ctrl
+    llm.instruction -> a.instr
+    s -> a.s
+    v -> a.v
+    
+    a.act -> act
+    a.planned_instr -> instr
+
+    // llm.ready -> ready
+   
+    
+}
+
+federated reactor at 10.218.100.78 {
+    d = new Driver()
+    c = new Car()
+    en = new Environment()
+    adc = new Coach()
+    sim = new Simulation() 
+    
+
+
+    // adc.ready -> d.start_signal
+    // adc.ready -> c.start_signal
+    // adc.ready -> en.start_signal
+    // adc.ready -> sim.start_signal
+  
+
+
+    d.accelerator -> c.accel_in 
+    d.brake -> c.brake_in 
+    d.steer -> c.steer_in 
+    d.head -> c.head_pos_in 
+    d.eye -> c.eye_pos_in
+  
+
+    c.velocity -> en.v
+    c.velocity -> adc.v
+    c.steer -> adc.st
+    c.head_pos -> adc.h
+    c.eye_pos -> adc.e
+    c.velocity -> sim.velocity_in
+    c.steer -> sim.steer_in
+
+    en.displacement -> adc.s
+    en.displacement -> sim.rem_dist
+
+    adc.act -> c.actuate_in after 200 ms
+}
