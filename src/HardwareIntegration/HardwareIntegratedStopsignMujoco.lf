@@ -181,7 +181,7 @@ reactor Car{
     input eye_pos_in
 
     state acceleration_net
-    state velocity_init = 30
+    state velocity_init = 11
     state dist_init = 0.0
   
     state accel_val = 0.0
@@ -289,7 +289,7 @@ reactor Environment{
     // state started = False
 
     input v
-    state pos_speed_change = 500.0
+    state pos_speed_change = 300.0
     state passed = False
     output displacement
     
@@ -358,6 +358,7 @@ reactor LLMInference {
     timer llmclock(4 sec, 400 msec)
 
     preamble{=
+        
 
         def run_llm_message(self, rd_val, v_val, head, eye):
             import ollama
@@ -392,7 +393,7 @@ reactor LLMInference {
 
                                             Post-stop behavior:
 
-                                            - If velocity <= 1 (vehicle stopped):
+                                            - If velocity <= 0 (vehicle stopped) ONLY THEN :
                                                 - Instruct: look left and right before moving
 
                                             Attention rules:
@@ -408,6 +409,7 @@ reactor LLMInference {
                                             ACTUATE | Brake now stop before sign
                                             WARNING | Look ahead slow down for stop sign
                                             NONE | Look left and right before moving
+
                                             """
                         },
                         {
@@ -415,8 +417,8 @@ reactor LLMInference {
                             "content": f"""INPUT:
                                             distance = {rd_val:.2f}
                                             velocity = {v_val:.2f}
-                                            head = {head}
-                                            eye = {eye}
+                                            head_history = {head}
+                                            eye_history = {eye}
 
                                             Return output:"""
                         }
@@ -455,11 +457,15 @@ reactor LLMInference {
             return "NONE", ""
 
     =}
-
+    reaction(startup) {=
+        self.head_history = []
+        self.eye_history = []
+        self.max_history = 4
+    =}
     
 
     reaction(s, v, st, h,e){=
-
+     
 
         if s.is_present:
             self.s_val = s.value
@@ -469,9 +475,28 @@ reactor LLMInference {
             self.st_val = st.value
         if h.is_present:
             self.h_val = h.value
+            print(f"Head value every 100ms: {self.h_val}")
+            if self.h_val == 0:
+                self.head_history.append("LEFT")
+            elif self.h_val == 1:
+                self.head_history.append("CENTER")
+            elif self.h_val == 2:
+                self.head_history.append("RIGHT")
+            else:
+                self.head_history.append("CENTER")
         if e.is_present:
             self.e_val = e.value
-
+            print(f"EYE value every 100ms: {self.e_val}")
+            if self.e_val == 0:
+                self.eye_history.append("LEFT")
+            elif self.e_val == 1:
+                self.eye_history.append("CENTER")
+            elif self.e_val == 2:
+                self.eye_history.append("RIGHT")
+            else:
+                self.eye_history.append("CENTER")
+        self.head_history = self.head_history[-self.max_history:]
+        self.eye_history = self.eye_history[-self.max_history:]
        
 
     =}
@@ -481,22 +506,23 @@ reactor LLMInference {
         v_val  = self.v_val
         if rd_val <= 0.0:
             rd_val = 0.0
+        head_input = self.head_history if self.head_history else ["CENTER"]
+        eye_input  = self.eye_history if self.eye_history else ["CENTER"]
 
-        if self.h_val == 0:
-            head_str = "LEFT"
-        elif self.h_val == 1:
-            head_str = "CENTER"
-        else:
-            head_str = "RIGHT"
+       
+        print(f"[LLM INPUT] DISTANCE: {rd_val:.2f} m  VELOCITY: {v_val} m/s")
+        print(f"Head history: {self.head_history}", flush=True)
+        print(f"Eye history: {self.eye_history}", flush=True)
 
-        if self.e_val == 0:
-            eye_str = "LEFT"
-        elif self.e_val == 1:
-            eye_str = "CENTER"
-        else:
-            eye_str = "RIGHT"
-        print(f"[LLM INPUT] DISTANCE: {rd_val:.2f} m  VELOCITY: {v_val} m/s eye: {eye_str} head:{head_str}")
-        tok_raw, msg_raw, ms = self.run_llm_message(rd_val, v_val, head_str, eye_str)
+        # tok_raw, msg_raw, ms = self.run_llm_message(rd_val, v_val, head_str, eye_str)
+
+        tok_raw, msg_raw, ms = self.run_llm_message(
+            rd_val,
+            v_val,
+            head_input,
+            eye_input
+        )
+
         current_dri = lf.time.logical_elapsed()/1e6
         physical_dri = lf.time.physical_elapsed()/1e6
         lag = physical_dri - current_dri
