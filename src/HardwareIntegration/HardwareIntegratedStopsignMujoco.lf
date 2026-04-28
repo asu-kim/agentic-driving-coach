@@ -6,7 +6,7 @@ target Python {keepalive: true,
 import SensorInputs from "SensorInputs.lf"
 // import MuJoCoCar from "/home/raspdeeksha/agentic-driving-coach/mujoco-py/src/lib/MuJoCoCar.lf"
 
-import MuJoCoCarAuto from "../../mujoco-py/src/lib/MuJoCoCarAuto.lf"
+import MuJoCoCarAuto from "../../mujoco-py/src/lib/MuJoCoCarAutoHardware.lf"
 
 preamble{=
     import time
