@@ -2,7 +2,7 @@ target Python {keepalive: true,
     // logging: DEBUG,
   DNET: False
     }
-
+#export OLLAMA_MODELS=/media/kimlab/715c6256-b199-4286-a5ac-91737a2cd133/ollama_modelsls
 import SensorInputs from "SensorInputs.lf"
 // import MuJoCoCar from "/home/raspdeeksha/agentic-driving-coach/mujoco-py/src/lib/MuJoCoCar.lf"
 
@@ -12,6 +12,20 @@ preamble{=
     import time
     import subprocess
     import threading
+    import sys
+
+    print("=== PYTHON EXEC ===", sys.executable, flush=True)
+    print("=== SYS PATH ===", sys.path, flush=True)
+    try:
+        import cv2
+        print("CV2 OK", flush=True)
+    except Exception as e:
+        print("CV2 ERROR:", e, flush=True)
+    try:
+        import ollama
+        print("OLLAMA OK", flush=True)
+    except Exception as e:
+        print("OLLAMA ERROR:", e, flush=True)
 =}
 
 reactor Driver{
@@ -31,7 +45,7 @@ reactor Driver{
     output eye
     // output ready
    
-    timer sensorclock(4 sec, 100 msec)
+    timer sensorclock(8 sec, 100 msec)
 
     sen = new SensorInputs()
     
@@ -355,7 +369,7 @@ reactor LLMInference {
     state st_val = 2
     state h_val = 5
 
-    timer llmclock(4 sec, 400 msec)
+    timer llmclock(8 sec, 1000 msec)
 
     preamble{=
 
@@ -367,7 +381,7 @@ reactor LLMInference {
 
             try:
                 r = ollama.chat(
-                    model="llama3:8b",
+                    model="llama3.2:1b-instruct-fp16", #llama3:8b
                     messages=[
                         {
                             "role": "system",
@@ -908,7 +922,7 @@ reaction(startup) {=
                 if instruction:
                     print(f"[LLM] ACTUATE | {instruction}", flush=True)
                     planned_instr.set(instruction)
-                    self.try_speak(now_ns, instruction)
+                    # self.try_speak(now_ns, instruction)
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
@@ -924,7 +938,7 @@ reaction(startup) {=
                 if instruction:
                     print(f"[LLM] WARNING | {instruction}", flush=True)
                     planned_instr.set(instruction)
-                    self.try_speak(now_ns, instruction)
+                    # self.try_speak(now_ns, instruction)
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
@@ -940,7 +954,7 @@ reaction(startup) {=
                 if instruction:
                     print(f"[LLM] NONE | {instruction}", flush=True)
                     planned_instr.set(instruction)
-                    self.try_speak(now_ns, instruction)
+                    # self.try_speak(now_ns, instruction)
 
             current_dri = lf.time.logical_elapsed()/1e6
             physical_dri = lf.time.physical_elapsed()/1e6
@@ -967,7 +981,7 @@ reaction(startup) {=
                 if instruction:
                     print(f"[LLM] ACTUATE | {instruction}", flush=True)
                     planned_instr.set(instruction)
-                    self.try_speak(now_ns, instruction)
+                    # self.try_speak(now_ns, instruction)
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
@@ -990,8 +1004,8 @@ reaction(startup) {=
                 print("----------------------------------------------------------")
                 monitoring.set()
                 return
-            if instruction:
-                self.try_speak(now_ns, instruction)
+            # if instruction:
+                # self.try_speak(now_ns, instruction)
 
             current_dri = lf.time.logical_elapsed()/1e6
             physical_dri = lf.time.physical_elapsed()/1e6
@@ -1056,8 +1070,8 @@ reaction(startup) {=
                 print("----------------------------------------------------------")
                 return
 
-            if instruction:
-                self.try_speak(now_ns, instruction)
+            # if instruction:
+                # self.try_speak(now_ns, instruction)
 
             current_dri = lf.time.logical_elapsed()/1e6
             physical_dri = lf.time.physical_elapsed()/1e6
@@ -1106,7 +1120,7 @@ reactor Coach{
     
 }
 
-federated reactor at 10.218.100.78 {
+federated reactor at 10.155.24.15 {
     d = new Driver()
     c = new Car()
     en = new Environment()
