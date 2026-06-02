@@ -9,12 +9,13 @@
     <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
     <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2"/>
     <!-- Speed limit sign texture (path relative to this XML file's directory) -->
-    <texture name="speed_limit_tex" type="2d" file="speed_limit.png"/>
+    <!-- <texture name="speed_limit_tex" type="2d" file="speed_limit.png"/> -->
+    <texture name="speed_limit_tex" type="2d" file="stopsign.png"/>
     <material name="speed_limit_mat" texture="speed_limit_tex" texrepeat="1 1" texuniform="false"/>
   </asset>
 
   <default>
-    <joint damping=".03"/>
+    <joint damping=".03" />
     <default class="wheel">
       <geom type="cylinder" size=".03 .01" rgba=".5 .5 1 1"/>
     </default>

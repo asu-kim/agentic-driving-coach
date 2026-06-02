@@ -3,12 +3,13 @@ target Python {keepalive: true,
     }
 
 import SensorInputs from "SensorInputs.lf"
-// import MuJoCoCar from "/home/raspdeeksha/agentic-driving-coach/mujoco-py/src/lib/MuJoCoCar.lf"
+import MuJoCoCar from "/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/mujoco-py/src/lib/MuJoCoCar.lf"
 
 preamble{=
     import time
     import subprocess
     import threading
+    import json
 =}
 
 reactor Driver{
@@ -124,43 +125,42 @@ reactor Driver{
 }
 
 
-// reactor Simulation{
-//     input start_signal
-//     state started = False
+reactor Simulation{
+    // input start_signal
+    // state started = False
 
-//     input steer_in
-//     input velocity_in
+    input steer_in
+    input velocity_in
 
-//     m = new MuJoCoCar()
+    m = new MuJoCoCar()
     
-//     reaction(start_signal) {=
-//         self.started = True
-//     =}
+    // reaction(start_signal) {=
+    //     self.started = True
+    // =}
 
-//     reaction(steer_in, velocity_in) -> m.forward, m.turn {=
-//         if not self.started:
-//             return
+    reaction(steer_in, velocity_in) -> m.forward, m.turn {=
+       
 
-//         vel = velocity_in.value if velocity_in.is_present else 0.0
-//         st  = steer_in.value if steer_in.is_present else 1
+        vel = velocity_in.value if velocity_in.is_present else 0.0
+        st  = steer_in.value if steer_in.is_present else 1
 
         
-//         forward_cmd = vel / 33.6   
-//         forward_cmd = max(-1.0, min(1.0, forward_cmd))
+        forward_cmd = vel / 33.6   
+        forward_cmd = max(-1.0, min(1.0, forward_cmd))
 
-//         #
-//         if st == 0:
-//             turn_cmd = -1.0
-//         elif st == 2:
-//             turn_cmd = 1.0
-//         else:
-//             turn_cmd = 0.0
+        #
+        if st == 0:
+            turn_cmd = -1.0
+        elif st == 2:
+            turn_cmd = 1.0
+        else:
+            turn_cmd = 0.0
 
-//         m.forward.set(forward_cmd)
-//         m.turn.set(turn_cmd)
-//         =}
+        m.forward.set(forward_cmd)
+        m.turn.set(turn_cmd)
+        =}
 
-// }
+}
 
 reactor Car{
     // input start_signal
@@ -386,7 +386,7 @@ reactor LLMInference {
                                             - Else -> NONE
 
                                             Special:
-                                            IF 10.5 ≤ velocity ≤ 11.5 -> maintain steady speed
+                                            IF 10.5 ≤ velocity ≤ 11.5 -> maintain steady speed only at 11 meter per second
 
                                             Output Format:
                                             TOKEN|Message
@@ -414,7 +414,7 @@ reactor LLMInference {
                     options={"temperature": 0.0, "num_predict": 30},
                 )
             except Exception as e:
-                print(">>> LLM ERROR:", e, flush=True)
+                # print(">>> LLM ERROR:", e, flush=True)
                 return "NONE", "", 0.0
 
             ms = (time.perf_counter() - t0) * 1000.0
@@ -468,11 +468,11 @@ reactor LLMInference {
         current_dri = lf.time.logical_elapsed()/1e6
         physical_dri = lf.time.physical_elapsed()/1e6
         lag = physical_dri - current_dri
-        print("----------------------------------------------------------")
-        print(f"[LLM INFERENCE] Logical time: {current_dri:.2f} ", flush=True)
-        print(f"[LLM INFERENCE] Physical time: {physical_dri:.2f} ", flush=True)
-        print(f"[LLM INFERENCE] LAG: {lag:.2f} ", flush=True)
-        print("----------------------------------------------------------")
+        # print("----------------------------------------------------------")
+        # print(f"[LLM INFERENCE] Logical time: {current_dri:.2f} ", flush=True)
+        # print(f"[LLM INFERENCE] Physical time: {physical_dri:.2f} ", flush=True)
+        # print(f"[LLM INFERENCE] LAG: {lag:.2f} ", flush=True)
+        # print("----------------------------------------------------------")
         self.check_deadline()
 
         raw = (msg_raw or "").strip()
@@ -486,7 +486,7 @@ reactor LLMInference {
         tok = tok.strip()
         msg = msg.strip()
 
-        print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
+        # print(f"[LLM RESULT] {tok} | {msg} | {ms:.2f} ms", flush=True)
 
         control.set(tok)
         instruction.set(msg)
@@ -502,291 +502,6 @@ reactor LLMInference {
 }
 
 
-// reactor Planner {
-//   input ctrl
-//   input instr
-//   input s
-//   input v
-//   output act
-//   output planned_instr
-
-// //   state last_warn_ns = -10000000000000
-// //   state last_act_ns = -10000000000000
-// //   state last_mon_ns = -10000000000000
-//   state last_speak = -1000000000000
-//   state speech_proc
-//   state reached = False
-//   state stable_count = 0
-
-//   preamble{=
-//     import subprocess
-//     import re
-//     import threading
-//     import tempfile
-//     import os
-
-    
-
-//     def speak_worker(self, msg):
-//         import re
-
-//         if not msg:
-//             return
-
-//         def convert_mps_to_kmph(match):
-//             val = float(match.group(1))
-//             kmph = int(round(val * 3.6))
-//             return f"{kmph} kilometers per hour"
-
-//         msg = re.sub(r"(\d+\.?\d*)\s*m/s", convert_mps_to_kmph, msg)
-//         msg = re.sub(r"(\d+\.?\d*)\s*mps", convert_mps_to_kmph, msg)
-//         msg = re.sub(r"(\d+\.?\d*)\s*meter per second", convert_mps_to_kmph, msg)
-
-//         msg = re.sub(r"\d+\.?\d*", lambda m: str(int(round(float(m.group(0))))), msg)
-
-//         msg = re.sub(
-//             r"from (\d+) kilometers per hour at (\d+) meters",
-//             r"\2 meters ahead, slow down from \1 kilometers per hour",
-//             msg
-//         )
-
-//         print(f"[DEBUG SPEAK] {msg}", flush=True)
-
-//         # proc = subprocess.Popen(
-//         #     ["espeak", "-v", "en-us", "-s", "135", "-p", "75", "-g", "6", msg],
-//         #     stdout=subprocess.DEVNULL,
-//         #     stderr=subprocess.DEVNULL
-//         # )
-//         wav_path = "/tmp/piper_out.wav"
-
-//         proc = subprocess.Popen(
-//             f"echo \"{msg}\" | ~/piper/piper "
-//             f"--model ~/piper/en_US-lessac-medium.onnx "
-//             f"--length_scale 1.15 "
-//             f"--noise_scale 0.6 "
-//             f"--output_file {wav_path} && aplay {wav_path}",
-//             shell=True,
-//             stdout=subprocess.DEVNULL,
-//             stderr=subprocess.DEVNULL
-//         )
-
-        
-//         with self.speech_lock:
-//             self.speech_proc = proc
-
-//     def speak(self, msg):
-//         t = threading.Thread(target=self.speak_worker, args=(msg,))
-//         t.daemon = True
-//         t.start()
-// =}
-// reaction(startup) {=
-//     self.speech_proc = None
-//     self.speech_lock = threading.Lock()
-// =}
-
-//   initial mode monitoring {
-//         reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
-//             kw = (ctrl.value or "NONE").strip()
-//             # print(f"[PLANNER MONITORING] control value: {ctrl.value}")
-            
-//             instruction = (instr.value or "").strip()
-//             rd = s.value if s.value is not None else 0.0
-//             v_val = v.value if v.value is not None else 0.0
-//             now_ns = lf.time.logical_elapsed()
-
-            
-//             if kw == "ACTUATE":
-                
-//                 # actuate.set()
-//                 if (now_ns - self.last_act_ns) >= 5000000000:
-//                     if instruction:
-//                         print(f"[LLM] ACTUATE | {instruction}", flush=True)
-//                         planned_instr.set(instruction)
-//                         self.speak(instruction)
-
-//                     self.last_act_ns = now_ns
-//                     current_dri = lf.time.logical_elapsed()/1e6
-//                     physical_dri = lf.time.physical_elapsed()/1e6
-//                     lag = physical_dri - current_dri
-//                     print("----------------------------------------------------------")
-//                     print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
-//                     print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
-//                     print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
-//                     print("----------------------------------------------------------")
-//                     actuate.set()
-//                     return
-
-//             if kw == "WARNING":
-//                 if (now_ns - self.last_warn_ns) >= 5000000000:
-//                     if instruction:
-//                         print(f"[LLM] WARNING | {instruction}", flush=True)
-//                         planned_instr.set(instruction)
-//                         self.speak(instruction)
-
-//                     self.last_warn_ns = now_ns
-//                     current_dri = lf.time.logical_elapsed()/1e6
-//                     physical_dri = lf.time.physical_elapsed()/1e6
-//                     lag = physical_dri - current_dri
-//                     print("----------------------------------------------------------")
-//                     print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
-//                     print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
-//                     print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
-//                     print("----------------------------------------------------------")
-//                     warning.set()
-//                     return
-//             if kw == "NONE":
-//                 if (now_ns - self.last_mon_ns) >= 7000000000:
-//                         if instruction:
-//                             print(f"[LLM] NONE | {instruction}", flush=True)
-//                             planned_instr.set(instruction)
-//                             self.speak(instruction)
-//                         self.last_mon_ns = now_ns
-//             current_dri = lf.time.logical_elapsed()/1e6
-//             physical_dri = lf.time.physical_elapsed()/1e6
-//             lag = physical_dri - current_dri
-//             print("----------------------------------------------------------")
-//             print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
-//             print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
-//             print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
-//             print("----------------------------------------------------------")
-//         =}
-//   }
-
-//   mode warning {
-//         reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
-//             kw = (ctrl.value or "NONE").strip()
-//             # print(f"[PLANNER] control value: {ctrl.value}")
-
-//             instruction = (instr.value or "").strip()
-//             rd = s.value if s.value is not None else 0.0
-//             v_val = v.value if v.value is not None else 0.0
-//             now_ns = lf.time.logical_elapsed()
-            
-
-            
-//             if kw == "ACTUATE":
-//                 if (now_ns - self.last_act_ns) >= 5000000000:
-//                     if instruction:
-//                         print(f"[LLM] ACTUATE | {instruction}", flush=True)
-//                         planned_instr.set(instruction)
-//                         self.speak(instruction)
-//                     self.last_act_ns = now_ns
-//                 current_dri = lf.time.logical_elapsed()/1e6
-//                 physical_dri = lf.time.physical_elapsed()/1e6
-//                 lag = physical_dri - current_dri
-//                 print("----------------------------------------------------------")
-//                 print(f"[PLANNER WARNING ] Logical time: {current_dri:.2f} ", flush=True)
-//                 print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
-//                 print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
-//                 print("----------------------------------------------------------")
-//                 actuate.set()
-//                 return
-
-//             if kw != "WARNING":
-                
-//                 current_dri = lf.time.logical_elapsed()/1e6
-//                 physical_dri = lf.time.physical_elapsed()/1e6
-//                 lag = physical_dri - current_dri
-//                 print("----------------------------------------------------------")
-//                 print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
-//                 print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
-//                 print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
-//                 print("----------------------------------------------------------")
-//                 monitoring.set()
-//                 return
-//             current_dri = lf.time.logical_elapsed()/1e6
-//             physical_dri = lf.time.physical_elapsed()/1e6
-//             lag = physical_dri - current_dri
-//             print("----------------------------------------------------------")
-//             print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
-//             print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
-//             print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
-//             print("----------------------------------------------------------")
-//         =}
-//   }
-
-//   mode actuate {
-//         reaction(ctrl, instr, s, v) -> act, monitoring, planned_instr {=
-//             kw = (ctrl.value or "NONE").strip()
-//             # print(f"[PLANNER] control value: {ctrl.value}")
-//             instruction = (instr.value or "").strip()
-//             now_ns = lf.time.logical_elapsed()
-
-//             rd = s.value if s.value is not None else 0.0
-//             v_val = v.value if v.value is not None else 0.0
-//             target = 11.0
-            
-            
-            
-//             if rd <= 1:
-//                 if v_val> target:
-//                     print(f"Act set to BRAKE")
-//                     act.set("BRAKE")
-//                 elif v_val < target:
-//                     print(f"Act set to ACCEL")
-//                     act.set("ACCEL")
-//                 else:
-//                     print(f"Act set to HOLD")
-//                     act.set("HOLD")
-
-
-//             # If far enough either accel or hold
-//             elif rd > 150:
-//                 if v_val < target - 0.5:
-//                     print(f"Act set to accel")
-//                     act.set("ACCEL")
-//                 else:
-//                     print(f"Act set to hold")
-//                     act.set("HOLD")
-
-//             # If the velocity is too high near the speed limit then break
-//             elif rd <= 25:
-//                 if v_val > target + 1:
-//                     print(f"Act set to BRAKE")
-//                     act.set("BRAKE")
-//                 else:
-//                     print(f"Act set to hold")
-//                     act.set("HOLD")
-
-//             else:
-//                 #if remaining distance is between 25 to 150 just hold 
-//                 print(f"Act set to hold")
-//                 act.set("HOLD")
-
-            
-
-//             if kw != "ACTUATE":
-//                 # if the llm does not inform to actuiate go to monitor
-//                 monitoring.set()
-//                 current_dri = lf.time.logical_elapsed()/1e6
-//                 physical_dri = lf.time.physical_elapsed()/1e6
-//                 lag = physical_dri - current_dri
-//                 print("----------------------------------------------------------")
-//                 print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
-//                 print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
-//                 print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
-//                 print("----------------------------------------------------------")
-//                 return
-
-//             # act.set(11)
-//             # monitoring.set()
-//             # if (now_ns - self.last_warn_ns) >= 5000000000:
-//             #         if instruction:
-//             #             print(f"[LLM] WARNING | {instruction}", flush=True)
-//             #             planned_instr.set(instruction)
-//             #             self.speak(instruction)
-//             current_dri = lf.time.logical_elapsed()/1e6
-//             physical_dri = lf.time.physical_elapsed()/1e6
-//             lag = physical_dri - current_dri
-//             print("----------------------------------------------------------")
-//             print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
-//             print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
-//             print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
-//             print("----------------------------------------------------------")
-        
-//         =}
-//   }
-// }
 reactor Planner {
   input ctrl
   input instr
@@ -801,6 +516,7 @@ reactor Planner {
   state stable_count = 0
 
   preamble{=
+    import json
     import subprocess
     import re
     import threading
@@ -829,7 +545,7 @@ reactor Planner {
             msg
         )
 
-        print(f"[DEBUG SPEAK] {msg}", flush=True)
+        # print(f"[DEBUG SPEAK] {msg}", flush=True)
 
         wav_path = "/tmp/piper_out.wav"
 
@@ -860,7 +576,7 @@ reactor Planner {
         with self.speech_lock:
             if self.speech_proc and self.speech_proc.poll() is None:
                 self.speech_proc.kill()
-        print(f"[LLM SPEAK] {instruction}", flush=True)
+        # print(f"[LLM SPEAK] {instruction}", flush=True)
         self.speak(instruction)
         self.last_speak_ns = now_ns
 =}
@@ -876,54 +592,71 @@ reaction(startup) {=
             instruction = (instr.value or "").strip()
             rd = s.value if s.value is not None else 0.0
             v_val = v.value if v.value is not None else 0.0
+            # try:
+            #     data = {
+            #         "speed": float(v_val),
+            #         "distance": float(rd)
+            #     }
+
+            #     with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/HardwareIntegration/car_data.json", "w") as f:
+            #         json.dump(data, f)
+
+            #     print("WROTE:", data, flush=True)
+
+            # except Exception as e:
+            #     print("WRITE ERROR:", e, flush=True)
             now_ns = lf.time.logical_elapsed()
+            speed_kmph = int(round(v_val * 3.6))
+            distance_m = int(round(rd))
+
+            print(f"Your Speed is: {speed_kmph} km/h at a distance of: {distance_m} meters")
 
             if kw == "ACTUATE":
                 if instruction:
-                    print(f"[LLM] ACTUATE | {instruction}", flush=True)
+                    # print(f"[LLM] ACTUATE | {instruction}", flush=True)
                     planned_instr.set(instruction)
                     self.try_speak(now_ns, instruction)
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
-                print("----------------------------------------------------------")
-                print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
-                print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
-                print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
-                print("----------------------------------------------------------")
+                # print("----------------------------------------------------------")
+                # print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+                # print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+                # print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
+                # print("----------------------------------------------------------")
                 actuate.set()
                 return
 
             if kw == "WARNING":
                 if instruction:
-                    print(f"[LLM] WARNING | {instruction}", flush=True)
+                    # print(f"[LLM] WARNING | {instruction}", flush=True)
                     planned_instr.set(instruction)
                     self.try_speak(now_ns, instruction)
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
-                print("----------------------------------------------------------")
-                print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
-                print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
-                print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
-                print("----------------------------------------------------------")
+                # print("----------------------------------------------------------")
+                # print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+                # print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+                # print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
+                # print("----------------------------------------------------------")
                 warning.set()
                 return
 
             if kw == "NONE":
                 if instruction:
-                    print(f"[LLM] NONE | {instruction}", flush=True)
+                    # print(f"[LLM] NONE | {instruction}", flush=True)
                     planned_instr.set(instruction)
                     self.try_speak(now_ns, instruction)
 
             current_dri = lf.time.logical_elapsed()/1e6
             physical_dri = lf.time.physical_elapsed()/1e6
             lag = physical_dri - current_dri
-            print("----------------------------------------------------------")
-            print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
-            print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
-            print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
-            print("----------------------------------------------------------")
+            # print("----------------------------------------------------------")
+            # print(f"[PLANNER monitor] Logical time: {current_dri:.2f} ", flush=True)
+            # print(f"[PLANNER monitor] Physical time: {physical_dri:.2f} ", flush=True)
+            # print(f"[PLANNER monitor] LAG: {lag:.2f} ", flush=True)
+            # print("----------------------------------------------------------")
         =}
   }
 
@@ -932,20 +665,39 @@ reaction(startup) {=
             kw = (ctrl.value or "NONE").strip()
             instruction = (instr.value or "").strip()
             now_ns = lf.time.logical_elapsed()
+            rd = s.value if s.value is not None else 0.0
+            v_val = v.value if v.value is not None else 0.0
+            speed_kmph = int(round(v_val * 3.6))
+            distance_m = int(round(rd))
+            # try:
+            #     data = {
+            #         "speed": float(v_val),
+            #         "distance": float(rd)
+            #     }
+
+            #     with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/HardwareIntegration/car_data.json", "w") as f:
+            #         json.dump(data, f)
+
+            #     print("WROTE:", data, flush=True)
+
+            # except Exception as e:
+            #     print("WRITE ERROR:", e, flush=True)
+
+            print(f"Your Speed is: {speed_kmph} km/h at a distance of: {distance_m} meters")
 
             if kw == "ACTUATE":
                 if instruction:
-                    print(f"[LLM] ACTUATE | {instruction}", flush=True)
+                    # print(f"[LLM] ACTUATE | {instruction}", flush=True)
                     planned_instr.set(instruction)
                     self.try_speak(now_ns, instruction)
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
-                print("----------------------------------------------------------")
-                print(f"[PLANNER WARNING ] Logical time: {current_dri:.2f} ", flush=True)
-                print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
-                print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
-                print("----------------------------------------------------------")
+                # print("----------------------------------------------------------")
+                # print(f"[PLANNER WARNING ] Logical time: {current_dri:.2f} ", flush=True)
+                # print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+                # print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
+                # print("----------------------------------------------------------")
                 actuate.set()
                 return
 
@@ -953,22 +705,22 @@ reaction(startup) {=
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
-                print("----------------------------------------------------------")
-                print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
-                print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
-                print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
-                print("----------------------------------------------------------")
+                # print("----------------------------------------------------------")
+                # print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
+                # print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+                # print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
+                # print("----------------------------------------------------------")
                 monitoring.set()
                 return
 
             current_dri = lf.time.logical_elapsed()/1e6
             physical_dri = lf.time.physical_elapsed()/1e6
             lag = physical_dri - current_dri
-            print("----------------------------------------------------------")
-            print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
-            print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
-            print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
-            print("----------------------------------------------------------")
+            # print("----------------------------------------------------------")
+            # print(f"[PLANNER WARNING] Logical time: {current_dri:.2f} ", flush=True)
+            # print(f"[PLANNER WARNING] Physical time: {physical_dri:.2f} ", flush=True)
+            # print(f"[PLANNER WARNING] LAG: {lag:.2f} ", flush=True)
+            # print("----------------------------------------------------------")
         =}
   }
 
@@ -980,34 +732,51 @@ reaction(startup) {=
 
             rd = s.value if s.value is not None else 0.0
             v_val = v.value if v.value is not None else 0.0
+            speed_kmph = int(round(v_val * 3.6))
+            distance_m = int(round(rd))
+            # try:
+            #     data = {
+            #         "speed": float(v_val),
+            #         "distance": float(rd)
+            #     }
+
+            #     with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/HardwareIntegration/car_data.json", "w") as f:
+            #         json.dump(data, f)
+
+            #     print("WROTE:", data, flush=True)
+
+            # except Exception as e:
+            #     print("WRITE ERROR:", e, flush=True)
+
+            print(f"Your Speed is: {speed_kmph} km/h at a distance of: {distance_m} meters")
             target = 11.0
 
             if rd <= 1:
                 if v_val > target + 2:
-                    print(f"Act set to BRAKE")
+                    # print(f"Act set to BRAKE")
                     act.set("BRAKE")
                 elif v_val < target + 2:
-                    print(f"Act set to ACCEL")
+                    # print(f"Act set to ACCEL")
                     act.set("ACCEL")
                 else:
-                    print(f"Act set to HOLD")
+                    # print(f"Act set to HOLD")
                     act.set("HOLD")
             elif rd > 150:
                 if v_val < target - 0.5:
-                    print(f"Act set to accel")
+                    # print(f"Act set to accel")
                     act.set("ACCEL")
                 else:
-                    print(f"Act set to hold")
+                    # print(f"Act set to hold")
                     act.set("HOLD")
             elif rd <= 25:
                 if v_val > target + 5:
-                    print(f"Act set to BRAKE")
+                    # print(f"Act set to BRAKE")
                     act.set("BRAKE")
                 else:
-                    print(f"Act set to hold")
+                    # print(f"Act set to hold")
                     act.set("HOLD")
             else:
-                print(f"Act set to hold")
+                # print(f"Act set to hold")
                 act.set("HOLD")
 
             if kw != "ACTUATE":
@@ -1015,11 +784,11 @@ reaction(startup) {=
                 current_dri = lf.time.logical_elapsed()/1e6
                 physical_dri = lf.time.physical_elapsed()/1e6
                 lag = physical_dri - current_dri
-                print("----------------------------------------------------------")
-                print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
-                print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
-                print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
-                print("----------------------------------------------------------")
+                # print("----------------------------------------------------------")
+                # print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
+                # print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
+                # print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
+                # print("----------------------------------------------------------")
                 return
 
             if instruction:
@@ -1028,11 +797,11 @@ reaction(startup) {=
             current_dri = lf.time.logical_elapsed()/1e6
             physical_dri = lf.time.physical_elapsed()/1e6
             lag = physical_dri - current_dri
-            print("----------------------------------------------------------")
-            print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
-            print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
-            print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
-            print("----------------------------------------------------------")
+            # print("----------------------------------------------------------")
+            # print(f"[PLANNER ACTUATE] Logical time: {current_dri:.2f} ", flush=True)
+            # print(f"[PLANNER ACTUATE] Physical time: {physical_dri:.2f} ", flush=True)
+            # print(f"[PLANNER ACTUATE] LAG: {lag:.2f} ", flush=True)
+            # print("----------------------------------------------------------")
         =}
   }
 }
@@ -1077,7 +846,7 @@ federated reactor at 10.218.100.78 {
     c = new Car()
     en = new Environment()
     adc = new Coach()
-    // sim = new Simulation() 
+    sim = new Simulation() 
     
 
 
@@ -1100,8 +869,8 @@ federated reactor at 10.218.100.78 {
     c.steer -> adc.st
     c.head_pos -> adc.h
     c.eye_pos -> adc.e
-    // c.velocity -> sim.velocity_in
-    // c.steer -> sim.steer_in
+    c.velocity -> sim.velocity_in
+    c.steer -> sim.steer_in
 
     en.displacement -> adc.s
 

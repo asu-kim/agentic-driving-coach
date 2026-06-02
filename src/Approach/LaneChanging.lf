@@ -115,6 +115,7 @@ preamble{=
 =}
 
 reactor Driver{
+    input instr
     output steer
     output accelerator
     output brake
@@ -129,7 +130,7 @@ reactor Driver{
 
     reaction(startup){=
         try:
-            with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/DriverBehaviorLane_beginner.txt", "r") as f:
+            with open("/home/asurite.ad.asu.edu/dprahlad/agentic-driving-coach/src/DriverBehavior/DriverBehaviorLane_beginner.txt", "r") as f:
                 for ln in f.readlines():
                     ln = ln.strip()
                     if not ln:
@@ -150,7 +151,7 @@ reactor Driver{
             self.loaded = False
     =}
 
-    reaction(t) -> accelerator, brake, head, steer {=
+    reaction(t, instr) -> accelerator, brake, head, steer {=
         if self.done:
             return
         if not self.loaded or len(self.rows) == 0:
@@ -176,32 +177,34 @@ reactor Driver{
             steer.set(Steer(s).name)
 
         self.idx += 1
+        if instr.is_present:
+            print(f"{instr.value}]")
     =}
 }
 
 reactor Car{
-    input steer
-    input accel
-    input brk
-    input ext_inp
+    input steer_in
+    input accel_in
+    input brake_in
+    input actuate_in 
     input head
 
     state acceleration_net
     state velocity_init = 18.0
 
-    output v
-    output h
-    output st
+    output velocity
+    output head_pos
+    output steer
 
-    reaction(accel, brk, ext_inp, head, steer)->v, h, st{=
-        amsg = accel.value
-        bmsg = brk.value
+    reaction(accel_in, brake_in, actuate_in , head, steer_in)->velocity, steer, head_pos{=
+        amsg = accel_in.value
+        bmsg = brake_in.value
         hmsg = head.value
-        smsg = steer.value
+        smsg = steer_in.value
 
         
-        if ext_inp.is_present:
-            cmd = ext_inp.value
+        if actuate_in.is_present:
+            cmd = actuate_in.value
             if cmd in [Brake(5).name, Brake(6).name]:
                 bmsg = cmd
             elif cmd in [Accelerate(1).name, Accelerate(2).name, Accelerate(3).name, Accelerate(4).name]:
@@ -229,9 +232,9 @@ reactor Car{
         if vel < 0.0:
             vel = 0.0
 
-        v.set(vel)
-        h.set(hmsg)
-        st.set(smsg)
+        velocity.set(vel)
+        head_pos.set(hmsg)
+        steer.set(smsg)
 
         self.velocity_init = vel
     =}
@@ -242,9 +245,9 @@ reactor Environment{
     state lane_change_pos = 100.0
     state shifted = False
 
-    output s
+    output displacement
 
-    reaction(v)->s{=
+    reaction(v)->displacement{=
         vn = float(v.value)
         step = vn * 0.1
 
@@ -253,21 +256,21 @@ reactor Environment{
             if self.lane_change_pos <= 0.0:
                 self.lane_change_pos = 0.0
                 self.shifted = True
-            s.set(self.lane_change_pos)
+            displacement.set(self.lane_change_pos)
         else:
-            s.set(0.0)
+            displacement.set(0.0)
     =}
 }
 
-reactor LlmDecision {
+reactor LlmInference{
     input s
     input v
     input h
     input st
     
 
-    output dec
-    output msg
+    output control
+    output instruction
 
     
     state done = False
@@ -276,7 +279,7 @@ reactor LlmDecision {
     state last_dl_tok = ""
     state last_dl_msg = ""
 
-    reaction(s, v, h, st) -> dec, msg {=
+    reaction(s, v, h, st) -> control, instruction {=
         rd_val = s.value if s.value is not None else 0.0
         v_val  = v.value  if v.value is not None else 0.0
         h_val  = h.value if h.value is not None else Head(9).name
@@ -284,8 +287,8 @@ reactor LlmDecision {
         
  
         if self.done  or rd_val <= 0.0:
-            dec.set("NONE")
-            msg.set("")
+            control.set("NONE")
+            instruction.set("")
             self.done = True
             return
 
@@ -301,15 +304,15 @@ reactor LlmDecision {
         print("logical", lf.time.logical_elapsed()/1e6, flush=True)
         print("physical", lf.time.physical_elapsed()/1e6, flush=True)
 
-        tok, instruction, ms = run_llm_message(rd_val, v_val, h_val, s_val)
+        tok, llm_instruction, ms = run_llm_message(rd_val, v_val, h_val, s_val)
 
        
         self.check_deadline()
 
-        dec.set(tok)
-        msg.set(instruction)
+        control.set(tok)
+        instruction.set(llm_instruction)
 
-        print(f"[LLM] {ms:.1f} ms -> {tok} | {instruction}", flush=True)
+        print(f"[LLM] {ms:.1f} ms -> {tok} | {llm_instruction}", flush=True)
     =}
 
     deadline(613 msec) {=
@@ -320,21 +323,21 @@ reactor LlmDecision {
        
        
         if self.done  or rd_val <= 0.0:
-            dec.set("NONE")
-            msg.set("")
+            control.set("NONE")
+            instruction.set("")
             self.done = True
             return
 
-        tok, instruction = fallback_policy(rd_val, v_val, h_val,s_val)
+        tok, llm_instruction = fallback_policy(rd_val, v_val, h_val,s_val)
 
       
-        if tok == self.last_dl_tok and instruction == self.last_dl_msg:
+        if tok == self.last_dl_tok and llm_instruction == self.last_dl_msg:
             return
         self.last_dl_tok = tok
-        self.last_dl_msg = instruction
+        self.last_dl_msg = llm_instruction
 
-        dec.set(tok)
-        msg.set(instruction)
+        control.set(tok)
+        instruction.set(llm_instruction)
 
    
         print("################################################", flush=True)
@@ -348,25 +351,26 @@ reactor LlmDecision {
         print("logical", lf.time.logical_elapsed()/1e6, flush=True)
         print("physical", lf.time.physical_elapsed()/1e6, flush=True)
         print("------------------------------------------------", flush=True)
-        print(f"[DEADLINE] fallback -> {tok} | {instruction}", flush=True)
+        print(f"[DEADLINE] fallback -> {tok} | {llm_instruction}", flush=True)
     =}
 }
 
-reactor Agent {
-  input dec
-  input msg
+reactor Planner {
+  input ctrl
+  input instr
   input s
   input v
-  output extInp
+  output act
+  output planned_instr
 
   state last_printed = ""
   state last_warn_ns = -1000000000000
 
 
   initial mode monitoring {
-    reaction(dec, msg, s, v) -> warning, actuate {=
-      kw  = dec.value
-      instruction = msg.value
+    reaction(ctrl, instr, s, v) -> warning, actuate, planned_instr {=
+      kw  = ctrl.value
+      instruction = instr.value
       rd  = s.value if s.value is not None else 0.0
       vel   = v.value  if v.value is not None else 0.0
       throttle = 1000000000
@@ -376,6 +380,8 @@ reactor Agent {
       if kw == "ACTUATE" and rd > 0.0:
         if instruction and instruction != self.last_printed:
             print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            i = f"[VERBAL] {kw} | {instruction}"
+            planned_instr.set(i)
             self.last_printed = instruction
         actuate.set()
         return
@@ -383,6 +389,8 @@ reactor Agent {
         if (now_ns - self.last_warn_ns) >= throttle:
           if instruction and instruction != self.last_printed:
             print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            i = f"[VERBAL] {kw} | {instruction}"
+            planned_instr.set(i)
             self.last_printed = instruction
           self.last_warn_ns = now_ns
         warning.set()
@@ -391,9 +399,9 @@ reactor Agent {
   }
 
   mode warning {
-    reaction(dec, msg, s, v) -> monitoring, actuate {=
-      kw  = dec.value
-      instruction = msg.value
+    reaction(ctrl, instr, s, v) -> monitoring, actuate, planned_instr {=
+      kw  = ctrl.value
+      instruction = instr.value
       rd  = s.value if s.value is not None else 0.0
       vel   = v.value  if v.value is not None else 0.0
       throttle = 1000000000
@@ -403,6 +411,8 @@ reactor Agent {
       if kw == "ACTUATE" and rd > 0.0:
         if instruction and instruction != self.last_printed:
           print(f"[VERBAL] {kw} | {instruction}", flush=True)
+          i = f"[VERBAL] {kw} | {instruction}"
+          planned_instr.set(i)
           self.last_printed = instruction
         actuate.set()
         return
@@ -415,6 +425,8 @@ reactor Agent {
         if (now_ns - self.last_warn_ns) >= throttle:
           if instruction and instruction != self.last_printed:
             print(f"[VERBAL] {kw} | {instruction}", flush=True)
+            i = f"[VERBAL] {kw} | {instruction}"
+            planned_instr.set(i)
             self.last_printed = instruction
           self.last_warn_ns = now_ns
         return
@@ -422,8 +434,8 @@ reactor Agent {
   }
 
   mode actuate {
-    reaction(dec, s, v) -> extInp, monitoring {=
-        kw = dec.value
+    reaction(ctrl, s, v) -> act, monitoring, planned_instr {=
+        kw = ctrl.value
         rd = s.value if s.value is not None else 0.0
         vel  = v.value  if v.value is not None else 0.0
 
@@ -433,13 +445,14 @@ reactor Agent {
 
             monitoring.set()
             return
-
+        i = f"[VERBAL] {kw} | Sent EmergencyBraking"
         if 0.0 < rd <= 25.0:
-            extInp.set(Steer(12).name) 
-            print(f"[ACTUATE] sent extInp={Steer(12).name}", flush=True)
+            act.set(Steer(12).name) 
+            
+            print(f"[ACTUATE] sent act={Steer(12).name}", flush=True)
         else:
             print("[ACTUATE] outside <=25m -> no action", flush=True)
-
+        planned_instr.set(i)
         monitoring.set()
     =}
   }
@@ -450,22 +463,24 @@ reactor Coach{
     input v
     input h
     input st
-    output extInp
+    output act
+    output instr
 
-    llm = new LlmDecision()
-    Agent = new Agent()
+    llm = new LlmInference()
+    Agent = new Planner()
 
     s -> llm.s
     v  -> llm.v
     h     -> llm.h
     st    -> llm.st
 
-    llm.dec    -> Agent.dec
-    llm.msg  -> Agent.msg
+    llm.control    -> Agent.ctrl
+    llm.instruction  -> Agent.instr
     s    -> Agent.s
     v               -> Agent.v
 
-    Agent.extInp -> extInp
+    Agent.act -> act
+    Agent.planned_instr -> instr
 }
 
 main reactor{
@@ -474,17 +489,18 @@ main reactor{
     en = new Environment()
     adc = new Coach()
 
-    d.accelerator -> c.accel after 500 ms
-    d.brake       -> c.brk after 500 ms
-    d.steer       -> c.steer after 500 ms
+    d.accelerator -> c.accel_in after 500 ms
+    d.brake       -> c.brake_in after 500 ms
+    d.steer       -> c.steer_in after 500 ms
     d.head        -> c.head after 500 ms
 
-    c.v      -> en.v
-    c.v       -> adc.v
-    c.h  -> adc.h
-    c.st -> adc.st
+    c.velocity      -> en.v
+    c.velocity       -> adc.v
+    c.head_pos  -> adc.h
+    c.steer -> adc.st
 
-    en.s -> adc.s
+    en.displacement -> adc.s
 
-    adc.extInp -> c.ext_inp after 200 ms
+    adc.act -> c.actuate_in after 200 ms
+    adc.instr -> d.instr 
 }
