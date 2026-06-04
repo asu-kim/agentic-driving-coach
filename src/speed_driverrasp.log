@@ -1,0 +1,2895 @@
+******* Using Python version: 3.12.3
+Time taken for wheel: 0.12
+The /dev/input/event0 is the path and shanwan Android GamePad is the name of the device.
+
+Webcam opened
+Time taken for cam: 1.44
+The devices are connected
+
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 560.22 
+[sterr,brake,accel] Physical time: 1562.53 
+[sterr,brake,accel] LAG: 1002.31 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.00392156862745098 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 560.22 
+[DRIVER REACTION 1] Physical time: 1562.95 
+[DRIVER REACTION 1] LAG: 1002.72 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 584.00 
+[sterr,brake,accel] Physical time: 1563.19 
+[sterr,brake,accel] LAG: 979.18 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.12941176470588237 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 584.00 
+[DRIVER REACTION 1] Physical time: 1563.57 
+[DRIVER REACTION 1] LAG: 979.57 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 608.00 
+[sterr,brake,accel] Physical time: 1563.91 
+[sterr,brake,accel] LAG: 955.91 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.24705882352941178 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 608.00 
+[DRIVER REACTION 1] Physical time: 1564.26 
+[DRIVER REACTION 1] LAG: 956.26 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 632.30 
+[sterr,brake,accel] Physical time: 1564.46 
+[sterr,brake,accel] LAG: 932.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.3568627450980392 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 632.30 
+[DRIVER REACTION 1] Physical time: 1564.79 
+[DRIVER REACTION 1] LAG: 932.49 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 656.01 
+[sterr,brake,accel] Physical time: 1564.98 
+[sterr,brake,accel] LAG: 908.98 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.41568627450980394 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 656.01 
+[DRIVER REACTION 1] Physical time: 1565.27 
+[DRIVER REACTION 1] LAG: 909.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 680.16 
+[sterr,brake,accel] Physical time: 1565.51 
+[sterr,brake,accel] LAG: 885.35 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5294117647058824 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 680.16 
+[DRIVER REACTION 1] Physical time: 1565.85 
+[DRIVER REACTION 1] LAG: 885.69 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 704.14 
+[sterr,brake,accel] Physical time: 1566.08 
+[sterr,brake,accel] LAG: 861.94 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.611764705882353 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 704.14 
+[DRIVER REACTION 1] Physical time: 1566.33 
+[DRIVER REACTION 1] LAG: 862.19 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 728.03 
+[sterr,brake,accel] Physical time: 1566.51 
+[sterr,brake,accel] LAG: 838.48 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.7098039215686275 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 728.03 
+[DRIVER REACTION 1] Physical time: 1566.77 
+[DRIVER REACTION 1] LAG: 838.74 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 752.08 
+[sterr,brake,accel] Physical time: 1567.00 
+[sterr,brake,accel] LAG: 814.92 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.803921568627451 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 752.08 
+[DRIVER REACTION 1] Physical time: 1567.31 
+[DRIVER REACTION 1] LAG: 815.23 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 776.12 
+[sterr,brake,accel] Physical time: 1567.55 
+[sterr,brake,accel] LAG: 791.43 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9137254901960784 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 776.12 
+[DRIVER REACTION 1] Physical time: 1567.80 
+[DRIVER REACTION 1] LAG: 791.68 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 800.07 
+[sterr,brake,accel] Physical time: 1567.96 
+[sterr,brake,accel] LAG: 767.88 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9921568627450981 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 800.07 
+[DRIVER REACTION 1] Physical time: 1568.14 
+[DRIVER REACTION 1] LAG: 768.07 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1104.08 
+[sterr,brake,accel] Physical time: 1568.30 
+[sterr,brake,accel] LAG: 464.22 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9568627450980393 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1104.08 
+[DRIVER REACTION 1] Physical time: 1568.48 
+[DRIVER REACTION 1] LAG: 464.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1128.16 
+[sterr,brake,accel] Physical time: 1568.59 
+[sterr,brake,accel] LAG: 440.43 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8745098039215686 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1128.16 
+[DRIVER REACTION 1] Physical time: 1569.20 
+[DRIVER REACTION 1] LAG: 441.04 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1152.10 
+[sterr,brake,accel] Physical time: 1569.34 
+[sterr,brake,accel] LAG: 417.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.7450980392156863 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1152.10 
+[DRIVER REACTION 1] Physical time: 1569.56 
+[DRIVER REACTION 1] LAG: 417.45 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1176.14 
+[sterr,brake,accel] Physical time: 1569.71 
+[sterr,brake,accel] LAG: 393.57 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6039215686274509 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1176.14 
+[DRIVER REACTION 1] Physical time: 1569.93 
+[DRIVER REACTION 1] LAG: 393.80 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1200.11 
+[sterr,brake,accel] Physical time: 1570.06 
+[sterr,brake,accel] LAG: 369.96 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.4666666666666667 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1200.11 
+[DRIVER REACTION 1] Physical time: 1570.26 
+[DRIVER REACTION 1] LAG: 370.16 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1224.11 
+[sterr,brake,accel] Physical time: 1570.40 
+[sterr,brake,accel] LAG: 346.29 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.36470588235294116 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1224.11 
+[DRIVER REACTION 1] Physical time: 1570.58 
+[DRIVER REACTION 1] LAG: 346.47 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1248.11 
+[sterr,brake,accel] Physical time: 1570.72 
+[sterr,brake,accel] LAG: 322.60 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.23921568627450981 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1248.11 
+[DRIVER REACTION 1] Physical time: 1570.88 
+[DRIVER REACTION 1] LAG: 322.77 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1272.15 
+[sterr,brake,accel] Physical time: 1570.99 
+[sterr,brake,accel] LAG: 298.84 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.12156862745098039 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1272.15 
+[DRIVER REACTION 1] Physical time: 1571.15 
+[DRIVER REACTION 1] LAG: 299.00 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 1296.22 
+[sterr,brake,accel] Physical time: 1571.25 
+[sterr,brake,accel] LAG: 275.03 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 1296.22 
+[DRIVER REACTION 1] Physical time: 1571.42 
+[DRIVER REACTION 1] LAG: 275.20 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 2008.52 
+[DEVICE READER CAM read] LAG: 8.52 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 2000.00 
+[DEVICE READER CAM TIMER] Physical time: 2008.78 
+[DEVICE READER CAM TIMER] LAG: 8.78 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 2000.00 
+[DRIVER] Physical time: 2009.31 
+[DRIVER] LAG: 9.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2048.24 
+[sterr,brake,accel] Physical time: 2048.49 
+[sterr,brake,accel] LAG: 0.25 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.03137254901960784 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2048.24 
+[DRIVER REACTION 1] Physical time: 2049.23 
+[DRIVER REACTION 1] LAG: 0.98 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2072.22 
+[sterr,brake,accel] Physical time: 2072.46 
+[sterr,brake,accel] LAG: 0.25 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.12156862745098039 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2072.22 
+[DRIVER REACTION 1] Physical time: 2073.16 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2096.25 
+[sterr,brake,accel] Physical time: 2096.53 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.20784313725490197 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2096.25 
+[DRIVER REACTION 1] Physical time: 2097.22 
+[DRIVER REACTION 1] LAG: 0.97 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2120.25 
+[sterr,brake,accel] Physical time: 2120.52 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.2901960784313726 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2120.25 
+[DRIVER REACTION 1] Physical time: 2121.26 
+[DRIVER REACTION 1] LAG: 1.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2144.27 
+[sterr,brake,accel] Physical time: 2144.53 
+[sterr,brake,accel] LAG: 0.26 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.35294117647058826 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2144.27 
+[DRIVER REACTION 1] Physical time: 2145.22 
+[DRIVER REACTION 1] LAG: 0.95 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2168.33 
+[sterr,brake,accel] Physical time: 2168.59 
+[sterr,brake,accel] LAG: 0.26 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.42745098039215684 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2168.33 
+[DRIVER REACTION 1] Physical time: 2169.20 
+[DRIVER REACTION 1] LAG: 0.86 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2192.44 
+[sterr,brake,accel] Physical time: 2192.80 
+[sterr,brake,accel] LAG: 0.36 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5019607843137255 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2192.44 
+[DRIVER REACTION 1] Physical time: 2193.54 
+[DRIVER REACTION 1] LAG: 1.10 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 2205.36 
+[DEVICE READER CAM read] LAG: 5.36 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 2200.00 
+[DEVICE READER CAM TIMER] Physical time: 2205.56 
+[DEVICE READER CAM TIMER] LAG: 5.56 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 2200.00 
+[DRIVER] Physical time: 2206.11 
+[DRIVER] LAG: 6.11 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2216.23 
+[sterr,brake,accel] Physical time: 2216.38 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5725490196078431 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2216.23 
+[DRIVER REACTION 1] Physical time: 2216.73 
+[DRIVER REACTION 1] LAG: 0.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2240.23 
+[sterr,brake,accel] Physical time: 2240.49 
+[sterr,brake,accel] LAG: 0.26 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6274509803921569 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2240.23 
+[DRIVER REACTION 1] Physical time: 2241.17 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2264.28 
+[sterr,brake,accel] Physical time: 2264.57 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6823529411764706 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2264.28 
+[DRIVER REACTION 1] Physical time: 2265.28 
+[DRIVER REACTION 1] LAG: 1.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2288.32 
+[sterr,brake,accel] Physical time: 2288.60 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.7450980392156863 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2288.32 
+[DRIVER REACTION 1] Physical time: 2289.46 
+[DRIVER REACTION 1] LAG: 1.14 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2312.28 
+[sterr,brake,accel] Physical time: 2312.55 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8117647058823529 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2312.28 
+[DRIVER REACTION 1] Physical time: 2313.22 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2336.31 
+[sterr,brake,accel] Physical time: 2336.60 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8745098039215686 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2336.31 
+[DRIVER REACTION 1] Physical time: 2337.34 
+[DRIVER REACTION 1] LAG: 1.03 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2360.24 
+[sterr,brake,accel] Physical time: 2360.48 
+[sterr,brake,accel] LAG: 0.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9411764705882353 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2360.24 
+[DRIVER REACTION 1] Physical time: 2361.13 
+[DRIVER REACTION 1] LAG: 0.89 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2384.24 
+[sterr,brake,accel] Physical time: 2384.48 
+[sterr,brake,accel] LAG: 0.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9764705882352941 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2384.24 
+[DRIVER REACTION 1] Physical time: 2385.15 
+[DRIVER REACTION 1] LAG: 0.91 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 2406.78 
+[DEVICE READER CAM read] LAG: 6.78 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 2400.00 
+[DEVICE READER CAM TIMER] Physical time: 2406.98 
+[DEVICE READER CAM TIMER] LAG: 6.98 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 2400.00 
+[DRIVER] Physical time: 2407.43 
+[DRIVER] LAG: 7.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 2609.32 
+[DEVICE READER CAM read] LAG: 9.32 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 2600.00 
+[DEVICE READER CAM TIMER] Physical time: 2609.59 
+[DEVICE READER CAM TIMER] LAG: 9.59 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 2600.00 
+[DRIVER] Physical time: 2610.29 
+[DRIVER] LAG: 10.29 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2680.35 
+[sterr,brake,accel] Physical time: 2680.52 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9450980392156862 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2680.35 
+[DRIVER REACTION 1] Physical time: 2680.90 
+[DRIVER REACTION 1] LAG: 0.56 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2704.36 
+[sterr,brake,accel] Physical time: 2704.50 
+[sterr,brake,accel] LAG: 0.14 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9019607843137255 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2704.36 
+[DRIVER REACTION 1] Physical time: 2704.93 
+[DRIVER REACTION 1] LAG: 0.57 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2728.29 
+[sterr,brake,accel] Physical time: 2728.43 
+[sterr,brake,accel] LAG: 0.14 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.792156862745098 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2728.29 
+[DRIVER REACTION 1] Physical time: 2728.79 
+[DRIVER REACTION 1] LAG: 0.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2752.31 
+[sterr,brake,accel] Physical time: 2752.46 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6784313725490196 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2752.31 
+[DRIVER REACTION 1] Physical time: 2752.81 
+[DRIVER REACTION 1] LAG: 0.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2776.33 
+[sterr,brake,accel] Physical time: 2776.50 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5647058823529412 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2776.33 
+[DRIVER REACTION 1] Physical time: 2776.90 
+[DRIVER REACTION 1] LAG: 0.57 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 2808.57 
+[DEVICE READER CAM read] LAG: 8.57 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 2800.00 
+[DEVICE READER CAM TIMER] Physical time: 2808.84 
+[DEVICE READER CAM TIMER] LAG: 8.84 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 2800.00 
+[FACE DETECTOR] Physical time: 2956.53 
+[FACE DETECTOR] LAG: 156.53 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5647058823529412 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2800.00 
+[DRIVER REACTION 1] Physical time: 2956.91 
+[DRIVER REACTION 1] LAG: 156.91 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 2800.00 
+[DRIVER] Physical time: 2957.06 
+[DRIVER] LAG: 157.06 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2800.34 
+[sterr,brake,accel] Physical time: 2957.93 
+[sterr,brake,accel] LAG: 157.60 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.4392156862745098 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2800.34 
+[DRIVER REACTION 1] Physical time: 2958.57 
+[DRIVER REACTION 1] LAG: 158.23 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2824.41 
+[sterr,brake,accel] Physical time: 2959.09 
+[sterr,brake,accel] LAG: 134.67 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.3607843137254902 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2824.41 
+[DRIVER REACTION 1] Physical time: 2959.69 
+[DRIVER REACTION 1] LAG: 135.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2848.21 
+[sterr,brake,accel] Physical time: 2960.12 
+[sterr,brake,accel] LAG: 111.91 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.25098039215686274 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2848.21 
+[DRIVER REACTION 1] Physical time: 2960.72 
+[DRIVER REACTION 1] LAG: 112.51 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2872.36 
+[sterr,brake,accel] Physical time: 2961.22 
+[sterr,brake,accel] LAG: 88.86 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.1450980392156863 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2872.36 
+[DRIVER REACTION 1] Physical time: 2961.86 
+[DRIVER REACTION 1] LAG: 89.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 2896.30 
+[sterr,brake,accel] Physical time: 2962.28 
+[sterr,brake,accel] LAG: 65.98 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.058823529411764705 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 2896.30 
+[DRIVER REACTION 1] Physical time: 2962.77 
+[DRIVER REACTION 1] LAG: 66.47 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 3003.92 
+[DEVICE READER CAM read] LAG: 3.92 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 3000.00 
+[DEVICE READER CAM TIMER] Physical time: 3004.10 
+[DEVICE READER CAM TIMER] LAG: 4.10 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 3000.00 
+[DRIVER] Physical time: 3004.58 
+[DRIVER] LAG: 4.58 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 3204.58 
+[DEVICE READER CAM read] LAG: 4.58 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 3200.00 
+[DEVICE READER CAM TIMER] Physical time: 3204.86 
+[DEVICE READER CAM TIMER] LAG: 4.86 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 3200.00 
+[DRIVER] Physical time: 3205.45 
+[DRIVER] LAG: 5.45 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3280.66 
+[sterr,brake,accel] Physical time: 3280.83 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.03529411764705882 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3280.66 
+[DRIVER REACTION 1] Physical time: 3281.25 
+[DRIVER REACTION 1] LAG: 0.59 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3304.40 
+[sterr,brake,accel] Physical time: 3304.56 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.11764705882352941 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3304.40 
+[DRIVER REACTION 1] Physical time: 3304.91 
+[DRIVER REACTION 1] LAG: 0.51 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3328.39 
+[sterr,brake,accel] Physical time: 3328.53 
+[sterr,brake,accel] LAG: 0.14 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.21176470588235294 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3328.39 
+[DRIVER REACTION 1] Physical time: 3328.89 
+[DRIVER REACTION 1] LAG: 0.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3352.42 
+[sterr,brake,accel] Physical time: 3352.59 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.30196078431372547 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3352.42 
+[DRIVER REACTION 1] Physical time: 3353.05 
+[DRIVER REACTION 1] LAG: 0.63 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3376.38 
+[sterr,brake,accel] Physical time: 3376.52 
+[sterr,brake,accel] LAG: 0.13 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.40784313725490196 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3376.38 
+[DRIVER REACTION 1] Physical time: 3376.80 
+[DRIVER REACTION 1] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 3404.31 
+[DEVICE READER CAM read] LAG: 4.31 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 3400.00 
+[DEVICE READER CAM TIMER] Physical time: 3404.55 
+[DEVICE READER CAM TIMER] LAG: 4.55 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 3400.00 
+[DRIVER] Physical time: 3404.83 
+[DRIVER] LAG: 4.83 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3400.43 
+[sterr,brake,accel] Physical time: 3406.09 
+[sterr,brake,accel] LAG: 5.65 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5215686274509804 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3400.43 
+[DRIVER REACTION 1] Physical time: 3406.84 
+[DRIVER REACTION 1] LAG: 6.41 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3424.43 
+[sterr,brake,accel] Physical time: 3424.73 
+[sterr,brake,accel] LAG: 0.31 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.596078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3424.43 
+[DRIVER REACTION 1] Physical time: 3425.35 
+[DRIVER REACTION 1] LAG: 0.92 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3448.40 
+[sterr,brake,accel] Physical time: 3448.70 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.7176470588235294 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3448.40 
+[DRIVER REACTION 1] Physical time: 3449.30 
+[DRIVER REACTION 1] LAG: 0.90 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3472.50 
+[sterr,brake,accel] Physical time: 3472.83 
+[sterr,brake,accel] LAG: 0.33 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8196078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3472.50 
+[DRIVER REACTION 1] Physical time: 3473.48 
+[DRIVER REACTION 1] LAG: 0.98 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3496.44 
+[sterr,brake,accel] Physical time: 3496.72 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9058823529411765 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3496.44 
+[DRIVER REACTION 1] Physical time: 3497.32 
+[DRIVER REACTION 1] LAG: 0.88 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3520.42 
+[sterr,brake,accel] Physical time: 3520.76 
+[sterr,brake,accel] LAG: 0.34 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.984313725490196 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3520.42 
+[DRIVER REACTION 1] Physical time: 3521.39 
+[DRIVER REACTION 1] LAG: 0.97 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 3604.46 
+[DEVICE READER CAM read] LAG: 4.46 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 3600.00 
+[DEVICE READER CAM TIMER] Physical time: 3604.76 
+[DEVICE READER CAM TIMER] LAG: 4.76 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 3600.00 
+[DRIVER] Physical time: 3605.35 
+[DRIVER] LAG: 5.35 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 3804.39 
+[DEVICE READER CAM read] LAG: 4.39 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 3800.00 
+[DEVICE READER CAM TIMER] Physical time: 3804.67 
+[DEVICE READER CAM TIMER] LAG: 4.67 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 3800.00 
+[FACE DETECTOR] Physical time: 3943.42 
+[FACE DETECTOR] LAG: 143.42 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.984313725490196 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3800.00 
+[DRIVER REACTION 1] Physical time: 3943.86 
+[DRIVER REACTION 1] LAG: 143.86 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 3800.00 
+[DRIVER] Physical time: 3944.04 
+[DRIVER] LAG: 144.04 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3800.51 
+[sterr,brake,accel] Physical time: 3946.07 
+[sterr,brake,accel] LAG: 145.55 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9568627450980393 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3800.51 
+[DRIVER REACTION 1] Physical time: 3946.70 
+[DRIVER REACTION 1] LAG: 146.19 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3824.40 
+[sterr,brake,accel] Physical time: 3947.10 
+[sterr,brake,accel] LAG: 122.70 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9333333333333333 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3824.40 
+[DRIVER REACTION 1] Physical time: 3947.67 
+[DRIVER REACTION 1] LAG: 123.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3848.32 
+[sterr,brake,accel] Physical time: 3948.09 
+[sterr,brake,accel] LAG: 99.77 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8470588235294118 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3848.32 
+[DRIVER REACTION 1] Physical time: 3948.89 
+[DRIVER REACTION 1] LAG: 100.57 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3872.41 
+[sterr,brake,accel] Physical time: 3949.32 
+[sterr,brake,accel] LAG: 76.91 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.7764705882352941 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3872.41 
+[DRIVER REACTION 1] Physical time: 3949.89 
+[DRIVER REACTION 1] LAG: 77.48 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3896.41 
+[sterr,brake,accel] Physical time: 3950.19 
+[sterr,brake,accel] LAG: 53.78 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6784313725490196 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3896.41 
+[DRIVER REACTION 1] Physical time: 3950.68 
+[DRIVER REACTION 1] LAG: 54.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3920.46 
+[sterr,brake,accel] Physical time: 3950.97 
+[sterr,brake,accel] LAG: 30.52 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.596078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3920.46 
+[DRIVER REACTION 1] Physical time: 3951.40 
+[DRIVER REACTION 1] LAG: 30.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3945.41 
+[sterr,brake,accel] Physical time: 3951.74 
+[sterr,brake,accel] LAG: 6.34 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.47058823529411764 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3945.41 
+[DRIVER REACTION 1] Physical time: 3952.21 
+[DRIVER REACTION 1] LAG: 6.80 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3968.36 
+[sterr,brake,accel] Physical time: 3968.54 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.3568627450980392 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3968.36 
+[DRIVER REACTION 1] Physical time: 3968.97 
+[DRIVER REACTION 1] LAG: 0.60 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 3992.47 
+[sterr,brake,accel] Physical time: 3992.79 
+[sterr,brake,accel] LAG: 0.32 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.2549019607843137 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 3992.47 
+[DRIVER REACTION 1] Physical time: 3993.40 
+[DRIVER REACTION 1] LAG: 0.93 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4007.74 
+[DEVICE READER CAM read] LAG: 7.74 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4000.00 
+[DEVICE READER CAM TIMER] Physical time: 4007.93 
+[DEVICE READER CAM TIMER] LAG: 7.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4000.00 
+[DRIVER] Physical time: 4008.40 
+[DRIVER] LAG: 8.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 4016.44 
+[sterr,brake,accel] Physical time: 4016.59 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.12941176470588237 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 4016.44 
+[DRIVER REACTION 1] Physical time: 4016.99 
+[DRIVER REACTION 1] LAG: 0.55 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 4040.57 
+[sterr,brake,accel] Physical time: 4040.85 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0196078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 4040.57 
+[DRIVER REACTION 1] Physical time: 4041.47 
+[DRIVER REACTION 1] LAG: 0.90 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4204.49 
+[DEVICE READER CAM read] LAG: 4.49 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4200.00 
+[DEVICE READER CAM TIMER] Physical time: 4204.77 
+[DEVICE READER CAM TIMER] LAG: 4.77 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4200.00 
+[DRIVER] Physical time: 4205.36 
+[DRIVER] LAG: 5.36 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4404.70 
+[DEVICE READER CAM read] LAG: 4.70 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4400.00 
+[DEVICE READER CAM TIMER] Physical time: 4404.93 
+[DEVICE READER CAM TIMER] LAG: 4.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4400.00 
+[DRIVER] Physical time: 4405.52 
+[DRIVER] LAG: 5.52 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4604.51 
+[DEVICE READER CAM read] LAG: 4.51 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4600.00 
+[DEVICE READER CAM TIMER] Physical time: 4604.82 
+[DEVICE READER CAM TIMER] LAG: 4.82 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4600.00 
+[DRIVER] Physical time: 4605.44 
+[DRIVER] LAG: 5.44 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4809.12 
+[DEVICE READER CAM read] LAG: 9.12 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4800.00 
+[DEVICE READER CAM TIMER] Physical time: 4809.37 
+[DEVICE READER CAM TIMER] LAG: 9.37 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 4800.00 
+[FACE DETECTOR] Physical time: 4951.53 
+[FACE DETECTOR] LAG: 151.53 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0196078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 4800.00 
+[DRIVER REACTION 1] Physical time: 4952.77 
+[DRIVER REACTION 1] LAG: 152.77 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4800.00 
+[DRIVER] Physical time: 4953.14 
+[DRIVER] LAG: 153.14 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5004.70 
+[DEVICE READER CAM read] LAG: 4.70 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5000.00 
+[DEVICE READER CAM TIMER] Physical time: 5004.93 
+[DEVICE READER CAM TIMER] LAG: 4.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5000.00 
+[DRIVER] Physical time: 5005.21 
+[DRIVER] LAG: 5.21 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5204.95 
+[DEVICE READER CAM read] LAG: 4.95 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5200.00 
+[DEVICE READER CAM TIMER] Physical time: 5205.18 
+[DEVICE READER CAM TIMER] LAG: 5.18 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5200.00 
+[DRIVER] Physical time: 5205.84 
+[DRIVER] LAG: 5.84 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5404.35 
+[DEVICE READER CAM read] LAG: 4.35 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5400.00 
+[DEVICE READER CAM TIMER] Physical time: 5404.59 
+[DEVICE READER CAM TIMER] LAG: 4.59 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5400.00 
+[DRIVER] Physical time: 5404.84 
+[DRIVER] LAG: 4.84 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5605.15 
+[DEVICE READER CAM read] LAG: 5.15 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5600.00 
+[DEVICE READER CAM TIMER] Physical time: 5605.42 
+[DEVICE READER CAM TIMER] LAG: 5.42 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5600.00 
+[DRIVER] Physical time: 5606.13 
+[DRIVER] LAG: 6.13 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5804.45 
+[DEVICE READER CAM read] LAG: 4.45 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5800.00 
+[DEVICE READER CAM TIMER] Physical time: 5804.73 
+[DEVICE READER CAM TIMER] LAG: 4.73 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 5800.00 
+[FACE DETECTOR] Physical time: 5949.27 
+[FACE DETECTOR] LAG: 149.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0196078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 5800.00 
+[DRIVER REACTION 1] Physical time: 5950.76 
+[DRIVER REACTION 1] LAG: 150.76 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5800.00 
+[DRIVER] Physical time: 5951.06 
+[DRIVER] LAG: 151.06 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6005.51 
+[DEVICE READER CAM read] LAG: 5.51 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6000.00 
+[DEVICE READER CAM TIMER] Physical time: 6005.80 
+[DEVICE READER CAM TIMER] LAG: 5.80 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6000.00 
+[DRIVER] Physical time: 6006.02 
+[DRIVER] LAG: 6.02 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6184.87 
+[sterr,brake,accel] Physical time: 6185.14 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.043137254901960784 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6184.87 
+[DRIVER REACTION 1] Physical time: 6185.89 
+[DRIVER REACTION 1] LAG: 1.02 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6203.70 
+[DEVICE READER CAM read] LAG: 3.70 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6200.00 
+[DEVICE READER CAM TIMER] Physical time: 6203.89 
+[DEVICE READER CAM TIMER] LAG: 3.89 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6200.00 
+[DRIVER] Physical time: 6204.35 
+[DRIVER] LAG: 4.35 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6224.82 
+[sterr,brake,accel] Physical time: 6224.96 
+[sterr,brake,accel] LAG: 0.14 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07058823529411765 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6224.82 
+[DRIVER REACTION 1] Physical time: 6225.25 
+[DRIVER REACTION 1] LAG: 0.43 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6264.83 
+[sterr,brake,accel] Physical time: 6265.01 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.09803921568627451 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6264.83 
+[DRIVER REACTION 1] Physical time: 6265.36 
+[DRIVER REACTION 1] LAG: 0.53 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6296.78 
+[sterr,brake,accel] Physical time: 6296.95 
+[sterr,brake,accel] LAG: 0.18 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.12156862745098039 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6296.78 
+[DRIVER REACTION 1] Physical time: 6297.27 
+[DRIVER REACTION 1] LAG: 0.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6360.85 
+[sterr,brake,accel] Physical time: 6361.03 
+[sterr,brake,accel] LAG: 0.18 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.14901960784313725 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6360.85 
+[DRIVER REACTION 1] Physical time: 6361.39 
+[DRIVER REACTION 1] LAG: 0.54 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6402.83 
+[DEVICE READER CAM read] LAG: 2.83 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6400.00 
+[DEVICE READER CAM TIMER] Physical time: 6403.00 
+[DEVICE READER CAM TIMER] LAG: 3.00 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6400.00 
+[DRIVER] Physical time: 6403.12 
+[DRIVER] LAG: 3.12 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6456.91 
+[sterr,brake,accel] Physical time: 6457.19 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.17254901960784313 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6456.91 
+[DRIVER REACTION 1] Physical time: 6457.92 
+[DRIVER REACTION 1] LAG: 1.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6552.94 
+[sterr,brake,accel] Physical time: 6553.24 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.19607843137254902 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6552.94 
+[DRIVER REACTION 1] Physical time: 6554.09 
+[DRIVER REACTION 1] LAG: 1.15 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6609.70 
+[DEVICE READER CAM read] LAG: 9.70 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6600.00 
+[DEVICE READER CAM TIMER] Physical time: 6609.93 
+[DEVICE READER CAM TIMER] LAG: 9.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6600.00 
+[DRIVER] Physical time: 6610.56 
+[DRIVER] LAG: 10.56 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6609.07 
+[sterr,brake,accel] Physical time: 6612.03 
+[sterr,brake,accel] LAG: 2.96 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.2196078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6609.07 
+[DRIVER REACTION 1] Physical time: 6612.39 
+[DRIVER REACTION 1] LAG: 3.32 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6640.82 
+[sterr,brake,accel] Physical time: 6640.99 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.24313725490196078 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6640.82 
+[DRIVER REACTION 1] Physical time: 6641.31 
+[DRIVER REACTION 1] LAG: 0.49 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6664.84 
+[sterr,brake,accel] Physical time: 6664.99 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.26666666666666666 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6664.84 
+[DRIVER REACTION 1] Physical time: 6665.30 
+[DRIVER REACTION 1] LAG: 0.45 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6688.91 
+[sterr,brake,accel] Physical time: 6689.07 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.2901960784313726 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6688.91 
+[DRIVER REACTION 1] Physical time: 6689.41 
+[DRIVER REACTION 1] LAG: 0.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6712.92 
+[sterr,brake,accel] Physical time: 6713.08 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.32941176470588235 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6712.92 
+[DRIVER REACTION 1] Physical time: 6713.37 
+[DRIVER REACTION 1] LAG: 0.45 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6736.90 
+[sterr,brake,accel] Physical time: 6737.13 
+[sterr,brake,accel] LAG: 0.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.36470588235294116 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6736.90 
+[DRIVER REACTION 1] Physical time: 6737.46 
+[DRIVER REACTION 1] LAG: 0.56 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6760.84 
+[sterr,brake,accel] Physical time: 6760.99 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.40784313725490196 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6760.84 
+[DRIVER REACTION 1] Physical time: 6761.29 
+[DRIVER REACTION 1] LAG: 0.45 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6784.83 
+[sterr,brake,accel] Physical time: 6784.98 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.4392156862745098 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6784.83 
+[DRIVER REACTION 1] Physical time: 6785.27 
+[DRIVER REACTION 1] LAG: 0.45 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6804.39 
+[DEVICE READER CAM read] LAG: 4.39 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6800.00 
+[DEVICE READER CAM TIMER] Physical time: 6804.67 
+[DEVICE READER CAM TIMER] LAG: 4.67 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 6800.00 
+[FACE DETECTOR] Physical time: 6941.82 
+[FACE DETECTOR] LAG: 141.82 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.4392156862745098 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6800.00 
+[DRIVER REACTION 1] Physical time: 6942.16 
+[DRIVER REACTION 1] LAG: 142.16 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6800.00 
+[DRIVER] Physical time: 6942.32 
+[DRIVER] LAG: 142.32 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6809.09 
+[sterr,brake,accel] Physical time: 6943.90 
+[sterr,brake,accel] LAG: 134.81 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.48627450980392156 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6809.09 
+[DRIVER REACTION 1] Physical time: 6944.50 
+[DRIVER REACTION 1] LAG: 135.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6832.74 
+[sterr,brake,accel] Physical time: 6945.18 
+[sterr,brake,accel] LAG: 112.44 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5294117647058824 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6832.74 
+[DRIVER REACTION 1] Physical time: 6945.81 
+[DRIVER REACTION 1] LAG: 113.06 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6856.80 
+[sterr,brake,accel] Physical time: 6946.20 
+[sterr,brake,accel] LAG: 89.40 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5803921568627451 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6856.80 
+[DRIVER REACTION 1] Physical time: 6946.76 
+[DRIVER REACTION 1] LAG: 89.96 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6880.83 
+[sterr,brake,accel] Physical time: 6947.14 
+[sterr,brake,accel] LAG: 66.31 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6235294117647059 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6880.83 
+[DRIVER REACTION 1] Physical time: 6947.66 
+[DRIVER REACTION 1] LAG: 66.83 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6904.85 
+[sterr,brake,accel] Physical time: 6948.07 
+[sterr,brake,accel] LAG: 43.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6549019607843137 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6904.85 
+[DRIVER REACTION 1] Physical time: 6948.55 
+[DRIVER REACTION 1] LAG: 43.71 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6928.92 
+[sterr,brake,accel] Physical time: 6948.93 
+[sterr,brake,accel] LAG: 20.01 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6980392156862745 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6928.92 
+[DRIVER REACTION 1] Physical time: 6949.40 
+[DRIVER REACTION 1] LAG: 20.48 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6952.99 
+[sterr,brake,accel] Physical time: 6953.21 
+[sterr,brake,accel] LAG: 0.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.7411764705882353 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6952.99 
+[DRIVER REACTION 1] Physical time: 6953.81 
+[DRIVER REACTION 1] LAG: 0.83 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 6976.88 
+[sterr,brake,accel] Physical time: 6977.17 
+[sterr,brake,accel] LAG: 0.29 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.7803921568627451 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6976.88 
+[DRIVER REACTION 1] Physical time: 6977.89 
+[DRIVER REACTION 1] LAG: 1.01 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7004.42 
+[DEVICE READER CAM read] LAG: 4.42 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7000.00 
+[DEVICE READER CAM TIMER] Physical time: 7004.69 
+[DEVICE READER CAM TIMER] LAG: 4.69 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7000.00 
+[DRIVER] Physical time: 7005.94 
+[DRIVER] LAG: 5.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 7000.95 
+[sterr,brake,accel] Physical time: 7007.56 
+[sterr,brake,accel] LAG: 6.61 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8196078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 7000.95 
+[DRIVER REACTION 1] Physical time: 7007.96 
+[DRIVER REACTION 1] LAG: 7.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 7024.83 
+[sterr,brake,accel] Physical time: 7024.97 
+[sterr,brake,accel] LAG: 0.14 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8509803921568627 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 7024.83 
+[DRIVER REACTION 1] Physical time: 7025.23 
+[DRIVER REACTION 1] LAG: 0.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 7048.87 
+[sterr,brake,accel] Physical time: 7049.02 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8901960784313725 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 7048.87 
+[DRIVER REACTION 1] Physical time: 7049.39 
+[DRIVER REACTION 1] LAG: 0.52 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 7072.86 
+[sterr,brake,accel] Physical time: 7073.02 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9333333333333333 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 7072.86 
+[DRIVER REACTION 1] Physical time: 7073.32 
+[DRIVER REACTION 1] LAG: 0.46 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 7096.88 
+[sterr,brake,accel] Physical time: 7097.06 
+[sterr,brake,accel] LAG: 0.18 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9568627450980393 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 7096.88 
+[DRIVER REACTION 1] Physical time: 7097.38 
+[DRIVER REACTION 1] LAG: 0.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 7120.90 
+[sterr,brake,accel] Physical time: 7121.06 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9921568627450981 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 7120.90 
+[DRIVER REACTION 1] Physical time: 7121.38 
+[DRIVER REACTION 1] LAG: 0.49 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7204.56 
+[DEVICE READER CAM read] LAG: 4.56 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7200.00 
+[DEVICE READER CAM TIMER] Physical time: 7205.04 
+[DEVICE READER CAM TIMER] LAG: 5.04 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7200.00 
+[DRIVER] Physical time: 7205.25 
+[DRIVER] LAG: 5.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7405.35 
+[DEVICE READER CAM read] LAG: 5.35 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7400.00 
+[DEVICE READER CAM TIMER] Physical time: 7405.61 
+[DEVICE READER CAM TIMER] LAG: 5.61 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7400.00 
+[DRIVER] Physical time: 7406.49 
+[DRIVER] LAG: 6.49 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7604.55 
+[DEVICE READER CAM read] LAG: 4.55 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7600.00 
+[DEVICE READER CAM TIMER] Physical time: 7605.03 
+[DEVICE READER CAM TIMER] LAG: 5.03 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7600.00 
+[DRIVER] Physical time: 7605.51 
+[DRIVER] LAG: 5.51 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7804.56 
+[DEVICE READER CAM read] LAG: 4.56 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7800.00 
+[DEVICE READER CAM TIMER] Physical time: 7804.84 
+[DEVICE READER CAM TIMER] LAG: 4.84 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 7800.00 
+[FACE DETECTOR] Physical time: 7948.95 
+[FACE DETECTOR] LAG: 148.95 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9921568627450981 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 7800.00 
+[DRIVER REACTION 1] Physical time: 7949.52 
+[DRIVER REACTION 1] LAG: 149.52 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7800.00 
+[DRIVER] Physical time: 7949.87 
+[DRIVER] LAG: 149.87 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8005.06 
+[DEVICE READER CAM read] LAG: 5.06 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8000.00 
+[DEVICE READER CAM TIMER] Physical time: 8005.31 
+[DEVICE READER CAM TIMER] LAG: 5.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8000.00 
+[DRIVER] Physical time: 8005.54 
+[DRIVER] LAG: 5.54 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8032.99 
+[sterr,brake,accel] Physical time: 8033.28 
+[sterr,brake,accel] LAG: 0.29 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9568627450980393 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8032.99 
+[DRIVER REACTION 1] Physical time: 8034.05 
+[DRIVER REACTION 1] LAG: 1.06 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8057.00 
+[sterr,brake,accel] Physical time: 8057.27 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.9137254901960784 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8057.00 
+[DRIVER REACTION 1] Physical time: 8057.99 
+[DRIVER REACTION 1] LAG: 0.99 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8081.16 
+[sterr,brake,accel] Physical time: 8081.44 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.8392156862745098 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8081.16 
+[DRIVER REACTION 1] Physical time: 8082.18 
+[DRIVER REACTION 1] LAG: 1.02 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8105.14 
+[sterr,brake,accel] Physical time: 8105.46 
+[sterr,brake,accel] LAG: 0.32 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.7607843137254902 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8105.14 
+[DRIVER REACTION 1] Physical time: 8106.38 
+[DRIVER REACTION 1] LAG: 1.24 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8129.06 
+[sterr,brake,accel] Physical time: 8129.32 
+[sterr,brake,accel] LAG: 0.26 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.6470588235294118 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8129.06 
+[DRIVER REACTION 1] Physical time: 8130.01 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8152.99 
+[sterr,brake,accel] Physical time: 8153.24 
+[sterr,brake,accel] LAG: 0.25 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.5294117647058824 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8152.99 
+[DRIVER REACTION 1] Physical time: 8153.91 
+[DRIVER REACTION 1] LAG: 0.92 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8177.09 
+[sterr,brake,accel] Physical time: 8177.37 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.396078431372549 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8177.09 
+[DRIVER REACTION 1] Physical time: 8178.10 
+[DRIVER REACTION 1] LAG: 1.00 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8203.97 
+[DEVICE READER CAM read] LAG: 3.97 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8200.00 
+[DEVICE READER CAM TIMER] Physical time: 8204.18 
+[DEVICE READER CAM TIMER] LAG: 4.18 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8200.00 
+[DRIVER] Physical time: 8204.75 
+[DRIVER] LAG: 4.75 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8201.06 
+[sterr,brake,accel] Physical time: 8206.28 
+[sterr,brake,accel] LAG: 5.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.23529411764705882 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8201.06 
+[DRIVER REACTION 1] Physical time: 8206.92 
+[DRIVER REACTION 1] LAG: 5.86 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 8225.04 
+[sterr,brake,accel] Physical time: 8225.26 
+[sterr,brake,accel] LAG: 0.22 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8225.04 
+[DRIVER REACTION 1] Physical time: 8225.85 
+[DRIVER REACTION 1] LAG: 0.81 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8405.15 
+[DEVICE READER CAM read] LAG: 5.15 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8400.00 
+[DEVICE READER CAM TIMER] Physical time: 8405.41 
+[DEVICE READER CAM TIMER] LAG: 5.41 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8400.00 
+[DRIVER] Physical time: 8406.14 
+[DRIVER] LAG: 6.14 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8605.30 
+[DEVICE READER CAM read] LAG: 5.30 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8600.00 
+[DEVICE READER CAM TIMER] Physical time: 8605.55 
+[DEVICE READER CAM TIMER] LAG: 5.55 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8600.00 
+[DRIVER] Physical time: 8606.44 
+[DRIVER] LAG: 6.44 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8809.01 
+[DEVICE READER CAM read] LAG: 9.01 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8800.00 
+[DEVICE READER CAM TIMER] Physical time: 8809.29 
+[DEVICE READER CAM TIMER] LAG: 9.29 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 8800.00 
+[FACE DETECTOR] Physical time: 8948.52 
+[FACE DETECTOR] LAG: 148.52 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8800.00 
+[DRIVER REACTION 1] Physical time: 8949.21 
+[DRIVER REACTION 1] LAG: 149.21 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8800.00 
+[DRIVER] Physical time: 8949.54 
+[DRIVER] LAG: 149.54 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9004.49 
+[DEVICE READER CAM read] LAG: 4.49 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9000.00 
+[DEVICE READER CAM TIMER] Physical time: 9004.77 
+[DEVICE READER CAM TIMER] LAG: 4.77 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9000.00 
+[DRIVER] Physical time: 9004.97 
+[DRIVER] LAG: 4.97 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9204.48 
+[DEVICE READER CAM read] LAG: 4.48 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9200.00 
+[DEVICE READER CAM TIMER] Physical time: 9204.77 
+[DEVICE READER CAM TIMER] LAG: 4.77 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9200.00 
+[DRIVER] Physical time: 9205.37 
+[DRIVER] LAG: 5.37 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9297.34 
+[sterr,brake,accel] Physical time: 9297.68 
+[sterr,brake,accel] LAG: 0.34 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.011764705882352941
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9297.34 
+[DRIVER REACTION 1] Physical time: 9298.36 
+[DRIVER REACTION 1] LAG: 1.02 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9321.22 
+[sterr,brake,accel] Physical time: 9321.49 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.047058823529411764
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9321.22 
+[DRIVER REACTION 1] Physical time: 9322.24 
+[DRIVER REACTION 1] LAG: 1.02 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9345.16 
+[sterr,brake,accel] Physical time: 9345.43 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.09411764705882353
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9345.16 
+[DRIVER REACTION 1] Physical time: 9346.08 
+[DRIVER REACTION 1] LAG: 0.92 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9369.13 
+[sterr,brake,accel] Physical time: 9369.36 
+[sterr,brake,accel] LAG: 0.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.13333333333333333
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9369.13 
+[DRIVER REACTION 1] Physical time: 9370.07 
+[DRIVER REACTION 1] LAG: 0.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9393.14 
+[sterr,brake,accel] Physical time: 9393.37 
+[sterr,brake,accel] LAG: 0.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.17647058823529413
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9393.14 
+[DRIVER REACTION 1] Physical time: 9393.98 
+[DRIVER REACTION 1] LAG: 0.84 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9407.69 
+[DEVICE READER CAM read] LAG: 7.69 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9400.00 
+[DEVICE READER CAM TIMER] Physical time: 9407.92 
+[DEVICE READER CAM TIMER] LAG: 7.92 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9400.00 
+[DRIVER] Physical time: 9408.31 
+[DRIVER] LAG: 8.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9417.10 
+[sterr,brake,accel] Physical time: 9417.27 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.2196078431372549
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9417.10 
+[DRIVER REACTION 1] Physical time: 9417.72 
+[DRIVER REACTION 1] LAG: 0.63 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9441.15 
+[sterr,brake,accel] Physical time: 9441.39 
+[sterr,brake,accel] LAG: 0.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.26666666666666666
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9441.15 
+[DRIVER REACTION 1] Physical time: 9442.03 
+[DRIVER REACTION 1] LAG: 0.88 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9465.21 
+[sterr,brake,accel] Physical time: 9465.49 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.30980392156862746
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9465.21 
+[DRIVER REACTION 1] Physical time: 9466.17 
+[DRIVER REACTION 1] LAG: 0.96 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9489.20 
+[sterr,brake,accel] Physical time: 9489.49 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.3607843137254902
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9489.20 
+[DRIVER REACTION 1] Physical time: 9490.21 
+[DRIVER REACTION 1] LAG: 1.00 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9513.20 
+[sterr,brake,accel] Physical time: 9513.48 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.4196078431372549
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9513.20 
+[DRIVER REACTION 1] Physical time: 9514.15 
+[DRIVER REACTION 1] LAG: 0.95 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9537.20 
+[sterr,brake,accel] Physical time: 9537.50 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.48627450980392156
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9537.20 
+[DRIVER REACTION 1] Physical time: 9538.29 
+[DRIVER REACTION 1] LAG: 1.09 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9561.21 
+[sterr,brake,accel] Physical time: 9561.48 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.5490196078431373
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9561.21 
+[DRIVER REACTION 1] Physical time: 9562.15 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9585.19 
+[sterr,brake,accel] Physical time: 9585.46 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.6078431372549019
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9585.19 
+[DRIVER REACTION 1] Physical time: 9586.13 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9604.59 
+[DEVICE READER CAM read] LAG: 4.59 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9600.00 
+[DEVICE READER CAM TIMER] Physical time: 9604.90 
+[DEVICE READER CAM TIMER] LAG: 4.90 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9600.00 
+[DRIVER] Physical time: 9605.49 
+[DRIVER] LAG: 5.49 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9609.31 
+[sterr,brake,accel] Physical time: 9609.56 
+[sterr,brake,accel] LAG: 0.25 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.6627450980392157
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9609.31 
+[DRIVER REACTION 1] Physical time: 9610.18 
+[DRIVER REACTION 1] LAG: 0.87 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9633.20 
+[sterr,brake,accel] Physical time: 9633.46 
+[sterr,brake,accel] LAG: 0.26 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.7254901960784313
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9633.20 
+[DRIVER REACTION 1] Physical time: 9634.17 
+[DRIVER REACTION 1] LAG: 0.97 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9657.19 
+[sterr,brake,accel] Physical time: 9657.43 
+[sterr,brake,accel] LAG: 0.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.7803921568627451
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9657.19 
+[DRIVER REACTION 1] Physical time: 9658.08 
+[DRIVER REACTION 1] LAG: 0.88 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9681.26 
+[sterr,brake,accel] Physical time: 9681.53 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.8392156862745098
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9681.26 
+[DRIVER REACTION 1] Physical time: 9682.23 
+[DRIVER REACTION 1] LAG: 0.97 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9705.22 
+[sterr,brake,accel] Physical time: 9705.49 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.8941176470588236
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9705.22 
+[DRIVER REACTION 1] Physical time: 9706.20 
+[DRIVER REACTION 1] LAG: 0.98 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9729.21 
+[sterr,brake,accel] Physical time: 9729.45 
+[sterr,brake,accel] LAG: 0.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.9411764705882353
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9729.21 
+[DRIVER REACTION 1] Physical time: 9730.07 
+[DRIVER REACTION 1] LAG: 0.85 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 9753.19 
+[sterr,brake,accel] Physical time: 9753.42 
+[sterr,brake,accel] LAG: 0.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=1.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9753.19 
+[DRIVER REACTION 1] Physical time: 9754.02 
+[DRIVER REACTION 1] LAG: 0.83 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9805.23 
+[DEVICE READER CAM read] LAG: 5.23 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9800.00 
+[DEVICE READER CAM TIMER] Physical time: 9805.48 
+[DEVICE READER CAM TIMER] LAG: 5.48 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 9800.00 
+[FACE DETECTOR] Physical time: 9953.46 
+[FACE DETECTOR] LAG: 153.46 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=1.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9800.00 
+[DRIVER REACTION 1] Physical time: 9954.10 
+[DRIVER REACTION 1] LAG: 154.10 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9800.00 
+[DRIVER] Physical time: 9954.40 
+[DRIVER] LAG: 154.40 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10004.71 
+[DEVICE READER CAM read] LAG: 4.71 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10000.00 
+[DEVICE READER CAM TIMER] Physical time: 10004.93 
+[DEVICE READER CAM TIMER] LAG: 4.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10000.00 
+[DRIVER] Physical time: 10005.88 
+[DRIVER] LAG: 5.88 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10204.14 
+[DEVICE READER CAM read] LAG: 4.14 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10200.00 
+[DEVICE READER CAM TIMER] Physical time: 10204.37 
+[DEVICE READER CAM TIMER] LAG: 4.37 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10200.00 
+[DRIVER] Physical time: 10204.57 
+[DRIVER] LAG: 4.57 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10241.28 
+[sterr,brake,accel] Physical time: 10241.58 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.9686274509803922
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10241.28 
+[DRIVER REACTION 1] Physical time: 10242.31 
+[DRIVER REACTION 1] LAG: 1.03 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10265.29 
+[sterr,brake,accel] Physical time: 10265.55 
+[sterr,brake,accel] LAG: 0.26 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.9098039215686274
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10265.29 
+[DRIVER REACTION 1] Physical time: 10266.17 
+[DRIVER REACTION 1] LAG: 0.88 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10289.27 
+[sterr,brake,accel] Physical time: 10289.53 
+[sterr,brake,accel] LAG: 0.26 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.8549019607843137
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10289.27 
+[DRIVER REACTION 1] Physical time: 10290.16 
+[DRIVER REACTION 1] LAG: 0.89 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10313.27 
+[sterr,brake,accel] Physical time: 10313.54 
+[sterr,brake,accel] LAG: 0.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.7803921568627451
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10313.27 
+[DRIVER REACTION 1] Physical time: 10314.21 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10337.28 
+[sterr,brake,accel] Physical time: 10337.53 
+[sterr,brake,accel] LAG: 0.26 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.7058823529411765
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10337.28 
+[DRIVER REACTION 1] Physical time: 10338.15 
+[DRIVER REACTION 1] LAG: 0.88 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10361.26 
+[sterr,brake,accel] Physical time: 10361.50 
+[sterr,brake,accel] LAG: 0.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.6196078431372549
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10361.26 
+[DRIVER REACTION 1] Physical time: 10362.11 
+[DRIVER REACTION 1] LAG: 0.85 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10385.26 
+[sterr,brake,accel] Physical time: 10385.49 
+[sterr,brake,accel] LAG: 0.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.5215686274509804
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10385.26 
+[DRIVER REACTION 1] Physical time: 10386.14 
+[DRIVER REACTION 1] LAG: 0.87 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10406.97 
+[DEVICE READER CAM read] LAG: 6.97 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10400.00 
+[DEVICE READER CAM TIMER] Physical time: 10407.18 
+[DEVICE READER CAM TIMER] LAG: 7.18 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10400.00 
+[DRIVER] Physical time: 10407.76 
+[DRIVER] LAG: 7.76 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10409.33 
+[sterr,brake,accel] Physical time: 10409.43 
+[sterr,brake,accel] LAG: 0.10 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.45098039215686275
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10409.33 
+[DRIVER REACTION 1] Physical time: 10409.73 
+[DRIVER REACTION 1] LAG: 0.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10433.22 
+[sterr,brake,accel] Physical time: 10433.33 
+[sterr,brake,accel] LAG: 0.11 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.3607843137254902
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10433.22 
+[DRIVER REACTION 1] Physical time: 10433.56 
+[DRIVER REACTION 1] LAG: 0.33 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10457.32 
+[sterr,brake,accel] Physical time: 10457.47 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.2784313725490196
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10457.32 
+[DRIVER REACTION 1] Physical time: 10457.83 
+[DRIVER REACTION 1] LAG: 0.51 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10481.35 
+[sterr,brake,accel] Physical time: 10481.51 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.19215686274509805
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10481.35 
+[DRIVER REACTION 1] Physical time: 10481.93 
+[DRIVER REACTION 1] LAG: 0.58 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10505.36 
+[sterr,brake,accel] Physical time: 10505.52 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.10588235294117647
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10505.36 
+[DRIVER REACTION 1] Physical time: 10505.88 
+[DRIVER REACTION 1] LAG: 0.53 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10529.35 
+[sterr,brake,accel] Physical time: 10529.50 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.050980392156862744
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10529.35 
+[DRIVER REACTION 1] Physical time: 10529.85 
+[DRIVER REACTION 1] LAG: 0.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 10561.35 
+[sterr,brake,accel] Physical time: 10561.48 
+[sterr,brake,accel] LAG: 0.13 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.01568627450980392
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10561.35 
+[DRIVER REACTION 1] Physical time: 10561.83 
+[DRIVER REACTION 1] LAG: 0.48 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10604.33 
+[DEVICE READER CAM read] LAG: 4.33 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10600.00 
+[DEVICE READER CAM TIMER] Physical time: 10604.58 
+[DEVICE READER CAM TIMER] LAG: 4.58 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10600.00 
+[DRIVER] Physical time: 10604.84 
+[DRIVER] LAG: 4.84 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10805.22 
+[DEVICE READER CAM read] LAG: 5.22 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10800.00 
+[DEVICE READER CAM TIMER] Physical time: 10805.48 
+[DEVICE READER CAM TIMER] LAG: 5.48 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 10800.00 
+[FACE DETECTOR] Physical time: 10938.54 
+[FACE DETECTOR] LAG: 138.54 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.01568627450980392
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10800.00 
+[DRIVER REACTION 1] Physical time: 10940.27 
+[DRIVER REACTION 1] LAG: 140.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10800.00 
+[DRIVER] Physical time: 10940.78 
+[DRIVER] LAG: 140.78 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11005.59 
+[DEVICE READER CAM read] LAG: 5.59 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11000.00 
+[DEVICE READER CAM TIMER] Physical time: 11006.12 
+[DEVICE READER CAM TIMER] LAG: 6.12 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11000.00 
+[DRIVER] Physical time: 11006.88 
+[DRIVER] LAG: 6.88 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11105.35 
+[sterr,brake,accel] Physical time: 11105.59 
+[sterr,brake,accel] LAG: 0.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.043137254901960784
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11105.35 
+[DRIVER REACTION 1] Physical time: 11106.26 
+[DRIVER REACTION 1] LAG: 0.91 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11129.45 
+[sterr,brake,accel] Physical time: 11129.77 
+[sterr,brake,accel] LAG: 0.32 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.07450980392156863
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11129.45 
+[DRIVER REACTION 1] Physical time: 11130.42 
+[DRIVER REACTION 1] LAG: 0.97 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11153.39 
+[sterr,brake,accel] Physical time: 11153.70 
+[sterr,brake,accel] LAG: 0.32 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.13725490196078433
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11153.39 
+[DRIVER REACTION 1] Physical time: 11154.34 
+[DRIVER REACTION 1] LAG: 0.96 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11177.50 
+[sterr,brake,accel] Physical time: 11177.82 
+[sterr,brake,accel] LAG: 0.32 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.18823529411764706
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11177.50 
+[DRIVER REACTION 1] Physical time: 11178.47 
+[DRIVER REACTION 1] LAG: 0.97 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11208.35 
+[DEVICE READER CAM read] LAG: 8.35 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11200.00 
+[DEVICE READER CAM TIMER] Physical time: 11208.66 
+[DEVICE READER CAM TIMER] LAG: 8.66 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11200.00 
+[DRIVER] Physical time: 11209.84 
+[DRIVER] LAG: 9.84 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11201.45 
+[sterr,brake,accel] Physical time: 11212.17 
+[sterr,brake,accel] LAG: 10.72 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.24313725490196078
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11201.45 
+[DRIVER REACTION 1] Physical time: 11212.59 
+[DRIVER REACTION 1] LAG: 11.14 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11225.36 
+[sterr,brake,accel] Physical time: 11225.48 
+[sterr,brake,accel] LAG: 0.11 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.2980392156862745
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11225.36 
+[DRIVER REACTION 1] Physical time: 11225.75 
+[DRIVER REACTION 1] LAG: 0.38 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11249.37 
+[sterr,brake,accel] Physical time: 11249.51 
+[sterr,brake,accel] LAG: 0.14 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.3607843137254902
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11249.37 
+[DRIVER REACTION 1] Physical time: 11249.85 
+[DRIVER REACTION 1] LAG: 0.48 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11273.41 
+[sterr,brake,accel] Physical time: 11273.58 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.43137254901960786
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11273.41 
+[DRIVER REACTION 1] Physical time: 11273.94 
+[DRIVER REACTION 1] LAG: 0.53 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11297.42 
+[sterr,brake,accel] Physical time: 11297.58 
+[sterr,brake,accel] LAG: 0.16 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.5058823529411764
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11297.42 
+[DRIVER REACTION 1] Physical time: 11297.94 
+[DRIVER REACTION 1] LAG: 0.52 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11321.43 
+[sterr,brake,accel] Physical time: 11321.58 
+[sterr,brake,accel] LAG: 0.15 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.5764705882352941
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11321.43 
+[DRIVER REACTION 1] Physical time: 11321.95 
+[DRIVER REACTION 1] LAG: 0.52 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11345.43 
+[sterr,brake,accel] Physical time: 11345.60 
+[sterr,brake,accel] LAG: 0.17 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.6431372549019608
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11345.43 
+[DRIVER REACTION 1] Physical time: 11346.03 
+[DRIVER REACTION 1] LAG: 0.60 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11369.39 
+[sterr,brake,accel] Physical time: 11369.52 
+[sterr,brake,accel] LAG: 0.13 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.6941176470588235
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11369.39 
+[DRIVER REACTION 1] Physical time: 11369.83 
+[DRIVER REACTION 1] LAG: 0.44 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11393.40 
+[sterr,brake,accel] Physical time: 11393.52 
+[sterr,brake,accel] LAG: 0.12 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.7529411764705882
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11393.40 
+[DRIVER REACTION 1] Physical time: 11393.87 
+[DRIVER REACTION 1] LAG: 0.47 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11404.42 
+[DEVICE READER CAM read] LAG: 4.42 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11400.00 
+[DEVICE READER CAM TIMER] Physical time: 11404.70 
+[DEVICE READER CAM TIMER] LAG: 4.70 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11400.00 
+[DRIVER] Physical time: 11404.90 
+[DRIVER] LAG: 4.90 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11417.37 
+[sterr,brake,accel] Physical time: 11417.57 
+[sterr,brake,accel] LAG: 0.20 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.803921568627451
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11417.37 
+[DRIVER REACTION 1] Physical time: 11418.10 
+[DRIVER REACTION 1] LAG: 0.73 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11441.43 
+[sterr,brake,accel] Physical time: 11441.78 
+[sterr,brake,accel] LAG: 0.34 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.8509803921568627
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11441.43 
+[DRIVER REACTION 1] Physical time: 11442.40 
+[DRIVER REACTION 1] LAG: 0.97 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11465.47 
+[sterr,brake,accel] Physical time: 11465.77 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.8901960784313725
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11465.47 
+[DRIVER REACTION 1] Physical time: 11466.46 
+[DRIVER REACTION 1] LAG: 0.98 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11489.43 
+[sterr,brake,accel] Physical time: 11489.73 
+[sterr,brake,accel] LAG: 0.29 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.9254901960784314
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11489.43 
+[DRIVER REACTION 1] Physical time: 11490.38 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11513.50 
+[sterr,brake,accel] Physical time: 11513.86 
+[sterr,brake,accel] LAG: 0.36 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.9607843137254902
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11513.50 
+[DRIVER REACTION 1] Physical time: 11514.59 
+[DRIVER REACTION 1] LAG: 1.09 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11537.44 
+[sterr,brake,accel] Physical time: 11537.72 
+[sterr,brake,accel] LAG: 0.28 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.996078431372549
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11537.44 
+[DRIVER REACTION 1] Physical time: 11538.30 
+[DRIVER REACTION 1] LAG: 0.85 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11604.48 
+[DEVICE READER CAM read] LAG: 4.48 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11600.00 
+[DEVICE READER CAM TIMER] Physical time: 11604.77 
+[DEVICE READER CAM TIMER] LAG: 4.77 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11600.00 
+[DRIVER] Physical time: 11605.34 
+[DRIVER] LAG: 5.34 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11808.03 
+[DEVICE READER CAM read] LAG: 8.03 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11800.00 
+[DEVICE READER CAM TIMER] Physical time: 11808.27 
+[DEVICE READER CAM TIMER] LAG: 8.27 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 11800.00 
+[FACE DETECTOR] Physical time: 11923.31 
+[FACE DETECTOR] LAG: 123.31 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.996078431372549
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11800.00 
+[DRIVER REACTION 1] Physical time: 11923.91 
+[DRIVER REACTION 1] LAG: 123.91 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11800.00 
+[DRIVER] Physical time: 11924.19 
+[DRIVER] LAG: 124.19 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11841.37 
+[sterr,brake,accel] Physical time: 11925.32 
+[sterr,brake,accel] LAG: 83.95 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.9529411764705882
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11841.37 
+[DRIVER REACTION 1] Physical time: 11926.10 
+[DRIVER REACTION 1] LAG: 84.73 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11865.50 
+[sterr,brake,accel] Physical time: 11926.56 
+[sterr,brake,accel] LAG: 61.06 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.8745098039215686
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11865.50 
+[DRIVER REACTION 1] Physical time: 11927.13 
+[DRIVER REACTION 1] LAG: 61.63 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11889.46 
+[sterr,brake,accel] Physical time: 11927.45 
+[sterr,brake,accel] LAG: 37.98 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.796078431372549
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11889.46 
+[DRIVER REACTION 1] Physical time: 11928.95 
+[DRIVER REACTION 1] LAG: 39.48 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11913.46 
+[sterr,brake,accel] Physical time: 11929.76 
+[sterr,brake,accel] LAG: 16.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.6823529411764706
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11913.46 
+[DRIVER REACTION 1] Physical time: 11930.98 
+[DRIVER REACTION 1] LAG: 17.52 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11937.55 
+[sterr,brake,accel] Physical time: 11937.80 
+[sterr,brake,accel] LAG: 0.24 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.5411764705882353
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11937.55 
+[DRIVER REACTION 1] Physical time: 11938.26 
+[DRIVER REACTION 1] LAG: 0.70 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11961.59 
+[sterr,brake,accel] Physical time: 11961.89 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.396078431372549
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11961.59 
+[DRIVER REACTION 1] Physical time: 11962.49 
+[DRIVER REACTION 1] LAG: 0.90 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 11985.51 
+[sterr,brake,accel] Physical time: 11985.81 
+[sterr,brake,accel] LAG: 0.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.24705882352941178
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11985.51 
+[DRIVER REACTION 1] Physical time: 11986.45 
+[DRIVER REACTION 1] LAG: 0.94 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12003.87 
+[DEVICE READER CAM read] LAG: 3.87 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12000.00 
+[DEVICE READER CAM TIMER] Physical time: 12004.06 
+[DEVICE READER CAM TIMER] LAG: 4.06 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12000.00 
+[DRIVER] Physical time: 12004.52 
+[DRIVER] LAG: 4.52 
+----------------------------------------------------------
+----------------------------------------------------------
+[sterr,brake,accel] Logical time: 12009.51 
+[sterr,brake,accel] Physical time: 12009.73 
+[sterr,brake,accel] LAG: 0.22 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.10980392156862745
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 12009.51 
+[DRIVER REACTION 1] Physical time: 12010.16 
+[DRIVER REACTION 1] LAG: 0.65 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12204.87 
+[DEVICE READER CAM read] LAG: 4.87 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12200.00 
+[DEVICE READER CAM TIMER] Physical time: 12205.10 
+[DEVICE READER CAM TIMER] LAG: 5.10 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12200.00 
+[DRIVER] Physical time: 12205.97 
+[DRIVER] LAG: 5.97 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12405.13 
+[DEVICE READER CAM read] LAG: 5.13 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12400.00 
+[DEVICE READER CAM TIMER] Physical time: 12405.40 
+[DEVICE READER CAM TIMER] LAG: 5.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12400.00 
+[DRIVER] Physical time: 12406.18 
+[DRIVER] LAG: 6.18 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12605.31 
+[DEVICE READER CAM read] LAG: 5.31 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12600.00 
+[DEVICE READER CAM TIMER] Physical time: 12605.58 
+[DEVICE READER CAM TIMER] LAG: 5.58 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12600.00 
+[DRIVER] Physical time: 12606.31 
+[DRIVER] LAG: 6.31 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12804.90 
+[DEVICE READER CAM read] LAG: 4.90 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12800.00 
+[DEVICE READER CAM TIMER] Physical time: 12805.17 
+[DEVICE READER CAM TIMER] LAG: 5.17 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 12800.00 
+[FACE DETECTOR] Physical time: 12921.14 
+[FACE DETECTOR] LAG: 121.14 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.10980392156862745
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 12800.00 
+[DRIVER REACTION 1] Physical time: 12921.43 
+[DRIVER REACTION 1] LAG: 121.43 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12800.00 
+[DRIVER] Physical time: 12921.54 
+[DRIVER] LAG: 121.54 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13004.09 
+[DEVICE READER CAM read] LAG: 4.09 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13000.00 
+[DEVICE READER CAM TIMER] Physical time: 13004.34 
+[DEVICE READER CAM TIMER] LAG: 4.34 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13000.00 
+[DRIVER] Physical time: 13005.10 
+[DRIVER] LAG: 5.10 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13204.39 
+[DEVICE READER CAM read] LAG: 4.39 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13200.00 
+[DEVICE READER CAM TIMER] Physical time: 13204.67 
+[DEVICE READER CAM TIMER] LAG: 4.67 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13200.00 
+[DRIVER] Physical time: 13204.88 
+[DRIVER] LAG: 4.88 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13405.85 
+[DEVICE READER CAM read] LAG: 5.85 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13400.00 
+[DEVICE READER CAM TIMER] Physical time: 13406.12 
+[DEVICE READER CAM TIMER] LAG: 6.12 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13400.00 
+[DRIVER] Physical time: 13406.86 
+[DRIVER] LAG: 6.86 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13604.43 
+[DEVICE READER CAM read] LAG: 4.43 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13600.00 
+[DEVICE READER CAM TIMER] Physical time: 13604.71 
+[DEVICE READER CAM TIMER] LAG: 4.71 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13600.00 
+[DRIVER] Physical time: 13604.91 
+[DRIVER] LAG: 4.91 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13804.60 
+[DEVICE READER CAM read] LAG: 4.60 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13800.00 
+[DEVICE READER CAM TIMER] Physical time: 13804.89 
+[DEVICE READER CAM TIMER] LAG: 4.89 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 13800.00 
+[FACE DETECTOR] Physical time: 13924.51 
+[FACE DETECTOR] LAG: 124.51 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.10980392156862745
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 13800.00 
+[DRIVER REACTION 1] Physical time: 13926.16 
+[DRIVER REACTION 1] LAG: 126.16 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13800.00 
+[DRIVER] Physical time: 13926.50 
+[DRIVER] LAG: 126.50 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14004.66 
+[DEVICE READER CAM read] LAG: 4.66 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14000.00 
+[DEVICE READER CAM TIMER] Physical time: 14004.90 
+[DEVICE READER CAM TIMER] LAG: 4.90 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14000.00 
+[DRIVER] Physical time: 14005.13 
+[DRIVER] LAG: 5.13 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14205.21 
+[DEVICE READER CAM read] LAG: 5.21 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14200.00 
+[DEVICE READER CAM TIMER] Physical time: 14205.39 
+[DEVICE READER CAM TIMER] LAG: 5.39 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14200.00 
+[DRIVER] Physical time: 14205.82 
+[DRIVER] LAG: 5.82 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14408.73 
+[DEVICE READER CAM read] LAG: 8.73 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14400.00 
+[DEVICE READER CAM TIMER] Physical time: 14409.01 
+[DEVICE READER CAM TIMER] LAG: 9.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14400.00 
+[DRIVER] Physical time: 14409.75 
+[DRIVER] LAG: 9.75 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14604.55 
+[DEVICE READER CAM read] LAG: 4.55 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14600.00 
+[DEVICE READER CAM TIMER] Physical time: 14604.83 
+[DEVICE READER CAM TIMER] LAG: 4.83 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14600.00 
+[DRIVER] Physical time: 14605.49 
+[DRIVER] LAG: 5.49 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14804.46 
+[DEVICE READER CAM read] LAG: 4.46 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14800.00 
+[DEVICE READER CAM TIMER] Physical time: 14804.76 
+[DEVICE READER CAM TIMER] LAG: 4.76 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 14800.00 
+[FACE DETECTOR] Physical time: 14921.51 
+[FACE DETECTOR] LAG: 121.51 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.10980392156862745
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 14800.00 
+[DRIVER REACTION 1] Physical time: 14921.94 
+[DRIVER REACTION 1] LAG: 121.94 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14800.00 
+[DRIVER] Physical time: 14922.14 
+[DRIVER] LAG: 122.14 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15004.75 
+[DEVICE READER CAM read] LAG: 4.75 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15000.00 
+[DEVICE READER CAM TIMER] Physical time: 15004.98 
+[DEVICE READER CAM TIMER] LAG: 4.98 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15000.00 
+[DRIVER] Physical time: 15005.58 
+[DRIVER] LAG: 5.58 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15204.78 
+[DEVICE READER CAM read] LAG: 4.78 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15200.00 
+[DEVICE READER CAM TIMER] Physical time: 15205.01 
+[DEVICE READER CAM TIMER] LAG: 5.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15200.00 
+[DRIVER] Physical time: 15205.68 
+[DRIVER] LAG: 5.68 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15405.56 
+[DEVICE READER CAM read] LAG: 5.56 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15400.00 
+[DEVICE READER CAM TIMER] Physical time: 15406.08 
+[DEVICE READER CAM TIMER] LAG: 6.08 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15400.00 
+[DRIVER] Physical time: 15406.83 
+[DRIVER] LAG: 6.83 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15604.48 
+[DEVICE READER CAM read] LAG: 4.48 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15600.00 
+[DEVICE READER CAM TIMER] Physical time: 15604.76 
+[DEVICE READER CAM TIMER] LAG: 4.76 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15600.00 
+[DRIVER] Physical time: 15605.39 
+[DRIVER] LAG: 5.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15804.69 
+[DEVICE READER CAM read] LAG: 4.69 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15800.00 
+[DEVICE READER CAM TIMER] Physical time: 15804.93 
+[DEVICE READER CAM TIMER] LAG: 4.93 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 15800.00 
+[FACE DETECTOR] Physical time: 15918.79 
+[FACE DETECTOR] LAG: 118.79 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.07450980392156863 brake=0.10980392156862745
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 15800.00 
+[DRIVER REACTION 1] Physical time: 15918.99 
+[DRIVER REACTION 1] LAG: 118.99 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15800.00 
+[DRIVER] Physical time: 15919.07 
+[DRIVER] LAG: 119.07 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 16005.16 
+[DEVICE READER CAM read] LAG: 5.16 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 16000.00 
+[DEVICE READER CAM TIMER] Physical time: 16005.38 
+[DEVICE READER CAM TIMER] LAG: 5.38 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16000.00 
+[DRIVER] Physical time: 16006.25 
+[DRIVER] LAG: 6.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 16204.58 
+[DEVICE READER CAM read] LAG: 4.58 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 16200.00 
+[DEVICE READER CAM TIMER] Physical time: 16204.88 
+[DEVICE READER CAM TIMER] LAG: 4.88 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16200.00 
+[DRIVER] Physical time: 16205.07 
+[DRIVER] LAG: 5.07 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 16405.10 
+[DEVICE READER CAM read] LAG: 5.10 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 16400.00 
+[DEVICE READER CAM TIMER] Physical time: 16405.33 
+[DEVICE READER CAM TIMER] LAG: 5.33 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16400.00 
+[DRIVER] Physical time: 16406.53 
+[DRIVER] LAG: 6.53 
+---- System clock resolution: 1 nsec
+---- Start execution on Sat Apr 18 19:53:51 2026 ---- plus 569324464 nanoseconds
+Fed 0 (d_main): Connected to 10.218.100.78:15045.
+Fed 0 (d_main): Starting timestamp is: 1776567233623318806.

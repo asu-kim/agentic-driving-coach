@@ -1,0 +1,4772 @@
+******* Using Python version: 3.12.3
+The /dev/input/event1 is the path and shanwan Android GamePad is the name of the device.
+
+[EVDEV] brake raw=232 norm=0.910
+[EVDEV] accel raw=238 norm=0.933
+[EVDEV] brake raw=234 norm=0.918
+[EVDEV] brake raw=235 norm=0.922
+[EVDEV] brake raw=236 norm=0.925
+[EVDEV] brake raw=237 norm=0.929
+Webcam opened
+The devices are connected
+
+[EVDEV] brake raw=238 norm=0.933
+[EVDEV] brake raw=239 norm=0.937
+[EVDEV] brake raw=241 norm=0.945
+[EVDEV] brake raw=243 norm=0.953
+[EVDEV] brake raw=244 norm=0.957
+[EVDEV] brake raw=246 norm=0.965
+[EVDEV] brake raw=249 norm=0.976
+[EVDEV] brake raw=252 norm=0.988
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=255 norm=1.000
+[EVDEV] accel raw=239 norm=0.937
+[EVDEV] accel raw=238 norm=0.933
+[EVDEV] accel raw=237 norm=0.929
+[EVDEV] accel raw=238 norm=0.933
+[EVDEV] accel raw=236 norm=0.925
+[EVDEV] accel raw=235 norm=0.922
+[EVDEV] accel raw=234 norm=0.918
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=226 norm=0.886
+[EVDEV] accel raw=221 norm=0.867
+[EVDEV] accel raw=219 norm=0.859
+[EVDEV] accel raw=215 norm=0.843
+[EVDEV] accel raw=213 norm=0.835
+[EVDEV] accel raw=209 norm=0.820
+[EVDEV] accel raw=205 norm=0.804
+[EVDEV] accel raw=203 norm=0.796
+[EVDEV] accel raw=199 norm=0.780
+[EVDEV] accel raw=197 norm=0.773
+[EVDEV] accel raw=193 norm=0.757
+[EVDEV] accel raw=187 norm=0.733
+[EVDEV] accel raw=185 norm=0.725
+[EVDEV] accel raw=181 norm=0.710
+[EVDEV] accel raw=179 norm=0.702
+[EVDEV] accel raw=173 norm=0.678
+[EVDEV] accel raw=168 norm=0.659
+[EVDEV] accel raw=165 norm=0.647
+[EVDEV] accel raw=158 norm=0.620
+[EVDEV] accel raw=155 norm=0.608
+[EVDEV] accel raw=150 norm=0.588
+[EVDEV] accel raw=145 norm=0.569
+[EVDEV] accel raw=142 norm=0.557
+[EVDEV] accel raw=136 norm=0.533
+[EVDEV] accel raw=133 norm=0.522
+[EVDEV] accel raw=127 norm=0.498
+[EVDEV] accel raw=121 norm=0.475
+[EVDEV] accel raw=119 norm=0.467
+[EVDEV] accel raw=114 norm=0.447
+[EVDEV] accel raw=111 norm=0.435
+[EVDEV] accel raw=106 norm=0.416
+[EVDEV] accel raw=102 norm=0.400
+[EVDEV] accel raw=99 norm=0.388
+[EVDEV] accel raw=95 norm=0.373
+[EVDEV] accel raw=94 norm=0.369
+[EVDEV] accel raw=89 norm=0.349
+[EVDEV] accel raw=86 norm=0.337
+[EVDEV] accel raw=84 norm=0.329
+[EVDEV] accel raw=79 norm=0.310
+[EVDEV] accel raw=78 norm=0.306
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=60 norm=0.235
+[EVDEV] accel raw=59 norm=0.231
+[EVDEV] accel raw=57 norm=0.224
+[EVDEV] accel raw=56 norm=0.220
+[EVDEV] accel raw=54 norm=0.212
+[EVDEV] accel raw=53 norm=0.208
+[EVDEV] accel raw=52 norm=0.204
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=52 norm=0.204
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=52 norm=0.204
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=52 norm=0.204
+[EVDEV] accel raw=51 norm=0.200
+[EVDEV] accel raw=52 norm=0.204
+[EVDEV] accel raw=53 norm=0.208
+[EVDEV] accel raw=54 norm=0.212
+[EVDEV] accel raw=53 norm=0.208
+[EVDEV] accel raw=54 norm=0.212
+[EVDEV] accel raw=55 norm=0.216
+---------------------------------------------------------
+[CAR CLOCK] logical time: 0.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=54 norm=0.212
+[EVDEV] accel raw=55 norm=0.216
+[EVDEV] accel raw=54 norm=0.212
+[EVDEV] accel raw=55 norm=0.216
+[EVDEV] accel raw=56 norm=0.220
+[EVDEV] accel raw=57 norm=0.224
+[EVDEV] accel raw=58 norm=0.227
+[EVDEV] accel raw=59 norm=0.231
+[EVDEV] accel raw=58 norm=0.227
+[EVDEV] accel raw=59 norm=0.231
+---------------------------------------------------------
+[CAR CLOCK] logical time: 100.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=60 norm=0.235
+[EVDEV] accel raw=61 norm=0.239
+[EVDEV] accel raw=60 norm=0.235
+[EVDEV] accel raw=61 norm=0.239
+[EVDEV] accel raw=60 norm=0.235
+[EVDEV] accel raw=61 norm=0.239
+---------------------------------------------------------
+[CAR CLOCK] logical time: 200.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=61 norm=0.239
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=61 norm=0.239
+[EVDEV] accel raw=62 norm=0.243
+---------------------------------------------------------
+[CAR CLOCK] logical time: 300.00
+velocity=30.00 acceleration=0.00
+[EVDEV] accel raw=61 norm=0.239
+acceleration=0.00
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=62 norm=0.243
+Faces: 0
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=62 norm=0.243
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 400.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=63 norm=0.247
+---------------------------------------------------------
+[CAR CLOCK] logical time: 500.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] accel raw=63 norm=0.247
+---------------------------------------------------------
+[CAR CLOCK] logical time: 600.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=63 norm=0.247
+---------------------------------------------------------
+[CAR CLOCK] logical time: 700.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=61 norm=0.239
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=65 norm=0.255
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=65 norm=0.255
+---------------------------------------------------------
+[CAR CLOCK] logical time: 800.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=65 norm=0.255
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=65 norm=0.255
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=65 norm=0.255
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=65 norm=0.255
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=65 norm=0.255
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=66 norm=0.259
+Faces: 0
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=67 norm=0.263
+Saved debug (no face)
+[EVDEV] accel raw=61 norm=0.239
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 900.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=65 norm=0.255
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=67 norm=0.263
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1000.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=65 norm=0.255
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=68 norm=0.267
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1100.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=70 norm=0.275
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1200.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=76 norm=0.298
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1300.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=75 norm=0.294
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=68 norm=0.267
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=70 norm=0.275
+Faces: 0
+[EVDEV] accel raw=64 norm=0.251
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=66 norm=0.259
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1400.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=71 norm=0.278
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1500.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=75 norm=0.294
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=67 norm=0.263
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=71 norm=0.278
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1600.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=71 norm=0.278
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1700.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=75 norm=0.294
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=69 norm=0.271
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=76 norm=0.298
+[EVDEV] accel raw=73 norm=0.286
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1800.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=77 norm=0.302
+Faces: 0
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 1900.00
+[EVDEV] accel raw=72 norm=0.282
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=71 norm=0.278
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=72 norm=0.282
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2000.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=76 norm=0.298
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=73 norm=0.286
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2100.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=73 norm=0.286
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=75 norm=0.294
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] accel raw=75 norm=0.294
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2200.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=76 norm=0.298
+[EVDEV] accel raw=77 norm=0.302
+[EVDEV] accel raw=78 norm=0.306
+[EVDEV] accel raw=79 norm=0.310
+[EVDEV] accel raw=80 norm=0.314
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2300.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=82 norm=0.322
+[EVDEV] accel raw=83 norm=0.325
+[EVDEV] accel raw=84 norm=0.329
+[EVDEV] accel raw=85 norm=0.333
+[EVDEV] accel raw=86 norm=0.337
+[EVDEV] accel raw=87 norm=0.341
+[EVDEV] accel raw=88 norm=0.345
+[EVDEV] accel raw=89 norm=0.349
+[EVDEV] accel raw=90 norm=0.353
+[EVDEV] accel raw=91 norm=0.357
+[EVDEV] accel raw=92 norm=0.361
+[EVDEV] accel raw=93 norm=0.365
+[EVDEV] accel raw=94 norm=0.369
+[EVDEV] accel raw=95 norm=0.373
+[EVDEV] accel raw=96 norm=0.376
+[EVDEV] accel raw=97 norm=0.380
+[EVDEV] accel raw=98 norm=0.384
+Faces: 0
+[EVDEV] accel raw=99 norm=0.388
+[EVDEV] accel raw=100 norm=0.392
+[EVDEV] accel raw=101 norm=0.396
+[EVDEV] accel raw=102 norm=0.400
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2400.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=103 norm=0.404
+[EVDEV] accel raw=104 norm=0.408
+[EVDEV] accel raw=105 norm=0.412
+[EVDEV] accel raw=104 norm=0.408
+[EVDEV] accel raw=105 norm=0.412
+[EVDEV] accel raw=106 norm=0.416
+[EVDEV] accel raw=107 norm=0.420
+[EVDEV] accel raw=108 norm=0.424
+[EVDEV] accel raw=110 norm=0.431
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2500.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=113 norm=0.443
+[EVDEV] accel raw=114 norm=0.447
+[EVDEV] accel raw=115 norm=0.451
+[EVDEV] accel raw=117 norm=0.459
+[EVDEV] accel raw=118 norm=0.463
+[EVDEV] accel raw=119 norm=0.467
+[EVDEV] accel raw=120 norm=0.471
+[EVDEV] accel raw=121 norm=0.475
+[EVDEV] accel raw=122 norm=0.478
+[EVDEV] accel raw=123 norm=0.482
+[EVDEV] accel raw=125 norm=0.490
+[EVDEV] accel raw=126 norm=0.494
+[EVDEV] accel raw=127 norm=0.498
+[EVDEV] accel raw=128 norm=0.502
+[EVDEV] accel raw=130 norm=0.510
+[EVDEV] accel raw=132 norm=0.518
+[EVDEV] accel raw=133 norm=0.522
+[EVDEV] accel raw=134 norm=0.525
+[EVDEV] accel raw=136 norm=0.533
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2600.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=137 norm=0.537
+[EVDEV] accel raw=139 norm=0.545
+[EVDEV] accel raw=140 norm=0.549
+[EVDEV] accel raw=141 norm=0.553
+[EVDEV] accel raw=142 norm=0.557
+[EVDEV] accel raw=143 norm=0.561
+[EVDEV] accel raw=144 norm=0.565
+[EVDEV] accel raw=143 norm=0.561
+[EVDEV] accel raw=144 norm=0.565
+[EVDEV] accel raw=143 norm=0.561
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2700.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=144 norm=0.565
+[EVDEV] accel raw=145 norm=0.569
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2800.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 2900.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3000.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=146 norm=0.573
+[EVDEV] accel raw=145 norm=0.569
+[EVDEV] accel raw=146 norm=0.573
+[EVDEV] accel raw=147 norm=0.576
+[EVDEV] accel raw=146 norm=0.573
+[EVDEV] accel raw=147 norm=0.576
+[EVDEV] accel raw=148 norm=0.580
+[EVDEV] accel raw=149 norm=0.584
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3100.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=150 norm=0.588
+[EVDEV] accel raw=151 norm=0.592
+[EVDEV] accel raw=152 norm=0.596
+[EVDEV] accel raw=153 norm=0.600
+[EVDEV] accel raw=154 norm=0.604
+[EVDEV] accel raw=155 norm=0.608
+[EVDEV] accel raw=156 norm=0.612
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3200.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=157 norm=0.616
+[EVDEV] accel raw=156 norm=0.612
+[EVDEV] accel raw=157 norm=0.616
+[EVDEV] accel raw=156 norm=0.612
+[EVDEV] accel raw=157 norm=0.616
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3300.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=158 norm=0.620
+Faces: 0
+[EVDEV] accel raw=157 norm=0.616
+[EVDEV] accel raw=158 norm=0.620
+[EVDEV] accel raw=157 norm=0.616
+[EVDEV] accel raw=158 norm=0.620
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3400.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=159 norm=0.624
+[EVDEV] accel raw=160 norm=0.627
+[EVDEV] accel raw=159 norm=0.624
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3500.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=158 norm=0.620
+[EVDEV] accel raw=157 norm=0.616
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3600.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=156 norm=0.612
+[EVDEV] accel raw=155 norm=0.608
+[EVDEV] accel raw=154 norm=0.604
+[EVDEV] accel raw=153 norm=0.600
+[EVDEV] accel raw=152 norm=0.596
+[EVDEV] accel raw=151 norm=0.592
+[EVDEV] accel raw=150 norm=0.588
+[EVDEV] accel raw=149 norm=0.584
+[EVDEV] accel raw=148 norm=0.580
+[EVDEV] accel raw=146 norm=0.573
+[EVDEV] accel raw=145 norm=0.569
+[EVDEV] accel raw=144 norm=0.565
+[EVDEV] accel raw=143 norm=0.561
+[EVDEV] accel raw=142 norm=0.557
+[EVDEV] accel raw=140 norm=0.549
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3700.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=136 norm=0.533
+[EVDEV] accel raw=134 norm=0.525
+[EVDEV] accel raw=132 norm=0.518
+[EVDEV] accel raw=130 norm=0.510
+[EVDEV] brake raw=254 norm=0.996
+[EVDEV] accel raw=128 norm=0.502
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] accel raw=126 norm=0.494
+[EVDEV] brake raw=251 norm=0.984
+[EVDEV] accel raw=125 norm=0.490
+[EVDEV] accel raw=120 norm=0.471
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] accel raw=117 norm=0.459
+[EVDEV] brake raw=245 norm=0.961
+[EVDEV] accel raw=111 norm=0.435
+[EVDEV] brake raw=240 norm=0.941
+[EVDEV] accel raw=109 norm=0.427
+[EVDEV] brake raw=239 norm=0.937
+[EVDEV] accel raw=106 norm=0.416
+[EVDEV] brake raw=235 norm=0.922
+[EVDEV] accel raw=101 norm=0.396
+[EVDEV] brake raw=231 norm=0.906
+[EVDEV] accel raw=99 norm=0.388
+[EVDEV] brake raw=229 norm=0.898
+[EVDEV] accel raw=94 norm=0.369
+[EVDEV] brake raw=223 norm=0.875
+[EVDEV] accel raw=91 norm=0.357
+[EVDEV] brake raw=220 norm=0.863
+[EVDEV] accel raw=84 norm=0.329
+[EVDEV] brake raw=213 norm=0.835
+[EVDEV] accel raw=78 norm=0.306
+[EVDEV] brake raw=206 norm=0.808
+[EVDEV] accel raw=74 norm=0.290
+[EVDEV] brake raw=203 norm=0.796
+[EVDEV] accel raw=66 norm=0.259
+[EVDEV] brake raw=198 norm=0.776
+[EVDEV] accel raw=62 norm=0.243
+[EVDEV] brake raw=196 norm=0.769
+[EVDEV] accel raw=54 norm=0.212
+[EVDEV] brake raw=191 norm=0.749
+[EVDEV] accel raw=47 norm=0.184
+[EVDEV] brake raw=188 norm=0.737
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3800.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=42 norm=0.165
+[EVDEV] brake raw=186 norm=0.729
+[EVDEV] accel raw=36 norm=0.141
+[EVDEV] brake raw=181 norm=0.710
+[EVDEV] accel raw=31 norm=0.122
+[EVDEV] brake raw=179 norm=0.702
+[EVDEV] accel raw=25 norm=0.098
+[EVDEV] brake raw=175 norm=0.686
+[EVDEV] accel raw=18 norm=0.071
+[EVDEV] brake raw=172 norm=0.675
+[EVDEV] accel raw=14 norm=0.055
+[EVDEV] brake raw=170 norm=0.667
+[EVDEV] accel raw=7 norm=0.027
+[EVDEV] brake raw=166 norm=0.651
+[EVDEV] accel raw=2 norm=0.008
+[EVDEV] brake raw=164 norm=0.643
+[EVDEV] accel raw=0 norm=0.000
+[EVDEV] brake raw=159 norm=0.624
+[EVDEV] brake raw=155 norm=0.608
+[EVDEV] brake raw=152 norm=0.596
+[EVDEV] brake raw=149 norm=0.584
+[EVDEV] brake raw=147 norm=0.576
+[EVDEV] brake raw=143 norm=0.561
+[EVDEV] brake raw=142 norm=0.557
+[EVDEV] brake raw=139 norm=0.545
+[EVDEV] brake raw=137 norm=0.537
+[EVDEV] brake raw=136 norm=0.533
+[EVDEV] brake raw=135 norm=0.529
+[EVDEV] brake raw=136 norm=0.533
+[EVDEV] brake raw=135 norm=0.529
+[EVDEV] brake raw=134 norm=0.525
+[EVDEV] brake raw=135 norm=0.529
+[EVDEV] brake raw=134 norm=0.525
+Faces: 0
+[EVDEV] brake raw=135 norm=0.529
+[EVDEV] brake raw=134 norm=0.525
+[EVDEV] brake raw=135 norm=0.529
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 3900.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] brake raw=136 norm=0.533
+[EVDEV] brake raw=137 norm=0.537
+[EVDEV] brake raw=138 norm=0.541
+[EVDEV] brake raw=139 norm=0.545
+[EVDEV] brake raw=140 norm=0.549
+[EVDEV] brake raw=142 norm=0.557
+[EVDEV] brake raw=144 norm=0.565
+[EVDEV] brake raw=145 norm=0.569
+[EVDEV] brake raw=147 norm=0.576
+[EVDEV] brake raw=148 norm=0.580
+[EVDEV] brake raw=150 norm=0.588
+[EVDEV] brake raw=152 norm=0.596
+[EVDEV] brake raw=154 norm=0.604
+[EVDEV] brake raw=159 norm=0.624
+[EVDEV] brake raw=160 norm=0.627
+[EVDEV] brake raw=165 norm=0.647
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4000.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] brake raw=171 norm=0.671
+[EVDEV] brake raw=173 norm=0.678
+[EVDEV] brake raw=177 norm=0.694
+[EVDEV] brake raw=178 norm=0.698
+[EVDEV] brake raw=181 norm=0.710
+[EVDEV] brake raw=182 norm=0.714
+[EVDEV] brake raw=183 norm=0.718
+[EVDEV] brake raw=186 norm=0.729
+[EVDEV] brake raw=187 norm=0.733
+[EVDEV] brake raw=190 norm=0.745
+[EVDEV] brake raw=193 norm=0.757
+[EVDEV] brake raw=194 norm=0.761
+[EVDEV] accel raw=5 norm=0.020
+[EVDEV] brake raw=199 norm=0.780
+[EVDEV] accel raw=10 norm=0.039
+[EVDEV] brake raw=201 norm=0.788
+[EVDEV] accel raw=17 norm=0.067
+[EVDEV] brake raw=206 norm=0.808
+[EVDEV] accel raw=24 norm=0.094
+[EVDEV] brake raw=211 norm=0.827
+[EVDEV] accel raw=28 norm=0.110
+[EVDEV] brake raw=212 norm=0.831
+[EVDEV] accel raw=32 norm=0.125
+[EVDEV] brake raw=216 norm=0.847
+[EVDEV] accel raw=34 norm=0.133
+[EVDEV] brake raw=217 norm=0.851
+[EVDEV] accel raw=38 norm=0.149
+[EVDEV] brake raw=219 norm=0.859
+[EVDEV] accel raw=39 norm=0.153
+[EVDEV] brake raw=221 norm=0.867
+[EVDEV] accel raw=40 norm=0.157
+[EVDEV] accel raw=41 norm=0.161
+[EVDEV] brake raw=223 norm=0.875
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4100.00
+velocity=30.00 acceleration=0.00
+acceleration=0.00
+[EVDEV] accel raw=42 norm=0.165
+[EVDEV] brake raw=224 norm=0.878
+[EVDEV] accel raw=43 norm=0.169
+[EVDEV] brake raw=225 norm=0.882
+[EVDEV] accel raw=44 norm=0.173
+[EVDEV] accel raw=45 norm=0.176
+[EVDEV] brake raw=226 norm=0.886
+[EVDEV] accel raw=46 norm=0.180
+[EVDEV] brake raw=227 norm=0.890
+[EVDEV] accel raw=47 norm=0.184
+[EVDEV] brake raw=228 norm=0.894
+[EVDEV] accel raw=48 norm=0.188
+[EVDEV] brake raw=229 norm=0.898
+[EVDEV] brake raw=230 norm=0.902
+[EVDEV] brake raw=231 norm=0.906
+[EVDEV] accel raw=49 norm=0.192
+[EVDEV] accel raw=48 norm=0.188
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4200.00
+velocity=29.80 acceleration=-2.00
+acceleration=-2.00
+[EVDEV] accel raw=47 norm=0.184
+[EVDEV] brake raw=230 norm=0.902
+[EVDEV] accel raw=43 norm=0.169
+[EVDEV] brake raw=229 norm=0.898
+[EVDEV] accel raw=42 norm=0.165
+[EVDEV] brake raw=228 norm=0.894
+[EVDEV] accel raw=39 norm=0.153
+[EVDEV] brake raw=227 norm=0.890
+[EVDEV] accel raw=36 norm=0.141
+[EVDEV] brake raw=225 norm=0.882
+[EVDEV] accel raw=33 norm=0.129
+[EVDEV] brake raw=224 norm=0.878
+[EVDEV] accel raw=30 norm=0.118
+[EVDEV] brake raw=222 norm=0.871
+[EVDEV] accel raw=29 norm=0.114
+[EVDEV] brake raw=221 norm=0.867
+[EVDEV] accel raw=24 norm=0.094
+[EVDEV] brake raw=220 norm=0.863
+[EVDEV] accel raw=18 norm=0.071
+[EVDEV] brake raw=218 norm=0.855
+[EVDEV] accel raw=17 norm=0.067
+[EVDEV] brake raw=216 norm=0.847
+[EVDEV] accel raw=9 norm=0.035
+[EVDEV] brake raw=214 norm=0.839
+[EVDEV] accel raw=6 norm=0.024
+[EVDEV] brake raw=213 norm=0.835
+[EVDEV] accel raw=0 norm=0.000
+[EVDEV] brake raw=210 norm=0.824
+[EVDEV] brake raw=206 norm=0.808
+[EVDEV] brake raw=204 norm=0.800
+[EVDEV] brake raw=200 norm=0.784
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4300.00
+velocity=29.60 acceleration=-2.00
+acceleration=-2.00
+[EVDEV] brake raw=198 norm=0.776
+[EVDEV] brake raw=191 norm=0.749
+[EVDEV] brake raw=183 norm=0.718
+[EVDEV] brake raw=179 norm=0.702
+[EVDEV] brake raw=169 norm=0.663
+[EVDEV] brake raw=162 norm=0.635
+[EVDEV] brake raw=147 norm=0.576
+[EVDEV] brake raw=128 norm=0.502
+[EVDEV] brake raw=119 norm=0.467
+[EVDEV] brake raw=103 norm=0.404
+[EVDEV] brake raw=94 norm=0.369
+[EVDEV] brake raw=75 norm=0.294
+[EVDEV] brake raw=58 norm=0.227
+[EVDEV] brake raw=49 norm=0.192
+[EVDEV] brake raw=37 norm=0.145
+[EVDEV] brake raw=31 norm=0.122
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=33 norm=0.129
+[EVDEV] brake raw=44 norm=0.173
+[EVDEV] brake raw=51 norm=0.200
+[EVDEV] brake raw=68 norm=0.267
+[EVDEV] brake raw=92 norm=0.361
+[EVDEV] brake raw=103 norm=0.404
+[EVDEV] brake raw=116 norm=0.455
+[EVDEV] brake raw=119 norm=0.467
+[EVDEV] brake raw=120 norm=0.471
+[EVDEV] brake raw=125 norm=0.490
+[EVDEV] brake raw=128 norm=0.502
+[EVDEV] brake raw=132 norm=0.518
+[EVDEV] brake raw=133 norm=0.522
+[EVDEV] brake raw=136 norm=0.533
+[EVDEV] brake raw=137 norm=0.537
+[EVDEV] brake raw=138 norm=0.541
+[EVDEV] brake raw=139 norm=0.545
+[EVDEV] brake raw=141 norm=0.553
+[EVDEV] brake raw=145 norm=0.569
+[EVDEV] brake raw=146 norm=0.573
+[EVDEV] brake raw=151 norm=0.592
+[EVDEV] brake raw=157 norm=0.616
+[EVDEV] brake raw=160 norm=0.627
+[EVDEV] brake raw=166 norm=0.651
+[EVDEV] brake raw=170 norm=0.667
+[EVDEV] brake raw=176 norm=0.690
+[EVDEV] brake raw=181 norm=0.710
+[EVDEV] brake raw=183 norm=0.718
+[EVDEV] brake raw=187 norm=0.733
+[EVDEV] brake raw=189 norm=0.741
+[EVDEV] brake raw=190 norm=0.745
+[EVDEV] brake raw=192 norm=0.753
+[EVDEV] brake raw=193 norm=0.757
+[EVDEV] brake raw=194 norm=0.761
+[EVDEV] brake raw=195 norm=0.765
+[EVDEV] brake raw=196 norm=0.769
+[EVDEV] brake raw=198 norm=0.776
+[EVDEV] brake raw=199 norm=0.780
+[EVDEV] brake raw=200 norm=0.784
+[EVDEV] brake raw=201 norm=0.788
+[EVDEV] brake raw=202 norm=0.792
+[EVDEV] brake raw=203 norm=0.796
+[EVDEV] brake raw=206 norm=0.808
+[EVDEV] brake raw=207 norm=0.812
+[EVDEV] brake raw=208 norm=0.816
+[EVDEV] brake raw=209 norm=0.820
+[EVDEV] brake raw=210 norm=0.824
+[EVDEV] brake raw=211 norm=0.827
+[EVDEV] brake raw=212 norm=0.831
+[EVDEV] brake raw=213 norm=0.835
+[EVDEV] brake raw=214 norm=0.839
+[EVDEV] brake raw=215 norm=0.843
+[EVDEV] brake raw=216 norm=0.847
+[EVDEV] brake raw=217 norm=0.851
+[EVDEV] brake raw=218 norm=0.855
+[EVDEV] brake raw=219 norm=0.859
+[EVDEV] brake raw=221 norm=0.867
+[EVDEV] brake raw=222 norm=0.871
+[EVDEV] brake raw=224 norm=0.878
+[EVDEV] brake raw=226 norm=0.886
+[EVDEV] brake raw=227 norm=0.890
+[EVDEV] brake raw=229 norm=0.898
+[EVDEV] brake raw=230 norm=0.902
+[EVDEV] brake raw=232 norm=0.910
+[EVDEV] brake raw=234 norm=0.918
+[EVDEV] brake raw=235 norm=0.922
+[EVDEV] brake raw=238 norm=0.933
+[EVDEV] brake raw=240 norm=0.941
+[EVDEV] brake raw=243 norm=0.953
+[EVDEV] brake raw=245 norm=0.961
+[EVDEV] brake raw=247 norm=0.969
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=250 norm=0.980
+[EVDEV] brake raw=252 norm=0.988
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=254 norm=0.996
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=254 norm=0.996
+[EVDEV] brake raw=255 norm=1.000
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=252 norm=0.988
+[EVDEV] brake raw=251 norm=0.984
+[EVDEV] brake raw=246 norm=0.965
+[EVDEV] brake raw=244 norm=0.957
+[EVDEV] brake raw=238 norm=0.933
+[EVDEV] brake raw=231 norm=0.906
+[EVDEV] brake raw=228 norm=0.894
+[EVDEV] brake raw=221 norm=0.867
+[EVDEV] brake raw=217 norm=0.851
+[EVDEV] brake raw=210 norm=0.824
+[EVDEV] brake raw=203 norm=0.796
+[EVDEV] brake raw=200 norm=0.784
+[EVDEV] brake raw=195 norm=0.765
+[EVDEV] brake raw=192 norm=0.753
+[EVDEV] brake raw=188 norm=0.737
+[EVDEV] brake raw=183 norm=0.718
+[EVDEV] brake raw=181 norm=0.710
+[EVDEV] brake raw=177 norm=0.694
+[EVDEV] brake raw=175 norm=0.686
+[EVDEV] brake raw=173 norm=0.678
+[EVDEV] brake raw=171 norm=0.671
+[EVDEV] brake raw=170 norm=0.667
+[EVDEV] brake raw=171 norm=0.671
+[EVDEV] brake raw=172 norm=0.675
+[EVDEV] brake raw=173 norm=0.678
+[EVDEV] brake raw=172 norm=0.675
+[EVDEV] brake raw=173 norm=0.678
+[EVDEV] brake raw=174 norm=0.682
+[EVDEV] brake raw=175 norm=0.686
+[EVDEV] brake raw=176 norm=0.690
+[EVDEV] brake raw=177 norm=0.694
+[EVDEV] brake raw=178 norm=0.698
+[EVDEV] brake raw=179 norm=0.702
+[EVDEV] brake raw=180 norm=0.706
+[EVDEV] brake raw=181 norm=0.710
+[EVDEV] brake raw=182 norm=0.714
+[EVDEV] brake raw=183 norm=0.718
+[EVDEV] brake raw=184 norm=0.722
+[EVDEV] brake raw=185 norm=0.725
+[EVDEV] brake raw=186 norm=0.729
+[EVDEV] brake raw=187 norm=0.733
+[EVDEV] brake raw=188 norm=0.737
+[EVDEV] brake raw=189 norm=0.741
+[EVDEV] brake raw=190 norm=0.745
+[EVDEV] brake raw=191 norm=0.749
+[EVDEV] brake raw=192 norm=0.753
+[EVDEV] brake raw=193 norm=0.757
+[EVDEV] brake raw=194 norm=0.761
+[EVDEV] brake raw=195 norm=0.765
+[EVDEV] brake raw=196 norm=0.769
+[EVDEV] brake raw=197 norm=0.773
+[EVDEV] brake raw=198 norm=0.776
+[EVDEV] brake raw=199 norm=0.780
+[EVDEV] brake raw=200 norm=0.784
+[EVDEV] brake raw=202 norm=0.792
+[EVDEV] brake raw=203 norm=0.796
+[EVDEV] brake raw=204 norm=0.800
+[EVDEV] brake raw=205 norm=0.804
+[EVDEV] brake raw=206 norm=0.808
+[EVDEV] brake raw=207 norm=0.812
+[EVDEV] brake raw=209 norm=0.820
+[EVDEV] brake raw=210 norm=0.824
+[EVDEV] brake raw=211 norm=0.827
+[EVDEV] brake raw=213 norm=0.835
+[EVDEV] brake raw=214 norm=0.839
+[EVDEV] brake raw=215 norm=0.843
+[EVDEV] brake raw=216 norm=0.847
+[EVDEV] brake raw=217 norm=0.851
+[EVDEV] brake raw=218 norm=0.855
+[EVDEV] brake raw=219 norm=0.859
+[EVDEV] brake raw=220 norm=0.863
+[EVDEV] brake raw=221 norm=0.867
+[EVDEV] brake raw=223 norm=0.875
+[EVDEV] brake raw=224 norm=0.878
+[EVDEV] brake raw=225 norm=0.882
+[EVDEV] brake raw=226 norm=0.886
+[EVDEV] brake raw=227 norm=0.890
+[EVDEV] brake raw=228 norm=0.894
+[EVDEV] brake raw=229 norm=0.898
+[EVDEV] brake raw=230 norm=0.902
+[EVDEV] brake raw=231 norm=0.906
+[EVDEV] brake raw=232 norm=0.910
+[EVDEV] brake raw=234 norm=0.918
+[EVDEV] brake raw=235 norm=0.922
+[EVDEV] brake raw=236 norm=0.925
+[EVDEV] brake raw=237 norm=0.929
+[EVDEV] brake raw=238 norm=0.933
+[EVDEV] brake raw=239 norm=0.937
+[EVDEV] brake raw=240 norm=0.941
+[EVDEV] brake raw=241 norm=0.945
+[EVDEV] brake raw=242 norm=0.949
+[EVDEV] brake raw=243 norm=0.953
+[EVDEV] brake raw=244 norm=0.957
+[EVDEV] brake raw=245 norm=0.961
+[EVDEV] brake raw=246 norm=0.965
+[EVDEV] brake raw=247 norm=0.969
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=249 norm=0.976
+[EVDEV] brake raw=250 norm=0.980
+[EVDEV] brake raw=251 norm=0.984
+[EVDEV] brake raw=252 norm=0.988
+Faces: 0
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=254 norm=0.996
+[EVDEV] brake raw=255 norm=1.000
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4400.00
+velocity=29.40 acceleration=-2.00
+acceleration=-2.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4500.00
+velocity=29.20 acceleration=-2.00
+acceleration=-2.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4600.00
+velocity=29.00 acceleration=-2.00
+acceleration=-2.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4700.00
+velocity=28.80 acceleration=-2.00
+acceleration=-2.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4800.00
+velocity=28.60 acceleration=-2.00
+acceleration=-2.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 4900.00
+velocity=28.40 acceleration=-2.00
+acceleration=-2.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5000.00
+velocity=28.20 acceleration=-2.00
+acceleration=-2.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5100.00
+velocity=28.00 acceleration=-2.00
+acceleration=-2.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5200.00
+velocity=27.80 acceleration=-2.00
+acceleration=-2.00
+[EVDEV] brake raw=254 norm=0.996
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=252 norm=0.988
+[EVDEV] brake raw=251 norm=0.984
+[EVDEV] brake raw=250 norm=0.980
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5300.00
+velocity=27.60 acceleration=-2.00
+acceleration=-2.00
+[EVDEV] brake raw=249 norm=0.976
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=247 norm=0.969
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=247 norm=0.969
+[EVDEV] brake raw=249 norm=0.976
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=247 norm=0.969
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=247 norm=0.969
+[SENSOR RAW] brake=0.9098039215686274
+[SENSOR RAW] brake=0.9098039215686274
+[SENSOR RAW] brake=0.9176470588235294
+[SENSOR RAW] brake=0.9215686274509803
+[SENSOR RAW] brake=0.9254901960784314
+[SENSOR RAW] brake=0.9294117647058824
+[SENSOR RAW] brake=0.9333333333333333
+[EVDEV] brake raw=248 norm=0.973
+[SENSOR RAW] brake=0.9372549019607843
+[EVDEV] brake raw=246 norm=0.965
+[EVDEV] brake raw=248 norm=0.973
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.9372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5400.00
+velocity=26.96 acceleration=-6.42
+acceleration=-6.42
+[EVDEV] brake raw=247 norm=0.969
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=249 norm=0.976
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=247 norm=0.969
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=249 norm=0.976
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=249 norm=0.976
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=249 norm=0.976
+[SENSOR RAW] brake=0.9450980392156862
+[SENSOR RAW] brake=0.9529411764705882
+[SENSOR RAW] brake=0.9568627450980393
+[EVDEV] brake raw=250 norm=0.980
+[SENSOR RAW] brake=0.9647058823529412
+[EVDEV] brake raw=249 norm=0.976
+[SENSOR RAW] brake=0.9764705882352941
+[SENSOR RAW] brake=0.9882352941176471
+[SENSOR RAW] brake=0.9921568627450981
+[EVDEV] brake raw=250 norm=0.980
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=251 norm=0.984
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=249 norm=0.976
+[EVDEV] brake raw=250 norm=0.980
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5500.00
+velocity=26.21 acceleration=-7.52
+acceleration=-7.52
+[EVDEV] brake raw=251 norm=0.984
+[EVDEV] brake raw=250 norm=0.980
+[EVDEV] brake raw=251 norm=0.984
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=252 norm=0.988
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5600.00
+velocity=25.42 acceleration=-7.86
+acceleration=-7.86
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=252 norm=0.988
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5700.00
+velocity=24.52 acceleration=-8.98
+acceleration=-8.98
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=252 norm=0.988
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=251 norm=0.984
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=252 norm=0.988
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5800.00
+velocity=23.54 acceleration=-9.80
+acceleration=-9.80
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=253 norm=0.992
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=252 norm=0.988
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=253 norm=0.992
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 5900.00
+velocity=22.52 acceleration=-10.26
+acceleration=-10.26
+[EVDEV] brake raw=254 norm=0.996
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=255 norm=1.000
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6000.00
+velocity=21.47 acceleration=-10.49
+acceleration=-10.49
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6100.00
+velocity=20.41 acceleration=-10.52
+acceleration=-10.52
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6200.00
+velocity=19.36 acceleration=-10.52
+acceleration=-10.52
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6300.00
+velocity=18.31 acceleration=-10.52
+acceleration=-10.52
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6400.00
+velocity=17.26 acceleration=-10.53
+acceleration=-10.53
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6500.00
+velocity=16.21 acceleration=-10.52
+acceleration=-10.52
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6600.00
+velocity=15.15 acceleration=-10.51
+acceleration=-10.51
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6700.00
+velocity=14.11 acceleration=-10.49
+acceleration=-10.49
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6800.00
+velocity=13.06 acceleration=-10.48
+acceleration=-10.48
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 6900.00
+velocity=12.01 acceleration=-10.44
+acceleration=-10.44
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7000.00
+velocity=11.07 acceleration=-9.45
+acceleration=-9.45
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7100.00
+velocity=10.22 acceleration=-8.50
+acceleration=-8.50
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7200.00
+velocity=9.45 acceleration=-7.64
+acceleration=-7.64
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7300.00
+velocity=8.77 acceleration=-6.87
+acceleration=-6.87
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7400.00
+velocity=8.12 acceleration=-6.42
+acceleration=-6.42
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7500.00
+velocity=7.48 acceleration=-6.41
+acceleration=-6.41
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7600.00
+velocity=6.84 acceleration=-6.41
+acceleration=-6.41
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7700.00
+velocity=6.20 acceleration=-6.41
+acceleration=-6.41
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7800.00
+velocity=5.56 acceleration=-6.41
+acceleration=-6.41
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 7900.00
+velocity=4.92 acceleration=-6.41
+acceleration=-6.41
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8000.00
+velocity=4.28 acceleration=-6.41
+acceleration=-6.41
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8100.00
+velocity=3.64 acceleration=-6.41
+acceleration=-6.41
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8200.00
+velocity=3.00 acceleration=-6.40
+acceleration=-6.40
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8300.00
+velocity=2.36 acceleration=-6.39
+acceleration=-6.39
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8400.00
+velocity=1.72 acceleration=-6.39
+acceleration=-6.39
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8500.00
+velocity=1.09 acceleration=-6.36
+acceleration=-6.36
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8600.00
+velocity=0.45 acceleration=-6.37
+acceleration=-6.37
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8700.00
+velocity=0.00 acceleration=-6.38
+acceleration=-6.38
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8800.00
+velocity=0.00 acceleration=-6.38
+acceleration=-6.38
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 8900.00
+velocity=0.00 acceleration=-6.36
+acceleration=-6.36
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9000.00
+velocity=0.00 acceleration=-6.38
+acceleration=-6.38
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9100.00
+velocity=0.00 acceleration=-6.36
+acceleration=-6.36
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9200.00
+velocity=0.00 acceleration=-6.40
+acceleration=-6.40
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9300.00
+velocity=0.00 acceleration=-6.34
+acceleration=-6.34
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9400.00
+velocity=0.00 acceleration=-6.29
+acceleration=-6.29
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9500.00
+velocity=0.00 acceleration=-6.36
+acceleration=-6.36
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9600.00
+velocity=0.00 acceleration=-6.31
+acceleration=-6.31
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9700.00
+velocity=0.00 acceleration=-6.31
+acceleration=-6.31
+[EVDEV] brake raw=253 norm=0.992
+[EVDEV] brake raw=250 norm=0.980
+[EVDEV] brake raw=248 norm=0.973
+[EVDEV] brake raw=244 norm=0.957
+[EVDEV] brake raw=238 norm=0.933
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=235 norm=0.922
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=228 norm=0.894
+[EVDEV] brake raw=225 norm=0.882
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=217 norm=0.851
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=208 norm=0.816
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=203 norm=0.796
+[EVDEV] brake raw=195 norm=0.765
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=190 norm=0.745
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=182 norm=0.714
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=173 norm=0.678
+[EVDEV] brake raw=170 norm=0.667
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=159 norm=0.624
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9800.00
+velocity=0.00 acceleration=-6.33
+acceleration=-6.33
+[EVDEV] brake raw=155 norm=0.608
+[EVDEV] brake raw=144 norm=0.565
+[EVDEV] brake raw=133 norm=0.522
+[EVDEV] brake raw=128 norm=0.502
+[EVDEV] brake raw=117 norm=0.459
+[EVDEV] brake raw=112 norm=0.439
+[EVDEV] brake raw=104 norm=0.408
+[EVDEV] brake raw=97 norm=0.380
+[EVDEV] brake raw=93 norm=0.365
+[EVDEV] brake raw=86 norm=0.337
+[EVDEV] brake raw=83 norm=0.325
+[EVDEV] brake raw=78 norm=0.306
+[EVDEV] brake raw=71 norm=0.278
+[EVDEV] brake raw=67 norm=0.263
+[EVDEV] brake raw=59 norm=0.231
+[EVDEV] brake raw=55 norm=0.216
+[EVDEV] brake raw=44 norm=0.173
+[EVDEV] brake raw=37 norm=0.145
+[EVDEV] brake raw=34 norm=0.133
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 9900.00
+velocity=0.00 acceleration=-6.33
+acceleration=-6.33
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=9 norm=0.035
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=21 norm=0.082
+[EVDEV] accel raw=45 norm=0.176
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=55 norm=0.216
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=76 norm=0.298
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=91 norm=0.357
+[EVDEV] accel raw=98 norm=0.384
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10000.00
+velocity=0.00 acceleration=-6.32
+acceleration=-6.32
+[EVDEV] accel raw=108 norm=0.424
+[EVDEV] accel raw=109 norm=0.427
+[EVDEV] accel raw=112 norm=0.439
+[EVDEV] accel raw=116 norm=0.455
+[EVDEV] accel raw=115 norm=0.451
+[EVDEV] accel raw=127 norm=0.498
+[EVDEV] accel raw=129 norm=0.506
+[EVDEV] accel raw=139 norm=0.545
+[EVDEV] accel raw=146 norm=0.573
+[EVDEV] accel raw=150 norm=0.588
+[EVDEV] accel raw=162 norm=0.635
+[EVDEV] accel raw=166 norm=0.651
+[EVDEV] accel raw=174 norm=0.682
+[EVDEV] accel raw=180 norm=0.706
+[EVDEV] accel raw=181 norm=0.710
+[EVDEV] accel raw=185 norm=0.725
+[EVDEV] accel raw=186 norm=0.729
+[EVDEV] accel raw=191 norm=0.749
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=193 norm=0.757
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=205 norm=0.804
+[EVDEV] accel raw=204 norm=0.800
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=205 norm=0.804
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=209 norm=0.820
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=213 norm=0.835
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=212 norm=0.831
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=217 norm=0.851
+[EVDEV] accel raw=215 norm=0.843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10100.00
+velocity=0.00 acceleration=-6.33
+acceleration=-6.33
+[EVDEV] accel raw=219 norm=0.859
+[EVDEV] accel raw=223 norm=0.875
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=226 norm=0.886
+[EVDEV] accel raw=225 norm=0.882
+[EVDEV] accel raw=224 norm=0.878
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=220 norm=0.863
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=223 norm=0.875
+[EVDEV] accel raw=224 norm=0.878
+[EVDEV] accel raw=226 norm=0.886
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=232 norm=0.910
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=225 norm=0.882
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=226 norm=0.886
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=228 norm=0.894
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=227 norm=0.890
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10200.00
+velocity=0.00 acceleration=-6.29
+acceleration=-6.29
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=225 norm=0.882
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=226 norm=0.886
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=225 norm=0.882
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=226 norm=0.886
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=228 norm=0.894
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=229 norm=0.898
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=228 norm=0.894
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=224 norm=0.878
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=225 norm=0.882
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=228 norm=0.894
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=226 norm=0.886
+[EVDEV] accel raw=229 norm=0.898
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10300.00
+velocity=0.00 acceleration=-6.31
+acceleration=-6.31
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=234 norm=0.918
+[EVDEV] accel raw=224 norm=0.878
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=226 norm=0.886
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=226 norm=0.886
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=233 norm=0.914
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=226 norm=0.886
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=232 norm=0.910
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=234 norm=0.918
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=230 norm=0.902
+Faces: 0
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=231 norm=0.906
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10400.00
+velocity=0.00 acceleration=-6.34
+acceleration=-6.34
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=229 norm=0.898
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=229 norm=0.898
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10500.00
+velocity=0.00 acceleration=-6.32
+acceleration=-6.32
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=233 norm=0.914
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=228 norm=0.894
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=233 norm=0.914
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=229 norm=0.898
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=233 norm=0.914
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=228 norm=0.894
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10600.00
+velocity=0.00 acceleration=-6.33
+acceleration=-6.33
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=234 norm=0.918
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=234 norm=0.918
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10700.00
+velocity=0.00 acceleration=-6.31
+acceleration=-6.31
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=233 norm=0.914
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=233 norm=0.914
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=230 norm=0.902
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10800.00
+velocity=0.00 acceleration=-6.31
+acceleration=-6.31
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 10900.00
+velocity=0.00 acceleration=-6.30
+acceleration=-6.30
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11000.00
+velocity=0.00 acceleration=-6.30
+acceleration=-6.30
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11100.00
+velocity=0.00 acceleration=-6.30
+acceleration=-6.30
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11200.00
+velocity=0.00 acceleration=-6.28
+acceleration=-6.28
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11300.00
+velocity=0.00 acceleration=-6.23
+acceleration=-6.23
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=231 norm=0.906
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=232 norm=0.910
+[SENSOR RAW] brake=1.0
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11400.00
+velocity=0.00 acceleration=-6.12
+acceleration=-6.12
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] accel raw=233 norm=0.914
+[EVDEV] accel raw=234 norm=0.918
+[EVDEV] accel raw=235 norm=0.922
+[EVDEV] accel raw=236 norm=0.925
+[EVDEV] accel raw=237 norm=0.929
+[EVDEV] accel raw=238 norm=0.933
+[EVDEV] accel raw=239 norm=0.937
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=241 norm=0.945
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=242 norm=0.949
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=243 norm=0.953
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11500.00
+velocity=0.00 acceleration=-6.08
+acceleration=-6.08
+[EVDEV] accel raw=244 norm=0.957
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=245 norm=0.961
+[EVDEV] accel raw=246 norm=0.965
+[EVDEV] accel raw=247 norm=0.969
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=249 norm=0.976
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11600.00
+velocity=0.00 acceleration=-6.02
+acceleration=-6.02
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=247 norm=0.969
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11700.00
+velocity=0.00 acceleration=-6.00
+acceleration=-6.00
+[EVDEV] accel raw=246 norm=0.965
+[EVDEV] accel raw=247 norm=0.969
+[EVDEV] accel raw=246 norm=0.965
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=245 norm=0.961
+[EVDEV] accel raw=246 norm=0.965
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=245 norm=0.961
+[EVDEV] accel raw=246 norm=0.965
+[EVDEV] accel raw=245 norm=0.961
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=31 norm=0.122
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=30 norm=0.118
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11800.00
+velocity=0.00 acceleration=-5.86
+acceleration=-5.86
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=246 norm=0.965
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=247 norm=0.969
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=249 norm=0.976
+Faces: 0
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 11900.00
+velocity=0.00 acceleration=-5.75
+acceleration=-5.75
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=251 norm=0.984
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=251 norm=0.984
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=251 norm=0.984
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=250 norm=0.980
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=251 norm=0.984
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=250 norm=0.980
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=251 norm=0.984
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] brake raw=32 norm=0.125
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12000.00
+velocity=0.00 acceleration=-5.65
+acceleration=-5.65
+[EVDEV] accel raw=251 norm=0.984
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12100.00
+velocity=0.00 acceleration=-5.64
+acceleration=-5.64
+[EVDEV] accel raw=251 norm=0.984
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=31 norm=0.122
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12200.00
+velocity=0.00 acceleration=-5.64
+acceleration=-5.64
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12300.00
+velocity=0.00 acceleration=-5.64
+acceleration=-5.64
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+Faces: 1
+Eyes: 0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12400.00
+velocity=0.00 acceleration=-5.64
+acceleration=-5.64
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] brake raw=31 norm=0.122
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12500.00
+velocity=0.00 acceleration=-5.64
+acceleration=-5.64
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12600.00
+velocity=0.00 acceleration=-5.64
+acceleration=-5.64
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12700.00
+velocity=0.00 acceleration=-5.64
+acceleration=-5.64
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=250 norm=0.980
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[EVDEV] accel raw=248 norm=0.973
+[EVDEV] accel raw=249 norm=0.976
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=248 norm=0.973
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=247 norm=0.969
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12800.00
+velocity=0.00 acceleration=-5.63
+acceleration=-5.63
+[EVDEV] accel raw=246 norm=0.965
+[EVDEV] accel raw=245 norm=0.961
+[EVDEV] accel raw=244 norm=0.957
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+Faces: 1
+Eyes: 0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 12900.00
+velocity=0.00 acceleration=-5.61
+acceleration=-5.61
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13000.00
+velocity=0.00 acceleration=-5.56
+acceleration=-5.56
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=245 norm=0.961
+[EVDEV] accel raw=244 norm=0.957
+[EVDEV] accel raw=243 norm=0.953
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=241 norm=0.945
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=240 norm=0.941
+[EVDEV] accel raw=239 norm=0.937
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=238 norm=0.933
+[EVDEV] accel raw=236 norm=0.925
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=235 norm=0.922
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=232 norm=0.910
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13100.00
+velocity=0.00 acceleration=-5.50
+acceleration=-5.50
+[EVDEV] accel raw=231 norm=0.906
+[EVDEV] accel raw=230 norm=0.902
+[EVDEV] accel raw=229 norm=0.898
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=227 norm=0.890
+[EVDEV] accel raw=225 norm=0.882
+[EVDEV] accel raw=221 norm=0.867
+[EVDEV] accel raw=219 norm=0.859
+[EVDEV] accel raw=217 norm=0.851
+[EVDEV] accel raw=214 norm=0.839
+[EVDEV] accel raw=213 norm=0.835
+[EVDEV] accel raw=211 norm=0.827
+[EVDEV] accel raw=208 norm=0.816
+[EVDEV] accel raw=206 norm=0.808
+[EVDEV] accel raw=204 norm=0.800
+[EVDEV] accel raw=202 norm=0.792
+[EVDEV] accel raw=199 norm=0.780
+[EVDEV] accel raw=195 norm=0.765
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=193 norm=0.757
+[EVDEV] accel raw=186 norm=0.729
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=183 norm=0.718
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=178 norm=0.698
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=170 norm=0.667
+[EVDEV] accel raw=167 norm=0.655
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=1.0
+[EVDEV] accel raw=160 norm=0.627
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=157 norm=0.616
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13200.00
+velocity=0.00 acceleration=-5.48
+acceleration=-5.48
+[EVDEV] accel raw=151 norm=0.592
+[EVDEV] accel raw=145 norm=0.569
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=143 norm=0.561
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=135 norm=0.529
+[EVDEV] accel raw=133 norm=0.522
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=126 norm=0.494
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=120 norm=0.471
+[EVDEV] accel raw=116 norm=0.455
+[EVDEV] accel raw=109 norm=0.427
+[EVDEV] accel raw=106 norm=0.416
+[EVDEV] accel raw=99 norm=0.388
+[EVDEV] accel raw=92 norm=0.361
+[EVDEV] accel raw=89 norm=0.349
+[EVDEV] accel raw=82 norm=0.322
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=78 norm=0.306
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] accel raw=70 norm=0.275
+[EVDEV] accel raw=63 norm=0.247
+[EVDEV] accel raw=61 norm=0.239
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] accel raw=57 norm=0.224
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13300.00
+velocity=0.00 acceleration=-5.48
+acceleration=-5.48
+[EVDEV] accel raw=55 norm=0.216
+[EVDEV] accel raw=53 norm=0.208
+[EVDEV] accel raw=52 norm=0.204
+[EVDEV] accel raw=53 norm=0.208
+[EVDEV] accel raw=52 norm=0.204
+[EVDEV] accel raw=50 norm=0.196
+[EVDEV] accel raw=43 norm=0.169
+[EVDEV] accel raw=39 norm=0.153
+[EVDEV] accel raw=28 norm=0.110
+[EVDEV] accel raw=17 norm=0.067
+[EVDEV] accel raw=10 norm=0.039
+[EVDEV] accel raw=0 norm=0.000
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13400.00
+velocity=0.00 acceleration=-5.48
+acceleration=-5.48
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13500.00
+velocity=0.00 acceleration=-5.48
+acceleration=-5.48
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13600.00
+velocity=0.00 acceleration=-5.46
+acceleration=-5.46
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13700.00
+velocity=0.00 acceleration=-5.44
+acceleration=-5.44
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13800.00
+velocity=0.00 acceleration=-5.44
+acceleration=-5.44
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 13900.00
+velocity=0.00 acceleration=-5.44
+acceleration=-5.44
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14000.00
+velocity=0.00 acceleration=-5.54
+acceleration=-5.54
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14100.00
+velocity=0.00 acceleration=-5.61
+acceleration=-5.61
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=1.0
+[SENSOR RAW] brake=0.996078431372549
+[SENSOR RAW] brake=0.996078431372549
+[SENSOR RAW] brake=0.9921568627450981
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14200.00
+velocity=0.00 acceleration=-5.65
+acceleration=-5.65
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.984313725490196
+[SENSOR RAW] brake=0.984313725490196
+[SENSOR RAW] brake=0.984313725490196
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9607843137254902
+[SENSOR RAW] brake=0.9607843137254902
+[SENSOR RAW] brake=0.9411764705882353
+[SENSOR RAW] brake=0.9411764705882353
+[SENSOR RAW] brake=0.9372549019607843
+[SENSOR RAW] brake=0.9372549019607843
+[SENSOR RAW] brake=0.9215686274509803
+[SENSOR RAW] brake=0.9215686274509803
+[SENSOR RAW] brake=0.9058823529411765
+[SENSOR RAW] brake=0.9058823529411765
+[SENSOR RAW] brake=0.8980392156862745
+[SENSOR RAW] brake=0.8980392156862745
+[SENSOR RAW] brake=0.8745098039215686
+[SENSOR RAW] brake=0.8745098039215686
+[SENSOR RAW] brake=0.8627450980392157
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14300.00
+velocity=0.00 acceleration=-3.84
+acceleration=-3.84
+[SENSOR RAW] brake=0.8627450980392157
+[SENSOR RAW] brake=0.8352941176470589
+[SENSOR RAW] brake=0.8352941176470589
+[SENSOR RAW] brake=0.807843137254902
+[SENSOR RAW] brake=0.807843137254902
+[SENSOR RAW] brake=0.796078431372549
+[SENSOR RAW] brake=0.796078431372549
+[SENSOR RAW] brake=0.7764705882352941
+[SENSOR RAW] brake=0.7764705882352941
+[SENSOR RAW] brake=0.7686274509803922
+[SENSOR RAW] brake=0.7686274509803922
+[SENSOR RAW] brake=0.7490196078431373
+[SENSOR RAW] brake=0.7490196078431373
+[SENSOR RAW] brake=0.7372549019607844
+[SENSOR RAW] brake=0.7372549019607844
+[SENSOR RAW] brake=0.7294117647058823
+[SENSOR RAW] brake=0.7294117647058823
+[SENSOR RAW] brake=0.7098039215686275
+[SENSOR RAW] brake=0.7098039215686275
+[SENSOR RAW] brake=0.7019607843137254
+[SENSOR RAW] brake=0.7019607843137254
+[SENSOR RAW] brake=0.6862745098039216
+[SENSOR RAW] brake=0.6862745098039216
+[SENSOR RAW] brake=0.6745098039215687
+[SENSOR RAW] brake=0.6745098039215687
+[SENSOR RAW] brake=0.6666666666666666
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.6666666666666666
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14400.00
+velocity=0.00 acceleration=-1.95
+acceleration=-1.95
+[SENSOR RAW] brake=0.6666666666666666
+[SENSOR RAW] brake=0.6509803921568628
+[SENSOR RAW] brake=0.6509803921568628
+[SENSOR RAW] brake=0.6431372549019608
+[SENSOR RAW] brake=0.6431372549019608
+[SENSOR RAW] brake=0.6235294117647059
+[SENSOR RAW] brake=0.6078431372549019
+[SENSOR RAW] brake=0.596078431372549
+[SENSOR RAW] brake=0.5843137254901961
+[SENSOR RAW] brake=0.5764705882352941
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.5607843137254902
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.5568627450980392
+[SENSOR RAW] brake=0.5450980392156862
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.5372549019607843
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14500.00
+velocity=0.00 acceleration=-0.90
+acceleration=-0.90
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.5333333333333333
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.5294117647058824
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.5333333333333333
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.5294117647058824
+[SENSOR RAW] brake=0.5254901960784314
+[SENSOR RAW] brake=0.5294117647058824
+[SENSOR RAW] brake=0.5254901960784314
+[SENSOR RAW] brake=0.5294117647058824
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14600.00
+velocity=0.00 acceleration=-0.86
+acceleration=-0.86
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.5254901960784314
+[SENSOR RAW] brake=0.5294117647058824
+[SENSOR RAW] brake=0.5333333333333333
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14700.00
+velocity=0.00 acceleration=-0.88
+acceleration=-0.88
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.5372549019607843
+[SENSOR RAW] brake=0.5411764705882353
+[SENSOR RAW] brake=0.5450980392156862
+[SENSOR RAW] brake=0.5490196078431373
+[SENSOR RAW] brake=0.5568627450980392
+[SENSOR RAW] brake=0.5647058823529412
+[SENSOR RAW] brake=0.5686274509803921
+[SENSOR RAW] brake=0.5764705882352941
+[SENSOR RAW] brake=0.5803921568627451
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14800.00
+velocity=0.00 acceleration=-1.13
+acceleration=-1.13
+[SENSOR RAW] brake=0.5882352941176471
+[SENSOR RAW] brake=0.596078431372549
+[SENSOR RAW] brake=0.6039215686274509
+[SENSOR RAW] brake=0.6235294117647059
+[SENSOR RAW] brake=0.6274509803921569
+[SENSOR RAW] brake=0.6470588235294118
+[SENSOR RAW] brake=0.6705882352941176
+[SENSOR RAW] brake=0.6784313725490196
+[SENSOR RAW] brake=0.6941176470588235
+[SENSOR RAW] brake=0.6980392156862745
+[SENSOR RAW] brake=0.7098039215686275
+[SENSOR RAW] brake=0.7137254901960784
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.7137254901960784
+---------------------------------------------------------
+[CAR CLOCK] logical time: 14900.00
+velocity=0.00 acceleration=-2.58
+acceleration=-2.58
+[SENSOR RAW] brake=0.7176470588235294
+[SENSOR RAW] brake=0.7294117647058823
+[SENSOR RAW] brake=0.7333333333333333
+[SENSOR RAW] brake=0.7450980392156863
+[SENSOR RAW] brake=0.7568627450980392
+[SENSOR RAW] brake=0.7607843137254902
+[SENSOR RAW] brake=0.7607843137254902
+[SENSOR RAW] brake=0.7803921568627451
+[SENSOR RAW] brake=0.7803921568627451
+[SENSOR RAW] brake=0.788235294117647
+[SENSOR RAW] brake=0.788235294117647
+[SENSOR RAW] brake=0.807843137254902
+[SENSOR RAW] brake=0.807843137254902
+[SENSOR RAW] brake=0.8274509803921568
+[SENSOR RAW] brake=0.8274509803921568
+[SENSOR RAW] brake=0.8313725490196079
+[SENSOR RAW] brake=0.8313725490196079
+[SENSOR RAW] brake=0.8470588235294118
+[SENSOR RAW] brake=0.8470588235294118
+[SENSOR RAW] brake=0.8509803921568627
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15000.00
+velocity=0.00 acceleration=-4.20
+acceleration=-4.20
+[SENSOR RAW] brake=0.8509803921568627
+[SENSOR RAW] brake=0.8588235294117647
+[SENSOR RAW] brake=0.8588235294117647
+[SENSOR RAW] brake=0.8666666666666667
+[SENSOR RAW] brake=0.8666666666666667
+[SENSOR RAW] brake=0.8666666666666667
+[SENSOR RAW] brake=0.8745098039215686
+[SENSOR RAW] brake=0.8745098039215686
+[SENSOR RAW] brake=0.8784313725490196
+[SENSOR RAW] brake=0.8784313725490196
+[SENSOR RAW] brake=0.8823529411764706
+[SENSOR RAW] brake=0.8823529411764706
+[SENSOR RAW] brake=0.8823529411764706
+[SENSOR RAW] brake=0.8862745098039215
+[SENSOR RAW] brake=0.8862745098039215
+[SENSOR RAW] brake=0.8901960784313725
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15100.00
+velocity=0.00 acceleration=-4.70
+acceleration=-4.70
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.8901960784313725
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8941176470588236
+[SENSOR RAW] brake=0.8941176470588236
+[SENSOR RAW] brake=0.8980392156862745
+[SENSOR RAW] brake=0.9019607843137255
+[SENSOR RAW] brake=0.9058823529411765
+[EVDEV] brake raw=27 norm=0.106
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15200.00
+velocity=0.00 acceleration=-4.93
+acceleration=-4.93
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9058823529411765
+[SENSOR RAW] brake=0.9058823529411765
+[SENSOR RAW] brake=0.9058823529411765
+[SENSOR RAW] brake=0.9019607843137255
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15300.00
+velocity=0.00 acceleration=-4.88
+acceleration=-4.88
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9019607843137255
+[SENSOR RAW] brake=0.8980392156862745
+[SENSOR RAW] brake=0.8980392156862745
+[SENSOR RAW] brake=0.8941176470588236
+[SENSOR RAW] brake=0.8941176470588236
+[SENSOR RAW] brake=0.8901960784313725
+[SENSOR RAW] brake=0.8901960784313725
+[SENSOR RAW] brake=0.8823529411764706
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.8823529411764706
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8784313725490196
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.8784313725490196
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8705882352941177
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.8705882352941177
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8666666666666667
+[SENSOR RAW] brake=0.8666666666666667
+[SENSOR RAW] brake=0.8627450980392157
+[SENSOR RAW] brake=0.8627450980392157
+[SENSOR RAW] brake=0.8549019607843137
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.8549019607843137
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8470588235294118
+[SENSOR RAW] brake=0.8470588235294118
+[SENSOR RAW] brake=0.8392156862745098
+[SENSOR RAW] brake=0.8392156862745098
+[SENSOR RAW] brake=0.8352941176470589
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.8352941176470589
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15400.00
+velocity=0.00 acceleration=-4.28
+acceleration=-4.28
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8352941176470589
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.8235294117647058
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.807843137254902
+[SENSOR RAW] brake=0.8
+[SENSOR RAW] brake=0.7843137254901961
+[SENSOR RAW] brake=0.7764705882352941
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=0.7490196078431373
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.7176470588235294
+[SENSOR RAW] brake=0.7019607843137254
+[SENSOR RAW] brake=0.6627450980392157
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=0.6352941176470588
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.5764705882352941
+[SENSOR RAW] brake=0.5019607843137255
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15500.00
+velocity=0.00 acceleration=-0.71
+acceleration=-0.71
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.4666666666666667
+[SENSOR RAW] brake=0.403921568627451
+[SENSOR RAW] brake=0.3686274509803922
+[SENSOR RAW] brake=0.29411764705882354
+[SENSOR RAW] brake=0.22745098039215686
+[SENSOR RAW] brake=0.19215686274509805
+[SENSOR RAW] brake=0.1450980392156863
+[SENSOR RAW] brake=0.12156862745098039
+[SENSOR RAW] brake=0.11764705882352941
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15600.00
+velocity=0.35 acceleration=3.50
+acceleration=3.50
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15700.00
+velocity=0.70 acceleration=3.50
+acceleration=3.50
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15800.00
+velocity=1.05 acceleration=3.50
+acceleration=3.50
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=0.11764705882352941
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.12941176470588237
+[SENSOR RAW] brake=0.17254901960784313
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.2
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=0.26666666666666666
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.3607843137254902
+[SENSOR RAW] brake=0.403921568627451
+[SENSOR RAW] brake=0.4549019607843137
+[SENSOR RAW] brake=0.4666666666666667
+[SENSOR RAW] brake=0.47058823529411764
+[SENSOR RAW] brake=0.49019607843137253
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.49019607843137253
+---------------------------------------------------------
+[CAR CLOCK] logical time: 15900.00
+velocity=0.99 acceleration=-0.65
+acceleration=-0.65
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.5019607843137255
+[SENSOR RAW] brake=0.5176470588235295
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.5215686274509804
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.5333333333333333
+[SENSOR RAW] brake=0.5372549019607843
+[SENSOR RAW] brake=0.5411764705882353
+[SENSOR RAW] brake=0.5450980392156862
+[SENSOR RAW] brake=0.5529411764705883
+[SENSOR RAW] brake=0.5686274509803921
+[SENSOR RAW] brake=0.5725490196078431
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16000.00
+velocity=0.88 acceleration=-1.09
+acceleration=-1.09
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.592156862745098
+[SENSOR RAW] brake=0.615686274509804
+[SENSOR RAW] brake=0.6274509803921569
+[SENSOR RAW] brake=0.6509803921568628
+[SENSOR RAW] brake=0.6666666666666666
+[SENSOR RAW] brake=0.6901960784313725
+[SENSOR RAW] brake=0.7098039215686275
+[SENSOR RAW] brake=0.7176470588235294
+[SENSOR RAW] brake=0.7333333333333333
+[SENSOR RAW] brake=0.7411764705882353
+[SENSOR RAW] brake=0.7450980392156863
+[SENSOR RAW] brake=0.7529411764705882
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16100.00
+velocity=0.57 acceleration=-3.10
+acceleration=-3.10
+[SENSOR RAW] brake=0.7568627450980392
+[SENSOR RAW] brake=0.7607843137254902
+[SENSOR RAW] brake=0.7647058823529411
+[SENSOR RAW] brake=0.7686274509803922
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16200.00
+velocity=0.23 acceleration=-3.32
+acceleration=-3.32
+[SENSOR RAW] brake=0.7764705882352941
+[SENSOR RAW] brake=0.7803921568627451
+[SENSOR RAW] brake=0.7843137254901961
+[SENSOR RAW] brake=0.788235294117647
+[SENSOR RAW] brake=0.792156862745098
+[SENSOR RAW] brake=0.796078431372549
+[SENSOR RAW] brake=0.807843137254902
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16300.00
+velocity=0.00 acceleration=-3.87
+acceleration=-3.87
+[SENSOR RAW] brake=0.8117647058823529
+[SENSOR RAW] brake=0.8156862745098039
+[SENSOR RAW] brake=0.8196078431372549
+[SENSOR RAW] brake=0.8235294117647058
+[SENSOR RAW] brake=0.8274509803921568
+[SENSOR RAW] brake=0.8313725490196079
+[SENSOR RAW] brake=0.8352941176470589
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.8352941176470589
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16400.00
+velocity=0.00 acceleration=-4.28
+acceleration=-4.28
+[SENSOR RAW] brake=0.8392156862745098
+[SENSOR RAW] brake=0.8431372549019608
+[SENSOR RAW] brake=0.8470588235294118
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16500.00
+velocity=0.00 acceleration=-4.46
+acceleration=-4.46
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8509803921568627
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16600.00
+velocity=0.00 acceleration=-4.52
+acceleration=-4.52
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16700.00
+velocity=0.00 acceleration=-4.52
+acceleration=-4.52
+[SENSOR RAW] brake=0.8549019607843137
+[SENSOR RAW] brake=0.8588235294117647
+[SENSOR RAW] brake=0.8666666666666667
+[SENSOR RAW] brake=0.8705882352941177
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16800.00
+velocity=0.00 acceleration=-4.82
+acceleration=-4.82
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8784313725490196
+[SENSOR RAW] brake=0.8862745098039215
+[SENSOR RAW] brake=0.8901960784313725
+[SENSOR RAW] brake=0.8980392156862745
+[SENSOR RAW] brake=0.9019607843137255
+[SENSOR RAW] brake=0.9098039215686274
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9176470588235294
+[SENSOR RAW] brake=0.9215686274509803
+[SENSOR RAW] brake=0.9333333333333333
+[SENSOR RAW] brake=0.9411764705882353
+[SENSOR RAW] brake=0.9529411764705882
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+Faces: 0
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.9529411764705882
+---------------------------------------------------------
+[CAR CLOCK] logical time: 16900.00
+velocity=0.00 acceleration=-6.17
+acceleration=-6.17
+[SENSOR RAW] brake=0.9607843137254902
+[SENSOR RAW] brake=0.9686274509803922
+[SENSOR RAW] brake=0.9725490196078431
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.9803921568627451
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9882352941176471
+[SENSOR RAW] brake=0.9921568627450981
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17000.00
+velocity=0.00 acceleration=-6.86
+acceleration=-6.86
+[SENSOR RAW] brake=0.996078431372549
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.996078431372549
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17100.00
+velocity=0.00 acceleration=-6.93
+acceleration=-6.93
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.9882352941176471
+[SENSOR RAW] brake=0.984313725490196
+[SENSOR RAW] brake=0.9647058823529412
+[SENSOR RAW] brake=0.9568627450980393
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.9568627450980393
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17400.00
+velocity=0.00 acceleration=-6.24
+acceleration=-6.24
+[SENSOR RAW] brake=0.9333333333333333
+[SENSOR RAW] brake=0.9058823529411765
+[SENSOR RAW] brake=0.8941176470588236
+[SENSOR RAW] brake=0.8666666666666667
+[SENSOR RAW] brake=0.8509803921568627
+[SENSOR RAW] brake=0.8235294117647058
+[SENSOR RAW] brake=0.796078431372549
+[SENSOR RAW] brake=0.7843137254901961
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.7647058823529411
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.7529411764705882
+[SENSOR RAW] brake=0.7372549019607844
+[SENSOR RAW] brake=0.7176470588235294
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17500.00
+velocity=0.00 acceleration=-2.64
+acceleration=-2.64
+[SENSOR RAW] brake=0.7098039215686275
+[SENSOR RAW] brake=0.6941176470588235
+[SENSOR RAW] brake=0.6862745098039216
+[SENSOR RAW] brake=0.6784313725490196
+[SENSOR RAW] brake=0.6705882352941176
+[SENSOR RAW] brake=0.6666666666666666
+[SENSOR RAW] brake=0.6705882352941176
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17600.00
+velocity=0.00 acceleration=-2.05
+acceleration=-2.05
+[SENSOR RAW] brake=0.6745098039215687
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17700.00
+velocity=0.00 acceleration=-2.09
+acceleration=-2.09
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17800.00
+velocity=0.00 acceleration=-2.09
+acceleration=-2.09
+[SENSOR RAW] brake=0.6784313725490196
+[SENSOR RAW] brake=0.6745098039215687
+[SENSOR RAW] brake=0.6784313725490196
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.6784313725490196
+---------------------------------------------------------
+[CAR CLOCK] logical time: 17900.00
+velocity=0.00 acceleration=-2.14
+acceleration=-2.14
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18000.00
+velocity=0.00 acceleration=-2.14
+acceleration=-2.14
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18100.00
+velocity=0.00 acceleration=-2.14
+acceleration=-2.14
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18200.00
+velocity=0.00 acceleration=-2.14
+acceleration=-2.14
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.6823529411764706
+[SENSOR RAW] brake=0.6862745098039216
+[SENSOR RAW] brake=0.6901960784313725
+[SENSOR RAW] brake=0.6941176470588235
+[SENSOR RAW] brake=0.6980392156862745
+[SENSOR RAW] brake=0.7019607843137254
+[SENSOR RAW] brake=0.7058823529411765
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18300.00
+velocity=0.00 acceleration=-2.48
+acceleration=-2.48
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.7098039215686275
+[SENSOR RAW] brake=0.7137254901960784
+[SENSOR RAW] brake=0.7176470588235294
+[SENSOR RAW] brake=0.7215686274509804
+[SENSOR RAW] brake=0.7254901960784313
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.7254901960784313
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18400.00
+velocity=0.00 acceleration=-2.74
+acceleration=-2.74
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.7294117647058823
+[SENSOR RAW] brake=0.7333333333333333
+[SENSOR RAW] brake=0.7372549019607844
+[SENSOR RAW] brake=0.7411764705882353
+[SENSOR RAW] brake=0.7450980392156863
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18500.00
+velocity=0.00 acceleration=-3.00
+acceleration=-3.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.7490196078431373
+[SENSOR RAW] brake=0.7529411764705882
+[SENSOR RAW] brake=0.7568627450980392
+[SENSOR RAW] brake=0.7607843137254902
+[SENSOR RAW] brake=0.7647058823529411
+[SENSOR RAW] brake=0.7686274509803922
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18600.00
+velocity=0.00 acceleration=-3.32
+acceleration=-3.32
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.7725490196078432
+[SENSOR RAW] brake=0.7764705882352941
+[SENSOR RAW] brake=0.7803921568627451
+[SENSOR RAW] brake=0.7843137254901961
+[SENSOR RAW] brake=0.792156862745098
+[SENSOR RAW] brake=0.796078431372549
+[SENSOR RAW] brake=0.8
+[SENSOR RAW] brake=0.803921568627451
+[SENSOR RAW] brake=0.807843137254902
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18700.00
+velocity=0.00 acceleration=-3.87
+acceleration=-3.87
+[SENSOR RAW] brake=0.8117647058823529
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.8196078431372549
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=0.8235294117647058
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8274509803921568
+[SENSOR RAW] brake=0.8352941176470589
+[SENSOR RAW] brake=0.8392156862745098
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.8431372549019608
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8470588235294118
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18800.00
+velocity=0.00 acceleration=-4.46
+acceleration=-4.46
+[SENSOR RAW] brake=0.8509803921568627
+[SENSOR RAW] brake=0.8549019607843137
+[SENSOR RAW] brake=0.8588235294117647
+[SENSOR RAW] brake=0.8627450980392157
+[SENSOR RAW] brake=0.8666666666666667
+[SENSOR RAW] brake=0.8745098039215686
+[SENSOR RAW] brake=0.8784313725490196
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8823529411764706
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.8823529411764706
+---------------------------------------------------------
+[CAR CLOCK] logical time: 18900.00
+velocity=0.00 acceleration=-5.01
+acceleration=-5.01
+[SENSOR RAW] brake=0.8862745098039215
+[SENSOR RAW] brake=0.8901960784313725
+[SENSOR RAW] brake=0.8941176470588236
+[SENSOR RAW] brake=0.8980392156862745
+[SENSOR RAW] brake=0.9019607843137255
+[SENSOR RAW] brake=0.9058823529411765
+[SENSOR RAW] brake=0.9098039215686274
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19000.00
+velocity=0.00 acceleration=-5.45
+acceleration=-5.45
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9176470588235294
+[SENSOR RAW] brake=0.9215686274509803
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.9254901960784314
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9294117647058824
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9333333333333333
+[SENSOR RAW] brake=0.9372549019607843
+[SENSOR RAW] brake=0.9411764705882353
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.9450980392156862
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19100.00
+velocity=0.00 acceleration=-6.04
+acceleration=-6.04
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9490196078431372
+[SENSOR RAW] brake=0.9529411764705882
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.9568627450980393
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9607843137254902
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.9647058823529412
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19200.00
+velocity=0.00 acceleration=-6.38
+acceleration=-6.38
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9686274509803922
+[SENSOR RAW] brake=0.9725490196078431
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=0.9764705882352941
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9803921568627451
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19300.00
+velocity=0.00 acceleration=-6.65
+acceleration=-6.65
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=0.984313725490196
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9882352941176471
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.996078431372549
+[SENSOR RAW] brake=1.0
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 19900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 20900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.996078431372549
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21200.00
+velocity=0.00 acceleration=-6.93
+acceleration=-6.93
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.9882352941176471
+[SENSOR RAW] brake=0.984313725490196
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21300.00
+velocity=0.00 acceleration=-6.72
+acceleration=-6.72
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9803921568627451
+[SENSOR RAW] brake=0.9764705882352941
+[SENSOR RAW] brake=0.9725490196078431
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.9725490196078431
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21400.00
+velocity=0.00 acceleration=-6.51
+acceleration=-6.51
+[SENSOR RAW] brake=0.9686274509803922
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9686274509803922
+[SENSOR RAW] brake=0.9764705882352941
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21500.00
+velocity=0.00 acceleration=-6.58
+acceleration=-6.58
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9686274509803922
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9686274509803922
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21600.00
+velocity=0.00 acceleration=-6.44
+acceleration=-6.44
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9647058823529412
+[SENSOR RAW] brake=0.9725490196078431
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21700.00
+velocity=0.00 acceleration=-6.51
+acceleration=-6.51
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9686274509803922
+[SENSOR RAW] brake=0.9725490196078431
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21800.00
+velocity=0.00 acceleration=-6.51
+acceleration=-6.51
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9764705882352941
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9686274509803922
+[SENSOR RAW] brake=0.9725490196078431
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.9725490196078431
+---------------------------------------------------------
+[CAR CLOCK] logical time: 21900.00
+velocity=0.00 acceleration=-6.51
+acceleration=-6.51
+[SENSOR RAW] brake=0.9764705882352941
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9764705882352941
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9764705882352941
+[SENSOR RAW] brake=0.9803921568627451
+[SENSOR RAW] brake=0.9764705882352941
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22000.00
+velocity=0.00 acceleration=-6.58
+acceleration=-6.58
+[SENSOR RAW] brake=0.9803921568627451
+[SENSOR RAW] brake=0.984313725490196
+[SENSOR RAW] brake=0.9764705882352941
+[SENSOR RAW] brake=0.9803921568627451
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22100.00
+velocity=0.00 acceleration=-6.65
+acceleration=-6.65
+[SENSOR RAW] brake=0.984313725490196
+[SENSOR RAW] brake=0.9803921568627451
+[SENSOR RAW] brake=0.984313725490196
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22200.00
+velocity=0.00 acceleration=-6.72
+acceleration=-6.72
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22300.00
+velocity=0.00 acceleration=-6.72
+acceleration=-6.72
+[SENSOR RAW] brake=0.9882352941176471
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.9882352941176471
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22400.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.9882352941176471
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22500.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22600.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22700.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22800.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.9882352941176471
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.9882352941176471
+---------------------------------------------------------
+[CAR CLOCK] logical time: 22900.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.984313725490196
+[SENSOR RAW] brake=0.9882352941176471
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23000.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=27 norm=0.106
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23100.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23200.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.9882352941176471
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23300.00
+velocity=0.00 acceleration=-6.79
+acceleration=-6.79
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.9921568627450981
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.9921568627450981
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23400.00
+velocity=0.00 acceleration=-6.86
+acceleration=-6.86
+[EVDEV] brake raw=31 norm=0.122
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23500.00
+velocity=0.00 acceleration=-6.86
+acceleration=-6.86
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.996078431372549
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23600.00
+velocity=0.00 acceleration=-6.93
+acceleration=-6.93
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=27 norm=0.106
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 23900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+Faces: 1
+Eyes: 0
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 24900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 25900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 26900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 27900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+[EVDEV] brake raw=30 norm=0.118
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 28900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+Faces: 0
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 29900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 30900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 31900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32100.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32200.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32300.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32400.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32500.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32600.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32700.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32800.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=1.0
+---------------------------------------------------------
+[CAR CLOCK] logical time: 32900.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33000.00
+velocity=0.00 acceleration=-7.00
+acceleration=-7.00
+[SENSOR RAW] brake=0.9921568627450981
+[SENSOR RAW] brake=0.9803921568627451
+[SENSOR RAW] brake=0.9725490196078431
+[SENSOR RAW] brake=0.9568627450980393
+[SENSOR RAW] brake=0.9333333333333333
+[SENSOR RAW] brake=0.9215686274509803
+[SENSOR RAW] brake=0.8941176470588236
+[SENSOR RAW] brake=0.8823529411764706
+[SENSOR RAW] brake=0.8509803921568627
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33100.00
+velocity=0.00 acceleration=-4.52
+acceleration=-4.52
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.8156862745098039
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.796078431372549
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.7647058823529411
+[SENSOR RAW] brake=0.7450980392156863
+[SENSOR RAW] brake=0.7137254901960784
+[SENSOR RAW] brake=0.6784313725490196
+[SENSOR RAW] brake=0.6666666666666666
+[SENSOR RAW] brake=0.6235294117647059
+[SENSOR RAW] brake=0.6078431372549019
+[SENSOR RAW] brake=0.5647058823529412
+[SENSOR RAW] brake=0.5215686274509804
+[SENSOR RAW] brake=0.5019607843137255
+[SENSOR RAW] brake=0.4588235294117647
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33200.00
+velocity=0.00 acceleration=-0.48
+acceleration=-0.48
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.4392156862745098
+[SENSOR RAW] brake=0.40784313725490196
+[SENSOR RAW] brake=0.3803921568627451
+[SENSOR RAW] brake=0.36470588235294116
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.33725490196078434
+[SENSOR RAW] brake=0.3254901960784314
+[SENSOR RAW] brake=0.3058823529411765
+[SENSOR RAW] brake=0.2784313725490196
+[SENSOR RAW] brake=0.2627450980392157
+[SENSOR RAW] brake=0.23137254901960785
+[SENSOR RAW] brake=0.21568627450980393
+[SENSOR RAW] brake=0.17254901960784313
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33300.00
+velocity=0.35 acceleration=3.50
+acceleration=3.50
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.1450980392156863
+[SENSOR RAW] brake=0.13333333333333333
+[SENSOR RAW] brake=0.11764705882352941
+[EVDEV] brake raw=30 norm=0.118
+Faces: 0
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.11764705882352941
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33400.00
+velocity=0.70 acceleration=3.50
+acceleration=3.50
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33500.00
+velocity=1.05 acceleration=3.50
+acceleration=3.50
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11764705882352941
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33600.00
+velocity=1.40 acceleration=3.50
+acceleration=3.50
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33700.00
+velocity=1.75 acceleration=3.50
+acceleration=3.50
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=30 norm=0.118
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33800.00
+velocity=2.07 acceleration=3.20
+acceleration=3.20
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 33900.00
+velocity=2.49 acceleration=4.24
+acceleration=4.24
+[EVDEV] brake raw=30 norm=0.118
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34000.00
+velocity=3.01 acceleration=5.14
+acceleration=5.14
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=28 norm=0.110
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34100.00
+velocity=3.53 acceleration=5.20
+acceleration=5.20
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34200.00
+velocity=4.04 acceleration=5.17
+acceleration=5.17
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34300.00
+velocity=4.57 acceleration=5.25
+acceleration=5.25
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34400.00
+velocity=5.08 acceleration=5.14
+acceleration=5.14
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34500.00
+velocity=5.61 acceleration=5.23
+acceleration=5.23
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34600.00
+velocity=6.13 acceleration=5.25
+acceleration=5.25
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34700.00
+velocity=6.66 acceleration=5.25
+acceleration=5.25
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34800.00
+velocity=7.18 acceleration=5.25
+acceleration=5.25
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+Faces: 0
+Saved debug (no face)
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 34900.00
+velocity=7.71 acceleration=5.25
+acceleration=5.25
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 35000.00
+velocity=8.24 acceleration=5.28
+acceleration=5.28
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 35100.00
+velocity=8.77 acceleration=5.34
+acceleration=5.34
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 35200.00
+velocity=9.30 acceleration=5.28
+acceleration=5.28
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 35300.00
+velocity=9.79 acceleration=4.93
+acceleration=4.93
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11764705882352941
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+Faces: 0
+[EVDEV] brake raw=28 norm=0.110
+[EVDEV] brake raw=29 norm=0.114
+Saved debug (no face)
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 35400.00
+velocity=10.24 acceleration=4.49
+acceleration=4.49
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+[SENSOR RAW] brake=0.11372549019607843
+---------------------------------------------------------
+[CAR CLOCK] logical time: 35500.00
+velocity=10.65 acceleration=4.10
+acceleration=4.10

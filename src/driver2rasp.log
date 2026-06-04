@@ -1,0 +1,1873 @@
+******* Using Python version: 3.12.3
+Time taken for wheel: 0.12
+The /dev/input/event0 is the path and shanwan Android GamePad is the name of the device.
+
+Webcam opened
+Time taken for cam: 1.44
+The devices are connected
+
+[DEVICE READER CAM read] Physical time: 4009.11 
+[DEVICE READER CAM read] LAG: 9.11 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4000.00 
+[DEVICE READER CAM TIMER] Physical time: 4009.27 
+[DEVICE READER CAM TIMER] LAG: 9.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4000.00 
+[DRIVER] Physical time: 4009.71 
+[DRIVER] LAG: 9.71 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4100.00 
+[DRIVER] Physical time: 4100.40 
+[DRIVER] LAG: 0.40 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4209.65 
+[DEVICE READER CAM read] LAG: 9.65 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4200.00 
+[DEVICE READER CAM TIMER] Physical time: 4209.95 
+[DEVICE READER CAM TIMER] LAG: 9.95 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4200.00 
+[DRIVER] Physical time: 4210.20 
+[DRIVER] LAG: 10.20 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4300.00 
+[DRIVER] Physical time: 4300.42 
+[DRIVER] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4405.12 
+[DEVICE READER CAM read] LAG: 5.12 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4400.00 
+[DEVICE READER CAM TIMER] Physical time: 4405.39 
+[DEVICE READER CAM TIMER] LAG: 5.39 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4400.00 
+[DRIVER] Physical time: 4406.13 
+[DRIVER] LAG: 6.13 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4500.00 
+[DRIVER] Physical time: 4500.42 
+[DRIVER] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4608.67 
+[DEVICE READER CAM read] LAG: 8.67 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4600.00 
+[DEVICE READER CAM TIMER] Physical time: 4608.87 
+[DEVICE READER CAM TIMER] LAG: 8.87 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4600.00 
+[DRIVER] Physical time: 4609.39 
+[DRIVER] LAG: 9.39 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4700.00 
+[DRIVER] Physical time: 4700.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 4809.41 
+[DEVICE READER CAM read] LAG: 9.41 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 4800.00 
+[DEVICE READER CAM TIMER] Physical time: 4809.73 
+[DEVICE READER CAM TIMER] LAG: 9.73 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 4800.00 
+[FACE DETECTOR] Physical time: 4894.69 
+[FACE DETECTOR] LAG: 94.69 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 4800.00 
+[DRIVER REACTION 1] Physical time: 4895.14 
+[DRIVER REACTION 1] LAG: 95.14 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4800.00 
+[DRIVER] Physical time: 4895.34 
+[DRIVER] LAG: 95.34 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 4900.00 
+[DRIVER] Physical time: 4900.18 
+[DRIVER] LAG: 0.18 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5005.14 
+[DEVICE READER CAM read] LAG: 5.14 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5000.00 
+[DEVICE READER CAM TIMER] Physical time: 5005.41 
+[DEVICE READER CAM TIMER] LAG: 5.41 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5000.00 
+[DRIVER] Physical time: 5005.69 
+[DRIVER] LAG: 5.69 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5100.00 
+[DRIVER] Physical time: 5100.37 
+[DRIVER] LAG: 0.37 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5209.62 
+[DEVICE READER CAM read] LAG: 9.62 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5200.00 
+[DEVICE READER CAM TIMER] Physical time: 5209.89 
+[DEVICE READER CAM TIMER] LAG: 9.89 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5200.00 
+[DRIVER] Physical time: 5210.12 
+[DRIVER] LAG: 10.12 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5300.00 
+[DRIVER] Physical time: 5300.40 
+[DRIVER] LAG: 0.40 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5404.92 
+[DEVICE READER CAM read] LAG: 4.92 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5400.00 
+[DEVICE READER CAM TIMER] Physical time: 5405.19 
+[DEVICE READER CAM TIMER] LAG: 5.19 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5400.00 
+[DRIVER] Physical time: 5405.43 
+[DRIVER] LAG: 5.43 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5500.00 
+[DRIVER] Physical time: 5500.45 
+[DRIVER] LAG: 0.45 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5608.96 
+[DEVICE READER CAM read] LAG: 8.96 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5600.00 
+[DEVICE READER CAM TIMER] Physical time: 5610.31 
+[DEVICE READER CAM TIMER] LAG: 10.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5600.00 
+[DRIVER] Physical time: 5610.96 
+[DRIVER] LAG: 10.96 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5700.00 
+[DRIVER] Physical time: 5700.28 
+[DRIVER] LAG: 0.28 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 5809.31 
+[DEVICE READER CAM read] LAG: 9.31 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 5800.00 
+[DEVICE READER CAM TIMER] Physical time: 5809.63 
+[DEVICE READER CAM TIMER] LAG: 9.63 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 5800.00 
+[FACE DETECTOR] Physical time: 5887.18 
+[FACE DETECTOR] LAG: 87.18 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 5800.00 
+[DRIVER REACTION 1] Physical time: 5887.56 
+[DRIVER REACTION 1] LAG: 87.56 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5800.00 
+[DRIVER] Physical time: 5887.75 
+[DRIVER] LAG: 87.75 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 5900.00 
+[DRIVER] Physical time: 5900.26 
+[DRIVER] LAG: 0.26 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6004.92 
+[DEVICE READER CAM read] LAG: 4.92 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6000.00 
+[DEVICE READER CAM TIMER] Physical time: 6005.18 
+[DEVICE READER CAM TIMER] LAG: 5.18 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6000.00 
+[DRIVER] Physical time: 6006.48 
+[DRIVER] LAG: 6.48 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6100.00 
+[DRIVER] Physical time: 6100.26 
+[DRIVER] LAG: 0.26 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6204.72 
+[DEVICE READER CAM read] LAG: 4.72 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6200.00 
+[DEVICE READER CAM TIMER] Physical time: 6204.96 
+[DEVICE READER CAM TIMER] LAG: 4.96 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6200.00 
+[DRIVER] Physical time: 6205.61 
+[DRIVER] LAG: 5.61 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6300.00 
+[DRIVER] Physical time: 6300.29 
+[DRIVER] LAG: 0.29 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6405.24 
+[DEVICE READER CAM read] LAG: 5.24 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6400.00 
+[DEVICE READER CAM TIMER] Physical time: 6405.51 
+[DEVICE READER CAM TIMER] LAG: 5.51 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6400.00 
+[DRIVER] Physical time: 6406.27 
+[DRIVER] LAG: 6.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6500.00 
+[DRIVER] Physical time: 6500.37 
+[DRIVER] LAG: 0.37 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6604.61 
+[DEVICE READER CAM read] LAG: 4.61 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6600.00 
+[DEVICE READER CAM TIMER] Physical time: 6604.85 
+[DEVICE READER CAM TIMER] LAG: 4.85 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6600.00 
+[DRIVER] Physical time: 6605.43 
+[DRIVER] LAG: 5.43 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6700.00 
+[DRIVER] Physical time: 6700.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 6804.48 
+[DEVICE READER CAM read] LAG: 4.48 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 6800.00 
+[DEVICE READER CAM TIMER] Physical time: 6804.77 
+[DEVICE READER CAM TIMER] LAG: 4.77 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 6800.00 
+[FACE DETECTOR] Physical time: 6879.90 
+[FACE DETECTOR] LAG: 79.90 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 6800.00 
+[DRIVER REACTION 1] Physical time: 6880.21 
+[DRIVER REACTION 1] LAG: 80.21 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6800.00 
+[DRIVER] Physical time: 6880.40 
+[DRIVER] LAG: 80.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 6900.00 
+[DRIVER] Physical time: 6900.25 
+[DRIVER] LAG: 0.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7004.73 
+[DEVICE READER CAM read] LAG: 4.73 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7000.00 
+[DEVICE READER CAM TIMER] Physical time: 7004.95 
+[DEVICE READER CAM TIMER] LAG: 4.95 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7000.00 
+[DRIVER] Physical time: 7005.61 
+[DRIVER] LAG: 5.61 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7100.00 
+[DRIVER] Physical time: 7100.26 
+[DRIVER] LAG: 0.26 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7204.70 
+[DEVICE READER CAM read] LAG: 4.70 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7200.00 
+[DEVICE READER CAM TIMER] Physical time: 7204.96 
+[DEVICE READER CAM TIMER] LAG: 4.96 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7200.00 
+[DRIVER] Physical time: 7205.93 
+[DRIVER] LAG: 5.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7300.00 
+[DRIVER] Physical time: 7300.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7405.10 
+[DEVICE READER CAM read] LAG: 5.10 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7400.00 
+[DEVICE READER CAM TIMER] Physical time: 7405.37 
+[DEVICE READER CAM TIMER] LAG: 5.37 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7400.00 
+[DRIVER] Physical time: 7406.73 
+[DRIVER] LAG: 6.73 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7500.00 
+[DRIVER] Physical time: 7500.28 
+[DRIVER] LAG: 0.28 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7605.35 
+[DEVICE READER CAM read] LAG: 5.35 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7600.00 
+[DEVICE READER CAM TIMER] Physical time: 7605.68 
+[DEVICE READER CAM TIMER] LAG: 5.68 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7600.00 
+[DRIVER] Physical time: 7606.36 
+[DRIVER] LAG: 6.36 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7700.00 
+[DRIVER] Physical time: 7700.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 7807.95 
+[DEVICE READER CAM read] LAG: 7.95 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 7800.00 
+[DEVICE READER CAM TIMER] Physical time: 7808.20 
+[DEVICE READER CAM TIMER] LAG: 8.20 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 7800.00 
+[FACE DETECTOR] Physical time: 7887.13 
+[FACE DETECTOR] LAG: 87.13 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 7800.00 
+[DRIVER REACTION 1] Physical time: 7887.31 
+[DRIVER REACTION 1] LAG: 87.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7800.00 
+[DRIVER] Physical time: 7887.38 
+[DRIVER] LAG: 87.38 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 7900.00 
+[DRIVER] Physical time: 7900.36 
+[DRIVER] LAG: 0.36 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8004.77 
+[DEVICE READER CAM read] LAG: 4.77 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8000.00 
+[DEVICE READER CAM TIMER] Physical time: 8005.01 
+[DEVICE READER CAM TIMER] LAG: 5.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8000.00 
+[DRIVER] Physical time: 8005.87 
+[DRIVER] LAG: 5.87 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8100.00 
+[DRIVER] Physical time: 8100.41 
+[DRIVER] LAG: 0.41 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8205.24 
+[DEVICE READER CAM read] LAG: 5.24 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8200.00 
+[DEVICE READER CAM TIMER] Physical time: 8205.51 
+[DEVICE READER CAM TIMER] LAG: 5.51 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8200.00 
+[DRIVER] Physical time: 8206.23 
+[DRIVER] LAG: 6.23 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8300.00 
+[DRIVER] Physical time: 8300.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8405.17 
+[DEVICE READER CAM read] LAG: 5.17 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8400.00 
+[DEVICE READER CAM TIMER] Physical time: 8405.41 
+[DEVICE READER CAM TIMER] LAG: 5.41 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8400.00 
+[DRIVER] Physical time: 8406.27 
+[DRIVER] LAG: 6.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8500.00 
+[DRIVER] Physical time: 8500.38 
+[DRIVER] LAG: 0.38 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8604.50 
+[DEVICE READER CAM read] LAG: 4.50 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8600.00 
+[DEVICE READER CAM TIMER] Physical time: 8604.79 
+[DEVICE READER CAM TIMER] LAG: 4.79 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8600.00 
+[DRIVER] Physical time: 8605.37 
+[DRIVER] LAG: 5.37 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8700.00 
+[DRIVER] Physical time: 8700.42 
+[DRIVER] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 8804.86 
+[DEVICE READER CAM read] LAG: 4.86 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 8800.00 
+[DEVICE READER CAM TIMER] Physical time: 8805.12 
+[DEVICE READER CAM TIMER] LAG: 5.12 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 8800.00 
+[FACE DETECTOR] Physical time: 8882.11 
+[FACE DETECTOR] LAG: 82.11 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 8800.00 
+[DRIVER REACTION 1] Physical time: 8882.45 
+[DRIVER REACTION 1] LAG: 82.45 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8800.00 
+[DRIVER] Physical time: 8882.67 
+[DRIVER] LAG: 82.67 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 8900.00 
+[DRIVER] Physical time: 8900.35 
+[DRIVER] LAG: 0.35 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9008.09 
+[DEVICE READER CAM read] LAG: 8.09 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9000.00 
+[DEVICE READER CAM TIMER] Physical time: 9008.32 
+[DEVICE READER CAM TIMER] LAG: 8.32 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9000.00 
+[DRIVER] Physical time: 9008.61 
+[DRIVER] LAG: 8.61 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9100.00 
+[DRIVER] Physical time: 9100.40 
+[DRIVER] LAG: 0.40 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9204.65 
+[DEVICE READER CAM read] LAG: 4.65 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9200.00 
+[DEVICE READER CAM TIMER] Physical time: 9204.89 
+[DEVICE READER CAM TIMER] LAG: 4.89 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9200.00 
+[DRIVER] Physical time: 9205.48 
+[DRIVER] LAG: 5.48 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9300.00 
+[DRIVER] Physical time: 9300.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9405.06 
+[DEVICE READER CAM read] LAG: 5.06 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9400.00 
+[DEVICE READER CAM TIMER] Physical time: 9405.33 
+[DEVICE READER CAM TIMER] LAG: 5.33 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9400.00 
+[DRIVER] Physical time: 9406.64 
+[DRIVER] LAG: 6.64 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9500.00 
+[DRIVER] Physical time: 9500.29 
+[DRIVER] LAG: 0.29 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9604.92 
+[DEVICE READER CAM read] LAG: 4.92 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9600.00 
+[DEVICE READER CAM TIMER] Physical time: 9605.15 
+[DEVICE READER CAM TIMER] LAG: 5.15 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9600.00 
+[DRIVER] Physical time: 9606.03 
+[DRIVER] LAG: 6.03 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9700.00 
+[DRIVER] Physical time: 9700.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 9805.10 
+[DEVICE READER CAM read] LAG: 5.10 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 9800.00 
+[DEVICE READER CAM TIMER] Physical time: 9805.33 
+[DEVICE READER CAM TIMER] LAG: 5.33 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 9800.00 
+[FACE DETECTOR] Physical time: 9879.30 
+[FACE DETECTOR] LAG: 79.30 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 9800.00 
+[DRIVER REACTION 1] Physical time: 9879.81 
+[DRIVER REACTION 1] LAG: 79.81 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9800.00 
+[DRIVER] Physical time: 9880.03 
+[DRIVER] LAG: 80.03 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 9900.00 
+[DRIVER] Physical time: 9900.36 
+[DRIVER] LAG: 0.36 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10005.41 
+[DEVICE READER CAM read] LAG: 5.41 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10000.00 
+[DEVICE READER CAM TIMER] Physical time: 10005.71 
+[DEVICE READER CAM TIMER] LAG: 5.71 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10000.00 
+[DRIVER] Physical time: 10006.37 
+[DRIVER] LAG: 6.37 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10100.00 
+[DRIVER] Physical time: 10100.25 
+[DRIVER] LAG: 0.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10204.86 
+[DEVICE READER CAM read] LAG: 4.86 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10200.00 
+[DEVICE READER CAM TIMER] Physical time: 10205.09 
+[DEVICE READER CAM TIMER] LAG: 5.09 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10200.00 
+[DRIVER] Physical time: 10205.75 
+[DRIVER] LAG: 5.75 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10300.00 
+[DRIVER] Physical time: 10300.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10405.21 
+[DEVICE READER CAM read] LAG: 5.21 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10400.00 
+[DEVICE READER CAM TIMER] Physical time: 10405.48 
+[DEVICE READER CAM TIMER] LAG: 5.48 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10400.00 
+[DRIVER] Physical time: 10406.21 
+[DRIVER] LAG: 6.21 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10500.00 
+[DRIVER] Physical time: 10500.42 
+[DRIVER] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10604.57 
+[DEVICE READER CAM read] LAG: 4.57 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10600.00 
+[DEVICE READER CAM TIMER] Physical time: 10604.81 
+[DEVICE READER CAM TIMER] LAG: 4.81 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10600.00 
+[DRIVER] Physical time: 10605.40 
+[DRIVER] LAG: 5.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10700.00 
+[DRIVER] Physical time: 10700.38 
+[DRIVER] LAG: 0.38 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 10804.75 
+[DEVICE READER CAM read] LAG: 4.75 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 10800.00 
+[DEVICE READER CAM TIMER] Physical time: 10805.05 
+[DEVICE READER CAM TIMER] LAG: 5.05 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 10800.00 
+[FACE DETECTOR] Physical time: 10884.70 
+[FACE DETECTOR] LAG: 84.70 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 10800.00 
+[DRIVER REACTION 1] Physical time: 10885.02 
+[DRIVER REACTION 1] LAG: 85.02 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10800.00 
+[DRIVER] Physical time: 10885.17 
+[DRIVER] LAG: 85.17 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 10900.00 
+[DRIVER] Physical time: 10900.24 
+[DRIVER] LAG: 0.24 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11004.71 
+[DEVICE READER CAM read] LAG: 4.71 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11000.00 
+[DEVICE READER CAM TIMER] Physical time: 11004.93 
+[DEVICE READER CAM TIMER] LAG: 4.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11000.00 
+[DRIVER] Physical time: 11005.51 
+[DRIVER] LAG: 5.51 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11100.00 
+[DRIVER] Physical time: 11100.34 
+[DRIVER] LAG: 0.34 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11205.22 
+[DEVICE READER CAM read] LAG: 5.22 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11200.00 
+[DEVICE READER CAM TIMER] Physical time: 11205.49 
+[DEVICE READER CAM TIMER] LAG: 5.49 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11200.00 
+[DRIVER] Physical time: 11206.21 
+[DRIVER] LAG: 6.21 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11300.00 
+[DRIVER] Physical time: 11300.25 
+[DRIVER] LAG: 0.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11405.10 
+[DEVICE READER CAM read] LAG: 5.10 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11400.00 
+[DEVICE READER CAM TIMER] Physical time: 11405.34 
+[DEVICE READER CAM TIMER] LAG: 5.34 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11400.00 
+[DRIVER] Physical time: 11406.60 
+[DRIVER] LAG: 6.60 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11500.00 
+[DRIVER] Physical time: 11500.41 
+[DRIVER] LAG: 0.41 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11604.47 
+[DEVICE READER CAM read] LAG: 4.47 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11600.00 
+[DEVICE READER CAM TIMER] Physical time: 11604.79 
+[DEVICE READER CAM TIMER] LAG: 4.79 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11600.00 
+[DRIVER] Physical time: 11605.40 
+[DRIVER] LAG: 5.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11700.00 
+[DRIVER] Physical time: 11700.25 
+[DRIVER] LAG: 0.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 11804.60 
+[DEVICE READER CAM read] LAG: 4.60 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 11800.00 
+[DEVICE READER CAM TIMER] Physical time: 11804.83 
+[DEVICE READER CAM TIMER] LAG: 4.83 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 11800.00 
+[FACE DETECTOR] Physical time: 11880.00 
+[FACE DETECTOR] LAG: 80.00 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 11800.00 
+[DRIVER REACTION 1] Physical time: 11880.31 
+[DRIVER REACTION 1] LAG: 80.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11800.00 
+[DRIVER] Physical time: 11880.45 
+[DRIVER] LAG: 80.45 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 11900.00 
+[DRIVER] Physical time: 11900.35 
+[DRIVER] LAG: 0.35 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12004.35 
+[DEVICE READER CAM read] LAG: 4.35 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12000.00 
+[DEVICE READER CAM TIMER] Physical time: 12004.63 
+[DEVICE READER CAM TIMER] LAG: 4.63 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12000.00 
+[DRIVER] Physical time: 12004.82 
+[DRIVER] LAG: 4.82 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12100.00 
+[DRIVER] Physical time: 12100.37 
+[DRIVER] LAG: 0.37 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12207.74 
+[DEVICE READER CAM read] LAG: 7.74 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12200.00 
+[DEVICE READER CAM TIMER] Physical time: 12207.98 
+[DEVICE READER CAM TIMER] LAG: 7.98 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12200.00 
+[DRIVER] Physical time: 12208.61 
+[DRIVER] LAG: 8.61 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12300.00 
+[DRIVER] Physical time: 12300.25 
+[DRIVER] LAG: 0.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12409.84 
+[DEVICE READER CAM read] LAG: 9.84 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12400.00 
+[DEVICE READER CAM TIMER] Physical time: 12410.12 
+[DEVICE READER CAM TIMER] LAG: 10.12 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12400.00 
+[DRIVER] Physical time: 12410.84 
+[DRIVER] LAG: 10.84 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12500.00 
+[DRIVER] Physical time: 12500.46 
+[DRIVER] LAG: 0.46 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12604.37 
+[DEVICE READER CAM read] LAG: 4.37 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12600.00 
+[DEVICE READER CAM TIMER] Physical time: 12604.66 
+[DEVICE READER CAM TIMER] LAG: 4.66 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12600.00 
+[DRIVER] Physical time: 12604.92 
+[DRIVER] LAG: 4.92 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12700.00 
+[DRIVER] Physical time: 12700.42 
+[DRIVER] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 12805.34 
+[DEVICE READER CAM read] LAG: 5.34 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 12800.00 
+[DEVICE READER CAM TIMER] Physical time: 12805.66 
+[DEVICE READER CAM TIMER] LAG: 5.66 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 12800.00 
+[FACE DETECTOR] Physical time: 12884.51 
+[FACE DETECTOR] LAG: 84.51 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 12800.00 
+[DRIVER REACTION 1] Physical time: 12884.86 
+[DRIVER REACTION 1] LAG: 84.86 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12800.00 
+[DRIVER] Physical time: 12885.01 
+[DRIVER] LAG: 85.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 12900.00 
+[DRIVER] Physical time: 12900.35 
+[DRIVER] LAG: 0.35 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13005.15 
+[DEVICE READER CAM read] LAG: 5.15 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13000.00 
+[DEVICE READER CAM TIMER] Physical time: 13005.41 
+[DEVICE READER CAM TIMER] LAG: 5.41 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13000.00 
+[DRIVER] Physical time: 13006.12 
+[DRIVER] LAG: 6.12 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13100.00 
+[DRIVER] Physical time: 13100.36 
+[DRIVER] LAG: 0.36 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13205.21 
+[DEVICE READER CAM read] LAG: 5.21 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13200.00 
+[DEVICE READER CAM TIMER] Physical time: 13205.46 
+[DEVICE READER CAM TIMER] LAG: 5.46 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13200.00 
+[DRIVER] Physical time: 13205.88 
+[DRIVER] LAG: 5.88 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13300.00 
+[DRIVER] Physical time: 13300.40 
+[DRIVER] LAG: 0.40 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13405.26 
+[DEVICE READER CAM read] LAG: 5.26 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13400.00 
+[DEVICE READER CAM TIMER] Physical time: 13405.49 
+[DEVICE READER CAM TIMER] LAG: 5.49 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13400.00 
+[DRIVER] Physical time: 13406.49 
+[DRIVER] LAG: 6.49 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13500.00 
+[DRIVER] Physical time: 13500.38 
+[DRIVER] LAG: 0.38 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13605.21 
+[DEVICE READER CAM read] LAG: 5.21 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13600.00 
+[DEVICE READER CAM TIMER] Physical time: 13605.48 
+[DEVICE READER CAM TIMER] LAG: 5.48 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13600.00 
+[DRIVER] Physical time: 13606.19 
+[DRIVER] LAG: 6.19 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13700.00 
+[DRIVER] Physical time: 13700.41 
+[DRIVER] LAG: 0.41 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 13805.05 
+[DEVICE READER CAM read] LAG: 5.05 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 13800.00 
+[DEVICE READER CAM TIMER] Physical time: 13805.32 
+[DEVICE READER CAM TIMER] LAG: 5.32 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 13800.00 
+[FACE DETECTOR] Physical time: 13883.99 
+[FACE DETECTOR] LAG: 83.99 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 13800.00 
+[DRIVER REACTION 1] Physical time: 13884.33 
+[DRIVER REACTION 1] LAG: 84.33 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13800.00 
+[DRIVER] Physical time: 13884.50 
+[DRIVER] LAG: 84.50 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 13900.00 
+[DRIVER] Physical time: 13900.23 
+[DRIVER] LAG: 0.23 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14004.68 
+[DEVICE READER CAM read] LAG: 4.68 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14000.00 
+[DEVICE READER CAM TIMER] Physical time: 14004.90 
+[DEVICE READER CAM TIMER] LAG: 4.90 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14000.00 
+[DRIVER] Physical time: 14005.47 
+[DRIVER] LAG: 5.47 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14100.00 
+[DRIVER] Physical time: 14100.38 
+[DRIVER] LAG: 0.38 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14205.26 
+[DEVICE READER CAM read] LAG: 5.26 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14200.00 
+[DEVICE READER CAM TIMER] Physical time: 14205.49 
+[DEVICE READER CAM TIMER] LAG: 5.49 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14200.00 
+[DRIVER] Physical time: 14206.61 
+[DRIVER] LAG: 6.61 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14300.00 
+[DRIVER] Physical time: 14300.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14405.26 
+[DEVICE READER CAM read] LAG: 5.26 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14400.00 
+[DEVICE READER CAM TIMER] Physical time: 14405.56 
+[DEVICE READER CAM TIMER] LAG: 5.56 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14400.00 
+[DRIVER] Physical time: 14406.22 
+[DRIVER] LAG: 6.22 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14500.00 
+[DRIVER] Physical time: 14500.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14608.47 
+[DEVICE READER CAM read] LAG: 8.47 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14600.00 
+[DEVICE READER CAM TIMER] Physical time: 14608.75 
+[DEVICE READER CAM TIMER] LAG: 8.75 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14600.00 
+[DRIVER] Physical time: 14609.34 
+[DRIVER] LAG: 9.34 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14700.00 
+[DRIVER] Physical time: 14700.38 
+[DRIVER] LAG: 0.38 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 14809.50 
+[DEVICE READER CAM read] LAG: 9.50 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 14800.00 
+[DEVICE READER CAM TIMER] Physical time: 14809.77 
+[DEVICE READER CAM TIMER] LAG: 9.77 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 14800.00 
+[FACE DETECTOR] Physical time: 14892.43 
+[FACE DETECTOR] LAG: 92.43 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 14800.00 
+[DRIVER REACTION 1] Physical time: 14892.78 
+[DRIVER REACTION 1] LAG: 92.78 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14800.00 
+[DRIVER] Physical time: 14892.92 
+[DRIVER] LAG: 92.92 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 14900.00 
+[DRIVER] Physical time: 14900.21 
+[DRIVER] LAG: 0.21 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15004.82 
+[DEVICE READER CAM read] LAG: 4.82 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15000.00 
+[DEVICE READER CAM TIMER] Physical time: 15005.08 
+[DEVICE READER CAM TIMER] LAG: 5.08 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15000.00 
+[DRIVER] Physical time: 15005.31 
+[DRIVER] LAG: 5.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15100.00 
+[DRIVER] Physical time: 15100.44 
+[DRIVER] LAG: 0.44 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15205.12 
+[DEVICE READER CAM read] LAG: 5.12 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15200.00 
+[DEVICE READER CAM TIMER] Physical time: 15205.39 
+[DEVICE READER CAM TIMER] LAG: 5.39 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15200.00 
+[DRIVER] Physical time: 15206.28 
+[DRIVER] LAG: 6.28 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15300.00 
+[DRIVER] Physical time: 15300.42 
+[DRIVER] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15405.38 
+[DEVICE READER CAM read] LAG: 5.38 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15400.00 
+[DEVICE READER CAM TIMER] Physical time: 15405.87 
+[DEVICE READER CAM TIMER] LAG: 5.87 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15400.00 
+[DRIVER] Physical time: 15406.61 
+[DRIVER] LAG: 6.61 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15500.00 
+[DRIVER] Physical time: 15500.29 
+[DRIVER] LAG: 0.29 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15604.76 
+[DEVICE READER CAM read] LAG: 4.76 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15600.00 
+[DEVICE READER CAM TIMER] Physical time: 15605.01 
+[DEVICE READER CAM TIMER] LAG: 5.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15600.00 
+[DRIVER] Physical time: 15605.66 
+[DRIVER] LAG: 5.66 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15700.00 
+[DRIVER] Physical time: 15700.37 
+[DRIVER] LAG: 0.37 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 15804.75 
+[DEVICE READER CAM read] LAG: 4.75 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 15800.00 
+[DEVICE READER CAM TIMER] Physical time: 15804.99 
+[DEVICE READER CAM TIMER] LAG: 4.99 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 15800.00 
+[FACE DETECTOR] Physical time: 15884.23 
+[FACE DETECTOR] LAG: 84.23 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 15800.00 
+[DRIVER REACTION 1] Physical time: 15884.63 
+[DRIVER REACTION 1] LAG: 84.63 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15800.00 
+[DRIVER] Physical time: 15884.81 
+[DRIVER] LAG: 84.81 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 15900.00 
+[DRIVER] Physical time: 15900.24 
+[DRIVER] LAG: 0.24 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 16005.18 
+[DEVICE READER CAM read] LAG: 5.18 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 16000.00 
+[DEVICE READER CAM TIMER] Physical time: 16005.44 
+[DEVICE READER CAM TIMER] LAG: 5.44 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16000.00 
+[DRIVER] Physical time: 16006.21 
+[DRIVER] LAG: 6.21 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16100.00 
+[DRIVER] Physical time: 16100.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 16205.13 
+[DEVICE READER CAM read] LAG: 5.13 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 16200.00 
+[DEVICE READER CAM TIMER] Physical time: 16205.40 
+[DEVICE READER CAM TIMER] LAG: 5.40 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16200.00 
+[DRIVER] Physical time: 16206.12 
+[DRIVER] LAG: 6.12 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16300.00 
+[DRIVER] Physical time: 16300.38 
+[DRIVER] LAG: 0.38 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 16404.04 
+[DEVICE READER CAM read] LAG: 4.04 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 16400.00 
+[DEVICE READER CAM TIMER] Physical time: 16404.25 
+[DEVICE READER CAM TIMER] LAG: 4.25 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16400.00 
+[DRIVER] Physical time: 16404.85 
+[DRIVER] LAG: 4.85 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16500.00 
+[DRIVER] Physical time: 16500.42 
+[DRIVER] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 16604.83 
+[DEVICE READER CAM read] LAG: 4.83 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 16600.00 
+[DEVICE READER CAM TIMER] Physical time: 16605.07 
+[DEVICE READER CAM TIMER] LAG: 5.07 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16600.00 
+[DRIVER] Physical time: 16605.91 
+[DRIVER] LAG: 5.91 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16700.00 
+[DRIVER] Physical time: 16700.25 
+[DRIVER] LAG: 0.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 16805.22 
+[DEVICE READER CAM read] LAG: 5.22 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 16800.00 
+[DEVICE READER CAM TIMER] Physical time: 16805.48 
+[DEVICE READER CAM TIMER] LAG: 5.48 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 16800.00 
+[FACE DETECTOR] Physical time: 16882.25 
+[FACE DETECTOR] LAG: 82.25 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 16800.00 
+[DRIVER REACTION 1] Physical time: 16882.61 
+[DRIVER REACTION 1] LAG: 82.61 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16800.00 
+[DRIVER] Physical time: 16882.79 
+[DRIVER] LAG: 82.79 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 16900.00 
+[DRIVER] Physical time: 16900.25 
+[DRIVER] LAG: 0.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 17005.26 
+[DEVICE READER CAM read] LAG: 5.26 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 17000.00 
+[DEVICE READER CAM TIMER] Physical time: 17005.57 
+[DEVICE READER CAM TIMER] LAG: 5.57 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17000.00 
+[DRIVER] Physical time: 17006.25 
+[DRIVER] LAG: 6.25 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17100.00 
+[DRIVER] Physical time: 17100.42 
+[DRIVER] LAG: 0.42 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 17208.97 
+[DEVICE READER CAM read] LAG: 8.97 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 17200.00 
+[DEVICE READER CAM TIMER] Physical time: 17209.23 
+[DEVICE READER CAM TIMER] LAG: 9.23 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17200.00 
+[DRIVER] Physical time: 17209.98 
+[DRIVER] LAG: 9.98 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17300.00 
+[DRIVER] Physical time: 17300.29 
+[DRIVER] LAG: 0.29 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 17404.88 
+[DEVICE READER CAM read] LAG: 4.88 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 17400.00 
+[DEVICE READER CAM TIMER] Physical time: 17405.12 
+[DEVICE READER CAM TIMER] LAG: 5.12 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17400.00 
+[DRIVER] Physical time: 17405.77 
+[DRIVER] LAG: 5.77 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17500.00 
+[DRIVER] Physical time: 17500.27 
+[DRIVER] LAG: 0.27 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 17604.74 
+[DEVICE READER CAM read] LAG: 4.74 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 17600.00 
+[DEVICE READER CAM TIMER] Physical time: 17604.99 
+[DEVICE READER CAM TIMER] LAG: 4.99 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17600.00 
+[DRIVER] Physical time: 17605.66 
+[DRIVER] LAG: 5.66 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17700.00 
+[DRIVER] Physical time: 17700.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 17804.41 
+[DEVICE READER CAM read] LAG: 4.41 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 17800.00 
+[DEVICE READER CAM TIMER] Physical time: 17804.71 
+[DEVICE READER CAM TIMER] LAG: 4.71 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 17800.00 
+[FACE DETECTOR] Physical time: 17886.27 
+[FACE DETECTOR] LAG: 86.27 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 17800.00 
+[DRIVER REACTION 1] Physical time: 17886.60 
+[DRIVER REACTION 1] LAG: 86.60 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17800.00 
+[DRIVER] Physical time: 17886.70 
+[DRIVER] LAG: 86.70 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 17900.00 
+[DRIVER] Physical time: 17900.26 
+[DRIVER] LAG: 0.26 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 18005.10 
+[DEVICE READER CAM read] LAG: 5.10 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 18000.00 
+[DEVICE READER CAM TIMER] Physical time: 18005.35 
+[DEVICE READER CAM TIMER] LAG: 5.35 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18000.00 
+[DRIVER] Physical time: 18006.05 
+[DRIVER] LAG: 6.05 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18100.00 
+[DRIVER] Physical time: 18100.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 18204.36 
+[DEVICE READER CAM read] LAG: 4.36 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 18200.00 
+[DEVICE READER CAM TIMER] Physical time: 18204.65 
+[DEVICE READER CAM TIMER] LAG: 4.65 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18200.00 
+[DRIVER] Physical time: 18204.85 
+[DRIVER] LAG: 4.85 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18300.00 
+[DRIVER] Physical time: 18300.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 18408.92 
+[DEVICE READER CAM read] LAG: 8.92 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 18400.00 
+[DEVICE READER CAM TIMER] Physical time: 18409.19 
+[DEVICE READER CAM TIMER] LAG: 9.19 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18400.00 
+[DRIVER] Physical time: 18409.43 
+[DRIVER] LAG: 9.43 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18500.00 
+[DRIVER] Physical time: 18500.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 18605.23 
+[DEVICE READER CAM read] LAG: 5.23 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 18600.00 
+[DEVICE READER CAM TIMER] Physical time: 18606.51 
+[DEVICE READER CAM TIMER] LAG: 6.51 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18600.00 
+[DRIVER] Physical time: 18607.27 
+[DRIVER] LAG: 7.27 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18700.00 
+[DRIVER] Physical time: 18700.26 
+[DRIVER] LAG: 0.26 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 18805.26 
+[DEVICE READER CAM read] LAG: 5.26 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 18800.00 
+[DEVICE READER CAM TIMER] Physical time: 18805.57 
+[DEVICE READER CAM TIMER] LAG: 5.57 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 18800.00 
+[FACE DETECTOR] Physical time: 18882.47 
+[FACE DETECTOR] LAG: 82.47 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 18800.00 
+[DRIVER REACTION 1] Physical time: 18882.81 
+[DRIVER REACTION 1] LAG: 82.81 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18800.00 
+[DRIVER] Physical time: 18882.95 
+[DRIVER] LAG: 82.95 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 18900.00 
+[DRIVER] Physical time: 18900.32 
+[DRIVER] LAG: 0.32 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 19004.51 
+[DEVICE READER CAM read] LAG: 4.51 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 19000.00 
+[DEVICE READER CAM TIMER] Physical time: 19004.78 
+[DEVICE READER CAM TIMER] LAG: 4.78 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19000.00 
+[DRIVER] Physical time: 19005.39 
+[DRIVER] LAG: 5.39 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19100.00 
+[DRIVER] Physical time: 19100.41 
+[DRIVER] LAG: 0.41 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 19205.09 
+[DEVICE READER CAM read] LAG: 5.09 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 19200.00 
+[DEVICE READER CAM TIMER] Physical time: 19205.33 
+[DEVICE READER CAM TIMER] LAG: 5.33 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19200.00 
+[DRIVER] Physical time: 19206.13 
+[DRIVER] LAG: 6.13 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19300.00 
+[DRIVER] Physical time: 19300.25 
+[DRIVER] LAG: 0.25 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 19404.56 
+[DEVICE READER CAM read] LAG: 4.56 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 19400.00 
+[DEVICE READER CAM TIMER] Physical time: 19404.80 
+[DEVICE READER CAM TIMER] LAG: 4.80 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19400.00 
+[DRIVER] Physical time: 19405.38 
+[DRIVER] LAG: 5.38 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19500.00 
+[DRIVER] Physical time: 19500.35 
+[DRIVER] LAG: 0.35 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 19605.12 
+[DEVICE READER CAM read] LAG: 5.12 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 19600.00 
+[DEVICE READER CAM TIMER] Physical time: 19605.35 
+[DEVICE READER CAM TIMER] LAG: 5.35 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19600.00 
+[DRIVER] Physical time: 19606.13 
+[DRIVER] LAG: 6.13 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19700.00 
+[DRIVER] Physical time: 19700.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 19805.31 
+[DEVICE READER CAM read] LAG: 5.31 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 19800.00 
+[DEVICE READER CAM TIMER] Physical time: 19805.61 
+[DEVICE READER CAM TIMER] LAG: 5.61 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 19800.00 
+[FACE DETECTOR] Physical time: 19891.60 
+[FACE DETECTOR] LAG: 91.60 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 19800.00 
+[DRIVER REACTION 1] Physical time: 19892.01 
+[DRIVER REACTION 1] LAG: 92.01 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19800.00 
+[DRIVER] Physical time: 19892.11 
+[DRIVER] LAG: 92.11 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 19900.00 
+[DRIVER] Physical time: 19900.22 
+[DRIVER] LAG: 0.22 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 20005.12 
+[DEVICE READER CAM read] LAG: 5.12 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 20000.00 
+[DEVICE READER CAM TIMER] Physical time: 20005.38 
+[DEVICE READER CAM TIMER] LAG: 5.38 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20000.00 
+[DRIVER] Physical time: 20005.64 
+[DRIVER] LAG: 5.64 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20100.00 
+[DRIVER] Physical time: 20100.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 20204.90 
+[DEVICE READER CAM read] LAG: 4.90 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 20200.00 
+[DEVICE READER CAM TIMER] Physical time: 20205.14 
+[DEVICE READER CAM TIMER] LAG: 5.14 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20200.00 
+[DRIVER] Physical time: 20205.86 
+[DRIVER] LAG: 5.86 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20300.00 
+[DRIVER] Physical time: 20300.29 
+[DRIVER] LAG: 0.29 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 20408.47 
+[DEVICE READER CAM read] LAG: 8.47 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 20400.00 
+[DEVICE READER CAM TIMER] Physical time: 20408.74 
+[DEVICE READER CAM TIMER] LAG: 8.74 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20400.00 
+[DRIVER] Physical time: 20409.31 
+[DRIVER] LAG: 9.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20500.00 
+[DRIVER] Physical time: 20500.46 
+[DRIVER] LAG: 0.46 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 20604.49 
+[DEVICE READER CAM read] LAG: 4.49 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 20600.00 
+[DEVICE READER CAM TIMER] Physical time: 20604.77 
+[DEVICE READER CAM TIMER] LAG: 4.77 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20600.00 
+[DRIVER] Physical time: 20605.35 
+[DRIVER] LAG: 5.35 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20700.00 
+[DRIVER] Physical time: 20700.28 
+[DRIVER] LAG: 0.28 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 20804.59 
+[DEVICE READER CAM read] LAG: 4.59 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 20800.00 
+[DEVICE READER CAM TIMER] Physical time: 20804.82 
+[DEVICE READER CAM TIMER] LAG: 4.82 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 20800.00 
+[FACE DETECTOR] Physical time: 20880.98 
+[FACE DETECTOR] LAG: 80.98 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 20800.00 
+[DRIVER REACTION 1] Physical time: 20881.32 
+[DRIVER REACTION 1] LAG: 81.32 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20800.00 
+[DRIVER] Physical time: 20881.47 
+[DRIVER] LAG: 81.47 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 20900.00 
+[DRIVER] Physical time: 20900.23 
+[DRIVER] LAG: 0.23 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 21005.14 
+[DEVICE READER CAM read] LAG: 5.14 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 21000.00 
+[DEVICE READER CAM TIMER] Physical time: 21005.36 
+[DEVICE READER CAM TIMER] LAG: 5.36 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21000.00 
+[DRIVER] Physical time: 21006.26 
+[DRIVER] LAG: 6.26 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21100.00 
+[DRIVER] Physical time: 21100.39 
+[DRIVER] LAG: 0.39 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 21208.91 
+[DEVICE READER CAM read] LAG: 8.91 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 21200.00 
+[DEVICE READER CAM TIMER] Physical time: 21209.19 
+[DEVICE READER CAM TIMER] LAG: 9.19 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21200.00 
+[DRIVER] Physical time: 21209.47 
+[DRIVER] LAG: 9.47 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21300.00 
+[DRIVER] Physical time: 21300.66 
+[DRIVER] LAG: 0.66 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 21405.10 
+[DEVICE READER CAM read] LAG: 5.10 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 21400.00 
+[DEVICE READER CAM TIMER] Physical time: 21405.38 
+[DEVICE READER CAM TIMER] LAG: 5.38 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21400.00 
+[DRIVER] Physical time: 21406.10 
+[DRIVER] LAG: 6.10 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21500.00 
+[DRIVER] Physical time: 21500.50 
+[DRIVER] LAG: 0.50 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 21605.33 
+[DEVICE READER CAM read] LAG: 5.33 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 21600.00 
+[DEVICE READER CAM TIMER] Physical time: 21605.65 
+[DEVICE READER CAM TIMER] LAG: 5.65 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21600.00 
+[DRIVER] Physical time: 21606.31 
+[DRIVER] LAG: 6.31 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21700.00 
+[DRIVER] Physical time: 21700.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 21804.46 
+[DEVICE READER CAM read] LAG: 4.46 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 21800.00 
+[DEVICE READER CAM TIMER] Physical time: 21804.75 
+[DEVICE READER CAM TIMER] LAG: 4.75 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 21800.00 
+[FACE DETECTOR] Physical time: 21882.38 
+[FACE DETECTOR] LAG: 82.38 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 21800.00 
+[DRIVER REACTION 1] Physical time: 21882.87 
+[DRIVER REACTION 1] LAG: 82.87 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21800.00 
+[DRIVER] Physical time: 21883.06 
+[DRIVER] LAG: 83.06 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 21900.00 
+[DRIVER] Physical time: 21900.36 
+[DRIVER] LAG: 0.36 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 22005.36 
+[DEVICE READER CAM read] LAG: 5.36 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 22000.00 
+[DEVICE READER CAM TIMER] Physical time: 22005.84 
+[DEVICE READER CAM TIMER] LAG: 5.84 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22000.00 
+[DRIVER] Physical time: 22006.46 
+[DRIVER] LAG: 6.46 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22100.00 
+[DRIVER] Physical time: 22100.46 
+[DRIVER] LAG: 0.46 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 22205.17 
+[DEVICE READER CAM read] LAG: 5.17 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 22200.00 
+[DEVICE READER CAM TIMER] Physical time: 22205.43 
+[DEVICE READER CAM TIMER] LAG: 5.43 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22200.00 
+[DRIVER] Physical time: 22206.17 
+[DRIVER] LAG: 6.17 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22300.00 
+[DRIVER] Physical time: 22300.41 
+[DRIVER] LAG: 0.41 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 22404.13 
+[DEVICE READER CAM read] LAG: 4.13 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 22400.00 
+[DEVICE READER CAM TIMER] Physical time: 22404.35 
+[DEVICE READER CAM TIMER] LAG: 4.35 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22400.00 
+[DRIVER] Physical time: 22404.93 
+[DRIVER] LAG: 4.93 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22500.00 
+[DRIVER] Physical time: 22500.40 
+[DRIVER] LAG: 0.40 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 22605.02 
+[DEVICE READER CAM read] LAG: 5.02 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 22600.00 
+[DEVICE READER CAM TIMER] Physical time: 22605.26 
+[DEVICE READER CAM TIMER] LAG: 5.26 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22600.00 
+[DRIVER] Physical time: 22605.46 
+[DRIVER] LAG: 5.46 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22700.00 
+[DRIVER] Physical time: 22700.43 
+[DRIVER] LAG: 0.43 
+----------------------------------------------------------
+[DEVICE READER CAM read] Physical time: 22804.81 
+[DEVICE READER CAM read] LAG: 4.81 
+----------------------------------------------------------
+[DEVICE READER CAM TIMER] Logical time: 22800.00 
+[DEVICE READER CAM TIMER] Physical time: 22805.05 
+[DEVICE READER CAM TIMER] LAG: 5.05 
+----------------------------------------------------------
+Faces: 0
+Saved debug (no face)
+----------------------------------------------------------
+[FACE DETECTOR] Logical time: 22800.00 
+[FACE DETECTOR] Physical time: 22887.95 
+[FACE DETECTOR] LAG: 87.95 
+----------------------------------------------------------
+[DRIVER STATE] accel=0.0 brake=0.0
+----------------------------------------------------------
+[DRIVER REACTION 1] Logical time: 22800.00 
+[DRIVER REACTION 1] Physical time: 22888.38 
+[DRIVER REACTION 1] LAG: 88.38 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22800.00 
+[DRIVER] Physical time: 22888.59 
+[DRIVER] LAG: 88.59 
+----------------------------------------------------------
+----------------------------------------------------------
+[DRIVER] Logical time: 22900.00 
+[DRIVER] Physical time: 22900.30 
+[DRIVER] LAG: 0.30 
+---- System clock resolution: 1 nsec
+---- Start execution on Sun Apr 19 17:21:26 2026 ---- plus 630039506 nanoseconds
+Fed 0 (d_main): Connected to 10.218.100.78:15045.
+Fed 0 (d_main): Starting timestamp is: 1776644488993416659.
